@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; margin: 0; padding: 0; overflow-x: hidden; }
-        /* Hide scrollbar but allow scrolling */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         
@@ -16,15 +15,12 @@
         .view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Bottom Nav Active State */
         .nav-item.active { color: #4338ca; font-weight: 600; }
         .nav-item.active svg { stroke: #4338ca; }
         
-        /* Form Input Styles */
         .form-input { width: 100%; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 12px; background: #f8fafc; outline: none; transition: 0.2s; font-size: 14px; color: #1e293b; }
         .form-input:focus { border-color: #4338ca; background: white; box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1); }
         
-        /* Hide native select arrow */
         select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; }
     </style>
 </head>
@@ -46,12 +42,49 @@
         </div>
     </header>
 
+    <!-- ================= VIEW 0: LOGIN ================= -->
+    <div id="view-login" class="view p-6 flex flex-col justify-center min-h-[85vh]">
+        <div class="text-center mb-8">
+            <div class="w-20 h-20 bg-indigo-100 rounded-full mx-auto flex items-center justify-center text-4xl mb-4 shadow-sm">🧵</div>
+            <h1 class="text-2xl font-extrabold text-gray-900">Welcome Back</h1>
+            <p class="text-sm text-gray-500 mt-1">Login to contact workers or build your profile</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+            <div class="mb-4">
+                <label class="block text-xs font-bold text-gray-600 mb-1">Mobile Number</label>
+                <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus-within:border-indigo-500 focus-within:bg-white transition">
+                    <span class="text-gray-500 font-semibold mr-2">+91</span>
+                    <input type="tel" id="login-mobile" placeholder="98765 43210" class="bg-transparent w-full outline-none text-gray-800 font-medium" maxlength="10">
+                </div>
+            </div>
+            
+            <div id="login-otp-section" class="hidden mb-4">
+                <label class="block text-xs font-bold text-gray-600 mb-1">Enter OTP</label>
+                <input type="number" id="login-otp" placeholder="123456" class="form-input text-center tracking-widest text-lg">
+                <p class="text-xs text-indigo-500 mt-2 font-semibold text-center">Demo OTP: 123456</p>
+            </div>
+
+            <button id="login-btn" onclick="handleLogin()" class="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-indigo-200 active:scale-[0.98] transition">
+                Send OTP
+            </button>
+            <p id="login-error" class="text-xs text-center text-red-500 mt-3 hidden font-medium"></p>
+        </div>
+    </div>
+
     <!-- ================= VIEW 1: HOME ================= -->
     <div id="view-home" class="view active p-4">
         <!-- Search Bar -->
-        <div class="relative mb-6">
+        <div class="relative mb-4">
             <input type="text" placeholder="काम या सेवा खोजें..." class="w-full bg-white border border-gray-200 rounded-full py-3.5 px-5 pl-12 shadow-sm focus:outline-none focus:border-indigo-500 text-sm">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-4 top-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+        </div>
+
+        <!-- Dynamic Login/Profile Button -->
+        <div class="mb-6">
+            <button onclick="switchTab('profile-form')" id="home-login-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl shadow-md shadow-indigo-200 active:scale-[0.98] transition flex items-center justify-center gap-2 text-sm">
+                👤 Login / अपना प्रोफाइल बनाएं
+            </button>
         </div>
 
         <!-- Banner -->
@@ -201,6 +234,11 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
                 प्रोफाइल बनाएं
             </button>
+            
+            <!-- Logout Button -->
+            <button onclick="logout()" class="w-full mt-3 bg-red-50 text-red-600 font-bold py-3.5 rounded-xl border border-red-100 hover:bg-red-100 transition">
+                Logout
+            </button>
         </div>
     </div>
 
@@ -215,7 +253,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
                 <span class="text-[10px] font-medium text-gray-500">Categories</span>
             </div>
-            <div class="nav-item flex flex-col items-center cursor-pointer transition-colors" onclick="switchTab('profile-form')" id="nav-profile">
+            <div class="nav-item flex flex-col items-center cursor-pointer transition-colors" onclick="switchTab('profile-form')" id="nav-profile-form">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                 <span class="text-[10px] font-medium text-gray-500">Profile</span>
             </div>
@@ -252,11 +290,17 @@
     let selectedCategory = null;
     let viewHistory = ['home'];
 
+    // --- LOGIN STATE ---
+    function isLoggedIn() {
+        return localStorage.getItem('apna_chhetr_logged_in') === 'true';
+    }
+
     // --- INITIALIZATION ---
     window.onload = function() {
         renderHomeCategories();
         renderCategoryAccordion();
-        updateHeader('home');
+        updateLoginButton();
+        switchTab('home');
     };
 
     // --- RENDERING FUNCTIONS ---
@@ -296,7 +340,6 @@
 
     function renderWorkerList(categoryName) {
         const container = document.getElementById('worker-list-container');
-        // Filter workers based on selected sub-category or main category
         const filtered = workersData.filter(w => w.skill.includes(categoryName) || w.category === categoryName || categoryName === 'All');
         
         if (filtered.length === 0) {
@@ -331,7 +374,6 @@
         document.getElementById('detail-charges').innerText = worker.charges;
         document.getElementById('detail-about').innerText = worker.about;
         
-        // Update Rating Stars
         const ratingVal = parseFloat(worker.rating);
         const starsContainer = document.querySelector('.text-yellow-500');
         let starsHTML = '';
@@ -343,11 +385,74 @@
         starsContainer.innerHTML = starsHTML;
     }
 
+    // --- LOGIN LOGIC ---
+    function handleLogin() {
+        const mobileInput = document.getElementById('login-mobile');
+        const otpSection = document.getElementById('login-otp-section');
+        const otpInput = document.getElementById('login-otp');
+        const loginBtn = document.getElementById('login-btn');
+        const errorEl = document.getElementById('login-error');
+        const mobile = mobileInput.value.trim();
+
+        if (loginBtn.innerText === "Send OTP") {
+            if (mobile.length !== 10) {
+                errorEl.innerText = "Please enter a valid 10-digit mobile number.";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+            errorEl.classList.add('hidden');
+            otpSection.classList.remove('hidden');
+            loginBtn.innerText = "Verify & Login";
+            return;
+        }
+
+        if (loginBtn.innerText === "Verify & Login") {
+            if (otpInput.value.trim() !== "123456") {
+                errorEl.innerText = "Invalid OTP. Please enter 123456.";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+            
+            // Success
+            localStorage.setItem('apna_chhetr_logged_in', 'true');
+            localStorage.setItem('apna_chhetr_user_mobile', mobile);
+            
+            // Reset Form
+            mobileInput.value = '';
+            otpInput.value = '';
+            otpSection.classList.add('hidden');
+            loginBtn.innerText = "Send OTP";
+            errorEl.classList.add('hidden');
+            
+            updateLoginButton();
+            switchTab('home');
+            alert("Login Successful!");
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('apna_chhetr_logged_in');
+        localStorage.removeItem('apna_chhetr_user_mobile');
+        updateLoginButton();
+        switchTab('home');
+        alert("Logged out successfully.");
+    }
+
+    function updateLoginButton() {
+        const btn = document.getElementById('home-login-btn');
+        if (btn) {
+            if (isLoggedIn()) {
+                const mobile = localStorage.getItem('apna_chhetr_user_mobile');
+                btn.innerHTML = `👤 अपना प्रोफाइल देखें (+91 ${mobile})`;
+            } else {
+                btn.innerHTML = `👤 Login / अपना प्रोफाइल बनाएं`;
+            }
+        }
+    }
+
     // --- NAVIGATION LOGIC ---
     function switchView(viewId) {
-        // Hide all views
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        // Show target view
         document.getElementById('view-' + viewId).classList.add('active');
         currentView = viewId;
         window.scrollTo(0, 0);
@@ -360,9 +465,10 @@
 
         headerTitle.innerText = title;
 
-        if (viewId === 'home' || viewId === 'categories' || viewId === 'profile-form') {
+        if (viewId === 'home' || viewId === 'categories' || viewId === 'profile-form' || viewId === 'login') {
             backBtn.classList.add('hidden');
             headerLocation.classList.remove('hidden');
+            if(viewId === 'login') headerLocation.classList.add('hidden');
         } else {
             backBtn.classList.remove('hidden');
             headerLocation.classList.add('hidden');
@@ -370,22 +476,30 @@
     }
 
     function switchTab(tab) {
-        // Update bottom nav active state
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        document.getElementById('nav-' + tab).classList.add('active');
+        const navEl = document.getElementById('nav-' + tab);
+        if (navEl) navEl.classList.add('active');
 
         if (tab === 'home') {
             viewHistory = ['home'];
             switchView('home');
             updateHeader('home', 'Apna Chhetr');
+            updateLoginButton();
         } else if (tab === 'categories') {
             viewHistory = ['categories'];
             switchView('categories');
             updateHeader('categories', 'श्रेणियाँ (Categories)');
         } else if (tab === 'profile-form') {
-            viewHistory = ['profile-form'];
-            switchView('profile-form');
-            updateHeader('profile-form', 'अपना प्रोफाइल बनाएं');
+            // Check if logged in
+            if (!isLoggedIn()) {
+                viewHistory = ['login'];
+                switchView('login');
+                updateHeader('login', 'Login');
+            } else {
+                viewHistory = ['profile-form'];
+                switchView('profile-form');
+                updateHeader('profile-form', 'अपना प्रोफाइल बनाएं');
+            }
         }
     }
 
@@ -394,7 +508,6 @@
         viewHistory.push('categories');
         switchView('categories');
         updateHeader('categories', 'श्रेणियाँ (Categories)');
-        // Open the accordion automatically
         toggleAccordion(catId, true);
     }
 
@@ -403,7 +516,6 @@
         const arrow = document.getElementById('accordion-arrow-' + catId);
         
         if (content.classList.contains('hidden') || forceOpen) {
-            // Close all others
             document.querySelectorAll('[id^="accordion-content-"]').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('[id^="accordion-arrow-"]').forEach(el => el.style.transform = 'rotate(0deg)');
             
@@ -434,7 +546,7 @@
 
     function goBack() {
         if (viewHistory.length > 1) {
-            viewHistory.pop(); // Remove current view
+            viewHistory.pop();
             const prevView = viewHistory[viewHistory.length - 1];
             
             if (prevView === 'home') switchTab('home');
@@ -444,12 +556,12 @@
                 updateHeader('worker-list', 'Workers');
             }
             else if (prevView === 'profile-form') switchTab('profile-form');
+            else if (prevView === 'login') switchTab('home'); // fallback
         } else {
             switchTab('home');
         }
     }
 
-    // --- SEARCH FUNCTIONALITY ---
     function filterWorkers() {
         const query = document.getElementById('worker-search').value.toLowerCase();
         const items = document.querySelectorAll('#worker-list-container > div');
@@ -464,6 +576,9 @@
         });
     }
 </script>
+
+</body>
+</html></script>
 
 </body>
 </html>
