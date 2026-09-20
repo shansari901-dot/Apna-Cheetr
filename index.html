@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apna Chhetr - Local Worker Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f3f4f6; }
+        .app-container { max-width: 480px; margin: 0 auto; background: white; min-height: 100vh; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .category-card { transition: transform 0.2s; cursor: pointer; }
+        .category-card:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+
+<div class="app-container relative">
+
+    <!-- ================= PAGE 1: HOME ================= -->
+    <div id="page-home" class="page active p-5">
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-extrabold text-blue-800 mb-1">अपना क्षेत्र</h1>
+            <p class="text-sm text-gray-500">Local Worker ↔ Employer Directory</p>
+        </div>
+
+        <!-- Location Selector -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-6 flex justify-between items-center">
+            <div>
+                <p class="text-xs text-gray-500 font-semibold uppercase">Aapka Area</p>
+                <p class="text-sm font-bold text-blue-900">Lohta, Varanasi</p>
+            </div>
+            <button class="text-blue-600 text-sm font-semibold bg-white px-3 py-1 rounded shadow-sm border border-blue-100">Badlein</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative mb-6">
+            <input type="text" placeholder="Kaam ya karigar khojein..." class="w-full bg-gray-100 border border-gray-300 rounded-full py-3 px-5 pl-12 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm">
+            <span class="absolute left-4 top-3.5 text-gray-400">🔍</span>
+        </div>
+
+        <!-- Categories -->
+        <h2 class="text-lg font-bold text-gray-800 mb-3">Categories</h2>
+        <div class="grid grid-cols-2 gap-3">
+            <div class="category-card bg-white border border-gray-200 p-4 rounded-xl shadow-sm flex flex-col items-center text-center" onclick="openCategory('Loom Worker')">
+                <span class="text-3xl mb-1">🧵</span>
+                <span class="text-sm font-semibold text-gray-700">Loom Worker</span>
+            </div>
+            <div class="category-card bg-white border border-gray-200 p-4 rounded-xl shadow-sm flex flex-col items-center text-center" onclick="openCategory('Medical Helper')">
+                <span class="text-3xl mb-1">🏥</span>
+                <span class="text-sm font-semibold text-gray-700">Medical Helper</span>
+            </div>
+            <div class="category-card bg-white border border-gray-200 p-4 rounded-xl shadow-sm flex flex-col items-center text-center" onclick="openCategory('Data Entry')">
+                <span class="text-3xl mb-1">💻</span>
+                <span class="text-sm font-semibold text-gray-700">Data Entry</span>
+            </div>
+            <div class="category-card bg-white border border-gray-200 p-4 rounded-xl shadow-sm flex flex-col items-center text-center" onclick="openCategory('Driving')">
+                <span class="text-3xl mb-1">🚗</span>
+                <span class="text-sm font-semibold text-gray-700">Driving</span>
+            </div>
+            <div class="category-card bg-white border border-gray-200 p-4 rounded-xl shadow-sm flex flex-col items-center text-center" onclick="openCategory('Restaurant Helper')">
+                <span class="text-3xl mb-1">🍽️</span>
+                <span class="text-sm font-semibold text-gray-700">Restaurant Helper</span>
+            </div>
+            <div class="category-card bg-white border border-gray-200 p-4 rounded-xl shadow-sm flex flex-col items-center text-center" onclick="openCategory('Bills / Invoice')">
+                <span class="text-3xl mb-1">🧾</span>
+                <span class="text-sm font-semibold text-gray-700">Bills / Invoice</span>
+            </div>
+        </div>
+
+        <!-- Login/Profile Button -->
+        <div class="mt-8 text-center border-t border-gray-200 pt-4">
+            <button class="bg-blue-600 text-white font-bold py-3 px-6 rounded-full w-full shadow-lg" onclick="alert('Login flow: Mobile Number + Gmail se login hoga.')">Apna Profile Banayein (Login)</button>
+            <p class="text-xs text-gray-400 mt-2">Worker ya Employer ke liye</p>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 2: WORKER LIST ================= -->
+    <div id="page-list" class="page p-5">
+        <button class="text-blue-600 font-semibold mb-4 flex items-center" onclick="goBack()">← Wapas</button>
+        <h2 id="list-title" class="text-xl font-bold text-gray-800 mb-4">Loom Worker</h2>
+        
+        <div id="worker-list" class="space-y-3">
+            <!-- List items javascript se aayenge -->
+        </div>
+    </div>
+
+    <!-- ================= PAGE 3: WORKER PROFILE ================= -->
+    <div id="page-profile" class="page p-5">
+        <button class="text-blue-600 font-semibold mb-4 flex items-center" onclick="goBackToList()">← Wapas</button>
+        
+        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 text-center">
+            <div class="w-24 h-24 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-4xl mb-4">👤</div>
+            <h2 id="prof-name" class="text-2xl font-bold text-gray-800">Md. Sahreerul Haq</h2>
+            <p id="prof-skill" class="text-blue-600 font-semibold">Power Loom Worker</p>
+            
+            <div class="mt-6 text-left space-y-3 bg-gray-50 p-4 rounded-lg">
+                <p class="text-sm text-gray-700"><span class="font-bold">Experience:</span> <span id="prof-exp">5 Saal</span></p>
+                <p class="text-sm text-gray-700"><span class="font-bold">Area:</span> <span id="prof-area">Lohta, Varanasi</span></p>
+                <p class="text-sm text-gray-700"><span class="font-bold">Contact:</span> <span id="prof-contact">+91 98765 43210</span></p>
+            </div>
+
+            <div class="mt-6 flex gap-3">
+                <button class="bg-green-500 text-white font-bold py-3 px-4 rounded-lg flex-1 shadow-md" onclick="alert('Calling...')">📞 Call Karein</button>
+                <button class="bg-green-600 text-white font-bold py-3 px-4 rounded-lg flex-1 shadow-md" onclick="alert('WhatsApp par message bhejein...')">💬 WhatsApp</button>
+            </div>
+            <p class="text-xs text-gray-400 mt-3">Contact karne ke liye login zaroori hai.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // --- Dummy Database (Aap ise Firebase se connect kar sakte hain) ---
+    const workersData = [
+        { id: 1, name: "Md. Sahreerul Haq", category: "Loom Worker", skill: "Power Loom Worker", exp: "5 Saal", area: "Lohta", contact: "+91 98765 43210" },
+        { id: 2, name: "Ramesh Kumar", category: "Loom Worker", skill: "Rapier Loom Worker", exp: "8 Saal", area: "Lohta", contact: "+91 98765 43211" },
+        { id: 3, name: "Suresh Patel", category: "Medical Helper", skill: "Hospital Helper", exp: "2 Saal", area: "Varanasi", contact: "+91 98765 43212" },
+        { id: 4, name: "Amit Singh", category: "Data Entry", skill: "Data Entry Operator", exp: "3 Saal", area: "Bhelupur", contact: "+91 98765 43213" },
+        { id: 5, name: "Vikash Yadav", category: "Driving", skill: "Driver (4-Wheeler)", exp: "10 Saal", area: "Lohta", contact: "+91 98765 43214" }
+    ];
+
+    let currentCategory = "";
+    let currentWorkerId = null;
+
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function openCategory(categoryName) {
+        currentCategory = categoryName;
+        document.getElementById('list-title').innerText = categoryName;
+        
+        const listContainer = document.getElementById('worker-list');
+        const filtered = workersData.filter(w => w.category === categoryName || w.skill.includes(categoryName));
+        
+        if(filtered.length === 0) {
+            listContainer.innerHTML = `<p class="text-center text-gray-500 mt-10">Is category mein abhi koi worker nahi hai.</p>`;
+        } else {
+            listContainer.innerHTML = filtered.map(w => `
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex justify-between items-center cursor-pointer hover:bg-blue-50" onclick="openProfile(${w.id})">
+                    <div>
+                        <h3 class="font-bold text-gray-800">${w.name}</h3>
+                        <p class="text-xs text-gray-500">${w.skill} • ${w.exp}</p>
+                    </div>
+                    <span class="text-blue-500 text-xl">➔</span>
+                </div>
+            `).join('');
+        }
+        showPage('page-list');
+    }
+
+    function openProfile(workerId) {
+        const worker = workersData.find(w => w.id === workerId);
+        if(!worker) return;
+        
+        currentWorkerId = workerId;
+        document.getElementById('prof-name').innerText = worker.name;
+        document.getElementById('prof-skill').innerText = worker.skill;
+        document.getElementById('prof-exp').innerText = worker.exp;
+        document.getElementById('prof-area').innerText = worker.area;
+        document.getElementById('prof-contact').innerText = worker.contact;
+        
+        showPage('page-profile');
+    }
+
+    function goBack() {
+        showPage('page-home');
+    }
+
+    function goBackToList() {
+        openCategory(currentCategory);
+    }
+</script>
+
+</body>
+  </html>
