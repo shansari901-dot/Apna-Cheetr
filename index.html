@@ -8,11 +8,11 @@
 <style>
 /* 🎨 DEFAULT THEME: BOTTLE GREEN 🎨 */
 :root { 
-  --primary: #064e3b;       /* Deep Bottle Green */
-  --primary-light: #059669; /* Emerald Green */
-  --accent: #f59e0b;        /* Orange/Gold */
+  --primary: #064e3b;       
+  --primary-light: #059669; 
+  --accent: #f59e0b;        
   --accent-light: #fef3c7;
-  --bg-color: #ecfdf5;      /* Light Green Mint Background (No more plain white) */
+  --bg-color: #ecfdf5;      
   --card-bg: #ffffff; 
   --text-dark: #064e3b; 
   --text-muted: #475569; 
@@ -28,7 +28,7 @@ body.theme-navy {
   --primary-light: #1e293b;  
   --accent: #f97316;        
   --accent-light: #ffedd5;
-  --bg-color: #f1f5f9;      /* Light Slate Background */
+  --bg-color: #f1f5f9;      
   --card-bg: #ffffff; 
   --text-dark: #0f172a; 
   --text-muted: #64748b; 
@@ -43,9 +43,9 @@ body.theme-dark {
   --primary-light: #1e1e1e;  
   --accent: #3b82f6;        
   --accent-light: #1e3a8a;
-  --bg-color: #000000;      /* Pure Black */
-  --card-bg: #1e1e1e;       /* Dark Grey Cards */
-  --text-dark: #f8fafc;     /* White Text */
+  --bg-color: #000000;      
+  --card-bg: #1e1e1e;       
+  --text-dark: #f8fafc;     
   --text-muted: #94a3b8; 
   --border: #333333; 
   --shadow: 0 8px 25px rgba(0, 0, 0, 0.5); 
@@ -76,7 +76,6 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 
 .location-badge { background: rgba(255,255,255,0.15); display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px);}
 
-/* FIXED ALIGNMENT & OVERLAP ISSUE */
 main { max-width: 480px; margin: 0 auto; padding: 20px 16px; position: relative; z-index: 10; }
 
 /* CARDS */
@@ -202,9 +201,7 @@ input:checked + .slider:before { transform: translateX(28px); }
            </div>
        </div>
        <div class="top-actions">
-           <!-- 🎨 THEME TOGGLE BUTTON -->
            <div class="icon-btn" onclick="toggleTheme()" title="Change Theme">🎨</div>
-           <!-- 🌐 LANGUAGE TOGGLE BUTTON -->
            <div class="icon-btn" onclick="toggleLang()" id="langBtn">🌐 EN</div>
        </div>
    </div>
@@ -261,8 +258,8 @@ input:checked + .slider:before { transform: translateX(28px); }
         </div>
         
         <div class="filter-scroll" id="filterContainer">
-            <div class="filter-chip active" onclick="setFilter('सभी', this)"><span class="hi">सभी</span><span class="en">All</span></div>
-            <div class="filter-chip" onclick="setFilter('बाज़ार', this)"><span class="hi">बाज़ार</span><span class="en">Shops</span></div>
+            <!-- 🛑 "सभी" FILTER REMOVED 🛑 -->
+            <div class="filter-chip active" onclick="setFilter('बाज़ार', this)"><span class="hi">बाज़ार</span><span class="en">Shops</span></div>
             <div class="filter-chip" onclick="setFilter('सेवाएं', this)"><span class="hi">सेवाएं</span><span class="en">Services</span></div>
             <div class="filter-chip" onclick="setFilter('रोज़गार', this)"><span class="hi">रोज़गार</span><span class="en">Jobs</span></div>
             <div class="filter-chip" onclick="setFilter('शिक्षा', this)"><span class="hi">शिक्षा</span><span class="en">Education</span></div>
@@ -433,12 +430,11 @@ let currentLang = localStorage.getItem('ac_lang') || 'hi';
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
 function applyTheme() {
-    document.body.className = ''; // reset
+    document.body.className = ''; 
     document.body.classList.add('lang-' + currentLang);
     
     if(currentTheme === 'navy') document.body.classList.add('theme-navy');
     else if(currentTheme === 'dark') document.body.classList.add('theme-dark');
-    // Default is bottle green (no extra class needed)
 }
 
 function toggleTheme() {
@@ -462,11 +458,11 @@ function toggleLang() {
     });
     
     applyTheme();
-    renderShops(); // re-render text in shop list
+    renderShops(); 
     showToast(t('भाषा बदल गई!', 'Language Changed!'));
 }
 
-// --- IN-APP TOAST SYSTEM (NO ALERTS) ---
+// --- IN-APP TOAST SYSTEM ---
 function showToast(message, type = 'success') {
     const toastBox = document.getElementById('toastBox');
     const toast = document.createElement('div');
@@ -478,21 +474,21 @@ function showToast(message, type = 'success') {
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => { toast.remove(); }, 300); }, 3000);
 }
 
-// --- DATABASE MOCKUP WITH VILLAGE/CITY JOBS ---
+// --- DATABASE MOCKUP WITH ISOLATED CATEGORIES ---
 let shopsData = [
     { id: 1, type: "बाज़ार", name: "General Store", catHi: "किराना / जनरल स्टोर", catEn: "General Store", loc: "कनॉट प्लेस, नई दिल्ली", icon: "🛒", isOpen: true },
-    { id: 2, type: "रोज़गार", name: "Ramesh Builder", catHi: "राजमिस्त्री (वर्कर चाहिए)", catEn: "Labor (Need Worker)", loc: "मकान बनवाने के लिए 4 मज़दूरों की ज़रूरत है।", icon: "👷", isOpen: true },
-    { id: 3, type: "रोज़गार", name: "Suresh (ड्राइवर)", catHi: "ट्रैक्टर ड्राइवर (काम चाहिए)", catEn: "Driver (Need Work)", loc: "मेरे पास 5 साल का ड्राइविंग अनुभव है, काम चाहिए।", icon: "🚜", isOpen: true },
-    { id: 4, type: "सेवाएं", name: "Sharma Plumbing", catHi: "प्लंबर सर्विस", catEn: "Plumber Service", loc: "करोल बाग़, नई दिल्ली", icon: "🛠️", isOpen: true },
-    { id: 5, type: "बाज़ार", name: "Fashion Saree Center", catHi: "कपड़े / साड़ी", catEn: "Clothing / Saree", loc: "चांदनी चौक, नई दिल्ली", icon: "👗", isOpen: false }
+    { id: 5, type: "बाज़ार", name: "Fashion Saree Center", catHi: "कपड़े / साड़ी", catEn: "Clothing / Saree", loc: "चांदनी चौक, नई दिल्ली", icon: "👗", isOpen: false },
+    { id: 2, type: "रोज़गार", name: "Ramesh Builder", catHi: "राजमिस्त्री", catEn: "Labor", loc: "मकान बनवाने के लिए 4 मज़दूरों की ज़रूरत है।", icon: "👷", isOpen: true, isHiring: true },
+    { id: 3, type: "रोज़गार", name: "Suresh (ड्राइवर)", catHi: "ट्रैक्टर ड्राइवर", catEn: "Driver", loc: "मेरे पास 5 साल का ड्राइविंग अनुभव है, काम चाहिए।", icon: "🚜", isOpen: true, isHiring: false },
+    { id: 4, type: "सेवाएं", name: "Sharma Plumbing", catHi: "प्लंबर सर्विस", catEn: "Plumber Service", loc: "करोल बाग़, नई दिल्ली", icon: "🛠️", isOpen: true }
 ];
 
-let currentFilter = 'सभी';
+let currentFilter = 'बाज़ार'; // 🛑 Default to Bazaar instead of All
 
 function renderShops() {
     let html = "";
-    let filterCheck = currentFilter === 'सभी' ? 'सभी' : currentFilter; // Simplification
-    let filtered = shopsData.filter(s => currentFilter === 'सभी' || s.type === currentFilter);
+    // 🛑 Pure isolation - only match exactly what is selected
+    let filtered = shopsData.filter(s => s.type === currentFilter);
     
     if(filtered.length === 0) {
         html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('कोई जानकारी नहीं मिली।','No info found.')}</div>`;
@@ -504,7 +500,11 @@ function renderShops() {
         let shopCat = t(shop.catHi, shop.catEn);
         
         if (shop.type === "रोज़गार") {
-            if(shop.catHi.includes("वर्कर चाहिए")) {
+            // Append Job Type Tag for UI clarity
+            let jobTag = shop.isHiring ? (currentLang==='hi'?" (वर्कर चाहिए)":" (Hiring)") : (currentLang==='hi'?" (काम चाहिए)":" (Seeking Work)");
+            shopCat += jobTag;
+
+            if(shop.isHiring) {
                 statusText = shop.isOpen ? t('🟢 अर्जेंट ज़रूरत', '🟢 Urgent Need') : t('🔴 फुल हो गया', '🔴 Filled');
             } else {
                 statusText = shop.isOpen ? t('🟢 काम के लिए खाली', '🟢 Available') : t('🔴 काम मिल गया', '🔴 Hired');
@@ -514,12 +514,11 @@ function renderShops() {
         }
 
         let statusBadge = `<span class="status-badge ${statusClass}">${statusText}</span>`;
-        // Pass escaped strings
         let safeName = shop.name.replace(/'/g, "\\'");
         let safeCat = shopCat.replace(/'/g, "\\'");
         let safeLoc = shop.loc.replace(/'/g, "\\'");
         
-        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}')`;
+        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring})`;
         
         html += `
         <div class="shop-card" onclick="${onclickData}">
@@ -539,7 +538,7 @@ function setFilter(type, element) {
     let chips = document.getElementById('filterContainer').children;
     for(let i=0; i<chips.length; i++) {
         chips[i].classList.remove('active');
-        if(chips[i].innerText.includes(t(type, type==='सभी'?'All':(type==='बाज़ार'?'Shops':type)))) {
+        if(chips[i].innerText.includes(t(type, type==='बाज़ार'?'Shops':type))) {
             chips[i].classList.add('active');
         }
     }
@@ -549,6 +548,16 @@ function setFilter(type, element) {
 function openCategory(type) {
     showTab('bazaar');
     setFilter(type);
+    
+    // Automatically select correct chip
+    let chips = document.getElementById('filterContainer').children;
+    for(let i=0; i<chips.length; i++) {
+        chips[i].classList.remove('active');
+        if(chips[i].innerText.includes(t(type, type==='बाज़ार'?'Shops':type))) {
+            chips[i].classList.add('active');
+            chips[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    }
 }
 
 function toggleShopStatus(checkbox) {
@@ -565,8 +574,8 @@ function toggleShopStatus(checkbox) {
         showToast(t('डेटाबेस अपडेट: जानकारी बंद है।', 'Database updated: Info is offline.'), 'error');
     }
     
-    shopsData[0].isOpen = isNowOpen;
-    renderShops(); 
+    shopsData[0].isOpen = isNowOpen; // Demo updating the first shop
+    if(currentFilter === shopsData[0].type) renderShops(); 
 }
 
 // DYNAMIC CATEGORIES
@@ -612,7 +621,6 @@ function setJobType(type) {
     }
 }
 
-// SUBMIT NEW POST
 function submitShop() {
     let mainCat = document.getElementById('addMainCat').value;
     let subCat = document.getElementById('addSubCat').value;
@@ -624,15 +632,15 @@ function submitShop() {
         return;
     }
     
-    let finalCat = subCat;
+    let isHiring = false;
     if(mainCat === 'रोज़गार') {
-        let isHiring = document.querySelector('input[name="jobType"]:checked').value === 'hiring';
-        finalCat = isHiring ? subCat + (currentLang==='hi'?" (वर्कर चाहिए)":" (Hiring)") : subCat + (currentLang==='hi'?" (काम चाहिए)":" (Seeking Work)");
+        isHiring = document.querySelector('input[name="jobType"]:checked').value === 'hiring';
     }
     
     let icon = mainCat === "बाज़ार" ? "🏬" : (mainCat === "सेवाएं" ? "🛠️" : (mainCat === "रोज़गार" ? "💼" : "🎓"));
     
-    shopsData.unshift({ id: Date.now(), type: mainCat, name: name, catHi: finalCat, catEn: finalCat, loc: loc, icon: icon, isOpen: true });
+    // Save cleanly without bracket tags (tags are added dynamically during render)
+    shopsData.unshift({ id: Date.now(), type: mainCat, name: name, catHi: subCat, catEn: subCat, loc: loc, icon: icon, isOpen: true, isHiring: isHiring });
     
     showToast(t("आपकी जानकारी सफलतापुर्वक रजिस्टर हो गई!", "Successfully registered!"));
     
@@ -647,11 +655,16 @@ function showTab(tabId) {
     document.getElementById(tabId).classList.remove('hidden');
     document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
     document.getElementById('nav-' + tabId).classList.add('active');
-    if(tabId === 'bazaar') renderShops();
+    
+    if(tabId === 'bazaar') {
+        // Default to 'Shops' if landing randomly, else keep current filter
+        if(currentFilter === 'सभी') setFilter('बाज़ार', document.querySelector('.filter-chip:first-child')); 
+        renderShops();
+    }
     window.scrollTo(0,0);
 }
 
-function openShopModal(name, cat, isOpen, loc, icon, type) {
+function openShopModal(name, cat, isOpen, loc, icon, type, isHiring) {
     document.getElementById('mShopName').textContent = name;
     document.getElementById('mShopCat').textContent = cat;
     document.getElementById('mShopLoc').textContent = loc;
@@ -661,7 +674,7 @@ function openShopModal(name, cat, isOpen, loc, icon, type) {
     let statusText = "";
     
     if (type === "रोज़गार") {
-        if(cat.includes("वर्कर चाहिए") || cat.includes("Worker") || cat.includes("Hiring")) {
+        if(isHiring) {
             statusText = isOpen ? t('🟢 अर्जेंट ज़रूरत है', '🟢 Urgent Hiring') : t('🔴 कामगार मिल गया', '🔴 Position Filled');
         } else {
             statusText = isOpen ? t('🟢 काम के लिए खाली हूँ', '🟢 Available for Work') : t('🔴 काम मिल गया', '🔴 Hired');
@@ -713,8 +726,9 @@ function askAI(type) {
 window.onload = () => { 
     document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
     applyTheme();
-    renderShops(); 
+    // Default open Shops on initial load if user goes to search tab
+    setFilter('बाज़ार'); 
 };
 </script>
 </body>
-                          </html>
+</html>
