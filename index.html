@@ -25,10 +25,10 @@
 body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
-body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none;}
+body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 70px; overflow-x: hidden; -webkit-user-select: none; user-select: none;}
 input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 
-/* 🌐 TOP BAR WITH BACK ARROW */
+/* 🌐 TOP BAR */
 .topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;}
 .topbar-left { display: flex; align-items: center; gap: 10px; }
 .back-arrow { font-size: 20px; color: var(--text-dark); cursor: pointer; padding: 4px 8px; border-radius: 50%; background: rgba(255,255,255,0.05); display: none; }
@@ -37,7 +37,9 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 .app-title { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px;}
 .app-subtitle { font-size: 10px; font-weight: 600; color: var(--text-muted); }
 
-.top-actions { display: flex; gap: 10px; align-items: center;}
+/* TOP ACTIONS (AI HELP & LANGUAGE BUTTONS BESIDE EACH OTHER) */
+.top-actions { display: flex; gap: 8px; align-items: center;}
+.ai-top-btn { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--accent); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;}
 .lang-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--accent); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer;}
 
 .location-selector { padding: 10px 16px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #f8fafc; cursor: pointer; background: var(--primary); border-bottom: 1px solid var(--border);}
@@ -61,7 +63,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 /* SECTION HEADINGS */
 .section-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--text-dark); border-bottom: 2px solid var(--accent); padding-bottom: 4px; display: inline-block;}
 
-/* 📱 HORIZONTAL CATEGORY GRID */
+/* 📱 HORIZONTAL CATEGORY GRID (8 CATEGORIES NOW) */
 .cat-grid-horz { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
 .cat-card-horz { background: var(--card-bg); border-radius: var(--radius); padding: 12px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s;}
 .cat-card-horz:active { transform: scale(0.97); background: var(--primary-light); }
@@ -77,6 +79,8 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bg-orange { background: linear-gradient(135deg, #fbbf24, #ea580c); color: white;}
 .bg-blue { background: linear-gradient(135deg, #60a5fa, #2563eb); color: white;}
 .bg-pink { background: linear-gradient(135deg, #f472b6, #db2777); color: white;}
+.bg-cyan { background: linear-gradient(135deg, #38bdf8, #0284c7); color: white;}
+.bg-indigo { background: linear-gradient(135deg, #818cf8, #4f46e5); color: white;}
 
 /* COMMON CARDS & FORMS */
 .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; }
@@ -112,24 +116,21 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .status-closed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
 
 /* BOTTOM NAV */
-.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 10px 0 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 999999 !important; border-top: 1px solid var(--border); }
+.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 10px 0 12px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 999999 !important; border-top: 1px solid var(--border); }
 .bottom-nav button { flex: 1; background: none; border: none; font-size: 10px; font-weight: 700; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative;}
 .bottom-nav button .ico { font-size: 20px; filter: grayscale(1); opacity: 0.6; transition: 0.2s;}
 .bottom-nav button.active { color: var(--accent); }
 .bottom-nav button.active .ico { filter: grayscale(0); opacity: 1;}
-.bottom-nav button.active::after { content: ''; position: absolute; bottom: -14px; width: 30px; height: 3px; background: var(--accent); border-radius: 10px; } 
+.bottom-nav button.active::after { content: ''; position: absolute; bottom: -12px; width: 30px; height: 3px; background: var(--accent); border-radius: 10px; } 
 
 .hidden { display: none !important; }
 
-/* AI CHATBOT & TOASTS */
-.ai-fab { position: fixed !important; bottom: 90px !important; right: 16px; width: 50px; height: 50px; background: var(--card-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: pointer; z-index: 99990; border: 1px solid var(--border); }
-.ai-fab::after { content: 'सहायता'; position: absolute; right: 55px; background: var(--accent); color: #000; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 50px; white-space: nowrap; }
-
+/* MODALS */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(2px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border);}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* AI BOX SPECIFIC (ENHANCED WITH MORE FAQ BUTTONS) */
+/* AI BOX */
 .ai-box { background: var(--card-bg); border-radius: 24px; padding: 20px; max-width: 400px; width: 90%; margin: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.6); border: 1px solid var(--border); position: relative; display: flex; flex-direction: column;}
 .chat-area { height: 220px; overflow-y: auto; background: var(--primary); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
 .msg-b { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--text-dark);}
@@ -160,7 +161,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 
 <div class="topbar">
    <div class="topbar-left">
-       <!-- ⬅️ BACK ARROW BUTTON -->
        <div class="back-arrow" id="backBtn" onclick="goHome()">←</div>
        <div class="logo-area">
            <div class="logo-icon">🏘️</div>
@@ -171,6 +171,8 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
        </div>
    </div>
    <div class="top-actions">
+       <!-- 🤖 AI HELP BUTTON BESIDE LANGUAGE -->
+       <div class="ai-top-btn" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖 <span class="hi">सहायता</span><span class="en">Help</span></div>
        <div class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 EN</div>
    </div>
 </div>
@@ -246,6 +248,26 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">खाना व रेस्टोरेंट</span><span class="en">Food</span></div>
                     <div class="cat-sub-horz"><span class="hi">रेस्टोरेंट, ढाबा, मिठाई</span><span class="en">Restaurant, Hotel, Dhaba</span></div>
+                </div>
+                <div class="cat-arrow">›</div>
+            </div>
+
+            <!-- 🚗 NEW CATEGORY 1: TRANSPORT 🚗 -->
+            <div class="cat-card-horz" onclick="showToast(t('वाहन व यातायात लिस्ट जल्द आ रही है!', 'Transport list coming soon!'))">
+                <div class="cat-icon-horz bg-cyan">🚗</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">वाहन व यातायात</span><span class="en">Transport</span></div>
+                    <div class="cat-sub-horz"><span class="hi">ऑटो, बस, टैक्सी, पेट्रोल पंप</span><span class="en">Auto, Bus, Taxi, Fuel</span></div>
+                </div>
+                <div class="cat-arrow">›</div>
+            </div>
+
+            <!-- 🏠 NEW CATEGORY 2: REAL ESTATE 🏠 -->
+            <div class="cat-card-horz" onclick="showToast(t('घर व प्रॉपर्टी लिस्ट जल्द आ रही है!', 'Real Estate list coming soon!'))">
+                <div class="cat-icon-horz bg-indigo">🏠</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">घर व प्रॉपर्टी</span><span class="en">Real Estate</span></div>
+                    <div class="cat-sub-horz"><span class="hi">किराए का मकान, प्लॉट, फ्लैट</span><span class="en">Rent House, Plot, Flat</span></div>
                 </div>
                 <div class="cat-arrow">›</div>
             </div>
@@ -458,7 +480,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- 🤖 ENHANCED AI ASSISTANT MODAL WITH MORE FAQS 🤖 -->
+<!-- 🤖 AI ASSISTANT MODAL -->
 <div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeAiModal(event)">
   <div class="ai-box" id="aiBoxContent">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -486,9 +508,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
   <button id="nav-onlineTab" onclick="showTab('onlineTab')"><div class="ico">🟢</div><span class="hi">ऑनलाइन</span><span class="en">Online</span></button>
   <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
 </nav>
-
-<!-- AI FAB -->
-<div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
 
 <script>
 const ADMIN_PHONE = '7318259001';
@@ -686,13 +705,11 @@ function showTab(tabId) {
     document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
     document.getElementById(tabId).classList.remove('hidden');
     
-    // Bottom Nav Active Routing
     document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
     let navId = tabId === 'onlineTab' ? 'nav-onlineTab' : ('nav-' + tabId);
     let navBtn = document.getElementById(navId);
     if(navBtn) navBtn.classList.add('active');
     
-    // Back Arrow Visibility logic (Show only when not on home)
     let backBtn = document.getElementById('backBtn');
     if(tabId === 'home') {
         backBtn.style.display = 'none';
@@ -842,7 +859,6 @@ function closeAiModal(e) {
     }
 }
 
-// 🤖 ENHANCED AI CHATBOT WITH MORE ANSWERS 🤖
 function askAI(type) {
     const chat = document.getElementById('aiChat');
     let q = "", a = "";
@@ -852,11 +868,11 @@ function askAI(type) {
     } 
     else if(type === 'free') { 
         q = t("💰 क्या यह फ्री है?", "💰 Is it free?"); 
-        a = t("जी हाँ! यह ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है।", "Yes! It is 100% Free for both customers and shopkeepers."); 
+        a = t("जी हाँ! यह पूरी तरह 100% फ्री है।", "Yes! It is 100% Free."); 
     } 
     else if(type === 'status') { 
         q = t("🎚️ स्टेटस कैसे बदलें?", "🎚️ How to toggle status?"); 
-        a = t("'👤 प्रोफाइल' में जाएं। वहां ON/OFF स्विच है। दुकान खोलने पर ON करें ताकि लोग लाइव देख सकें।", "Go to '👤 Profile'. Use the ON/OFF switch there so people can see your live status."); 
+        a = t("'👤 प्रोफाइल' में जाएं। वहां ON/OFF स्विच है। दुकान खोलने पर ON करें।", "Go to '👤 Profile'. Use the ON/OFF switch there so people can see your live status."); 
     }
     else if(type === 'login') { 
         q = t("🔐 लॉगिन क्यों ज़रूरी है?", "🔐 Why login required?"); 
@@ -864,7 +880,7 @@ function askAI(type) {
     }
     else if(type === 'jobs') { 
         q = t("💼 जॉब कैसे खोजें?", "💼 How to find jobs?"); 
-        a = t("होम पेज पर 'रोज़गार' केटेगरी पर क्लिक करें या 'खोजें' टैब में जाकर रोज़गार चुनें।", "Click on 'Jobs' category on the home page or search under the search tab."); 
+        a = t("होम पेज पर 'रोज़गार' केटेगरी पर क्लिक करें या 'खोजें' टैब में जाएं।", "Click on 'Jobs' category on the home page or search under the search tab."); 
     }
 
     chat.innerHTML += `<div class="msg-b m-user">${q}</div>`;
@@ -880,7 +896,7 @@ window.onload = () => {
     document.body.className = 'lang-' + currentLang;
     setFilter('बाज़ार'); 
     setOnlineFilter('बाज़ार');
-    document.getElementById('backBtn').style.display = 'none'; // Hidden on home init
+    document.getElementById('backBtn').style.display = 'none'; 
 };
 </script>
 </body>
