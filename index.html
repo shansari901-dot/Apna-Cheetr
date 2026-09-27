@@ -136,9 +136,18 @@ input:checked + .slider:before { transform: translateX(28px); }
 .m-user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px;}
 .ai-opts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;}
 .ai-btn { background: #fff; border: 1px solid var(--border); color: var(--primary); padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
+
+/* 🛑 IN-APP TOAST NOTIFICATIONS (NO BROWSER ALERTS) 🛑 */
+.toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 99999999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px;}
+.toast { background: #1e293b; color: white; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; }
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.error { background: #dc2626; border: 1px solid #f87171; }
+.toast.success { background: #059669; border: 1px solid #34d399; }
 </style>
 </head>
 <body>
+
+<div class="toast-container" id="toastBox"></div>
 
 <div class="topbar">
    <div class="topbar-header">
@@ -149,7 +158,7 @@ input:checked + .slider:before { transform: translateX(28px); }
                <div class="app-subtitle">बिना लॉगिन के लोकल जानकारी</div>
            </div>
        </div>
-       <div style="font-size: 20px; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 50%; cursor: pointer;">🔔</div>
+       <div style="font-size: 20px; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 50%; cursor: pointer;" onclick="showToast('कोई नई नोटिफिकेशन नहीं है।')">🔔</div>
    </div>
    <div class="location-badge">📍 नई दिल्ली, भारत <span style="font-size: 10px;">▼</span></div>
 </div>
@@ -297,7 +306,7 @@ input:checked + .slider:before { transform: translateX(28px); }
                 
                 <div style="border-top: 1px dashed #cbd5e1; padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);">दुकान का स्टेटस</div>
+                        <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);">स्टेटस</div>
                         <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 4px;">ग्राहक को लाइव दिखेगा</div>
                     </div>
                     
@@ -326,8 +335,8 @@ input:checked + .slider:before { transform: translateX(28px); }
         </div>
         
         <div class="action-row">
-            <button class="action-btn btn-call" onclick="alert('कॉलिंग...')">📞 कॉल करें</button>
-            <button class="action-btn btn-map" onclick="alert('मैप खुल रहा है...')">📍 रास्ता (Map)</button>
+            <button class="action-btn btn-call" onclick="showToast('नंबर उपलब्ध नहीं है।', 'error')">📞 कॉल करें</button>
+            <button class="action-btn btn-map" onclick="showToast('लोकेशन मैप पर देखी जा रही है...', 'success')">📍 रास्ता (Map)</button>
         </div>
 
         <div style="background: var(--bg-color); border: 1px solid var(--border); border-radius: 16px; padding: 16px;">
@@ -367,7 +376,26 @@ input:checked + .slider:before { transform: translateX(28px); }
 <div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
 
 <script>
-// --- DATABASE MOCKUP ---
+// --- IN-APP TOAST SYSTEM (NO ALERTS) ---
+function showToast(message, type = 'success') {
+    const toastBox = document.getElementById('toastBox');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = type === 'error' ? `⚠️ ${message}` : `✅ ${message}`;
+    
+    toastBox.appendChild(toast);
+    
+    // Trigger animation
+    setTimeout(() => { toast.classList.add('show'); }, 10);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => { toast.remove(); }, 300);
+    }, 3000);
+}
+
+// --- DATABASE MOCKUP WITH VILLAGE/CITY JOBS ---
 let shopsData = [
     { id: 1, type: "बाज़ार", name: "General Store", cat: "किराना / जनरल स्टोर", loc: "कनॉट प्लेस, नई दिल्ली", icon: "🛒", isOpen: true },
     { id: 2, type: "रोज़गार", name: "Ramesh Builder", cat: "राजमिस्त्री / मज़दूर (वर्कर चाहिए)", loc: "मकान बनवाने के लिए 4 मज़दूरों की ज़रूरत है।", icon: "👷", isOpen: true },
@@ -440,9 +468,11 @@ function toggleShopStatus(checkbox) {
     if(isNowOpen) {
         textEl.textContent = "ON (चालू है)";
         textEl.style.color = "#16a34a";
+        showToast('दुकान ऑनलाइन हो गई है।');
     } else {
         textEl.textContent = "OFF (बंद है)";
         textEl.style.color = "#dc2626";
+        showToast('दुकान बंद कर दी गई है।', 'error');
     }
     
     shopsData[0].isOpen = isNowOpen;
@@ -500,7 +530,7 @@ function submitShop() {
     let loc = document.getElementById('addLoc').value;
     
     if(!mainCat || !subCat || !name || !loc) {
-        alert("कृपया सभी ज़रूरी (*) जानकारी भरें!");
+        showToast("कृपया नाम, केटेगरी और विवरण ज़रूर भरें!", "error");
         return;
     }
     
@@ -514,7 +544,7 @@ function submitShop() {
     
     shopsData.unshift({ id: Date.now(), type: mainCat, name: name, cat: finalCat, loc: loc, icon: icon, isOpen: true });
     
-    alert("✅ आपकी जानकारी सफलतापुर्वक रजिस्टर हो गई!");
+    showToast("आपकी जानकारी सफलतापुर्वक रजिस्टर हो गई!");
     
     document.getElementById('addName').value = '';
     document.getElementById('addLoc').value = '';
@@ -586,4 +616,4 @@ function askAI(question) {
 window.onload = () => { renderShops(); };
 </script>
 </body>
-</html>
+  </html>
