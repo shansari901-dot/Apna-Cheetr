@@ -5,20 +5,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>अपना क्षेत्र - Apna Chhetr</title>
 <meta name="description" content="लोकल व्यापार और सेवाएं">
-<meta name="theme-color" content="#1e3a8a">
+<meta name="theme-color" content="#5d4037">
 <style>
-/* 🌟 APNA CHHETR PREMIUM THEME */
+/* 🟤 APNA CHHETR BROWN PREMIUM THEME 🟤 */
 :root { 
-  --primary: #1e3a8a;      
-  --primary-light: #3b82f6; 
-  --accent: #f59e0b;       
-  --bg-color: #f8fafc;
+  --primary: #5d4037;      /* Rich Brown */
+  --primary-light: #8d6e63; /* Light Brown */
+  --primary-dark: #3e2723;  /* Dark Brown */
+  --accent: #f59e0b;       /* Saffron/Gold */
+  --bg-color: #f5f5f4;     /* Off-white/Cream background */
   --card-bg: #ffffff; 
-  --text-dark: #0f172a; 
-  --text-muted: #64748b; 
-  --border: #e2e8f0; 
+  --text-dark: #291e1b; 
+  --text-muted: #78716c; 
+  --border: #e7e5e4; 
   --radius: 16px; 
-  --shadow: 0 4px 15px rgba(0,0,0,0.05); 
+  --shadow: 0 4px 15px rgba(93, 64, 55, 0.08); 
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -28,10 +29,10 @@ body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; 
 input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 
 /* 🌐 TOP BAR */
-.topbar { background: var(--primary); color: white; padding: 20px 20px 25px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 4px 20px rgba(30, 58, 138, 0.3); position: relative; z-index: 20;}
+.topbar { background: var(--primary); color: white; padding: 20px 20px 25px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 4px 20px rgba(93, 64, 55, 0.3); position: relative; z-index: 20;}
 .topbar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;}
 .logo-area { display: flex; align-items: center; gap: 10px; }
-.logo-icon { font-size: 24px; background: rgba(255,255,255,0.2); width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.3);}
+.logo-icon { font-size: 24px; background: rgba(255,255,255,0.15); width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2);}
 .app-title { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
 .app-subtitle { font-size: 11px; font-weight: 600; opacity: 0.8; margin-top: 2px;}
 
@@ -47,15 +48,21 @@ main { max-width: 480px; margin: -15px auto 0; padding: 0 16px 20px; position: r
 .field { margin-bottom: 16px; width: 100%; }
 .field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
 .input-wrap { display: flex; align-items: center; background: var(--bg-color); border: 1px solid var(--border); border-radius: 12px; padding: 0 12px; transition: 0.2s; }
-.input-wrap:focus-within { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); background: #fff;}
+.input-wrap:focus-within { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.15); background: #fff;}
 .input-wrap span { font-size: 18px; opacity: 0.7; margin-right: 8px; }
 .input-wrap input, .input-wrap select, .input-wrap textarea { width: 100%; padding: 14px 0; border: none; background: transparent; font-size: 14px; font-weight: 600; color: var(--text-dark); outline: none; }
 .optional-tag { font-size: 10px; color: #94a3b8; font-weight: 600; float: right; margin-top: 2px;}
 
-.btn { width: 100%; padding: 16px; border: none; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; text-align: center; color: #fff; background: linear-gradient(90deg, var(--primary), var(--primary-light)); box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3); }
+/* JOB TYPE RADIO BUTTONS */
+.radio-group { display: flex; gap: 10px; }
+.radio-box { flex: 1; background: var(--bg-color); padding: 12px; border-radius: 12px; border: 1px solid var(--border); text-align: center; font-size: 13px; font-weight: 700; color: var(--text-dark); cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;}
+.radio-box input { display: none; }
+.radio-box.active { background: #d1fae5; border-color: #10b981; color: #059669; }
+
+.btn { width: 100%; padding: 16px; border: none; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; text-align: center; color: #fff; background: linear-gradient(90deg, var(--primary), var(--primary-light)); box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3); }
 .btn:active { transform: scale(0.96); }
 
-/* GRID LAYOUT FOR HOME CATEGORIES */
+/* CATEGORIES */
 .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; margin-top: 15px;}
 .cat-card { background: var(--card-bg); padding: 16px 12px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s; cursor: pointer; }
 .cat-card:active { transform: scale(0.95); }
@@ -63,39 +70,44 @@ main { max-width: 480px; margin: -15px auto 0; padding: 0 16px 20px; position: r
 .cat-title { font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
 .cat-sub { font-size: 10px; font-weight: 600; color: var(--text-muted); }
 
-/* CATEGORY COLORS */
 .c-blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
 .c-orange { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
 .c-green { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
 .c-purple { background: #faf5ff; color: #9333ea; border: 1px solid #e9d5ff; }
 
-/* BAZAAR SHOP LIST STYLES */
-.search-box { background: #fff; padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); margin-bottom: 20px; border: 1px solid var(--border); margin-top: 10px;}
+/* BAZAAR SHOP LIST */
+.search-box { background: #fff; padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid var(--border); margin-top: 10px;}
 .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 600; color: var(--text-dark); }
+
+.filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 10px; scrollbar-width: none; }
+.filter-scroll::-webkit-scrollbar { display: none; }
+.filter-chip { background: #fff; border: 1px solid var(--border); padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: 0.2s;}
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2); }
 
 .shop-card { background: #fff; border-radius: 16px; padding: 12px; display: flex; gap: 12px; margin-bottom: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); cursor: pointer; transition: transform 0.2s; }
 .shop-card:active { transform: scale(0.97); }
-.shop-img-box { width: 70px; height: 70px; border-radius: 12px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 30px; border: 1px solid var(--border); flex-shrink: 0;}
+.shop-img-box { width: 70px; height: 70px; border-radius: 12px; background: var(--bg-color); display: flex; align-items: center; justify-content: center; font-size: 30px; border: 1px solid var(--border); flex-shrink: 0;}
 .shop-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 .shop-info h3 { font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
 .shop-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
 .status-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 6px; }
 .status-open { background: #d1fae5; color: #059669; border: 1px solid #a7f3d0; }
 .status-closed { background: #fee2e2; color: #e11d48; border: 1px solid #fecaca; }
+.status-job { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
 
-/* 🛒 SHOP DETAIL MODAL (BOTTOM SHEET) */
-.modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
+/* BOTTOM SHEET */
+.modal-overlay { position: fixed; inset: 0; background: rgba(41, 30, 27, 0.6); backdrop-filter: blur(4px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
 .bottom-sheet { background: #fff; width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px 20px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; }
-.sheet-close { width: 40px; height: 5px; background: #cbd5e1; border-radius: 10px; margin: 0 auto 20px; cursor: pointer; }
-.shop-detail-title { font-size: 20px; font-weight: 900; color: var(--primary); margin-bottom: 4px; }
-.shop-detail-sub { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 6px;}
+.sheet-close { width: 40px; height: 5px; background: #e7e5e4; border-radius: 10px; margin: 0 auto 20px; cursor: pointer; }
+.shop-detail-title { font-size: 20px; font-weight: 900; color: var(--primary-dark); margin-bottom: 4px; }
+.shop-detail-sub { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;}
 
 .action-row { display: flex; gap: 10px; margin-bottom: 20px; }
 .action-btn { flex: 1; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;}
 .btn-call { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
 .btn-map { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
 
-/* 🎚️ TOGGLE SWITCH CSS 🎚️ */
+/* TOGGLE SWITCH */
 .switch { position: relative; display: inline-block; width: 60px; height: 32px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);}
@@ -104,7 +116,7 @@ input:checked + .slider { background-color: #10b981; }
 input:checked + .slider:before { transform: translateX(28px); }
 
 /* BOTTOM NAV */
-.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: #fff; border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-around; padding: 12px 0 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 999999 !important; box-shadow: 0 -10px 25px rgba(0,0,0,0.05); border-top: 1px solid var(--border); }
+.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: #fff; border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-around; padding: 12px 0 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 999999 !important; box-shadow: 0 -10px 25px rgba(93, 64, 55, 0.08); border-top: 1px solid var(--border); }
 .bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .bottom-nav button .ico { font-size: 22px; transition: all 0.2s; filter: grayscale(1); opacity: 0.6;}
 .bottom-nav button.active { color: var(--primary); }
@@ -112,13 +124,13 @@ input:checked + .slider:before { transform: translateX(28px); }
 
 .hidden { display: none !important; }
 
-/* 🤖 AI CHATBOT CSS */
-.ai-fab { position: fixed !important; bottom: 100px !important; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4); cursor: pointer; z-index: 99990; transition: transform 0.2s; border: 2px solid #fff; }
+/* AI CHATBOT */
+.ai-fab { position: fixed !important; bottom: 100px !important; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3); cursor: pointer; z-index: 99990; transition: transform 0.2s; border: 2px solid #fff; }
 .ai-fab:active { transform: scale(0.9); }
 .ai-box { background: #fff; border-radius: 24px; padding: 20px; max-width: 350px; width: 100%; box-shadow: 0 25px 50px rgba(0,0,0,0.4); }
 .chat-area { height: 250px; overflow-y: auto; background: var(--bg-color); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
 .msg-b { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 13px; font-weight: 600; line-height: 1.4;}
-.m-ai { background: #e2e8f0; color: var(--primary-dark); align-self: flex-start; border-bottom-left-radius: 4px;}
+.m-ai { background: var(--border); color: var(--primary-dark); align-self: flex-start; border-bottom-left-radius: 4px;}
 .m-user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px;}
 .ai-opts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;}
 .ai-btn { background: #fff; border: 1px solid var(--primary-light); color: var(--primary-dark); padding: 8px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; }
@@ -137,11 +149,11 @@ input:checked + .slider:before { transform: translateX(28px); }
        </div>
        <div style="font-size: 20px; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 50%; cursor: pointer;">🔔</div>
    </div>
-   <div class="location-badge">📍 All India <span style="font-size: 10px;">▼</span></div>
+   <div class="location-badge">📍 नई दिल्ली, भारत <span style="font-size: 10px;">▼</span></div>
 </div>
 
 <main>
-    <!-- 🏠 1. HOME SECTION (FOR CUSTOMERS) -->
+    <!-- 🏠 HOME SECTION -->
     <section id="home">
         <div class="search-box">
             <span>🔍</span>
@@ -152,28 +164,28 @@ input:checked + .slider:before { transform: translateX(28px); }
             <div style="font-size: 30px;">✨</div>
             <div>
                 <b style="font-size: 14px; display: block; margin-bottom: 4px;">स्वागत है!</b>
-                <p style="font-size: 11px; font-weight: 600;">अब अपने आस-पास की सभी दुकानें और सर्विस बिना लॉगिन किये आसानी से खोजें।</p>
+                <p style="font-size: 11px; font-weight: 600;">अब अपने आस-पास की सभी दुकानें, जॉब्स और सर्विस बिना लॉगिन किये आसानी से खोजें।</p>
             </div>
         </div>
 
         <div style="font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 12px;">सुविधाएं (Categories)</div>
         <div class="cat-grid">
-            <div class="cat-card" onclick="showTab('bazaar')">
+            <div class="cat-card" onclick="openCategory('बाज़ार')">
                 <div class="cat-icon c-orange">🏬</div>
                 <div class="cat-title">लोकल बाज़ार</div>
-                <div class="cat-sub">सभी दुकानें खोजें</div>
+                <div class="cat-sub">दुकानें और खरीदारी</div>
             </div>
-            <div class="cat-card">
+            <div class="cat-card" onclick="openCategory('सेवाएं')">
                 <div class="cat-icon c-blue">🛠️</div>
                 <div class="cat-title">ज़रूरी सेवाएं</div>
                 <div class="cat-sub">प्लंबर, पीसी रिपेयर</div>
             </div>
-            <div class="cat-card">
+            <div class="cat-card" onclick="openCategory('रोज़गार')">
                 <div class="cat-icon c-green">💼</div>
                 <div class="cat-title">रोज़गार (Jobs)</div>
-                <div class="cat-sub">लोकल नौकरियां</div>
+                <div class="cat-sub">वर्कर या काम खोजें</div>
             </div>
-            <div class="cat-card">
+            <div class="cat-card" onclick="openCategory('शिक्षा')">
                 <div class="cat-icon c-purple">🎓</div>
                 <div class="cat-title">शिक्षा व कोर्स</div>
                 <div class="cat-sub">स्कूल, कंप्यूटर कोर्स</div>
@@ -181,53 +193,76 @@ input:checked + .slider:before { transform: translateX(28px); }
         </div>
     </section>
 
-    <!-- 🏬 2. BAZAAR SECTION (SHOP LIST) -->
+    <!-- 🏬 BAZAAR SECTION (LIST) -->
     <section id="bazaar" class="hidden">
-        <div class="search-box" style="margin-bottom: 20px;">
+        <div class="search-box" style="margin-bottom: 16px;">
             <span>🔍</span>
-            <input type="text" placeholder="दुकान का नाम या केटेगरी खोजें...">
+            <input type="text" placeholder="नाम या केटेगरी खोजें...">
         </div>
         
-        <div style="font-size: 14px; font-weight: 800; color: var(--text-muted); margin-bottom: 12px;">आस-पास की दुकानें 👇</div>
+        <div class="filter-scroll" id="filterContainer">
+            <div class="filter-chip active" onclick="setFilter('सभी', this)">सभी (All)</div>
+            <div class="filter-chip" onclick="setFilter('बाज़ार', this)">बाज़ार (Shops)</div>
+            <div class="filter-chip" onclick="setFilter('सेवाएं', this)">ज़रूरी सेवाएं</div>
+            <div class="filter-chip" onclick="setFilter('रोज़गार', this)">रोज़गार (Jobs)</div>
+            <div class="filter-chip" onclick="setFilter('शिक्षा', this)">शिक्षा (Education)</div>
+        </div>
         
-        <!-- Live Shops will be injected here by JS -->
+        <div style="font-size: 14px; font-weight: 800; color: var(--text-muted); margin-bottom: 12px; margin-top: 5px;">सूची (List) 👇</div>
+        
         <div id="shopListContainer"></div>
     </section>
 
-    <!-- ➕ 3. ADD SHOP SECTION (FOR SHOPKEEPERS) -->
+    <!-- ➕ ADD SHOP/JOB SECTION -->
     <section id="addShop" class="hidden">
         <div class="card">
-            <h2>🏬 अपनी दुकान/सर्विस जोड़ें</h2>
-            <p style="font-size:12px; color:var(--text-muted); margin-bottom:20px; font-weight:600;">अपनी दुकान रजिस्टर करें ताकि लोग आपको आसानी से खोज सकें। (यह फ्री है!)</p>
+            <h2>➕ नई जानकारी जोड़ें</h2>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:20px; font-weight:600;">अपनी दुकान, सर्विस या कोई जॉब रजिस्टर करें ताकि लोग आपको आसानी से खोज सकें। (यह फ्री है!)</p>
             
             <div class="field">
-                <label>दुकान या सर्विस का नाम *</label>
-                <div class="input-wrap"><span>🏪</span><input type="text" placeholder="उदा. अंसारी जनरल स्टोर" id="addName"></div>
-            </div>
-
-            <div class="field">
-                <label>दुकान की केटेगरी चुनें *</label>
+                <label>मेन केटेगरी चुनें *</label>
                 <div class="input-wrap">
                     <span>📑</span>
-                    <select id="addCat">
+                    <select id="addMainCat" onchange="updateSubCats()">
                         <option value="" disabled selected>-- केटेगरी चुनें --</option>
-                        <option value="किराना / जनरल स्टोर">किराना / जनरल स्टोर</option>
-                        <option value="कपड़े / साड़ी (Clothing)">कपड़े / साड़ी (Clothing)</option>
-                        <option value="मेडिकल (Pharmacy)">मेडिकल (Pharmacy)</option>
-                        <option value="इलेक्ट्रॉनिक्स / मोबाइल">इलेक्ट्रॉनिक्स / मोबाइल</option>
-                        <option value="हार्डवेयर / पेंट">हार्डवेयर / पेंट</option>
-                        <option value="सैलून / ब्यूटी पार्लर">सैलून / ब्यूटी पार्लर</option>
-                        <option value="रेस्टोरेंट / फ़ास्ट फ़ूड">रेस्टोरेंट / फ़ास्ट फ़ूड</option>
-                        <option value="प्लंबर / इलेक्ट्रीशियन">प्लंबर / इलेक्ट्रीशियन</option>
-                        <option value="कंप्यूटर / लैपटॉप रिपेयर">कंप्यूटर / लैपटॉप रिपेयर</option>
-                        <option value="अन्य (Other)">अन्य (Other)</option>
+                        <option value="बाज़ार">लोकल बाज़ार (दुकानें)</option>
+                        <option value="सेवाएं">ज़रूरी सेवाएं (प्लंबर/रिपेयर)</option>
+                        <option value="रोज़गार">रोज़गार (जॉब / वर्कर चाहिए)</option>
+                        <option value="शिक्षा">शिक्षा (कोर्स/ट्यूशन)</option>
                     </select>
                 </div>
             </div>
 
+            <!-- JOB TYPE SPECIFIC FIELD (Hidden by default) -->
+            <div class="field hidden" id="jobTypeField">
+                <label>आप क्या चाहते हैं? *</label>
+                <div class="radio-group">
+                    <label class="radio-box active" id="rbHiring" onclick="setJobType('hiring')">
+                        <input type="radio" name="jobType" value="hiring" checked> 👷 वर्कर चाहिए
+                    </label>
+                    <label class="radio-box" id="rbSeeking" onclick="setJobType('seeking')">
+                        <input type="radio" name="jobType" value="seeking"> 💼 मुझे काम चाहिए
+                    </label>
+                </div>
+            </div>
+
+            <!-- SUB-CATEGORY (Hidden by default) -->
+            <div class="field hidden" id="subCatField">
+                <label>दुकान / काम का प्रकार *</label>
+                <div class="input-wrap">
+                    <span>📋</span>
+                    <select id="addSubCat"></select>
+                </div>
+            </div>
+
             <div class="field">
-                <label>पूरा पता (Location) *</label>
-                <div class="input-wrap"><span>📍</span><textarea rows="2" placeholder="उदा. मेन मार्केट, लोहता, वाराणसी" id="addLoc"></textarea></div>
+                <label id="nameLabel">नाम (दुकान / आपका नाम) *</label>
+                <div class="input-wrap"><span>👤</span><input type="text" placeholder="नाम लिखें..." id="addName"></div>
+            </div>
+
+            <div class="field">
+                <label>पूरा विवरण / पता (Location) *</label>
+                <div class="input-wrap"><span>📍</span><textarea rows="2" placeholder="पूरा पता या काम की जानकारी" id="addLoc"></textarea></div>
             </div>
 
             <div class="field">
@@ -235,32 +270,30 @@ input:checked + .slider:before { transform: translateX(28px); }
                 <div class="input-wrap"><span>📞</span><input type="tel" placeholder="10 अंकों का नंबर" maxlength="10"></div>
             </div>
 
-            <button class="btn" onclick="submitShop()">✅ दुकान रजिस्टर करें</button>
+            <button class="btn" onclick="submitShop()">✅ रजिस्टर करें</button>
         </div>
     </section>
 
-    <!-- 👤 4. PROFILE SECTION (SHOPKEEPER DASHBOARD) -->
+    <!-- 👤 PROFILE SECTION -->
     <section id="profile" class="hidden">
         <div class="card" style="text-align: center;">
-            <div style="width: 60px; height: 60px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 10px;">👤</div>
-            <h2 style="justify-content: center; font-size: 20px; margin-bottom: 4px;">My Business</h2>
-            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">आपकी रजिस्टर की गई दुकान</p>
+            <div style="width: 60px; height: 60px; background: var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 10px;">👤</div>
+            <h2 style="justify-content: center; font-size: 20px; margin-bottom: 4px;">My Profile</h2>
+            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">आपकी रजिस्टर की गई जानकारी</p>
             
-            <!-- LIVE ON/OFF TOGGLE CARD -->
             <div style="background: var(--bg-color); border: 1px solid var(--primary-light); padding: 20px; border-radius: 16px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);">
                 <div style="font-size: 18px; margin-bottom: 8px;">🏬</div>
-                <h3 style="font-size: 16px; color: var(--primary-dark); font-weight: 900; margin-bottom: 4px;" id="dashShopName">Ansari General Store</h3>
+                <h3 style="font-size: 16px; color: var(--primary-dark); font-weight: 900; margin-bottom: 4px;" id="dashShopName">Store</h3>
                 <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;" id="dashShopCat">किराना / जनरल स्टोर</p>
                 
                 <div style="border-top: 1px dashed var(--border); padding-top: 20px; display: flex; justify-content: space-between; align-items: center;">
                     <div style="text-align: left;">
-                        <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);">दुकान का स्टेटस</div>
+                        <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);">स्टेटस</div>
                         <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 4px;">ग्राहक को लाइव दिखेगा</div>
                     </div>
                     
-                    <!-- THE MAGIC SWITCH -->
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <span id="switchText" style="font-size:12px; font-weight:800; color: #10b981;">ON (खुली है)</span>
+                        <span id="switchText" style="font-size:12px; font-weight:800; color: #10b981;">ON (चालू है)</span>
                         <label class="switch">
                           <input type="checkbox" id="liveSwitch" checked onchange="toggleShopStatus(this)">
                           <span class="slider"></span>
@@ -268,20 +301,19 @@ input:checked + .slider:before { transform: translateX(28px); }
                     </div>
                 </div>
             </div>
-            
         </div>
     </section>
 </main>
 
-<!-- 🛒 SHOP DETAIL MODAL (BOTTOM SHEET) -->
+<!-- 🛒 SMART DETAIL MODAL -->
 <div id="shopModal" class="modal-overlay hidden" onclick="closeShopModal(event)">
     <div class="bottom-sheet" id="shopSheet">
         <div class="sheet-close"></div>
-        <div style="width: 60px; height: 60px; background: #e2e8f0; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 30px; margin-bottom: 12px;" id="mShopIcon">🏬</div>
-        <h2 id="mShopName" class="shop-detail-title">Shop Name</h2>
+        <div style="width: 60px; height: 60px; background: var(--bg-color); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 30px; margin-bottom: 12px;" id="mShopIcon">🏬</div>
+        <h2 id="mShopName" class="shop-detail-title">Name</h2>
         <div class="shop-detail-sub">
             <span id="mShopCat">कैटेगरी</span> • 
-            <span id="mShopStatus" class="status-badge status-open">🟢 अभी खुली है</span>
+            <span id="mShopStatus" class="status-badge status-open">🟢 चालू है</span>
         </div>
         
         <div class="action-row">
@@ -290,7 +322,7 @@ input:checked + .slider:before { transform: translateX(28px); }
         </div>
 
         <div style="background: var(--bg-color); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px;">📍 पूरा पता (ADDRESS)</div>
+            <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px;">📍 विवरण / पता (DETAILS)</div>
             <div id="mShopLoc" style="font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.5;">पता यहाँ आएगा</div>
         </div>
     </div>
@@ -307,7 +339,7 @@ input:checked + .slider:before { transform: translateX(28px); }
        <div class="msg-b m-ai">नमस्ते! मैं आपका AI गाइड हूँ। आप 'अपना क्षेत्र' ऐप के बारे में मुझसे सवाल पूछ सकते हैं। 👇</div>
     </div>
     <div class="ai-opts">
-       <button class="ai-btn" onclick="askAI('दुकान कैसे जोड़ें?')">🏬 दुकान कैसे जोड़ें?</button>
+       <button class="ai-btn" onclick="askAI('जानकारी कैसे जोड़ें?')">➕ जानकारी कैसे जोड़ें?</button>
        <button class="ai-btn" onclick="askAI('क्या यह फ्री है?')">💰 क्या यह फ्री है?</button>
        <button class="ai-btn" onclick="askAI('स्टेटस (ON/OFF) कैसे बदलें?')">🎚️ स्टेटस कैसे बदलें?</button>
     </div>
@@ -317,8 +349,8 @@ input:checked + .slider:before { transform: translateX(28px); }
 <!-- BOTTOM NAVIGATION -->
 <nav class="bottom-nav">
   <button id="nav-home" class="active" onclick="showTab('home')"><div class="ico">🏠</div>होम</button>
-  <button id="nav-bazaar" onclick="showTab('bazaar')"><div class="ico">🏬</div>बाज़ार</button>
-  <button id="nav-addShop" onclick="showTab('addShop')"><div class="ico">➕</div>दुकान जोड़ें</button>
+  <button id="nav-bazaar" onclick="showTab('bazaar')"><div class="ico">🏬</div>खोजें</button>
+  <button id="nav-addShop" onclick="showTab('addShop')"><div class="ico">➕</div>जोड़ें</button>
   <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div>प्रोफाइल</button>
 </nav>
 
@@ -326,24 +358,41 @@ input:checked + .slider:before { transform: translateX(28px); }
 <div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
 
 <script>
-// --- DATABASE MOCKUP ---
-// Dukaano ka live data (Isme hum toggle ka asar dekhenge)
+// --- DATABASE MOCKUP WITH VILLAGE/CITY JOBS ---
 let shopsData = [
-    { id: 1, name: "Ansari General Store", cat: "किराना / जनरल स्टोर", loc: "मेन मार्केट, लोहता, वाराणसी", icon: "🛒", isOpen: true },
-    { id: 2, name: "Star Electronics", cat: "इलेक्ट्रॉनिक्स / मोबाइल", loc: "जामा मस्जिद रोड, आज़मगढ़", icon: "📱", isOpen: false },
-    { id: 3, name: "City Hospital", cat: "मेडिकल (Pharmacy)", loc: "चौक, लखनऊ", icon: "💊", isOpen: true }
+    { id: 1, type: "बाज़ार", name: "General Store", cat: "किराना / जनरल स्टोर", loc: "कनॉट प्लेस, नई दिल्ली", icon: "🛒", isOpen: true },
+    { id: 2, type: "रोज़गार", name: "Ramesh Builder", cat: "राजमिस्त्री / मज़दूर (वर्कर चाहिए)", loc: "मकान बनवाने के लिए 4 मज़दूरों की ज़रूरत है।", icon: "👷", isOpen: true },
+    { id: 3, type: "रोज़गार", name: "Suresh (ड्राइवर)", cat: "ट्रैक्टर / गाड़ी ड्राइवर (काम चाहिए)", loc: "मेरे पास 5 साल का ड्राइविंग अनुभव है, काम चाहिए।", icon: "🚜", isOpen: true },
+    { id: 4, type: "सेवाएं", name: "Sharma Plumbing", cat: "प्लंबर सर्विस", loc: "करोल बाग़, नई दिल्ली", icon: "🛠️", isOpen: true },
+    { id: 5, type: "बाज़ार", name: "Fashion Saree Center", cat: "कपड़े / साड़ी", loc: "चांदनी चौक, नई दिल्ली", icon: "👗", isOpen: false }
 ];
 
-// --- RENDER SHOPS IN BAZAAR ---
+let currentFilter = 'सभी';
+
 function renderShops() {
     let html = "";
-    shopsData.forEach(shop => {
-        let statusBadge = shop.isOpen 
-            ? `<span class="status-badge status-open"><span style="font-size:8px;">🟢</span> खुली है</span>`
-            : `<span class="status-badge status-closed"><span style="font-size:8px;">🔴</span> बंद है</span>`;
+    let filtered = shopsData.filter(s => currentFilter === 'सभी' || s.type === currentFilter);
+    
+    if(filtered.length === 0) {
+        html = `<div style="text-align:center; padding: 30px; font-weight:600; color: var(--text-muted);">कोई जानकारी नहीं मिली।</div>`;
+    }
+
+    filtered.forEach(shop => {
+        let statusText = "";
+        let statusClass = shop.isOpen ? 'status-open' : 'status-closed';
         
-        // Pass data to modal on click
-        let onclickData = `openShopModal('${shop.name}', '${shop.cat}', ${shop.isOpen}, '${shop.loc}', '${shop.icon}')`;
+        if (shop.type === "रोज़गार") {
+            if(shop.cat.includes("वर्कर चाहिए")) {
+                statusText = shop.isOpen ? '🟢 अर्जेंट ज़रूरत' : '🔴 फुल हो गया';
+            } else {
+                statusText = shop.isOpen ? '🟢 काम के लिए खाली' : '🔴 काम मिल गया';
+            }
+        } else {
+            statusText = shop.isOpen ? '🟢 चालू है' : '🔴 बंद है';
+        }
+
+        let statusBadge = `<span class="status-badge ${statusClass}">${statusText}</span>`;
+        let onclickData = `openShopModal('${shop.name}', '${shop.cat}', ${shop.isOpen}, '${shop.loc}', '${shop.icon}', '${shop.type}')`;
         
         html += `
         <div class="shop-card" onclick="${onclickData}">
@@ -358,72 +407,146 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
-// --- TOGGLE SHOP LIVE STATUS (From Profile) ---
+function setFilter(type, element) {
+    currentFilter = type;
+    let chips = document.getElementById('filterContainer').children;
+    for(let i=0; i<chips.length; i++) {
+        chips[i].classList.remove('active');
+        if(chips[i].innerText.includes(type) || (type === 'सभी' && chips[i].innerText.includes('All'))) {
+            chips[i].classList.add('active');
+        }
+    }
+    renderShops();
+}
+
+function openCategory(type) {
+    showTab('bazaar');
+    setFilter(type);
+}
+
 function toggleShopStatus(checkbox) {
     let textEl = document.getElementById('switchText');
     let isNowOpen = checkbox.checked;
     
     if(isNowOpen) {
-        textEl.textContent = "ON (खुली है)";
+        textEl.textContent = "ON (चालू है)";
         textEl.style.color = "#10b981";
     } else {
         textEl.textContent = "OFF (बंद है)";
         textEl.style.color = "#e11d48";
     }
     
-    // Update the first shop in our mock database to show real-time change
     shopsData[0].isOpen = isNowOpen;
-    renderShops(); // Re-render the bazaar list
+    renderShops(); 
 }
 
-// --- SUBMIT NEW SHOP ---
+// --- DYNAMIC CATEGORY LOGIC ---
+function updateSubCats() {
+    let mainCat = document.getElementById('addMainCat').value;
+    let subCatWrap = document.getElementById('subCatField');
+    let jobTypeWrap = document.getElementById('jobTypeField');
+    let subCatSelect = document.getElementById('addSubCat');
+    let nameLabel = document.getElementById('nameLabel');
+    
+    subCatWrap.classList.remove('hidden');
+    
+    if(mainCat === 'रोज़गार') {
+        jobTypeWrap.classList.remove('hidden');
+        nameLabel.innerText = "नाम (ठेकेदार / आपका नाम) *";
+    } else {
+        jobTypeWrap.classList.add('hidden');
+        nameLabel.innerText = "नाम (दुकान / सर्विस का नाम) *";
+    }
+
+    let opts = "";
+    if(mainCat === 'बाज़ार') {
+        opts = `<option value="किराना / जनरल स्टोर">किराना / जनरल स्टोर</option><option value="कपड़े / साड़ी">कपड़े / साड़ी</option><option value="मेडिकल / क्लिनिक">मेडिकल / क्लिनिक</option><option value="इलेक्ट्रॉनिक्स / मोबाइल">इलेक्ट्रॉनिक्स / मोबाइल</option><option value="हार्डवेयर / बिल्डिंग">हार्डवेयर / बिल्डिंग</option><option value="सब्ज़ी / फल / मीट">सब्ज़ी / फल / मीट</option><option value="अन्य">अन्य</option>`;
+    } else if(mainCat === 'सेवाएं') {
+        opts = `<option value="प्लंबर / इलेक्ट्रीशियन">प्लंबर / इलेक्ट्रीशियन</option><option value="मैकेनिक / गैरेज">मैकेनिक / गैरेज</option><option value="ब्यूटी पार्लर / नाई">ब्यूटी पार्लर / नाई</option><option value="टेलर / सिलाई">टेलर / सिलाई</option><option value="अन्य">अन्य</option>`;
+    } else if(mainCat === 'रोज़गार') {
+        opts = `<option value="राजमिस्त्री / मज़दूर">राजमिस्त्री / मज़दूर (Labor)</option><option value="खेतों का काम">खेतों का काम (Agriculture)</option><option value="ड्राइवर / ट्रैक्टर">ड्राइवर / ट्रैक्टर (Driver)</option><option value="दुकान हेल्पर">दुकान हेल्पर (Shop Helper)</option><option value="सिलाई / कारीगर">सिलाई / कारीगर (Artisan)</option><option value="कंप्यूटर / ऑफिस">कंप्यूटर / ऑफिस</option><option value="अन्य काम">अन्य काम</option>`;
+    } else if(mainCat === 'शिक्षा') {
+        opts = `<option value="स्कूल / कॉलेज">स्कूल / कॉलेज</option><option value="ट्यूशन / कोचिंग">ट्यूशन / कोचिंग</option><option value="कंप्यूटर कोर्स">कंप्यूटर कोर्स</option><option value="मदरसा / दीनी तालीम">मदरसा / दीनी तालीम</option><option value="अन्य">अन्य</option>`;
+    }
+    subCatSelect.innerHTML = opts;
+}
+
+function setJobType(type) {
+    document.getElementById('rbHiring').classList.remove('active');
+    document.getElementById('rbSeeking').classList.remove('active');
+    if(type === 'hiring') {
+        document.getElementById('rbHiring').classList.add('active');
+        document.querySelector('input[value="hiring"]').checked = true;
+    } else {
+        document.getElementById('rbSeeking').classList.add('active');
+        document.querySelector('input[value="seeking"]').checked = true;
+    }
+}
+
+// --- SUBMIT NEW POST ---
 function submitShop() {
+    let mainCat = document.getElementById('addMainCat').value;
+    let subCat = document.getElementById('addSubCat').value;
     let name = document.getElementById('addName').value;
-    let cat = document.getElementById('addCat').value;
     let loc = document.getElementById('addLoc').value;
     
-    if(!name || !cat || !loc) {
-        alert("कृपया दुकान का नाम, केटेगरी और पूरा पता ज़रूर भरें!");
+    if(!mainCat || !subCat || !name || !loc) {
+        alert("कृपया सभी ज़रूरी (*) जानकारी भरें!");
         return;
     }
     
-    // Add to top of list
-    shopsData.unshift({ id: Date.now(), name: name, cat: cat, loc: loc, icon: "🏬", isOpen: true });
+    let finalCat = subCat;
+    if(mainCat === 'रोज़गार') {
+        let isHiring = document.querySelector('input[name="jobType"]:checked').value === 'hiring';
+        finalCat = isHiring ? subCat + " (वर्कर चाहिए)" : subCat + " (काम चाहिए)";
+    }
     
-    alert("✅ आपकी दुकान सफलतापुर्वक रजिस्टर हो गई! अब आप 'बाज़ार' में इसे देख सकते हैं।");
+    let icon = mainCat === "बाज़ार" ? "🏬" : (mainCat === "सेवाएं" ? "🛠️" : (mainCat === "रोज़गार" ? "💼" : "🎓"));
     
-    // Clear form and go to Bazaar
+    shopsData.unshift({ id: Date.now(), type: mainCat, name: name, cat: finalCat, loc: loc, icon: icon, isOpen: true });
+    
+    alert("✅ आपकी जानकारी सफलतापुर्वक रजिस्टर हो गई!");
+    
     document.getElementById('addName').value = '';
-    document.getElementById('addCat').value = '';
     document.getElementById('addLoc').value = '';
-    renderShops();
-    showTab('bazaar');
+    
+    openCategory(mainCat);
 }
 
-// --- TAB SWITCHING LOGIC ---
 function showTab(tabId) {
     document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
     document.getElementById(tabId).classList.remove('hidden');
-    
     document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
     document.getElementById('nav-' + tabId).classList.add('active');
+    if(tabId === 'bazaar') renderShops();
     window.scrollTo(0,0);
 }
 
-// --- SHOP BOTTOM SHEET LOGIC ---
-function openShopModal(name, cat, isOpen, loc, icon) {
+function openShopModal(name, cat, isOpen, loc, icon, type) {
     document.getElementById('mShopName').textContent = name;
     document.getElementById('mShopCat').textContent = cat;
     document.getElementById('mShopLoc').textContent = loc;
     document.getElementById('mShopIcon').textContent = icon;
     
     let statusEl = document.getElementById('mShopStatus');
+    let statusText = "";
+    
+    if (type === "रोज़गार") {
+        if(cat.includes("वर्कर चाहिए")) {
+            statusText = isOpen ? '🟢 अर्जेंट ज़रूरत है' : '🔴 कामगार मिल गया';
+        } else {
+            statusText = isOpen ? '🟢 काम के लिए खाली हूँ' : '🔴 काम मिल गया';
+        }
+    } else {
+        statusText = isOpen ? '🟢 चालू है' : '🔴 बंद है';
+    }
+
     if(isOpen) {
         statusEl.className = 'status-badge status-open';
-        statusEl.innerHTML = '🟢 अभी खुली है';
+        statusEl.innerHTML = statusText;
     } else {
         statusEl.className = 'status-badge status-closed';
-        statusEl.innerHTML = '🔴 अभी बंद है';
+        statusEl.innerHTML = statusText;
     }
     document.getElementById('shopModal').classList.remove('hidden');
 }
@@ -434,7 +557,6 @@ function closeShopModal(e) {
     }
 }
 
-// --- AI CHATBOT LOGIC ---
 function askAI(question) {
     const chat = document.getElementById('aiChat');
     chat.innerHTML += `<div class="msg-b m-user">${question}</div>`;
@@ -442,9 +564,9 @@ function askAI(question) {
     
     setTimeout(() => {
         let ans = "";
-        if(question.includes('जोड़ें')) ans = "🏬 दुकान जोड़ने के लिए नीचे दिए गए '➕ दुकान जोड़ें' बटन पर क्लिक करें। अपना नाम, केटेगरी और एड्रेस डालें। यह तुरंत लिस्ट में आ जाएगी!";
-        else if(question.includes('फ्री')) ans = "💰 जी हाँ! ग्राहकों के लिए दुकानें खोजना और दुकानदारों के लिए अपनी दुकान रजिस्टर करना 100% फ्री है।";
-        else if(question.includes('स्टेटस')) ans = "🎚️ नीचे '👤 प्रोफाइल' में जाएं। वहां आपको 'ON/OFF' का बड़ा स्विच मिलेगा। दुकान खोलने पर ON करें, बंद करने पर OFF करें। ग्राहक इसे 'बाज़ार' में लाइव देख सकेंगे।";
+        if(question.includes('जोड़ें')) ans = "➕ जानकारी जोड़ने के लिए नीचे दिए गए '➕ जोड़ें' बटन पर क्लिक करें। अपना नाम, केटेगरी और एड्रेस डालें। यह तुरंत लिस्ट में आ जाएगी!";
+        else if(question.includes('फ्री')) ans = "💰 जी हाँ! यह पूरी तरह 100% फ्री है।";
+        else if(question.includes('स्टेटस')) ans = "🎚️ '👤 प्रोफाइल' में जाएं। वहां आपको 'ON/OFF' का स्विच मिलेगा। चालू रखने के लिए ON करें।";
         else ans = "मुझे समझ नहीं आया। कृपया दिए गए बटनों में से चुनाव करें।";
         
         chat.innerHTML += `<div class="msg-b m-ai">${ans}</div>`;
@@ -452,10 +574,7 @@ function askAI(question) {
     }, 600);
 }
 
-// Init
-window.onload = () => {
-    renderShops();
-};
+window.onload = () => { renderShops(); };
 </script>
 </body>
-                                                                                </html>
+</html>
