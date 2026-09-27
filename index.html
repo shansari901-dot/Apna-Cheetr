@@ -7,78 +7,71 @@
 <meta name="description" content="लोकल जानकारी, गाँव से शहर तक">
 <meta name="theme-color" content="#0b1120">
 <style>
-/* 🌌 ULTRA PREMIUM DARK NAVY THEME (Matching Screenshots) 🌌 */
+/* 🌌 ULTRA PREMIUM DARK NAVY THEME 🌌 */
 :root { 
-  --primary: #0b1120;       /* Very Dark Navy Background */
-  --primary-light: #1e293b;  /* Slightly lighter card bg */
-  --accent: #10b981;        /* Emerald Green for buttons/active states */
-  --accent-light: #d1fae5;
+  --primary: #0b1120;       /* Very Dark Navy */
+  --primary-light: #1e293b;  /* Slate */
+  --accent: #10b981;        /* Emerald Green */
   --bg-color: #0b1120;      
-  --card-bg: #151e2f;       /* Beautiful dark card color */
+  --card-bg: #151e2f;       /* Dark Card */
   --text-dark: #f8fafc;     /* White text */
-  --text-muted: #94a3b8;    /* Grey text for subtitles */
-  --border: #1e293b;        /* Subtle border */
+  --text-muted: #94a3b8;    /* Grey text */
+  --border: #1e293b;        
   --radius: 12px; 
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5); 
-  --bottom-nav-bg: #0b1120;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
 
-/* 🌐 BILINGUAL LOGIC */
 body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
-/* NATIVE APP FEEL */
 body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none;}
 input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 
-/* 🌐 TOP BAR (Sleek & Minimal) */
-.topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border);}
+/* 🌐 TOP BAR */
+.topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border);}
+.topbar-header { display: flex; justify-content: space-between; align-items: center;}
 .logo-area { display: flex; align-items: center; gap: 10px; }
 .logo-icon { font-size: 26px; }
 .app-title { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px;}
 .app-subtitle { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px;}
 
 .top-actions { display: flex; gap: 12px; align-items: center;}
-.icon-btn { font-size: 18px; color: var(--accent); background: rgba(16, 185, 129, 0.1); padding: 8px 12px; border-radius: 50px; cursor: pointer; border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 800;}
-.icon-btn:active { transform: scale(0.95); }
+.lang-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--accent); padding: 6px 12px; border-radius: 50px; font-size: 13px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px;}
 
-/* LOCATION SELECTOR */
 .location-selector { padding: 10px 16px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #f8fafc; cursor: pointer; background: var(--primary); border-bottom: 1px solid var(--border);}
 .location-selector span { font-size: 10px; color: var(--text-muted); }
 
 main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-index: 10; }
 
 /* 🖼️ HERO BANNER */
-.hero-banner { background: linear-gradient(90deg, #1e3a8a, #1e40af); border-radius: var(--radius); padding: 16px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border: 1px solid #2563eb; position: relative; overflow: hidden;}
-.hero-banner::after { content: ''; position: absolute; right: -20px; top: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.05); border-radius: 50%; }
-.hero-icon { font-size: 40px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); z-index: 2;}
+.hero-banner { background: linear-gradient(90deg, #1e3a8a, #0f172a); border-radius: var(--radius); padding: 16px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border: 1px solid #2563eb; position: relative; overflow: hidden;}
+.hero-icon { font-size: 40px; z-index: 2;}
 .hero-text { z-index: 2; flex: 1;}
-.hero-text b { font-size: 16px; display: block; margin-bottom: 4px; line-height: 1.3;}
-.hero-text p { font-size: 11px; font-weight: 600; opacity: 0.9;}
+.hero-text b { font-size: 15px; display: block; margin-bottom: 4px; line-height: 1.3;}
+.hero-text p { font-size: 11px; font-weight: 600; color: #cbd5e1;}
 .hero-badge { background: #fde047; color: #854d0e; font-size: 10px; font-weight: 900; padding: 4px 8px; border-radius: 6px; position: absolute; right: 12px; top: 12px;}
 
 /* 🔍 MAIN SEARCH BOX */
-.search-box { background: var(--card-bg); padding: 14px 16px; border-radius: 50px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px; border: 1px solid var(--border); box-shadow: var(--shadow);}
-.search-box span { font-size: 18px; color: var(--text-muted); }
+.search-box { background: var(--card-bg); padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px; border: 1px solid var(--border);}
+.search-box span { font-size: 16px; color: var(--text-muted); }
 .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 600; color: var(--text-dark); background: transparent; }
-.search-box input::placeholder { color: var(--text-muted); }
+.search-box input::placeholder { color: var(--text-muted); font-weight: 500;}
 
 /* SECTION HEADINGS */
-.section-title { font-size: 16px; font-weight: 800; margin-bottom: 16px; color: var(--text-dark); display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--accent); padding-bottom: 6px; display: inline-block;}
+.section-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--text-dark); border-bottom: 2px solid var(--accent); padding-bottom: 4px; display: inline-block;}
 
-/* 📱 HORIZONTAL CATEGORY GRID (Matching Screenshot) */
-.cat-grid-horz { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-.cat-card-horz { background: var(--card-bg); border-radius: var(--radius); padding: 14px 12px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s;}
+/* 📱 HORIZONTAL CATEGORY GRID */
+.cat-grid-horz { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.cat-card-horz { background: var(--card-bg); border-radius: var(--radius); padding: 12px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s;}
 .cat-card-horz:active { transform: scale(0.97); background: var(--primary-light); }
-.cat-icon-horz { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+.cat-icon-horz { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
 .cat-info-horz { flex: 1; }
-.cat-title-horz { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
+.cat-title-horz { font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
 .cat-sub-horz { font-size: 10px; font-weight: 600; color: var(--text-muted); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
-.cat-arrow { font-size: 12px; color: var(--text-muted); }
+.cat-arrow { font-size: 14px; color: var(--text-muted); }
 
-/* VIBRANT ICON COLORS FOR HORIZONTAL CARDS */
+/* VIBRANT ICON COLORS */
 .bg-green { background: linear-gradient(135deg, #4ade80, #16a34a); color: white;}
 .bg-purple { background: linear-gradient(135deg, #c084fc, #9333ea); color: white;}
 .bg-red { background: linear-gradient(135deg, #f87171, #dc2626); color: white;}
@@ -86,76 +79,78 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bg-blue { background: linear-gradient(135deg, #60a5fa, #2563eb); color: white;}
 .bg-pink { background: linear-gradient(135deg, #f472b6, #db2777); color: white;}
 .bg-cyan { background: linear-gradient(135deg, #22d3ee, #0891b2); color: white;}
-.bg-indigo { background: linear-gradient(135deg, #818cf8, #4f46e5); color: white;}
 
 /* VIEW MORE BUTTON */
 .view-more-btn { background: var(--card-bg); width: 100%; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 800; color: var(--text-dark); border: 1px solid var(--border); text-align: center; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;}
-.view-more-btn:active { background: var(--primary-light); }
 
-/* FORMS & CARDS */
-.card { background: var(--card-bg); border-radius: var(--radius); padding: 24px 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; box-sizing: border-box;}
-.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: var(--text-dark); display: flex; align-items: center; gap: 8px;}
-
-.field { margin-bottom: 18px; width: 100%; }
-.field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
-.input-wrap { display: flex; align-items: center; background: var(--primary); border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; transition: 0.2s;}
+/* COMMON CARDS & FORMS */
+.card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; }
+.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: var(--text-dark); }
+.field { margin-bottom: 16px; width: 100%; }
+.field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+.input-wrap { display: flex; align-items: center; background: var(--primary); border: 1px solid var(--border); border-radius: 12px; padding: 0 14px;}
 .input-wrap:focus-within { border-color: var(--accent); }
-.input-wrap span { font-size: 18px; opacity: 0.6; margin-right: 10px; width: 24px; text-align: center;}
-.input-wrap input, .input-wrap select, .input-wrap textarea { width: 100%; padding: 15px 0; border: none; background: transparent; font-size: 14px; font-weight: 600; color: var(--text-dark); outline: none; }
+.input-wrap span { font-size: 16px; opacity: 0.6; margin-right: 8px;}
+.input-wrap input, .input-wrap select, .input-wrap textarea { width: 100%; padding: 14px 0; border: none; background: transparent; font-size: 13px; font-weight: 600; color: var(--text-dark); outline: none; }
 .input-wrap select option { background: var(--primary-light); color: var(--text-dark); }
-.optional-tag { font-size: 11px; color: var(--text-muted); font-weight: 600; float: right; margin-top: 2px;}
 
 .radio-group { display: flex; gap: 10px; margin-top: 5px;}
-.radio-box { flex: 1; background: var(--primary); padding: 14px 10px; border-radius: 12px; border: 1px solid var(--border); text-align: center; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;}
-.radio-box input { display: none; }
+.radio-box { flex: 1; background: var(--primary); padding: 12px; border-radius: 12px; border: 1px solid var(--border); text-align: center; font-size: 12px; font-weight: 700; color: var(--text-muted); cursor: pointer;}
 .radio-box.active { background: rgba(16, 185, 129, 0.1); border-color: var(--accent); color: var(--accent);}
+.btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 14px; font-weight: 800; cursor: pointer; color: #000; background: var(--accent); margin-top: 10px;}
+.btn:active { transform: scale(0.97); }
 
-.btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; text-align: center; color: #000; background: var(--accent); margin-top: 10px;}
-.btn:active { transform: scale(0.96); opacity: 0.8;}
-
-/* FILTER CHIPS (Rounded rectangles) */
+/* FILTER CHIPS */
 .filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 12px; scrollbar-width: none; }
 .filter-scroll::-webkit-scrollbar { display: none; }
-.filter-chip { background: var(--card-bg); border: 1px solid var(--border); padding: 10px 20px; border-radius: 50px; font-size: 13px; font-weight: 700; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: 0.2s;}
+.filter-chip { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; color: var(--text-muted); white-space: nowrap; cursor: pointer;}
 .filter-chip.active { background: var(--accent); color: #000; border-color: var(--accent); }
 
-/* BEAUTIFUL SHOP LIST CARDS */
-.shop-card { background: var(--card-bg); border-radius: 16px; padding: 16px; display: flex; gap: 14px; margin-bottom: 16px; border: 1px solid var(--border); cursor: pointer; transition: transform 0.2s; align-items: center;}
-.shop-card:active { transform: scale(0.97); }
-.shop-img-box { width: 60px; height: 60px; border-radius: 12px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 30px; flex-shrink: 0;}
+/* SHOP LIST CARDS */
+.shop-card { background: var(--card-bg); border-radius: 16px; padding: 16px; display: flex; gap: 14px; margin-bottom: 16px; border: 1px solid var(--border); cursor: pointer; align-items: center;}
+.shop-img-box { width: 56px; height: 56px; border-radius: 12px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0;}
 .shop-info { flex: 1; }
-.shop-info h3 { font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+.shop-info h3 { font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
 .shop-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;}
 .status-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 6px; }
 .status-open { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
 .status-closed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
 
 /* BOTTOM NAV (GREEN INDICATOR STYLE) */
-.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 12px 0 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 999999 !important; border-top: 1px solid var(--border); }
-.bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative;}
+.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 10px 0 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 999999 !important; border-top: 1px solid var(--border); }
+.bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 700; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative;}
 .bottom-nav button .ico { font-size: 22px; filter: grayscale(1); opacity: 0.6; transition: 0.2s;}
 .bottom-nav button.active { color: var(--accent); }
 .bottom-nav button.active .ico { filter: grayscale(0); opacity: 1;}
-.bottom-nav button.active::after { content: ''; position: absolute; bottom: -16px; width: 30px; height: 3px; background: var(--accent); border-radius: 10px; } /* The Green Line */
+.bottom-nav button.active::after { content: ''; position: absolute; bottom: -14px; width: 35px; height: 3px; background: var(--accent); border-radius: 10px; } 
 
 .hidden { display: none !important; }
 
-/* AI CHATBOT & TOASTS */
+/* 🤖 AI CHATBOT & TOASTS 🤖 */
 .ai-fab { position: fixed !important; bottom: 90px !important; right: 16px; width: 50px; height: 50px; background: var(--card-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: pointer; z-index: 99990; border: 1px solid var(--border); }
 .ai-fab::after { content: 'सहायता'; position: absolute; right: 55px; background: var(--accent); color: #000; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 50px; white-space: nowrap; }
 
-.toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 99999999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px;}
-.toast { background: #1e293b; color: white; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; border: 1px solid #334155;}
-.toast.show { transform: translateY(0); opacity: 1; }
-.toast.error { border-left: 4px solid #ef4444; }
-.toast.success { border-left: 4px solid #10b981; }
-
-/* BOTTOM SHEET MODAL */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(2px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border);}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* TOGGLE SWITCH */
+/* AI BOX SPECIFIC */
+.ai-box { background: var(--card-bg); border-radius: 24px; padding: 20px; max-width: 400px; width: 90%; margin: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.6); border: 1px solid var(--border); position: relative; display: flex; flex-direction: column;}
+.chat-area { height: 250px; overflow-y: auto; background: var(--primary); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
+.msg-b { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--text-dark);}
+.m-ai { background: var(--card-bg); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px;}
+.m-user { background: var(--accent); color: #000; align-self: flex-end; border-bottom-right-radius: 4px;}
+.ai-opts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;}
+.ai-btn { background: var(--primary); border: 1px solid var(--border); color: var(--text-dark); padding: 8px 14px; border-radius: 50px; font-size: 11px; font-weight: 800; cursor: pointer; }
+
+/* TOASTS */
+.toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 99999999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px;}
+.toast { background: #1e293b; color: white; padding: 14px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; border: 1px solid #334155;}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.error { border-left: 4px solid #ef4444; }
+.toast.success { border-left: 4px solid #10b981; }
+
+/* SWITCH */
 .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--primary-light); transition: .4s; border-radius: 34px; border: 1px solid var(--border);}
@@ -169,15 +164,18 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 <div class="toast-container" id="toastBox"></div>
 
 <div class="topbar">
-   <div class="logo-area">
-       <div class="logo-icon">🏘️</div>
-       <div>
-           <div class="app-title"><span class="hi">अपना क्षेत्र</span><span class="en">Apna Chhetr</span></div>
-           <div class="app-subtitle"><span class="hi">लोकल जानकारी</span><span class="en">Local Info</span></div>
+   <div class="topbar-header">
+       <div class="logo-area">
+           <div class="logo-icon">🏘️</div>
+           <div>
+               <div class="app-title"><span class="hi">अपना क्षेत्र</span><span class="en">Apna Chhetr</span></div>
+               <div class="app-subtitle"><span class="hi">लोकल जानकारी</span><span class="en">Local Info</span></div>
+           </div>
        </div>
-   </div>
-   <div class="top-actions">
-       <div class="icon-btn" onclick="toggleLang()" id="langBtn">🌐 हिंदी</div>
+       <div class="top-actions">
+           <!-- 🌐 LANGUAGE TOGGLE -->
+           <div class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 EN</div>
+       </div>
    </div>
 </div>
 <div class="location-selector">📍 <span class="hi">नई दिल्ली, भारत</span><span class="en">New Delhi, India</span> <span>▼</span></div>
@@ -192,7 +190,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <p><span class="hi">अब सिर्फ एक ऐप में</span><span class="en">Now in just one app</span></p>
             </div>
             <div class="hero-icon">🏘️</div>
-            <div class="hero-badge"><span class="hi">गाँव से शहर तक सबके लिए</span><span class="en">For Village & City</span></div>
+            <div class="hero-badge"><span class="hi">गाँव से शहर तक</span><span class="en">Village to City</span></div>
         </div>
 
         <div class="search-box" onclick="showTab('bazaar')">
@@ -251,8 +249,8 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <div class="cat-card-horz" onclick="openCategory('खाना')">
                 <div class="cat-icon-horz bg-pink">🍴</div>
                 <div class="cat-info-horz">
-                    <div class="cat-title-horz"><span class="hi">खाना</span><span class="en">Food</span></div>
-                    <div class="cat-sub-horz"><span class="hi">रेस्टोरेंट, होटल, ढाबा</span><span class="en">Restaurant, Hotel, Dhaba</span></div>
+                    <div class="cat-title-horz"><span class="hi">खाना व रेस्टोरेंट</span><span class="en">Food</span></div>
+                    <div class="cat-sub-horz"><span class="hi">रेस्टोरेंट, ढाबा, मिठाई</span><span class="en">Restaurant, Hotel, Dhaba</span></div>
                 </div>
                 <div class="cat-arrow">›</div>
             </div>
@@ -271,7 +269,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
         
         <div class="filter-scroll" id="filterContainer">
-            <!-- Strict Isolation - No 'All' option -->
             <div class="filter-chip active" onclick="setFilter('बाज़ार', this)"><span class="hi">बाज़ार</span><span class="en">Shops</span></div>
             <div class="filter-chip" onclick="setFilter('सेवाएं', this)"><span class="hi">सेवाएं</span><span class="en">Services</span></div>
             <div class="filter-chip" onclick="setFilter('स्वास्थ्य', this)"><span class="hi">स्वास्थ्य</span><span class="en">Health</span></div>
@@ -282,10 +279,10 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         <div id="shopListContainer"></div>
     </section>
 
-    <!-- 🔐 AUTHENTICATION SECTION (LOGIN/SIGNUP) -->
+    <!-- 🔐 AUTHENTICATION SECTION -->
     <section id="auth" class="hidden">
         <div class="card" style="text-align: center; padding-top: 30px;">
-            <div style="font-size: 44px; margin-bottom: 10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">🏘️</div>
+            <div style="font-size: 44px; margin-bottom: 10px;">🏘️</div>
             <h2 style="justify-content:center; font-size: 22px; margin-bottom: 8px;"><span class="hi">लॉगिन / रजिस्टर</span><span class="en">Login / Register</span></h2>
             <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;"><span class="hi">दुकान या सर्विस जोड़ने के लिए सुरक्षित लॉगिन करें।</span><span class="en">Login securely to add your shop or service.</span></p>
             
@@ -307,15 +304,10 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
     </section>
 
-    <!-- ➕ 3. ADD INFO SECTION (PROTECTED) -->
+    <!-- ➕ 3. ADD INFO SECTION -->
     <section id="addShop" class="hidden">
         <div class="card">
             <h2 style="font-size: 20px;">➕ <span class="hi">नई जानकारी जोड़ें</span><span class="en">Add New Info</span></h2>
-            
-            <div style="background: rgba(239, 68, 68, 0.1); color: #f87171; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 800; margin-bottom: 20px; border: 1px solid rgba(239, 68, 68, 0.3); display: flex; align-items: center; gap: 10px; line-height: 1.4;">
-                <span style="font-size: 20px;">⚠️</span>
-                <span>चेतावनी: फेक (Fake) जानकारी डालने पर अकाउंट ब्लॉक कर दिया जाएगा।</span>
-            </div>
             
             <div class="field">
                 <label><span class="hi">मेन केटेगरी चुनें *</span><span class="en">Select Main Category *</span></label>
@@ -333,7 +325,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </div>
             </div>
 
-            <!-- JOB TYPE RADIO -->
             <div class="field hidden" id="jobTypeField">
                 <label><span class="hi">आप क्या चाहते हैं? *</span><span class="en">What do you want? *</span></label>
                 <div class="radio-group">
@@ -376,30 +367,30 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
     </section>
 
-    <!-- 👤 4. PROFILE SECTION (DASHBOARD) -->
+    <!-- 👤 4. PROFILE SECTION -->
     <section id="profile" class="hidden">
-        <div class="card" style="text-align: center; border-top: 4px solid var(--accent);">
-            <div style="width: 70px; height: 70px; background: var(--bg-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 12px; border: 2px solid var(--border);">👤</div>
-            <h2 style="justify-content: center; font-size: 22px; margin-bottom: 4px;" id="profileName">My Profile</h2>
-            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;" id="profilePhone">+91 XXXXXXXXXX</p>
+        <div class="card" style="text-align: center;">
+            <div style="width: 70px; height: 70px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 12px; border: 2px solid var(--border);">👤</div>
+            <h2 style="justify-content: center; font-size: 20px; margin-bottom: 4px;" id="profileName">My Profile</h2>
+            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;" id="profilePhone">+91 XXXXXXXXXX</p>
             
-            <div style="background: var(--bg-color); border: 1px solid var(--border); padding: 20px; border-radius: 20px; text-align: left; margin-bottom:20px;">
+            <div style="background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="display:flex; gap:14px; align-items:center; margin-bottom: 16px;">
-                    <div style="width: 50px; height: 50px; background: var(--card-bg); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:24px; border: 1px solid var(--border);">🏬</div>
+                    <div style="width: 46px; height: 46px; background: var(--card-bg); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:20px; border: 1px solid var(--border);">🏬</div>
                     <div>
-                        <h3 style="font-size: 16px; color: var(--text-dark); font-weight: 800; margin-bottom: 2px;" id="dashShopName">General Store</h3>
-                        <p style="font-size: 12px; color: var(--text-muted); font-weight: 600;" id="dashShopCat">किराना / जनरल स्टोर</p>
+                        <h3 style="font-size: 15px; color: var(--text-dark); font-weight: 800; margin-bottom: 2px;" id="dashShopName">General Store</h3>
+                        <p style="font-size: 11px; color: var(--text-muted); font-weight: 600;" id="dashShopCat">किराना / जनरल स्टोर</p>
                     </div>
                 </div>
                 
                 <div style="border-top: 1px dashed var(--border); padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);"><span class="hi">स्टेटस</span><span class="en">Status</span></div>
-                        <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 4px;"><span class="hi">ग्राहक को लाइव दिखेगा</span><span class="en">Visible live</span></div>
+                        <div style="font-size: 13px; font-weight: 800; color: var(--text-dark);"><span class="hi">स्टेटस</span><span class="en">Status</span></div>
+                        <div style="font-size: 10px; color: var(--text-muted); font-weight: 600; margin-top: 4px;"><span class="hi">ग्राहक को लाइव दिखेगा</span><span class="en">Visible live</span></div>
                     </div>
                     
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <span id="switchText" style="font-size:12px; font-weight:800; color: var(--accent);"><span class="hi">ON (चालू है)</span><span class="en">ON (Active)</span></span>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span id="switchText" style="font-size:11px; font-weight:800; color: var(--accent);"><span class="hi">ON (चालू है)</span><span class="en">ON (Active)</span></span>
                         <label class="switch">
                           <input type="checkbox" id="liveSwitch" checked onchange="toggleShopStatus(this)">
                           <span class="slider"></span>
@@ -411,28 +402,26 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <button class="btn" onclick="logout()" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">🚪 लॉगआउट (Logout)</button>
         </div>
 
-        <!-- 👑 MAIN ADMIN DASHBOARD BUTTON 👑 -->
         <div id="adminPanelBtn" class="hidden">
             <div style="font-size: 12px; color: var(--text-muted); font-weight: 700; margin: 30px 0 10px; text-align: center;">--- ADMIN ONLY ---</div>
             <button class="btn" style="background: linear-gradient(90deg, #c2410c, #ea580c); color:white;" onclick="showTab('admin')">👑 Admin Dashboard</button>
         </div>
     </section>
 
-    <!-- 👑 ADMIN PANEL (PROTECTED) -->
+    <!-- 👑 ADMIN PANEL -->
     <section id="admin" class="hidden">
         <div class="card" style="border-left: 4px solid #ea580c;">
             <h2 style="color: #ea580c;">👑 Admin Panel</h2>
-            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">यहाँ से आप किसी भी फेक जानकारी को डिलीट कर सकते हैं।</p>
             <div id="adminShopList"></div>
         </div>
     </section>
 </main>
 
-<!-- 🛒 SMART DETAIL MODAL -->
+<!-- 🛒 SMART DETAIL MODAL (BOTTOM SHEET) -->
 <div id="shopModal" class="modal-overlay hidden" onclick="closeShopModal(event)">
     <div class="bottom-sheet" id="shopSheet">
         <div class="sheet-close"></div>
-        <div style="width: 64px; height: 64px; background: var(--bg-color); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 16px;" id="mShopIcon">🏬</div>
+        <div style="width: 56px; height: 56px; background: var(--primary); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 16px;" id="mShopIcon">🏬</div>
         <h2 id="mShopName" class="shop-detail-title">Name</h2>
         <div class="shop-detail-sub">
             <span id="mShopCat">कैटेगरी</span> • 
@@ -444,11 +433,29 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <button class="action-btn btn-map" style="background: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2);" onclick="showToast(t('लोकेशन मैप पर देखी जा रही है...', 'Opening Map...'), 'success')">📍 <span class="hi">रास्ता (Map)</span><span class="en">Map</span></button>
         </div>
 
-        <div style="background: var(--bg-color); border: 1px solid var(--border); border-radius: 16px; padding: 16px;">
-            <div style="font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px;">📍 <span class="hi">विवरण / पता (DETAILS)</span><span class="en">ADDRESS / DETAILS</span></div>
-            <div id="mShopLoc" style="font-size: 14px; font-weight: 600; color: var(--text-dark); line-height: 1.5;">पता यहाँ आएगा</div>
+        <div style="background: var(--primary); border: 1px solid var(--border); border-radius: 16px; padding: 16px;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px;">📍 <span class="hi">विवरण / पता (DETAILS)</span><span class="en">ADDRESS / DETAILS</span></div>
+            <div id="mShopLoc" style="font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.5;">पता यहाँ आएगा</div>
         </div>
     </div>
+</div>
+
+<!-- 🤖 AI ASSISTANT MODAL (PROPER POPUP) 🤖 -->
+<div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeAiModal(event)">
+  <div class="ai-box" id="aiBoxContent">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+       <h2 style="color: var(--text-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">🤖 AI Help Guide</h2>
+       <div style="font-size: 24px; cursor: pointer; color: #ef4444; line-height:1;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
+    </div>
+    <div class="chat-area" id="aiChat">
+       <div class="msg-b m-ai"><span class="hi">नमस्ते! मैं आपका AI गाइड हूँ। आप 'अपना क्षेत्र' ऐप के बारे में मुझसे सवाल पूछ सकते हैं। 👇</span><span class="en">Hello! I am your AI Guide. Ask me anything about the App. 👇</span></div>
+    </div>
+    <div class="ai-opts">
+       <button class="ai-btn" onclick="askAI('add')">➕ <span class="hi">जानकारी कैसे जोड़ें?</span><span class="en">How to add info?</span></button>
+       <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह फ्री है?</span><span class="en">Is it Free?</span></button>
+       <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस कैसे बदलें?</span><span class="en">How to toggle ON/OFF?</span></button>
+    </div>
+  </div>
 </div>
 
 <!-- BOTTOM NAVIGATION -->
@@ -460,7 +467,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 </nav>
 
 <!-- AI FAB -->
-<div class="ai-fab" onclick="showToast(t('AI गाइड जल्द आ रहा है!', 'AI Guide coming soon!'))">🤖</div>
+<div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')"></div>
 
 <script>
 // --- GLOBAL VARIABLES & AUTH ---
@@ -473,7 +480,7 @@ function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 function toggleLang() {
     currentLang = currentLang === 'hi' ? 'en' : 'hi';
     localStorage.setItem('ac_lang', currentLang);
-    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 हिंदी' : '🌐 English';
+    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
     document.body.className = 'lang-' + currentLang;
     
     document.querySelectorAll('.lang-input').forEach(el => {
@@ -498,8 +505,7 @@ let shopsData = [
     { id: 6, type: "स्वास्थ्य", name: "City Hospital", catHi: "अस्पताल", catEn: "Hospital", loc: "NH-44, मुख्य रोड, नई दिल्ली", icon: "🏥", isOpen: true },
     { id: 2, type: "रोज़गार", name: "Ramesh Builder", catHi: "राजमिस्त्री", catEn: "Labor", loc: "मकान बनवाने के लिए 4 मज़दूरों की ज़रूरत है।", icon: "👷", isOpen: true, isHiring: true },
     { id: 3, type: "रोज़गार", name: "Suresh (ड्राइवर)", catHi: "ट्रैक्टर ड्राइवर", catEn: "Driver", loc: "मेरे पास 5 साल का ड्राइविंग अनुभव है, काम चाहिए।", icon: "🚜", isOpen: true, isHiring: false },
-    { id: 4, type: "सेवाएं", name: "Sharma Plumbing", catHi: "प्लंबर सर्विस", catEn: "Plumber", loc: "करोल बाग़, नई दिल्ली", icon: "🛠️", isOpen: true },
-    { id: 5, type: "बाज़ार", name: "Fashion Saree Center", catHi: "कपड़े / साड़ी", catEn: "Clothing", loc: "चांदनी चौक, नई दिल्ली", icon: "👗", isOpen: false }
+    { id: 4, type: "सेवाएं", name: "Sharma Plumbing", catHi: "प्लंबर सर्विस", catEn: "Plumber", loc: "करोल बाग़, नई दिल्ली", icon: "🛠️", isOpen: true }
 ];
 
 let currentFilter = 'बाज़ार'; 
@@ -572,12 +578,6 @@ function openCategory(type) {
 }
 
 // --- AUTHENTICATION LOGIC ---
-function switchAuth(mode) {
-    const isReg = mode === 'register';
-    document.getElementById('nameField').style.display = isReg ? 'block' : 'none';
-    document.getElementById('authBtn').innerHTML = isReg ? t("✅ रजिस्टर करें", "✅ Register") : t("✅ लॉगिन करें", "✅ Login");
-}
-
 function doAuth() {
     let phone = document.getElementById('authPhone').value;
     let name = document.getElementById('authName').value || "User";
@@ -758,11 +758,33 @@ function closeShopModal(e) {
     }
 }
 
+// 🤖 FIX: AI MODAL LOGIC 🤖
+function closeAiModal(e) {
+    if(e.target.id === 'aiModal' || e.target.classList.contains('sheet-close')) {
+        document.getElementById('aiModal').classList.add('hidden');
+    }
+}
+
+function askAI(type) {
+    const chat = document.getElementById('aiChat');
+    let q = "", a = "";
+    if(type === 'add') { q = t("➕ जानकारी कैसे जोड़ें?", "➕ How to add info?"); a = t("नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना नाम, केटेगरी और एड्रेस डालें। यह तुरंत लिस्ट में आ जाएगी!", "Click '➕ Add' below. Enter name, category, and address. It will be listed instantly!"); } 
+    else if(type === 'free') { q = t("💰 क्या यह फ्री है?", "💰 Is it free?"); a = t("जी हाँ! यह पूरी तरह 100% फ्री है।", "Yes! It is 100% Free."); } 
+    else if(type === 'status') { q = t("🎚️ स्टेटस कैसे बदलें?", "🎚️ How to toggle status?"); a = t("'👤 प्रोफाइल' में जाएं। वहां आपको 'ON/OFF' का स्विच मिलेगा। चालू रखने के लिए ON करें।", "Go to '👤 Profile'. You will find an ON/OFF switch. Keep it ON to show as open/available."); }
+
+    chat.innerHTML += `<div class="msg-b m-user">${q}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+    setTimeout(() => {
+        chat.innerHTML += `<div class="msg-b m-ai">${a}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+    }, 600);
+}
+
 window.onload = () => { 
-    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 English' : '🌐 हिंदी';
+    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
     document.body.className = 'lang-' + currentLang;
     setFilter('बाज़ार'); 
 };
 </script>
 </body>
-                                                                                                                                    </html>
+</html>
