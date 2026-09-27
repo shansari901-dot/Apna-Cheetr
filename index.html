@@ -9,9 +9,9 @@
 <style>
 /* 🌟 APNA CHHETR PREMIUM THEME */
 :root { 
-  --primary: #1e3a8a;      /* Deep Blue */
+  --primary: #1e3a8a;      
   --primary-light: #3b82f6; 
-  --accent: #f59e0b;       /* Saffron / Gold */
+  --accent: #f59e0b;       
   --bg-color: #f8fafc;
   --card-bg: #ffffff; 
   --text-dark: #0f172a; 
@@ -21,7 +21,6 @@
   --shadow: 0 4px 15px rgba(0,0,0,0.05); 
 }
 
-/* URDU NASTALIQ FONT SUPPORT */
 @font-face {
     font-family: 'Nastaliq';
     src: local('Jameel Noori Nastaleeq'), local('Nafees Nastaleeq'), local('Urdu Typesetting');
@@ -35,7 +34,7 @@
   -webkit-tap-highlight-color: transparent; 
 }
 
-/* NATIVE APP FEEL - NO TEXT SELECTION */
+/* NATIVE APP FEEL */
 body { 
   background: var(--bg-color); 
   color: var(--text-dark); 
@@ -64,7 +63,6 @@ input, textarea { -webkit-user-select: auto; user-select: auto; }
 .app-title { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
 .app-subtitle { font-size: 11px; font-weight: 600; opacity: 0.8; margin-top: 2px;}
 
-/* LOCATION BADGE */
 .location-badge {
     background: rgba(0,0,0,0.2);
     display: inline-flex;
@@ -91,56 +89,17 @@ main { max-width: 480px; margin: -15px auto 0; padding: 0 16px 20px; position: r
     margin-bottom: 24px;
     border: 1px solid var(--border);
 }
-.search-box input {
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-dark);
-}
+.search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 600; color: var(--text-dark); }
 
 /* SECTION HEADINGS */
-.section-title {
-    font-size: 16px;
-    font-weight: 800;
-    margin-bottom: 12px;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+.section-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; color: var(--primary); display: flex; align-items: center; justify-content: space-between; }
 .view-all { font-size: 12px; color: var(--accent); font-weight: 700; cursor: pointer; }
 
 /* GRID LAYOUT FOR CATEGORIES */
-.cat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.cat-card {
-    background: var(--card-bg);
-    padding: 16px 12px;
-    border-radius: var(--radius);
-    text-align: center;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    transition: transform 0.2s;
-    cursor: pointer;
-}
+.cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.cat-card { background: var(--card-bg); padding: 16px 12px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s; cursor: pointer; }
 .cat-card:active { transform: scale(0.95); }
-.cat-icon {
-    width: 46px;
-    height: 46px;
-    margin: 0 auto 10px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-}
+.cat-icon { width: 46px; height: 46px; margin: 0 auto 10px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
 .cat-title { font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
 .cat-sub { font-size: 10px; font-weight: 600; color: var(--text-muted); }
 
@@ -153,41 +112,65 @@ main { max-width: 480px; margin: -15px auto 0; padding: 0 16px 20px; position: r
 .c-teal { background: #f0fdfa; color: #0d9488; border: 1px solid #bfdbfe; }
 
 /* RECENT UPDATES BANNER */
-.news-banner {
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
-    border-radius: var(--radius);
-    padding: 16px;
-    color: white;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
-    margin-bottom: 20px;
-}
-.news-banner .n-icon { font-size: 30px; }
+.news-banner { background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: var(--radius); padding: 16px; color: white; display: flex; align-items: center; gap: 15px; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2); margin-bottom: 20px; }
+.news-banner .n-icon { font-size: 30px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 .news-banner b { display: block; font-size: 14px; margin-bottom: 4px; }
 .news-banner p { font-size: 11px; opacity: 0.9; font-weight: 600; line-height: 1.4; }
 
-/* BOTTOM NAV (FIXED & SAFE) */
-.bottom-nav { 
-  position: fixed !important; 
-  bottom: 0px !important; 
-  left: 0; right: 0; width: 100%;
-  background: #fff; 
-  border-top-left-radius: 24px; border-top-right-radius: 24px; 
-  display: flex; justify-content: space-around; 
-  padding: 12px 0 16px; 
-  padding-bottom: calc(12px + env(safe-area-inset-bottom)); 
-  z-index: 999999 !important; 
-  box-shadow: 0 -10px 25px rgba(0,0,0,0.05); 
-  border-top: 1px solid var(--border);
-}
+/* BOTTOM NAV */
+.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: #fff; border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-around; padding: 12px 0 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 999999 !important; box-shadow: 0 -10px 25px rgba(0,0,0,0.05); border-top: 1px solid var(--border); }
 .bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .bottom-nav button .ico { font-size: 22px; transition: all 0.2s; filter: grayscale(1); opacity: 0.6;}
 .bottom-nav button.active { color: var(--primary); }
 .bottom-nav button.active .ico { transform: translateY(-4px); filter: grayscale(0); opacity: 1;}
 
-.urdu-text { font-family: 'Nastaliq', serif; font-size: 16px; line-height: 1.6; direction: rtl; }
+.hidden { display: none !important; }
+
+/* BASIC CARDS FOR DEMO PAGES */
+.demo-card { background: #fff; padding: 30px 20px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border); margin-top: 20px; }
+.demo-card h2 { font-size: 20px; color: var(--primary); margin-bottom: 10px; font-weight: 800;}
+.demo-card p { font-size: 13px; color: var(--text-muted); font-weight: 600; line-height: 1.5;}
+
+/* 🏬 BAZAAR SHOP LIST STYLES 🏬 */
+.filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 10px; scrollbar-width: none; }
+.filter-scroll::-webkit-scrollbar { display: none; }
+.filter-chip { background: #fff; border: 1px solid var(--border); padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; color: var(--text-muted); white-space: nowrap; cursor: pointer; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 10px rgba(30, 58, 138, 0.2); }
+
+.shop-card { background: #fff; border-radius: 16px; padding: 12px; display: flex; gap: 12px; margin-bottom: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); cursor: pointer; transition: transform 0.2s; }
+.shop-card:active { transform: scale(0.97); }
+.shop-img { width: 70px; height: 70px; border-radius: 12px; background: #e2e8f0; object-fit: cover; border: 1px solid var(--border); }
+.shop-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.shop-info h3 { font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+.shop-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; }
+.status-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 6px; }
+.status-open { background: #d1fae5; color: #059669; border: 1px solid #a7f3d0; }
+.status-closed { background: #fee2e2; color: #e11d48; border: 1px solid #fecaca; }
+
+/* 🛒 SHOP DETAIL MODAL (BOTTOM SHEET) 🛒 */
+.modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
+.bottom-sheet { background: #fff; width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px 20px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; }
+.sheet-close { width: 40px; height: 5px; background: #cbd5e1; border-radius: 10px; margin: 0 auto 20px; cursor: pointer; }
+.shop-detail-img { width: 100%; height: 180px; border-radius: 16px; background: #e2e8f0; object-fit: cover; margin-bottom: 16px; border: 1px solid var(--border); }
+.shop-detail-title { font-size: 20px; font-weight: 900; color: var(--primary); margin-bottom: 4px; }
+.shop-detail-sub { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 6px;}
+
+.action-row { display: flex; gap: 10px; margin-bottom: 20px; }
+.action-btn { flex: 1; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: transform 0.2s;}
+.action-btn:active { transform: scale(0.95); }
+.btn-call { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+.btn-wa { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+.btn-map { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
+
+.info-box { background: var(--bg-color); border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.info-box-title { font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;}
+.timing-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px dashed var(--border); }
+.timing-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.loc-text { font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.5; }
+
+/* 🤖 AI CHATBOT CSS */
+.ai-fab { position: fixed !important; bottom: 100px !important; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4); cursor: pointer; z-index: 99990; transition: transform 0.2s; border: 2px solid #fff; }
+.ai-fab:active { transform: scale(0.9); }
 </style>
 </head>
 <body>
@@ -201,90 +184,203 @@ main { max-width: 480px; margin: -15px auto 0; padding: 0 16px 20px; position: r
                <div class="app-subtitle">लोकल जानकारी, आपकी मुट्ठी में</div>
            </div>
        </div>
-       <div style="font-size: 20px; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 50%;">🔔</div>
+       <div style="font-size: 20px; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 50%; cursor: pointer;">🔔</div>
    </div>
    <div class="location-badge">
-       📍 लोहता, वाराणसी <span>▼</span>
+       📍 लोहता, वाराणसी <span style="font-size: 10px;">▼</span>
    </div>
 </div>
 
 <main>
-    <!-- Search Bar -->
-    <div class="search-box">
-        <span style="font-size:18px;">🔍</span>
-        <input type="text" placeholder="दुकान, प्लंबर या नौकरी खोजें...">
-    </div>
-
-    <!-- Live Update Banner -->
-    <div class="news-banner">
-        <div class="n-icon">📰</div>
-        <div>
-            <b>ताज़ा ख़बर (लोकल)</b>
-            <p>गौतम बुद्ध इंटर कॉलेज के एडमिशन और परीक्षा के फॉर्म आ गए हैं। जानकारी के लिए शिक्षा टैब देखें।</p>
-        </div>
-    </div>
-
-    <!-- Main Categories Grid -->
-    <div class="section-title">
-        <span>सुविधाएं (Services)</span>
-        <span class="view-all">सभी देखें</span>
-    </div>
-
-    <div class="cat-grid">
-        <!-- 1. Local Vyapar -->
-        <div class="cat-card">
-            <div class="cat-icon c-orange">🏬</div>
-            <div class="cat-title">लोकल बाज़ार</div>
-            <div class="cat-sub">दुकानें, कपड़े, स्टेशनरी</div>
+    <!-- 🏠 HOME SECTION -->
+    <section id="home">
+        <div class="search-box">
+            <span style="font-size:18px;">🔍</span>
+            <input type="text" placeholder="दुकान, प्लंबर या नौकरी खोजें...">
         </div>
 
-        <!-- 2. Services -->
-        <div class="cat-card">
-            <div class="cat-icon c-blue">🛠️</div>
-            <div class="cat-title">ज़रूरी सेवाएं</div>
-            <div class="cat-sub">प्लंबर, पीसी रिपेयर, मैकेनिक</div>
+        <div class="news-banner">
+            <div class="n-icon">🎉</div>
+            <div>
+                <b>आज का स्पेशल ऑफर</b>
+                <p>अंसारी जनरल स्टोर: आज स्टेशनरी और परफ्यूम पर 20% की खास छूट! जल्दी करें।</p>
+            </div>
         </div>
 
-        <!-- 3. Rozgar -->
-        <div class="cat-card">
-            <div class="cat-icon c-green">💼</div>
-            <div class="cat-title">रोज़गार (Jobs)</div>
-            <div class="cat-sub">डेटा वर्क, ऑपरेटर, लेबर</div>
+        <div class="section-title">
+            <span>सुविधाएं (Services)</span>
+            <span class="view-all">सभी देखें</span>
         </div>
 
-        <!-- 4. Shiksha -->
-        <div class="cat-card">
-            <div class="cat-icon c-purple">🎓</div>
-            <div class="cat-title">शिक्षा व कोर्स</div>
-            <div class="cat-sub">स्कूल रिज़ल्ट, कंप्यूटर कोर्स</div>
+        <div class="cat-grid">
+            <div class="cat-card" onclick="showTab('bazaar')">
+                <div class="cat-icon c-orange">🏬</div>
+                <div class="cat-title">लोकल बाज़ार</div>
+                <div class="cat-sub">दुकानें, कपड़े, स्टेशनरी</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon c-blue">🛠️</div>
+                <div class="cat-title">ज़रूरी सेवाएं</div>
+                <div class="cat-sub">प्लंबर, पीसी रिपेयर</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon c-green">💼</div>
+                <div class="cat-title">रोज़गार (Jobs)</div>
+                <div class="cat-sub">डेटा वर्क, ऑपरेटर, लेबर</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon c-purple">🎓</div>
+                <div class="cat-title">शिक्षा व कोर्स</div>
+                <div class="cat-sub">रिज़ल्ट, कंप्यूटर कोर्स</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon c-red">🩸</div>
+                <div class="cat-title">इमरजेंसी / ब्लड</div>
+                <div class="cat-sub">अस्पताल, डोनर, पुलिस</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon c-teal">🏷️</div>
+                <div class="cat-title">सेल और ऑफर्स</div>
+                <div class="cat-sub">लोकल दुकानों की छूट</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🏬 BAZAAR SECTION (NEW SMART LIST) -->
+    <section id="bazaar" class="hidden">
+        <div class="search-box" style="margin-bottom: 16px;">
+            <span style="font-size:18px;">🔍</span>
+            <input type="text" placeholder="दुकान का नाम खोजें...">
         </div>
 
-        <!-- 5. Emergency & Blood -->
-        <div class="cat-card">
-            <div class="cat-icon c-red">🩸</div>
-            <div class="cat-title">इमरजेंसी / ब्लड</div>
-            <div class="cat-sub">अस्पताल, डोनर, पुलिस</div>
+        <div class="filter-scroll">
+            <div class="filter-chip active">सभी (All)</div>
+            <div class="filter-chip">किराना</div>
+            <div class="filter-chip">कपड़े (Saree)</div>
+            <div class="filter-chip">मेडिकल</div>
+            <div class="filter-chip">इलेक्ट्रॉनिक्स</div>
         </div>
 
-        <!-- 6. Travel & News -->
-        <div class="cat-card">
-            <div class="cat-icon c-teal">🚆</div>
-            <div class="cat-title">ख़बरें व सफर</div>
-            <div class="cat-sub">लोकल न्यूज़, ट्रांसपोर्ट</div>
+        <!-- Shop 1 (Open) -->
+        <div class="shop-card" onclick="openShopModal('Ansari General Store', 'किराना एवं स्टेशनरी', 'open', 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&h=400&fit=crop" class="shop-img" alt="Shop">
+            <div class="shop-info">
+                <h3>Ansari General Store</h3>
+                <p>📍 मेन मार्केट, लोहता</p>
+                <div><span class="status-badge status-open"><span style="font-size:8px;">🟢</span> अभी खुली है</span></div>
+            </div>
         </div>
-    </div>
+
+        <!-- Shop 2 (Closed) -->
+        <div class="shop-card" onclick="openShopModal('Ansari Saree Shop', 'कपड़े और साड़ियाँ', 'closed', 'https://images.unsplash.com/photo-1583391733958-d25e07fac662?w=400&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1583391733958-d25e07fac662?w=400&h=400&fit=crop" class="shop-img" alt="Shop">
+            <div class="shop-info">
+                <h3>Ansari Saree Shop</h3>
+                <p>📍 जामा मस्जिद के पास, लोहता</p>
+                <div><span class="status-badge status-closed"><span style="font-size:8px;">🔴</span> अभी बंद है</span></div>
+            </div>
+        </div>
+        
+        <!-- Add Shop Button (For Owners) -->
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="filter-chip" style="background:#eff6ff; color:var(--primary); border:1px dashed var(--primary);">➕ अपनी दुकान जोड़ें (Free)</button>
+        </div>
+    </section>
+
+    <!-- ➕ POST SECTION -->
+    <section id="post" class="hidden">
+        <div class="demo-card">
+            <div style="font-size: 50px; margin-bottom: 15px;">📢</div>
+            <h2>नया पोस्ट करें</h2>
+            <p>यहाँ से दुकानदार अपना ऑफर डाल सकेंगे और लोग किसी को नौकरी पर रखने या काम ढूंढने की पोस्ट कर सकेंगे।</p>
+        </div>
+    </section>
+
+    <!-- 👤 PROFILE SECTION -->
+    <section id="profile" class="hidden">
+        <div class="demo-card">
+            <div style="font-size: 50px; margin-bottom: 15px;">👤</div>
+            <h2>आपकी प्रोफाइल</h2>
+            <p>यहाँ यूज़र अपना नाम, नंबर और अपनी सेव की गई दुकानों या नौकरियों की लिस्ट देख सकेंगे।</p>
+        </div>
+    </section>
 </main>
+
+<!-- 🛒 SMART SHOP DETAIL MODAL (BOTTOM SHEET) 🛒 -->
+<div id="shopModal" class="modal-overlay hidden" onclick="closeShopModal(event)">
+    <div class="bottom-sheet" id="shopSheet">
+        <div class="sheet-close"></div>
+        <img id="mShopImg" src="" class="shop-detail-img" alt="Shop Image">
+        <h2 id="mShopName" class="shop-detail-title">Shop Name</h2>
+        <div class="shop-detail-sub">
+            <span id="mShopCat">कैटेगरी</span> • 
+            <span id="mShopStatus" class="status-badge status-open">🟢 अभी खुली है</span>
+        </div>
+        
+        <div class="action-row">
+            <button class="action-btn btn-call">📞 कॉल करें</button>
+            <button class="action-btn btn-wa">💬 WhatsApp</button>
+            <button class="action-btn btn-map">📍 रास्ता (Map)</button>
+        </div>
+
+        <div class="info-box">
+            <div class="info-box-title">🕒 खुलने का समय (Timings)</div>
+            <div class="timing-row"><span>सोमवार - शनिवार:</span> <span>सुबह 8:00 - रात 9:00</span></div>
+            <div class="timing-row"><span>रविवार (Sunday):</span> <span style="color:var(--danger);">बंद (Closed)</span></div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-box-title">📍 पूरा पता (Address)</div>
+            <div class="loc-text">मेन मार्केट, लोहता बाज़ार, वाराणसी, उत्तर प्रदेश - 221107</div>
+        </div>
+    </div>
+</div>
 
 <!-- BOTTOM NAVIGATION -->
 <nav class="bottom-nav">
-  <button class="active"><div class="ico">🏠</div>होम</button>
-  <button><div class="ico">🏬</div>बाज़ार</button>
-  <button><div class="ico">➕</div>पोस्ट करें</button>
-  <button><div class="ico">👤</div>प्रोफाइल</button>
+  <button id="nav-home" class="active" onclick="showTab('home')"><div class="ico">🏠</div>होम</button>
+  <button id="nav-bazaar" onclick="showTab('bazaar')"><div class="ico">🏬</div>बाज़ार</button>
+  <button id="nav-post" onclick="showTab('post')"><div class="ico">➕</div>पोस्ट करें</button>
+  <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div>प्रोफाइल</button>
 </nav>
 
+<!-- AI FAB -->
+<div class="ai-fab">🤖</div>
+
 <script>
-// Yeh abhi UI demo hai. Agle step me hum Cloudflare Database link karenge!
+// Tab Switching
+function showTab(tabId) {
+    document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+    document.getElementById(tabId).classList.remove('hidden');
+    
+    document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('nav-' + tabId).classList.add('active');
+    window.scrollTo(0,0);
+}
+
+// Shop Modal Logic
+function openShopModal(name, cat, status, imgSrc) {
+    document.getElementById('mShopName').textContent = name;
+    document.getElementById('mShopCat').textContent = cat;
+    document.getElementById('mShopImg').src = imgSrc;
+    
+    let statusEl = document.getElementById('mShopStatus');
+    if(status === 'open') {
+        statusEl.className = 'status-badge status-open';
+        statusEl.innerHTML = '🟢 अभी खुली है';
+    } else {
+        statusEl.className = 'status-badge status-closed';
+        statusEl.innerHTML = '🔴 अभी बंद है';
+    }
+    
+    document.getElementById('shopModal').classList.remove('hidden');
+}
+
+function closeShopModal(e) {
+    if(e.target.id === 'shopModal' || e.target.classList.contains('sheet-close')) {
+        document.getElementById('shopModal').classList.add('hidden');
+    }
+}
 </script>
 </body>
 </html>
