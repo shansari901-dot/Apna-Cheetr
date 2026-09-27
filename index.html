@@ -115,7 +115,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .status-open { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
 .status-closed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
 
-/* BOTTOM NAV (5 BUTTONS NOW WITH ONLINE) */
+/* BOTTOM NAV (5 BUTTONS WITH DEDICATED ONLINE TAB) */
 .bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 10px 0 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 999999 !important; border-top: 1px solid var(--border); }
 .bottom-nav button { flex: 1; background: none; border: none; font-size: 10px; font-weight: 700; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative;}
 .bottom-nav button .ico { font-size: 20px; filter: grayscale(1); opacity: 0.6; transition: 0.2s;}
@@ -133,7 +133,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border);}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* AI BOX SPECIFIC */
+/* AI BOX */
 .ai-box { background: var(--card-bg); border-radius: 24px; padding: 20px; max-width: 400px; width: 90%; margin: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.6); border: 1px solid var(--border); position: relative; display: flex; flex-direction: column;}
 .chat-area { height: 250px; overflow-y: auto; background: var(--primary); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
 .msg-b { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--text-dark);}
@@ -254,7 +254,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
     </section>
 
-    <!-- 🏬 2. BAZAAR SECTION (LIST WITH ONLINE FILTER) -->
+    <!-- 🏬 2. BAZAAR SECTION (SEARCH & BROWSE) -->
     <section id="bazaar" class="hidden">
         <div class="search-box" style="margin-bottom: 16px;">
             <span>🔍</span>
@@ -270,19 +270,32 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <div class="filter-chip" onclick="setFilter('खाना', this)"><span class="hi">खाना</span><span class="en">Food</span></div>
         </div>
         
-        <!-- 🟢 LIVE ONLINE TOGGLE FOR SEARCH TAB 🟢 -->
-        <div style="background: var(--card-bg); border: 1px solid var(--border); padding: 12px 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <div style="font-size: 12px; font-weight: 800; color: var(--text-dark);">
-                <span class="hi">🟢 सिर्फ जो अभी ONLINE (चालू) हैं उन्हें देखें</span>
-                <span class="en">🟢 Show Only Online (Open) Now</span>
-            </div>
-            <label class="switch" style="transform: scale(0.8);">
-              <input type="checkbox" id="onlineOnlyToggle" onchange="renderShops()">
-              <span class="slider"></span>
-            </label>
+        <div id="shopListContainer"></div>
+    </section>
+
+    <!-- 🟢 3. ONLINE ONLY SECTION (DEDICATED TAB) -->
+    <section id="onlineTab" class="hidden">
+        <div style="margin-bottom: 16px;">
+            <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px;">
+                <span class="hi">🟢 अभी जो ONLINE (चालू) हैं</span>
+                <span class="en">🟢 Currently Online (Open)</span>
+            </h2>
+            <p style="font-size: 11px; color: var(--text-muted); font-weight: 600;">
+                <span class="hi">नीचे से केटेगरी बदलें और देखें कौन उपलब्ध है।</span>
+                <span class="en">Switch category below to check who is available.</span>
+            </p>
+        </div>
+
+        <div class="filter-scroll" id="onlineFilterContainer">
+            <div class="filter-chip active" onclick="setOnlineFilter('बाज़ार', this)"><span class="hi">बाज़ार</span><span class="en">Shops</span></div>
+            <div class="filter-chip" onclick="setOnlineFilter('सेवाएं', this)"><span class="hi">सेवाएं</span><span class="en">Services</span></div>
+            <div class="filter-chip" onclick="setOnlineFilter('स्वास्थ्य', this)"><span class="hi">स्वास्थ्य</span><span class="en">Health</span></div>
+            <div class="filter-chip" onclick="setOnlineFilter('रोज़गार', this)"><span class="hi">रोज़गार</span><span class="en">Jobs</span></div>
+            <div class="filter-chip" onclick="setOnlineFilter('शिक्षा', this)"><span class="hi">शिक्षा</span><span class="en">Education</span></div>
+            <div class="filter-chip" onclick="setOnlineFilter('खाना', this)"><span class="hi">खाना</span><span class="en">Food</span></div>
         </div>
         
-        <div id="shopListContainer"></div>
+        <div id="onlineShopListContainer" style="margin-top: 16px;"></div>
     </section>
 
     <!-- 🔐 AUTHENTICATION SECTION -->
@@ -310,7 +323,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
     </section>
 
-    <!-- ➕ 3. ADD INFO SECTION -->
+    <!-- ➕ 4. ADD INFO SECTION -->
     <section id="addShop" class="hidden">
         <div class="card">
             <h2 style="font-size: 20px;">➕ <span class="hi">नई जानकारी जोड़ें</span><span class="en">Add New Info</span></h2>
@@ -374,7 +387,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
     </section>
 
-    <!-- 👤 4. PROFILE SECTION -->
+    <!-- 👤 5. PROFILE SECTION -->
     <section id="profile" class="hidden">
         <div class="card" style="text-align: center;">
             <div style="width: 70px; height: 70px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 12px; border: 2px solid var(--border);">👤</div>
@@ -452,7 +465,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
   <button id="nav-home" class="active" onclick="showTab('home')"><div class="ico">🏠</div><span class="hi">होम</span><span class="en">Home</span></button>
   <button id="nav-bazaar" onclick="showTab('bazaar')"><div class="ico">🔍</div><span class="hi">खोजें</span><span class="en">Search</span></button>
   <button id="nav-addShop" onclick="showTab('addShop')"><div class="ico">➕</div><span class="hi">जोड़ें</span><span class="en">Add</span></button>
-  <button id="nav-online" onclick="showTab('bazaar'); document.getElementById('onlineOnlyToggle').checked = true; renderShops();"><div class="ico">🟢</div><span class="hi">ऑनलाइन</span><span class="en">Online</span></button>
+  <button id="nav-onlineTab" onclick="showTab('onlineTab')"><div class="ico">🟢</div><span class="hi">ऑनलाइन</span><span class="en">Online</span></button>
   <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
 </nav>
 
@@ -476,6 +489,7 @@ function toggleLang() {
         el.placeholder = el.getAttribute('data-' + currentLang) || el.placeholder;
     });
     renderShops(); 
+    renderOnlineShops();
 }
 
 function showToast(message, type = 'success') {
@@ -499,19 +513,14 @@ let shopsData = [
 ];
 
 let currentFilter = 'बाज़ार'; 
+let currentOnlineFilter = 'बाज़ार';
 
 function renderShops() {
     let html = "";
-    let onlyOnline = document.getElementById('onlineOnlyToggle') ? document.getElementById('onlineOnlyToggle').checked : false;
-    
-    let filtered = shopsData.filter(s => {
-        let matchCat = (s.type === currentFilter);
-        let matchOnline = onlyOnline ? s.isOpen : true;
-        return matchCat && matchOnline;
-    });
+    let filtered = shopsData.filter(s => s.type === currentFilter);
     
     if(filtered.length === 0) {
-        html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('कोई जानकारी उपलब्ध नहीं है।','No info available.')}</div>`;
+        html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('कोई जानकारी नहीं मिली।','No info found.')}</div>`;
     }
 
     filtered.forEach(shop => {
@@ -548,6 +557,43 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
+// 🟢 RENDER ONLINE FILTERED SHOPS 🟢
+function renderOnlineShops() {
+    let html = "";
+    // Only match selected category AND must be isOpen == true
+    let filtered = shopsData.filter(s => s.type === currentOnlineFilter && s.isOpen === true);
+    
+    if(filtered.length === 0) {
+        html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('इस केटेगरी में अभी कोई ONLINE (चालू) नहीं है।','No one is currently online in this category.')}</div>`;
+    }
+
+    filtered.forEach(shop => {
+        let shopCat = t(shop.catHi, shop.catEn);
+        if (shop.type === "रोज़गार") {
+            let jobTag = shop.isHiring ? (currentLang==='hi'?" (वर्कर चाहिए)":" (Hiring)") : (currentLang==='hi'?" (काम चाहिए)":" (Seeking Work)");
+            shopCat += jobTag;
+        }
+
+        let statusBadge = `<span class="status-badge status-open">${t('🟢 चालू है', '🟢 Open')}</span>`;
+        let safeName = shop.name.replace(/'/g, "\\'");
+        let safeCat = shopCat.replace(/'/g, "\\'");
+        let safeLoc = shop.loc.replace(/'/g, "\\'");
+        
+        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring})`;
+        
+        html += `
+        <div class="shop-card" onclick="${onclickData}">
+            <div class="shop-img-box">${shop.icon}</div>
+            <div class="shop-info">
+                <h3>${shop.name}</h3>
+                <p><span>📍</span> <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 180px;">${shop.loc}</span></p>
+                <div>${statusBadge}</div>
+            </div>
+        </div>`;
+    });
+    document.getElementById('onlineShopListContainer').innerHTML = html;
+}
+
 function setFilter(type, element) {
     currentFilter = type;
     let chips = document.getElementById('filterContainer').children;
@@ -558,6 +604,18 @@ function setFilter(type, element) {
         }
     }
     renderShops();
+}
+
+function setOnlineFilter(type, element) {
+    currentOnlineFilter = type;
+    let chips = document.getElementById('onlineFilterContainer').children;
+    for(let i=0; i<chips.length; i++) {
+        chips[i].classList.remove('active');
+        if(chips[i].innerText.includes(t(type, type==='बाज़ार'?'Shops':type))) {
+            chips[i].classList.add('active');
+        }
+    }
+    renderOnlineShops();
 }
 
 function openCategory(type) {
@@ -612,14 +670,16 @@ function showTab(tabId) {
     document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
     document.getElementById(tabId).classList.remove('hidden');
     
-    if(tabId !== 'auth' && tabId !== 'admin') {
-        document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
-        let navBtn = document.getElementById('nav-' + tabId);
-        if(navBtn) navBtn.classList.add('active');
-    }
+    // Bottom Nav Active Routing Fixed
+    document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
+    let navId = tabId === 'onlineTab' ? 'nav-onlineTab' : ('nav-' + tabId);
+    let navBtn = document.getElementById(navId);
+    if(navBtn) navBtn.classList.add('active');
     
     if(tabId === 'bazaar') {
         renderShops();
+    } else if(tabId === 'onlineTab') {
+        renderOnlineShops();
     }
     window.scrollTo(0,0);
 }
@@ -659,7 +719,8 @@ function toggleShopStatus(checkbox) {
     }
     
     if(shopsData.length > 0) shopsData[0].isOpen = isNowOpen; 
-    if(currentFilter === shopsData[0].type) renderShops(); 
+    renderShops(); 
+    renderOnlineShops();
 }
 
 function updateSubCats() {
@@ -716,6 +777,7 @@ function deleteShop(id) {
         shopsData = shopsData.filter(s => s.id !== id);
         renderAdminList();
         renderShops();
+        renderOnlineShops();
         showToast(t("पोस्ट डिलीट कर दी गई है।", "Post deleted successfully."));
     }
 }
@@ -750,7 +812,8 @@ window.onload = () => {
     document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
     document.body.className = 'lang-' + currentLang;
     setFilter('बाज़ार'); 
+    setOnlineFilter('बाज़ार');
 };
 </script>
 </body>
-                                                 </html>
+</html>
