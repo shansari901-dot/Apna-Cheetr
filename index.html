@@ -4,52 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>अपना क्षेत्र - Apna Chhetr</title>
-<meta name="description" content="लोकल व्यापार और सेवाएं">
+<meta name="description" content="लोकल जानकारी, गाँव से शहर तक">
+<meta name="theme-color" content="#0b1120">
 <style>
-/* 🎨 DEFAULT THEME: BOTTLE GREEN 🎨 */
+/* 🌌 ULTRA PREMIUM DARK NAVY THEME (Matching Screenshots) 🌌 */
 :root { 
-  --primary: #064e3b;       
-  --primary-light: #059669; 
-  --accent: #f59e0b;        
-  --accent-light: #fef3c7;
-  --bg-color: #ecfdf5;      
-  --card-bg: #ffffff; 
-  --text-dark: #064e3b; 
-  --text-muted: #475569; 
-  --border: #d1fae5; 
-  --radius: 16px; 
-  --shadow: 0 8px 25px rgba(6, 78, 59, 0.08); 
-  --bottom-nav-bg: #ffffff;
-}
-
-/* 🌊 THEME 2: NAVY BLUE */
-body.theme-navy {
-  --primary: #0f172a;       
-  --primary-light: #1e293b;  
-  --accent: #f97316;        
-  --accent-light: #ffedd5;
-  --bg-color: #f1f5f9;      
-  --card-bg: #ffffff; 
-  --text-dark: #0f172a; 
-  --text-muted: #64748b; 
-  --border: #e2e8f0; 
-  --shadow: 0 8px 25px rgba(15, 23, 42, 0.08); 
-  --bottom-nav-bg: #ffffff;
-}
-
-/* 🌙 THEME 3: DARK MODE */
-body.theme-dark {
-  --primary: #121212;       
-  --primary-light: #1e1e1e;  
-  --accent: #3b82f6;        
-  --accent-light: #1e3a8a;
-  --bg-color: #000000;      
-  --card-bg: #1e1e1e;       
-  --text-dark: #f8fafc;     
-  --text-muted: #94a3b8; 
-  --border: #333333; 
-  --shadow: 0 8px 25px rgba(0, 0, 0, 0.5); 
-  --bottom-nav-bg: #121212;
+  --primary: #0b1120;       /* Very Dark Navy Background */
+  --primary-light: #1e293b;  /* Slightly lighter card bg */
+  --accent: #10b981;        /* Emerald Green for buttons/active states */
+  --accent-light: #d1fae5;
+  --bg-color: #0b1120;      
+  --card-bg: #151e2f;       /* Beautiful dark card color */
+  --text-dark: #f8fafc;     /* White text */
+  --text-muted: #94a3b8;    /* Grey text for subtitles */
+  --border: #1e293b;        /* Subtle border */
+  --radius: 12px; 
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5); 
+  --bottom-nav-bg: #0b1120;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -59,141 +30,138 @@ body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
 /* NATIVE APP FEEL */
-body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none; transition: background 0.3s ease, color 0.3s ease;}
+body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none;}
 input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 
-/* 🌐 TOP BAR */
-.topbar { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; padding: 25px 20px 20px; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); position: relative; z-index: 20;}
-.topbar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;}
-.logo-area { display: flex; align-items: center; gap: 12px; }
-.logo-icon { font-size: 24px; background: rgba(255,255,255,0.1); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
-.app-title { font-size: 22px; font-weight: 900; letter-spacing: 0.5px; margin-bottom: 2px;}
-.app-subtitle { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.8); letter-spacing: 0.5px;}
+/* 🌐 TOP BAR (Sleek & Minimal) */
+.topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border);}
+.logo-area { display: flex; align-items: center; gap: 10px; }
+.logo-icon { font-size: 26px; }
+.app-title { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px;}
+.app-subtitle { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px;}
 
-.top-actions { display: flex; gap: 10px; }
-.icon-btn { font-size: 16px; font-weight: 800; background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 50px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); color: white;}
+.top-actions { display: flex; gap: 12px; align-items: center;}
+.icon-btn { font-size: 18px; color: var(--accent); background: rgba(16, 185, 129, 0.1); padding: 8px 12px; border-radius: 50px; cursor: pointer; border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 800;}
 .icon-btn:active { transform: scale(0.95); }
 
-.location-badge { background: rgba(255,255,255,0.15); display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px);}
+/* LOCATION SELECTOR */
+.location-selector { padding: 10px 16px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #f8fafc; cursor: pointer; background: var(--primary); border-bottom: 1px solid var(--border);}
+.location-selector span { font-size: 10px; color: var(--text-muted); }
 
-/* FIXED ALIGNMENT & OVERLAP ISSUE */
-main { max-width: 480px; margin: 0 auto; padding: 20px 16px; position: relative; z-index: 10; }
+main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-index: 10; }
 
-/* CARDS */
-.card { background: var(--card-bg); border-radius: var(--radius); padding: 24px 20px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); width: 100%; box-sizing: border-box; transition: background 0.3s, border 0.3s;}
+/* 🖼️ HERO BANNER */
+.hero-banner { background: linear-gradient(90deg, #1e3a8a, #1e40af); border-radius: var(--radius); padding: 16px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border: 1px solid #2563eb; position: relative; overflow: hidden;}
+.hero-banner::after { content: ''; position: absolute; right: -20px; top: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.05); border-radius: 50%; }
+.hero-icon { font-size: 40px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); z-index: 2;}
+.hero-text { z-index: 2; flex: 1;}
+.hero-text b { font-size: 16px; display: block; margin-bottom: 4px; line-height: 1.3;}
+.hero-text p { font-size: 11px; font-weight: 600; opacity: 0.9;}
+.hero-badge { background: #fde047; color: #854d0e; font-size: 10px; font-weight: 900; padding: 4px 8px; border-radius: 6px; position: absolute; right: 12px; top: 12px;}
+
+/* 🔍 MAIN SEARCH BOX */
+.search-box { background: var(--card-bg); padding: 14px 16px; border-radius: 50px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px; border: 1px solid var(--border); box-shadow: var(--shadow);}
+.search-box span { font-size: 18px; color: var(--text-muted); }
+.search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 600; color: var(--text-dark); background: transparent; }
+.search-box input::placeholder { color: var(--text-muted); }
+
+/* SECTION HEADINGS */
+.section-title { font-size: 16px; font-weight: 800; margin-bottom: 16px; color: var(--text-dark); display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--accent); padding-bottom: 6px; display: inline-block;}
+
+/* 📱 HORIZONTAL CATEGORY GRID (Matching Screenshot) */
+.cat-grid-horz { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.cat-card-horz { background: var(--card-bg); border-radius: var(--radius); padding: 14px 12px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s;}
+.cat-card-horz:active { transform: scale(0.97); background: var(--primary-light); }
+.cat-icon-horz { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+.cat-info-horz { flex: 1; }
+.cat-title-horz { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
+.cat-sub-horz { font-size: 10px; font-weight: 600; color: var(--text-muted); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+.cat-arrow { font-size: 12px; color: var(--text-muted); }
+
+/* VIBRANT ICON COLORS FOR HORIZONTAL CARDS */
+.bg-green { background: linear-gradient(135deg, #4ade80, #16a34a); color: white;}
+.bg-purple { background: linear-gradient(135deg, #c084fc, #9333ea); color: white;}
+.bg-red { background: linear-gradient(135deg, #f87171, #dc2626); color: white;}
+.bg-orange { background: linear-gradient(135deg, #fbbf24, #ea580c); color: white;}
+.bg-blue { background: linear-gradient(135deg, #60a5fa, #2563eb); color: white;}
+.bg-pink { background: linear-gradient(135deg, #f472b6, #db2777); color: white;}
+.bg-cyan { background: linear-gradient(135deg, #22d3ee, #0891b2); color: white;}
+.bg-indigo { background: linear-gradient(135deg, #818cf8, #4f46e5); color: white;}
+
+/* VIEW MORE BUTTON */
+.view-more-btn { background: var(--card-bg); width: 100%; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 800; color: var(--text-dark); border: 1px solid var(--border); text-align: center; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;}
+.view-more-btn:active { background: var(--primary-light); }
+
+/* FORMS & CARDS */
+.card { background: var(--card-bg); border-radius: var(--radius); padding: 24px 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; box-sizing: border-box;}
 .card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: var(--text-dark); display: flex; align-items: center; gap: 8px;}
 
-/* FORMS (CENTER ALIGNED & CLEAN) */
 .field { margin-bottom: 18px; width: 100%; }
-.field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
-.input-wrap { display: flex; align-items: center; background: var(--bg-color); border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; transition: 0.2s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
-.input-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light);}
+.field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+.input-wrap { display: flex; align-items: center; background: var(--primary); border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; transition: 0.2s;}
+.input-wrap:focus-within { border-color: var(--accent); }
 .input-wrap span { font-size: 18px; opacity: 0.6; margin-right: 10px; width: 24px; text-align: center;}
 .input-wrap input, .input-wrap select, .input-wrap textarea { width: 100%; padding: 15px 0; border: none; background: transparent; font-size: 14px; font-weight: 600; color: var(--text-dark); outline: none; }
-.input-wrap select { color: var(--text-dark); }
-.input-wrap option { color: #000; background: #fff; }
+.input-wrap select option { background: var(--primary-light); color: var(--text-dark); }
 .optional-tag { font-size: 11px; color: var(--text-muted); font-weight: 600; float: right; margin-top: 2px;}
 
-/* JOB TYPE RADIO BUTTONS */
 .radio-group { display: flex; gap: 10px; margin-top: 5px;}
-.radio-box { flex: 1; background: var(--bg-color); padding: 14px 10px; border-radius: 12px; border: 1px solid var(--border); text-align: center; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;}
+.radio-box { flex: 1; background: var(--primary); padding: 14px 10px; border-radius: 12px; border: 1px solid var(--border); text-align: center; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;}
 .radio-box input { display: none; }
-.radio-box.active { background: var(--accent-light); border-color: var(--accent); color: var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+.radio-box.active { background: rgba(16, 185, 129, 0.1); border-color: var(--accent); color: var(--accent);}
 
-/* BUTTONS */
-.btn { width: 100%; padding: 16px; border: none; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; text-align: center; color: #fff; background: var(--accent); box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin-top: 10px;}
-.btn:active { transform: scale(0.96); box-shadow: 0 2px 8px rgba(0,0,0,0.2);}
+.btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; text-align: center; color: #000; background: var(--accent); margin-top: 10px;}
+.btn:active { transform: scale(0.96); opacity: 0.8;}
 
-/* CATEGORIES */
-.cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; margin-top: 15px;}
-.cat-card { background: var(--card-bg); padding: 18px 12px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border); transition: 0.3s; cursor: pointer; display: flex; flex-direction: column; align-items: center;}
-.cat-card:active { transform: scale(0.95); }
-.cat-icon { width: 50px; height: 50px; margin-bottom: 12px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-.cat-title { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
-.cat-sub { font-size: 11px; font-weight: 600; color: var(--text-muted); }
-
-/* PASTEL ICONS (Adapts to Dark Mode slightly) */
-.c-orange { background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; }
-.c-blue { background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; }
-.c-green { background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce3; }
-.c-purple { background: #faf5ff; color: #9333ea; border: 1px solid #f3e8ff; }
-body.theme-dark .c-orange, body.theme-dark .c-blue, body.theme-dark .c-green, body.theme-dark .c-purple { background: #2a2a2a; border-color: #444;}
-
-/* BAZAAR SHOP LIST */
-.search-box { background: var(--card-bg); padding: 14px 18px; border-radius: 50px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow); margin-bottom: 20px; border: 1px solid var(--border);}
-.search-box input { border: none; outline: none; width: 100%; font-size: 15px; font-weight: 600; color: var(--text-dark); background: transparent;}
-
+/* FILTER CHIPS (Rounded rectangles) */
 .filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 12px; scrollbar-width: none; }
 .filter-scroll::-webkit-scrollbar { display: none; }
-.filter-chip { background: var(--card-bg); border: 1px solid var(--border); padding: 10px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: 0.2s;}
-.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.filter-chip { background: var(--card-bg); border: 1px solid var(--border); padding: 10px 20px; border-radius: 50px; font-size: 13px; font-weight: 700; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: 0.2s;}
+.filter-chip.active { background: var(--accent); color: #000; border-color: var(--accent); }
 
-.shop-card { background: var(--card-bg); border-radius: 16px; padding: 14px; display: flex; gap: 14px; margin-bottom: 14px; box-shadow: var(--shadow); border: 1px solid var(--border); cursor: pointer; transition: transform 0.2s; align-items: center; position: relative;}
+/* BEAUTIFUL SHOP LIST CARDS */
+.shop-card { background: var(--card-bg); border-radius: 16px; padding: 16px; display: flex; gap: 14px; margin-bottom: 16px; border: 1px solid var(--border); cursor: pointer; transition: transform 0.2s; align-items: center;}
 .shop-card:active { transform: scale(0.97); }
-.shop-img-box { width: 64px; height: 64px; border-radius: 14px; background: var(--bg-color); display: flex; align-items: center; justify-content: center; font-size: 30px; border: 1px solid var(--border); flex-shrink: 0;}
-.shop-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.shop-img-box { width: 60px; height: 60px; border-radius: 12px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 30px; flex-shrink: 0;}
+.shop-info { flex: 1; }
 .shop-info h3 { font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
-.shop-info p { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;}
-.status-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; padding: 6px 10px; border-radius: 8px; }
-.status-open { background: #dcfce3; color: #166534; border: 1px solid #bbf7d0; }
-.status-closed { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
-body.theme-dark .status-open { background: #064e3b; color: #34d399; border-color: #065f46;}
-body.theme-dark .status-closed { background: #7f1d1d; color: #f87171; border-color: #991b1b;}
+.shop-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;}
+.status-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 6px; }
+.status-open { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.status-closed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
 
-/* ADMIN DELETE BUTTON */
-.admin-del-btn { position: absolute; top: 10px; right: 10px; background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 14px; z-index: 10;}
-
-/* BOTTOM SHEET MODAL */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
-.bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 28px; border-top-right-radius: 28px; padding: 24px 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.3); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; }
-.sheet-close { width: 40px; height: 5px; background: var(--border); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
-.shop-detail-title { font-size: 22px; font-weight: 900; color: var(--text-dark); margin-bottom: 6px; }
-.shop-detail-sub { font-size: 14px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;}
-
-.action-row { display: flex; gap: 12px; margin-bottom: 24px; }
-.action-btn { flex: 1; padding: 14px; border-radius: 14px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s;}
-.action-btn:active { transform: scale(0.95); }
-.btn-call { background: var(--accent); color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
-.btn-map { background: var(--bg-color); color: var(--text-dark); border: 1px solid var(--border); }
-
-/* TOGGLE SWITCH */
-.switch { position: relative; display: inline-block; width: 60px; height: 32px; }
-.switch input { opacity: 0; width: 0; height: 0; }
-.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--text-muted); transition: .4s; border-radius: 34px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);}
-.slider:before { position: absolute; content: ""; height: 24px; width: 24px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
-input:checked + .slider { background-color: #10b981; }
-input:checked + .slider:before { transform: translateX(28px); }
-
-/* BOTTOM NAV */
-.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: var(--bottom-nav-bg); border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-around; padding: 14px 0 16px; padding-bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 999999 !important; box-shadow: 0 -10px 30px rgba(0,0,0,0.1); border-top: 1px solid var(--border); transition: background 0.3s;}
-.bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: 0.2s;}
-.bottom-nav button .ico { font-size: 24px; transition: all 0.2s; filter: grayscale(1); opacity: 0.6;}
+/* BOTTOM NAV (GREEN INDICATOR STYLE) */
+.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 12px 0 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 999999 !important; border-top: 1px solid var(--border); }
+.bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative;}
+.bottom-nav button .ico { font-size: 22px; filter: grayscale(1); opacity: 0.6; transition: 0.2s;}
 .bottom-nav button.active { color: var(--accent); }
-.bottom-nav button.active .ico { transform: translateY(-4px); filter: grayscale(0); opacity: 1;}
+.bottom-nav button.active .ico { filter: grayscale(0); opacity: 1;}
+.bottom-nav button.active::after { content: ''; position: absolute; bottom: -16px; width: 30px; height: 3px; background: var(--accent); border-radius: 10px; } /* The Green Line */
 
 .hidden { display: none !important; }
 
 /* AI CHATBOT & TOASTS */
-.ai-fab { position: fixed !important; bottom: 100px !important; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 99990; transition: transform 0.2s; border: 2px solid var(--card-bg); }
-.ai-fab:active { transform: scale(0.9); }
-.ai-box { background: var(--card-bg); border-radius: 24px; padding: 20px; max-width: 350px; width: 100%; box-shadow: 0 25px 50px rgba(0,0,0,0.4); }
-.chat-area { height: 250px; overflow-y: auto; background: var(--bg-color); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
-.msg-b { max-width: 85%; padding: 12px 16px; border-radius: 14px; font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--text-dark);}
-.m-ai { background: var(--card-bg); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px;}
-.m-user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px;}
-.ai-opts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;}
-.ai-btn { background: var(--bg-color); border: 1px solid var(--border); color: var(--text-dark); padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; }
+.ai-fab { position: fixed !important; bottom: 90px !important; right: 16px; width: 50px; height: 50px; background: var(--card-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: pointer; z-index: 99990; border: 1px solid var(--border); }
+.ai-fab::after { content: 'सहायता'; position: absolute; right: 55px; background: var(--accent); color: #000; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 50px; white-space: nowrap; }
 
 .toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 99999999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px;}
-.toast { background: #1e293b; color: white; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; }
+.toast { background: #1e293b; color: white; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; border: 1px solid #334155;}
 .toast.show { transform: translateY(0); opacity: 1; }
-.toast.error { background: #dc2626; border: 1px solid #f87171; }
-.toast.success { background: #059669; border: 1px solid #34d399; }
+.toast.error { border-left: 4px solid #ef4444; }
+.toast.success { border-left: 4px solid #10b981; }
 
-/* AUTH TABS */
-.auth-tabs { display: flex; background: var(--bg-color); border-radius: 50px; padding: 6px; margin-bottom: 24px; border: 1px solid var(--border); }
-.auth-tabs button { flex: 1; padding: 12px; border: none; border-radius: 50px; background: transparent; font-size: 14px; font-weight: 800; color: var(--text-muted); cursor: pointer; transition: all 0.3s; }
-.auth-tabs button.active { background: var(--accent); color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+/* BOTTOM SHEET MODAL */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(2px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
+.bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border);}
+.sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
+
+/* TOGGLE SWITCH */
+.switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--primary-light); transition: .4s; border-radius: 34px; border: 1px solid var(--border);}
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: var(--text-muted); transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: rgba(16, 185, 129, 0.2); border-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(22px); background-color: var(--accent); }
 </style>
 </head>
 <body class="lang-hi">
@@ -201,76 +169,115 @@ input:checked + .slider:before { transform: translateX(28px); }
 <div class="toast-container" id="toastBox"></div>
 
 <div class="topbar">
-   <div class="topbar-header">
-       <div class="logo-area">
-           <div class="logo-icon">🏘️</div>
-           <div>
-               <div class="app-title"><span class="hi">अपना क्षेत्र</span><span class="en">Apna Chhetr</span></div>
-               <div class="app-subtitle"><span class="hi">लोकल जानकारी</span><span class="en">Local Info</span></div>
-           </div>
-       </div>
-       <div class="top-actions">
-           <div class="icon-btn" onclick="toggleTheme()" title="Change Theme">🎨</div>
-           <div class="icon-btn" onclick="toggleLang()" id="langBtn">🌐 EN</div>
+   <div class="logo-area">
+       <div class="logo-icon">🏘️</div>
+       <div>
+           <div class="app-title"><span class="hi">अपना क्षेत्र</span><span class="en">Apna Chhetr</span></div>
+           <div class="app-subtitle"><span class="hi">लोकल जानकारी</span><span class="en">Local Info</span></div>
        </div>
    </div>
-   <div class="location-badge">📍 <span class="hi">नई दिल्ली, भारत</span><span class="en">New Delhi, India</span> <span style="font-size: 10px;">▼</span></div>
+   <div class="top-actions">
+       <div class="icon-btn" onclick="toggleLang()" id="langBtn">🌐 हिंदी</div>
+   </div>
 </div>
+<div class="location-selector">📍 <span class="hi">नई दिल्ली, भारत</span><span class="en">New Delhi, India</span> <span>▼</span></div>
 
 <main>
     <!-- 🏠 1. HOME SECTION -->
     <section id="home">
-        <!-- 💡 DEMO BUTTON ON HOME SCREEN 💡 -->
-        <button class="btn" style="background: #10b981; color: white; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); border: 2px solid #059669;" onclick="document.getElementById('demoModal').classList.remove('hidden')">
-            👀 <span class="hi">ऐप कैसे काम करता है? (Demo)</span><span class="en">How App Works? (Demo)</span>
-        </button>
-
-        <div class="search-box" style="background: var(--card-bg); padding: 14px 18px; border-radius: 50px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow); margin-bottom: 20px; border: 1px solid var(--border);">
-            <span>🔍</span>
-            <input type="text" style="border: none; outline: none; width: 100%; font-size: 15px; font-weight: 600; color: var(--text-dark); background: transparent;" class="lang-input" data-hi="दुकान, सर्विस या नौकरी खोजें..." data-en="Search shops, services, jobs..." placeholder="दुकान, सर्विस या नौकरी खोजें...">
+        
+        <div class="hero-banner">
+            <div class="hero-text">
+                <b><span class="hi">अपने क्षेत्र की हर ज़रूरी जानकारी</span><span class="en">All essential local info</span></b>
+                <p><span class="hi">अब सिर्फ एक ऐप में</span><span class="en">Now in just one app</span></p>
+            </div>
+            <div class="hero-icon">🏘️</div>
+            <div class="hero-badge"><span class="hi">गाँव से शहर तक सबके लिए</span><span class="en">For Village & City</span></div>
         </div>
 
-        <div style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; margin-top: 10px;"><span class="hi">सुविधाएं (Categories)</span><span class="en">Categories</span></div>
+        <div class="search-box" onclick="showTab('bazaar')">
+            <span>🔍</span>
+            <input type="text" class="lang-input" data-hi="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." data-en="Search shop, service, person..." placeholder="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." readonly>
+        </div>
+
+        <div class="section-title"><span class="hi">मुख्य Categories</span><span class="en">Main Categories</span></div>
         
-        <div class="cat-grid">
-            <div class="cat-card" onclick="openCategory('बाज़ार')">
-                <div class="cat-icon c-orange">🏬</div>
-                <div class="cat-title"><span class="hi">लोकल बाज़ार</span><span class="en">Local Market</span></div>
-                <div class="cat-sub"><span class="hi">दुकानें और खरीदारी</span><span class="en">Shops & Shopping</span></div>
+        <div class="cat-grid-horz">
+            <div class="cat-card-horz" onclick="openCategory('बाज़ार')">
+                <div class="cat-icon-horz bg-green">🛒</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">स्थानीय बाज़ार</span><span class="en">Local Market</span></div>
+                    <div class="cat-sub-horz"><span class="hi">किराना, सब्ज़ी, दूध, फल आदि</span><span class="en">Grocery, Veg, Milk, Fruits</span></div>
+                </div>
+                <div class="cat-arrow">›</div>
             </div>
-            <div class="cat-card" onclick="openCategory('सेवाएं')">
-                <div class="cat-icon c-blue">🛠️</div>
-                <div class="cat-title"><span class="hi">ज़रूरी सेवाएं</span><span class="en">Services</span></div>
-                <div class="cat-sub"><span class="hi">प्लंबर, पीसी रिपेयर</span><span class="en">Plumber, PC Repair</span></div>
+            
+            <div class="cat-card-horz" onclick="openCategory('सेवाएं')">
+                <div class="cat-icon-horz bg-purple">🛠️</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">ज़रूरी सेवाएँ</span><span class="en">Services</span></div>
+                    <div class="cat-sub-horz"><span class="hi">प्लंबर, इलेक्ट्रीशियन, बढ़ई</span><span class="en">Plumber, Electrician, Carpenter</span></div>
+                </div>
+                <div class="cat-arrow">›</div>
             </div>
-            <div class="cat-card" onclick="openCategory('रोज़गार')">
-                <div class="cat-icon c-green">💼</div>
-                <div class="cat-title"><span class="hi">रोज़गार (Jobs)</span><span class="en">Jobs</span></div>
-                <div class="cat-sub"><span class="hi">वर्कर या काम खोजें</span><span class="en">Find Workers or Work</span></div>
+            
+            <div class="cat-card-horz" onclick="openCategory('स्वास्थ्य')">
+                <div class="cat-icon-horz bg-red">➕</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">स्वास्थ्य</span><span class="en">Health</span></div>
+                    <div class="cat-sub-horz"><span class="hi">अस्पताल, डॉक्टर, मेडिकल</span><span class="en">Hospital, Doctor, Medical</span></div>
+                </div>
+                <div class="cat-arrow">›</div>
             </div>
-            <div class="cat-card" onclick="openCategory('शिक्षा')">
-                <div class="cat-icon c-purple">🎓</div>
-                <div class="cat-title"><span class="hi">शिक्षा व कोर्स</span><span class="en">Education</span></div>
-                <div class="cat-sub"><span class="hi">स्कूल, कंप्यूटर कोर्स</span><span class="en">Schools & Courses</span></div>
+            
+            <div class="cat-card-horz" onclick="openCategory('रोज़गार')">
+                <div class="cat-icon-horz bg-orange">💼</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">रोज़गार</span><span class="en">Jobs</span></div>
+                    <div class="cat-sub-horz"><span class="hi">नौकरी, काम, स्किल ट्रेनिंग</span><span class="en">Jobs, Work, Skill Training</span></div>
+                </div>
+                <div class="cat-arrow">›</div>
             </div>
+            
+            <div class="cat-card-horz" onclick="openCategory('शिक्षा')">
+                <div class="cat-icon-horz bg-blue">🎓</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">शिक्षा व कोर्स</span><span class="en">Education</span></div>
+                    <div class="cat-sub-horz"><span class="hi">स्कूल, कॉलेज, कोचिंग</span><span class="en">School, College, Coaching</span></div>
+                </div>
+                <div class="cat-arrow">›</div>
+            </div>
+            
+            <div class="cat-card-horz" onclick="openCategory('खाना')">
+                <div class="cat-icon-horz bg-pink">🍴</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">खाना</span><span class="en">Food</span></div>
+                    <div class="cat-sub-horz"><span class="hi">रेस्टोरेंट, होटल, ढाबा</span><span class="en">Restaurant, Hotel, Dhaba</span></div>
+                </div>
+                <div class="cat-arrow">›</div>
+            </div>
+        </div>
+        
+        <div class="view-more-btn" onclick="showToast(t('जल्द ही और Categories जोड़ी जाएंगी!','More categories coming soon!'))">
+            🎛️ <span class="hi">और Categories देखें →</span><span class="en">View More Categories →</span>
         </div>
     </section>
 
     <!-- 🏬 2. BAZAAR SECTION (LIST) -->
     <section id="bazaar" class="hidden">
-        <div class="search-box" style="background: var(--card-bg); padding: 14px 18px; border-radius: 50px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow); margin-bottom: 20px; border: 1px solid var(--border);">
+        <div class="search-box" style="margin-bottom: 16px;">
             <span>🔍</span>
-            <input type="text" style="border: none; outline: none; width: 100%; font-size: 15px; font-weight: 600; color: var(--text-dark); background: transparent;" class="lang-input" data-hi="नाम या केटेगरी खोजें..." data-en="Search name or category..." placeholder="नाम या केटेगरी खोजें...">
+            <input type="text" class="lang-input" data-hi="खोजें..." data-en="Search..." placeholder="खोजें...">
         </div>
         
         <div class="filter-scroll" id="filterContainer">
+            <!-- Strict Isolation - No 'All' option -->
             <div class="filter-chip active" onclick="setFilter('बाज़ार', this)"><span class="hi">बाज़ार</span><span class="en">Shops</span></div>
             <div class="filter-chip" onclick="setFilter('सेवाएं', this)"><span class="hi">सेवाएं</span><span class="en">Services</span></div>
+            <div class="filter-chip" onclick="setFilter('स्वास्थ्य', this)"><span class="hi">स्वास्थ्य</span><span class="en">Health</span></div>
             <div class="filter-chip" onclick="setFilter('रोज़गार', this)"><span class="hi">रोज़गार</span><span class="en">Jobs</span></div>
             <div class="filter-chip" onclick="setFilter('शिक्षा', this)"><span class="hi">शिक्षा</span><span class="en">Education</span></div>
         </div>
-        
-        <div style="font-size: 14px; font-weight: 800; color: var(--text-muted); margin-bottom: 12px; margin-top: 10px;"><span class="hi">सूची (List)</span><span class="en">List</span> 👇</div>
         
         <div id="shopListContainer"></div>
     </section>
@@ -278,14 +285,9 @@ input:checked + .slider:before { transform: translateX(28px); }
     <!-- 🔐 AUTHENTICATION SECTION (LOGIN/SIGNUP) -->
     <section id="auth" class="hidden">
         <div class="card" style="text-align: center; padding-top: 30px;">
-            <div style="font-size: 44px; margin-bottom: 10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">🏘️</div>
+            <div style="font-size: 44px; margin-bottom: 10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">🏘️</div>
             <h2 style="justify-content:center; font-size: 22px; margin-bottom: 8px;"><span class="hi">लॉगिन / रजिस्टर</span><span class="en">Login / Register</span></h2>
             <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;"><span class="hi">दुकान या सर्विस जोड़ने के लिए सुरक्षित लॉगिन करें।</span><span class="en">Login securely to add your shop or service.</span></p>
-            
-            <div class="auth-tabs" id="authTabs">
-                <button id="tabLogin" class="active" onclick="switchAuth('login')"><span class="hi">लॉगिन</span><span class="en">Login</span></button>
-                <button id="tabReg" onclick="switchAuth('register')"><span class="hi">नया अकाउंट</span><span class="en">New Account</span></button>
-            </div>
             
             <div class="field">
                 <div class="input-wrap">
@@ -293,20 +295,14 @@ input:checked + .slider:before { transform: translateX(28px); }
                     <input class="lang-input" id="authPhone" type="tel" data-hi="10 अंकों का नंबर" data-en="10 Digit Number" placeholder="10 अंकों का नंबर" maxlength="10">
                 </div>
             </div>
-            <div class="field" id="nameField" style="display:none;">
+            <div class="field" id="nameField">
                 <div class="input-wrap">
                     <span>👤</span>
                     <input class="lang-input" id="authName" type="text" data-hi="अपना पूरा नाम" data-en="Full Name" placeholder="अपना पूरा नाम">
                 </div>
             </div>
-            <div class="field">
-                <div class="input-wrap">
-                    <span>🔒</span>
-                    <input class="lang-input" id="authPass" type="password" data-hi="पासवर्ड (कम से कम 4 अक्षर)" data-en="Password (Min 4 chars)" placeholder="पासवर्ड (कम से कम 4 अक्षर)">
-                </div>
-            </div>
             
-            <button class="btn" onclick="doAuth()" id="authBtn">✅ <span class="hi">लॉगिन करें</span><span class="en">Login</span></button>
+            <button class="btn" onclick="doAuth()" id="authBtn">✅ <span class="hi">लॉगिन करें</span><span class="en">Login / Register</span></button>
             <p style="text-align:center; margin-top:20px; font-size:12px; color:var(--text-muted); font-weight:600;"><span class="hi">कस्टमर बिना लॉगिन के भी ऐप चला सकते हैं।</span><span class="en">Customers can use the app without login.</span></p>
         </div>
     </section>
@@ -316,10 +312,9 @@ input:checked + .slider:before { transform: translateX(28px); }
         <div class="card">
             <h2 style="font-size: 20px;">➕ <span class="hi">नई जानकारी जोड़ें</span><span class="en">Add New Info</span></h2>
             
-            <!-- ⚠️ FAKE PROFILE WARNING ⚠️ -->
-            <div style="background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 800; margin-bottom: 20px; border: 1px solid #fecaca; display: flex; align-items: center; gap: 10px; line-height: 1.4;">
+            <div style="background: rgba(239, 68, 68, 0.1); color: #f87171; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 800; margin-bottom: 20px; border: 1px solid rgba(239, 68, 68, 0.3); display: flex; align-items: center; gap: 10px; line-height: 1.4;">
                 <span style="font-size: 20px;">⚠️</span>
-                <span>चेतावनी: कोई भी फेक (Fake) जानकारी या गलत नंबर डालने पर आपका अकाउंट तुरंत ब्लॉक कर दिया जाएगा और कानूनी कार्रवाई हो सकती है।</span>
+                <span>चेतावनी: फेक (Fake) जानकारी डालने पर अकाउंट ब्लॉक कर दिया जाएगा।</span>
             </div>
             
             <div class="field">
@@ -331,12 +326,14 @@ input:checked + .slider:before { transform: translateX(28px); }
                         <option value="" disabled selected class="en">-- Select Category --</option>
                         <option value="बाज़ार">लोकल बाज़ार (Shops)</option>
                         <option value="सेवाएं">ज़रूरी सेवाएं (Services)</option>
+                        <option value="स्वास्थ्य">स्वास्थ्य (Health/Medical)</option>
                         <option value="रोज़गार">रोज़गार (Jobs)</option>
                         <option value="शिक्षा">शिक्षा (Education)</option>
                     </select>
                 </div>
             </div>
 
+            <!-- JOB TYPE RADIO -->
             <div class="field hidden" id="jobTypeField">
                 <label><span class="hi">आप क्या चाहते हैं? *</span><span class="en">What do you want? *</span></label>
                 <div class="radio-group">
@@ -350,7 +347,7 @@ input:checked + .slider:before { transform: translateX(28px); }
             </div>
 
             <div class="field hidden" id="subCatField">
-                <label><span class="hi">दुकान / काम का प्रकार *</span><span class="en">Shop / Work Type *</span></label>
+                <label><span class="hi">काम का प्रकार *</span><span class="en">Type *</span></label>
                 <div class="input-wrap">
                     <span>📋</span>
                     <select id="addSubCat"></select>
@@ -358,7 +355,7 @@ input:checked + .slider:before { transform: translateX(28px); }
             </div>
 
             <div class="field">
-                <label id="nameLabel"><span class="hi">नाम (दुकान / आपका नाम) *</span><span class="en">Name (Shop / Your Name) *</span></label>
+                <label id="nameLabel"><span class="hi">नाम *</span><span class="en">Name *</span></label>
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
@@ -382,7 +379,7 @@ input:checked + .slider:before { transform: translateX(28px); }
     <!-- 👤 4. PROFILE SECTION (DASHBOARD) -->
     <section id="profile" class="hidden">
         <div class="card" style="text-align: center; border-top: 4px solid var(--accent);">
-            <div style="width: 70px; height: 70px; background: var(--bg-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 12px; border: 2px solid var(--border); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">👤</div>
+            <div style="width: 70px; height: 70px; background: var(--bg-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 12px; border: 2px solid var(--border);">👤</div>
             <h2 style="justify-content: center; font-size: 22px; margin-bottom: 4px;" id="profileName">My Profile</h2>
             <p style="font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;" id="profilePhone">+91 XXXXXXXXXX</p>
             
@@ -398,11 +395,11 @@ input:checked + .slider:before { transform: translateX(28px); }
                 <div style="border-top: 1px dashed var(--border); padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);"><span class="hi">स्टेटस</span><span class="en">Status</span></div>
-                        <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 4px;"><span class="hi">ग्राहक को लाइव दिखेगा</span><span class="en">Visible live to customers</span></div>
+                        <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 4px;"><span class="hi">ग्राहक को लाइव दिखेगा</span><span class="en">Visible live</span></div>
                     </div>
                     
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <span id="switchText" style="font-size:12px; font-weight:800; color: #16a34a;"><span class="hi">ON (चालू है)</span><span class="en">ON (Open)</span></span>
+                        <span id="switchText" style="font-size:12px; font-weight:800; color: var(--accent);"><span class="hi">ON (चालू है)</span><span class="en">ON (Active)</span></span>
                         <label class="switch">
                           <input type="checkbox" id="liveSwitch" checked onchange="toggleShopStatus(this)">
                           <span class="slider"></span>
@@ -411,22 +408,21 @@ input:checked + .slider:before { transform: translateX(28px); }
                 </div>
             </div>
             
-            <button class="btn" onclick="logout()" style="background: #dc2626; box-shadow: 0 4px 10px rgba(220,38,38,0.3);">🚪 लॉगआउट करें (Logout)</button>
+            <button class="btn" onclick="logout()" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">🚪 लॉगआउट (Logout)</button>
         </div>
 
-        <!-- 👑 MAIN ADMIN DASHBOARD BUTTON (ONLY VISIBLE TO 7318259001) 👑 -->
+        <!-- 👑 MAIN ADMIN DASHBOARD BUTTON 👑 -->
         <div id="adminPanelBtn" class="hidden">
             <div style="font-size: 12px; color: var(--text-muted); font-weight: 700; margin: 30px 0 10px; text-align: center;">--- ADMIN ONLY ---</div>
-            <button class="btn" style="background: linear-gradient(90deg, #b45309, #d97706); box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);" onclick="showTab('admin')">👑 Admin Dashboard</button>
+            <button class="btn" style="background: linear-gradient(90deg, #c2410c, #ea580c); color:white;" onclick="showTab('admin')">👑 Admin Dashboard</button>
         </div>
     </section>
 
     <!-- 👑 ADMIN PANEL (PROTECTED) -->
     <section id="admin" class="hidden">
-        <div class="card" style="border-left: 4px solid #b45309;">
-            <h2 style="color: #b45309;">👑 Admin Control Panel</h2>
-            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">यहाँ से आप किसी भी फेक दुकान या पोस्ट को डिलीट कर सकते हैं।</p>
-            
+        <div class="card" style="border-left: 4px solid #ea580c;">
+            <h2 style="color: #ea580c;">👑 Admin Panel</h2>
+            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">यहाँ से आप किसी भी फेक जानकारी को डिलीट कर सकते हैं।</p>
             <div id="adminShopList"></div>
         </div>
     </section>
@@ -444,8 +440,8 @@ input:checked + .slider:before { transform: translateX(28px); }
         </div>
         
         <div class="action-row">
-            <button class="action-btn btn-call" onclick="showToast(t('नंबर उपलब्ध नहीं है।', 'Number not available.'), 'error')">📞 <span class="hi">कॉल करें</span><span class="en">Call</span></button>
-            <button class="action-btn btn-map" onclick="showToast(t('लोकेशन मैप पर देखी जा रही है...', 'Opening Location Map...'), 'success')">📍 <span class="hi">रास्ता (Map)</span><span class="en">Map</span></button>
+            <button class="action-btn btn-call" style="background: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2);" onclick="showToast(t('नंबर उपलब्ध नहीं है।', 'Number not available.'), 'error')">📞 <span class="hi">कॉल करें</span><span class="en">Call</span></button>
+            <button class="action-btn btn-map" style="background: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2);" onclick="showToast(t('लोकेशन मैप पर देखी जा रही है...', 'Opening Map...'), 'success')">📍 <span class="hi">रास्ता (Map)</span><span class="en">Map</span></button>
         </div>
 
         <div style="background: var(--bg-color); border: 1px solid var(--border); border-radius: 16px; padding: 16px;">
@@ -453,49 +449,6 @@ input:checked + .slider:before { transform: translateX(28px); }
             <div id="mShopLoc" style="font-size: 14px; font-weight: 600; color: var(--text-dark); line-height: 1.5;">पता यहाँ आएगा</div>
         </div>
     </div>
-</div>
-
-<!-- 💡 APP DEMO MODAL 💡 -->
-<div id="demoModal" class="modal-overlay hidden" onclick="closeDemoModal(event)">
-    <div class="bottom-sheet" id="demoSheet">
-        <div class="sheet-close"></div>
-        <h2 style="font-size: 20px; font-weight: 900; color: var(--primary); margin-bottom: 20px;">👀 ऐप कैसे काम करता है?</h2>
-        
-        <div style="background: var(--bg-color); padding: 16px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 12px;">
-            <b style="font-size: 14px; color: var(--text-dark); display: block; margin-bottom: 4px;">1️⃣ ग्राहकों के लिए (बिना लॉगिन)</b>
-            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; line-height: 1.4;">'खोजें' टैब में जाकर आप बिना अकाउंट बनाए अपनी मनपसंद दुकान, प्लंबर या नौकरी खोज सकते हैं।</p>
-        </div>
-        
-        <div style="background: var(--bg-color); padding: 16px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 12px;">
-            <b style="font-size: 14px; color: var(--text-dark); display: block; margin-bottom: 4px;">2️⃣ दुकानदारों / वर्कर के लिए</b>
-            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; line-height: 1.4;">'जोड़ें' बटन दबाएं, अपना सुरक्षित अकाउंट बनाएं और अपनी दुकान या सर्विस फ्री में रजिस्टर करें।</p>
-        </div>
-        
-        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 16px; border-radius: 16px; margin-bottom: 20px;">
-            <b style="font-size: 14px; color: #059669; display: block; margin-bottom: 4px;">3️⃣ लाइव ON/OFF स्विच</b>
-            <p style="font-size: 12px; color: #064e3b; font-weight: 700; line-height: 1.4;">दुकानदार 'प्रोफाइल' में जाकर अपनी दुकान को ON/OFF कर सकते हैं, जिससे लोगों को पता चल जाए कि दुकान खुली है या बंद।</p>
-        </div>
-        
-        <button class="btn" style="margin-top:0;" onclick="document.getElementById('demoModal').classList.add('hidden')">✅ समझ गया (Got it)</button>
-    </div>
-</div>
-
-<!-- 🤖 AI ASSISTANT MODAL -->
-<div id="aiModal" class="modal-overlay hidden" style="align-items: center;">
-  <div class="ai-box">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-       <h2 style="color: var(--primary); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">🤖 AI Help Guide</h2>
-       <div style="font-size: 24px; cursor: pointer; color: #e11d48; line-height:1;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
-    </div>
-    <div class="chat-area" id="aiChat">
-       <div class="msg-b m-ai"><span class="hi">नमस्ते! मैं आपका AI गाइड हूँ। आप 'अपना क्षेत्र' ऐप के बारे में मुझसे सवाल पूछ सकते हैं। 👇</span><span class="en">Hello! I am your AI Guide. Ask me anything about the App. 👇</span></div>
-    </div>
-    <div class="ai-opts">
-       <button class="ai-btn" onclick="askAI('add')">➕ <span class="hi">जानकारी कैसे जोड़ें?</span><span class="en">How to add info?</span></button>
-       <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह फ्री है?</span><span class="en">Is it Free?</span></button>
-       <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस कैसे बदलें?</span><span class="en">How to toggle ON/OFF?</span></button>
-    </div>
-  </div>
 </div>
 
 <!-- BOTTOM NAVIGATION -->
@@ -507,43 +460,26 @@ input:checked + .slider:before { transform: translateX(28px); }
 </nav>
 
 <!-- AI FAB -->
-<div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
+<div class="ai-fab" onclick="showToast(t('AI गाइड जल्द आ रहा है!', 'AI Guide coming soon!'))">🤖</div>
 
 <script>
 // --- GLOBAL VARIABLES & AUTH ---
 const ADMIN_PHONE = '7318259001';
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
-let currentTheme = localStorage.getItem('ac_theme') || 'bottle'; 
 let currentLang = localStorage.getItem('ac_lang') || 'hi';
 
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
-function applyTheme() {
-    document.body.className = ''; 
-    document.body.classList.add('lang-' + currentLang);
-    if(currentTheme === 'navy') document.body.classList.add('theme-navy');
-    else if(currentTheme === 'dark') document.body.classList.add('theme-dark');
-}
-
-function toggleTheme() {
-    if(currentTheme === 'bottle') currentTheme = 'navy';
-    else if(currentTheme === 'navy') currentTheme = 'dark';
-    else currentTheme = 'bottle';
-    localStorage.setItem('ac_theme', currentTheme);
-    applyTheme();
-    showToast(t('थीम बदल गई!', 'Theme Changed!'));
-}
-
 function toggleLang() {
     currentLang = currentLang === 'hi' ? 'en' : 'hi';
     localStorage.setItem('ac_lang', currentLang);
-    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
+    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 हिंदी' : '🌐 English';
+    document.body.className = 'lang-' + currentLang;
+    
     document.querySelectorAll('.lang-input').forEach(el => {
         el.placeholder = el.getAttribute('data-' + currentLang) || el.placeholder;
     });
-    applyTheme();
     renderShops(); 
-    showToast(t('भाषा बदल गई!', 'Language Changed!'));
 }
 
 function showToast(message, type = 'success') {
@@ -558,10 +494,12 @@ function showToast(message, type = 'success') {
 
 // --- DATABASE MOCKUP ---
 let shopsData = [
-    { id: 1, type: "बाज़ार", name: "General Store", catHi: "किराना / जनरल स्टोर", catEn: "General Store", loc: "कनॉट प्लेस, नई दिल्ली", icon: "🛒", isOpen: true },
+    { id: 1, type: "बाज़ार", name: "General Store", catHi: "किराना / जनरल स्टोर", catEn: "Grocery Store", loc: "कनॉट प्लेस, नई दिल्ली", icon: "🛒", isOpen: true },
+    { id: 6, type: "स्वास्थ्य", name: "City Hospital", catHi: "अस्पताल", catEn: "Hospital", loc: "NH-44, मुख्य रोड, नई दिल्ली", icon: "🏥", isOpen: true },
     { id: 2, type: "रोज़गार", name: "Ramesh Builder", catHi: "राजमिस्त्री", catEn: "Labor", loc: "मकान बनवाने के लिए 4 मज़दूरों की ज़रूरत है।", icon: "👷", isOpen: true, isHiring: true },
     { id: 3, type: "रोज़गार", name: "Suresh (ड्राइवर)", catHi: "ट्रैक्टर ड्राइवर", catEn: "Driver", loc: "मेरे पास 5 साल का ड्राइविंग अनुभव है, काम चाहिए।", icon: "🚜", isOpen: true, isHiring: false },
-    { id: 4, type: "सेवाएं", name: "Sharma Plumbing", catHi: "प्लंबर सर्विस", catEn: "Plumber Service", loc: "करोल बाग़, नई दिल्ली", icon: "🛠️", isOpen: true }
+    { id: 4, type: "सेवाएं", name: "Sharma Plumbing", catHi: "प्लंबर सर्विस", catEn: "Plumber", loc: "करोल बाग़, नई दिल्ली", icon: "🛠️", isOpen: true },
+    { id: 5, type: "बाज़ार", name: "Fashion Saree Center", catHi: "कपड़े / साड़ी", catEn: "Clothing", loc: "चांदनी चौक, नई दिल्ली", icon: "👗", isOpen: false }
 ];
 
 let currentFilter = 'बाज़ार'; 
@@ -582,7 +520,6 @@ function renderShops() {
         if (shop.type === "रोज़गार") {
             let jobTag = shop.isHiring ? (currentLang==='hi'?" (वर्कर चाहिए)":" (Hiring)") : (currentLang==='hi'?" (काम चाहिए)":" (Seeking Work)");
             shopCat += jobTag;
-
             if(shop.isHiring) { statusText = shop.isOpen ? t('🟢 अर्जेंट ज़रूरत', '🟢 Urgent Need') : t('🔴 फुल हो गया', '🔴 Filled'); } 
             else { statusText = shop.isOpen ? t('🟢 काम के लिए खाली', '🟢 Available') : t('🔴 काम मिल गया', '🔴 Hired'); }
         } else {
@@ -637,28 +574,22 @@ function openCategory(type) {
 // --- AUTHENTICATION LOGIC ---
 function switchAuth(mode) {
     const isReg = mode === 'register';
-    document.getElementById('tabReg').classList.toggle('active', isReg);
-    document.getElementById('tabLogin').classList.toggle('active', !isReg);
     document.getElementById('nameField').style.display = isReg ? 'block' : 'none';
     document.getElementById('authBtn').innerHTML = isReg ? t("✅ रजिस्टर करें", "✅ Register") : t("✅ लॉगिन करें", "✅ Login");
 }
 
 function doAuth() {
     let phone = document.getElementById('authPhone').value;
-    let pass = document.getElementById('authPass').value;
-    let name = document.getElementById('authName').value;
-    let isReg = document.getElementById('tabReg').classList.contains('active');
+    let name = document.getElementById('authName').value || "User";
     
-    if(phone.length !== 10 || pass.length < 4) return showToast(t("कृपया सही नंबर और पासवर्ड डालें।", "Enter valid number and password."), "error");
-    if(isReg && !name) return showToast(t("कृपया अपना नाम डालें।", "Enter your name."), "error");
+    if(phone.length !== 10) return showToast(t("कृपया 10 अंकों का सही नंबर डालें।", "Enter valid 10 digit number."), "error");
     
-    // Set user
-    currentUser = { phone: phone, name: isReg ? name : "User" };
+    currentUser = { phone: phone, name: name };
     localStorage.setItem('ac_user', JSON.stringify(currentUser));
     
     showToast(t("सफलतापूर्वक लॉगिन हो गया!", "Login Successful!"));
     checkAdminAccess();
-    showTab('profile'); // Send to profile after login
+    showTab('profile'); 
 }
 
 function logout() {
@@ -682,19 +613,13 @@ function checkAdminAccess() {
     }
 }
 
-// --- TAB ROUTING WITH AUTH CHECK ---
 function showTab(tabId) {
-    // 🔒 Protect Add and Profile tabs
-    if((tabId === 'addShop' || tabId === 'profile' || tabId === 'admin') && !currentUser) {
-        tabId = 'auth';
-    }
-    
+    if((tabId === 'addShop' || tabId === 'profile' || tabId === 'admin') && !currentUser) { tabId = 'auth'; }
     if(tabId === 'profile') checkAdminAccess();
     
     document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
     document.getElementById(tabId).classList.remove('hidden');
     
-    // Update bottom nav (ignore if going to auth/admin)
     if(tabId !== 'auth' && tabId !== 'admin') {
         document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
         let navBtn = document.getElementById('nav-' + tabId);
@@ -715,14 +640,11 @@ function submitShop() {
     let name = document.getElementById('addName').value;
     let loc = document.getElementById('addLoc').value;
     
-    if(!mainCat || !subCat || !name || !loc) {
-        showToast(t("कृपया नाम, केटेगरी और विवरण ज़रूर भरें!", "Please fill all required (*) fields!"), "error");
-        return;
-    }
+    if(!mainCat || !subCat || !name || !loc) { showToast(t("कृपया सभी ज़रूरी (*) जानकारी भरें!", "Please fill all required (*) fields!"), "error"); return; }
     
     let isHiring = false;
     if(mainCat === 'रोज़गार') { isHiring = document.querySelector('input[name="jobType"]:checked').value === 'hiring'; }
-    let icon = mainCat === "बाज़ार" ? "🏬" : (mainCat === "सेवाएं" ? "🛠️" : (mainCat === "रोज़गार" ? "💼" : "🎓"));
+    let icon = mainCat === "बाज़ार" ? "🏬" : (mainCat === "सेवाएं" ? "🛠️" : (mainCat === "रोज़गार" ? "💼" : (mainCat === "स्वास्थ्य" ? "🏥" : "🎓")));
     
     let newShop = { id: Date.now(), type: mainCat, name: name, catHi: subCat, catEn: subCat, loc: loc, icon: icon, isOpen: true, isHiring: isHiring };
     shopsData.unshift(newShop);
@@ -738,17 +660,49 @@ function toggleShopStatus(checkbox) {
     let isNowOpen = checkbox.checked;
     
     if(isNowOpen) {
-        textEl.innerHTML = t("ON (चालू है)", "ON (Open)");
-        textEl.style.color = "#16a34a";
+        textEl.innerHTML = t("ON (चालू है)", "ON (Active)");
+        textEl.style.color = "var(--accent)";
         showToast(t('डेटाबेस अपडेट: जानकारी ऑनलाइन है।', 'Database updated: Info is online.'));
     } else {
         textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
-        textEl.style.color = "#dc2626";
+        textEl.style.color = "#f87171";
         showToast(t('डेटाबेस अपडेट: जानकारी बंद है।', 'Database updated: Info is offline.'), 'error');
     }
     
     if(shopsData.length > 0) shopsData[0].isOpen = isNowOpen; 
     if(currentFilter === shopsData[0].type) renderShops(); 
+}
+
+function updateSubCats() {
+    let mainCat = document.getElementById('addMainCat').value;
+    let subCatWrap = document.getElementById('subCatField');
+    let jobTypeWrap = document.getElementById('jobTypeField');
+    let subCatSelect = document.getElementById('addSubCat');
+    let nameLabel = document.getElementById('nameLabel');
+    
+    subCatWrap.classList.remove('hidden');
+    if(mainCat === 'रोज़गार') { jobTypeWrap.classList.remove('hidden'); nameLabel.innerHTML = t("नाम (ठेकेदार / आपका नाम) *", "Name (Contractor / Your Name) *"); } 
+    else { jobTypeWrap.classList.add('hidden'); nameLabel.innerHTML = t("नाम (दुकान / सर्विस का नाम) *", "Name (Shop / Service Name) *"); }
+
+    let opts = "";
+    if(mainCat === 'बाज़ार') { opts = `<option value="किराना / जनरल स्टोर">${t("किराना / जनरल स्टोर", "General Store")}</option><option value="कपड़े / साड़ी">${t("कपड़े / साड़ी", "Clothing/Saree")}</option><option value="इलेक्ट्रॉनिक्स">${t("इलेक्ट्रॉनिक्स", "Electronics")}</option>`; } 
+    else if(mainCat === 'सेवाएं') { opts = `<option value="प्लंबर / इलेक्ट्रीशियन">${t("प्लंबर / इलेक्ट्रीशियन", "Plumber/Electrician")}</option><option value="मैकेनिक">${t("मैकेनिक", "Mechanic")}</option>`; } 
+    else if(mainCat === 'स्वास्थ्य') { opts = `<option value="अस्पताल / क्लिनिक">${t("अस्पताल / क्लिनिक", "Hospital/Clinic")}</option><option value="मेडिकल स्टोर">${t("मेडिकल स्टोर", "Medical Store")}</option>`; } 
+    else if(mainCat === 'रोज़गार') { opts = `<option value="राजमिस्त्री / मज़दूर">${t("राजमिस्त्री / मज़दूर", "Mason/Labor")}</option><option value="ड्राइवर">${t("ड्राइवर", "Driver")}</option><option value="दुकान हेल्पर">${t("दुकान हेल्पर", "Shop Helper")}</option>`; } 
+    else if(mainCat === 'शिक्षा') { opts = `<option value="स्कूल / कॉलेज">${t("स्कूल / कॉलेज", "School/College")}</option><option value="कंप्यूटर कोर्स">${t("कंप्यूटर कोर्स", "Computer Course")}</option>`; }
+    subCatSelect.innerHTML = opts;
+}
+
+function setJobType(type) {
+    document.getElementById('rbHiring').classList.remove('active');
+    document.getElementById('rbSeeking').classList.remove('active');
+    if(type === 'hiring') {
+        document.getElementById('rbHiring').classList.add('active');
+        document.querySelector('input[value="hiring"]').checked = true;
+    } else {
+        document.getElementById('rbSeeking').classList.add('active');
+        document.querySelector('input[value="seeking"]').checked = true;
+    }
 }
 
 // --- ADMIN FEATURES ---
@@ -757,7 +711,7 @@ function renderAdminList() {
     shopsData.forEach(shop => {
         html += `
         <div class="shop-card" style="position:relative; margin-bottom: 10px;">
-            <button class="admin-del-btn" onclick="deleteShop(${shop.id})">🗑️</button>
+            <button style="position:absolute; right:10px; background:#f87171; color:#000; border:none; border-radius:50%; width:30px; height:30px;" onclick="deleteShop(${shop.id})">🗑️</button>
             <div class="shop-img-box">${shop.icon}</div>
             <div class="shop-info">
                 <h3 style="font-size:14px;">${shop.name}</h3>
@@ -778,12 +732,6 @@ function deleteShop(id) {
 }
 
 // --- MODALS ---
-function closeDemoModal(e) {
-    if(e.target.id === 'demoModal' || e.target.classList.contains('sheet-close')) {
-        document.getElementById('demoModal').classList.add('hidden');
-    }
-}
-
 function openShopModal(name, cat, isOpen, loc, icon, type, isHiring) {
     document.getElementById('mShopName').textContent = name;
     document.getElementById('mShopCat').textContent = cat;
@@ -810,46 +758,11 @@ function closeShopModal(e) {
     }
 }
 
-function askAI(type) {
-    const chat = document.getElementById('aiChat');
-    let q = "", a = "";
-    if(type === 'add') { q = t("➕ जानकारी कैसे जोड़ें?", "➕ How to add info?"); a = t("नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना नाम, केटेगरी और एड्रेस डालें। यह तुरंत लिस्ट में आ जाएगी!", "Click '➕ Add' below. Enter name, category, and address. It will be listed instantly!"); } 
-    else if(type === 'free') { q = t("💰 क्या यह फ्री है?", "💰 Is it free?"); a = t("जी हाँ! यह पूरी तरह 100% फ्री है।", "Yes! It is 100% Free."); } 
-    else if(type === 'status') { q = t("🎚️ स्टेटस कैसे बदलें?", "🎚️ How to toggle status?"); a = t("'👤 प्रोफाइल' में जाएं। वहां आपको 'ON/OFF' का स्विच मिलेगा। चालू रखने के लिए ON करें।", "Go to '👤 Profile'. You will find an ON/OFF switch. Keep it ON to show as open/available."); }
-
-    chat.innerHTML += `<div class="msg-b m-user">${q}</div>`;
-    chat.scrollTop = chat.scrollHeight;
-    setTimeout(() => {
-        chat.innerHTML += `<div class="msg-b m-ai">${a}</div>`;
-        chat.scrollTop = chat.scrollHeight;
-    }, 600);
-}
-
-function updateSubCats() {
-    let mainCat = document.getElementById('addMainCat').value;
-    let subCatWrap = document.getElementById('subCatField');
-    let jobTypeWrap = document.getElementById('jobTypeField');
-    let subCatSelect = document.getElementById('addSubCat');
-    let nameLabel = document.getElementById('nameLabel');
-    
-    subCatWrap.classList.remove('hidden');
-    if(mainCat === 'रोज़गार') { jobTypeWrap.classList.remove('hidden'); nameLabel.innerHTML = t("नाम (ठेकेदार / आपका नाम) *", "Name (Contractor / Your Name) *"); } 
-    else { jobTypeWrap.classList.add('hidden'); nameLabel.innerHTML = t("नाम (दुकान / सर्विस का नाम) *", "Name (Shop / Service Name) *"); }
-
-    let opts = "";
-    if(mainCat === 'बाज़ार') { opts = `<option value="किराना / जनरल स्टोर">${t("किराना / जनरल स्टोर", "General Store")}</option><option value="कपड़े / साड़ी">${t("कपड़े / साड़ी", "Clothing/Saree")}</option><option value="मेडिकल / क्लिनिक">${t("मेडिकल / क्लिनिक", "Medical/Clinic")}</option><option value="इलेक्ट्रॉनिक्स / मोबाइल">${t("इलेक्ट्रॉनिक्स / मोबाइल", "Electronics/Mobile")}</option><option value="हार्डवेयर / बिल्डिंग">${t("हार्डवेयर / बिल्डिंग", "Hardware/Building")}</option><option value="सब्ज़ी / फल / मीट">${t("सब्ज़ी / फल / मीट", "Vegetables/Meat")}</option><option value="अन्य">${t("अन्य", "Other")}</option>`; } 
-    else if(mainCat === 'सेवाएं') { opts = `<option value="प्लंबर / इलेक्ट्रीशियन">${t("प्लंबर / इलेक्ट्रीशियन", "Plumber/Electrician")}</option><option value="मैकेनिक / गैरेज">${t("मैकेनिक / गैरेज", "Mechanic/Garage")}</option><option value="ब्यूटी पार्लर / नाई">${t("ब्यूटी पार्लर / नाई", "Salon/Barber")}</option><option value="टेलर / सिलाई">${t("टेलर / सिलाई", "Tailor")}</option><option value="अन्य">${t("अन्य", "Other")}</option>`; } 
-    else if(mainCat === 'रोज़गार') { opts = `<option value="राजमिस्त्री / मज़दूर">${t("राजमिस्त्री / मज़दूर", "Mason/Labor")}</option><option value="खेतों का काम">${t("खेतों का काम", "Agriculture Work")}</option><option value="ड्राइवर / ट्रैक्टर">${t("ड्राइवर / ट्रैक्टर", "Driver/Tractor")}</option><option value="दुकान हेल्पर">${t("दुकान हेल्पर", "Shop Helper")}</option><option value="सिलाई / कारीगर">${t("सिलाई / कारीगर", "Artisan")}</option><option value="कंप्यूटर / ऑफिस">${t("कंप्यूटर / ऑफिस", "Computer/Office")}</option><option value="अन्य काम">${t("अन्य काम", "Other Work")}</option>`; } 
-    else if(mainCat === 'शिक्षा') { opts = `<option value="स्कूल / कॉलेज">${t("स्कूल / कॉलेज", "School/College")}</option><option value="ट्यूशन / कोचिंग">${t("ट्यूशन / कोचिंग", "Tuition/Coaching")}</option><option value="कंप्यूटर कोर्स">${t("कंप्यूटर कोर्स", "Computer Course")}</option><option value="मदरसा / दीनी तालीम">${t("मदरसा / दीनी तालीम", "Madarsa/Deeni Taleem")}</option><option value="अन्य">${t("अन्य", "Other")}</option>`; }
-    subCatSelect.innerHTML = opts;
-}
-
 window.onload = () => { 
-    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
-    applyTheme();
-    // Default open Shops on initial load if user goes to search tab
+    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 English' : '🌐 हिंदी';
+    document.body.className = 'lang-' + currentLang;
     setFilter('बाज़ार'); 
 };
 </script>
 </body>
-                                                                                                                                                                                                                 </html>
+                                                                                                                                    </html>
