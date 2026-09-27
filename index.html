@@ -5,21 +5,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>अपना क्षेत्र - Apna Chhetr</title>
 <meta name="description" content="लोकल व्यापार और सेवाएं">
-<meta name="theme-color" content="#5d4037">
+<meta name="theme-color" content="#0f172a">
 <style>
-/* 🟤 APNA CHHETR BROWN PREMIUM THEME 🟤 */
+/* 🌊 APNA CHHETR DEEP OCEAN BLUE THEME 🌊 */
 :root { 
-  --primary: #5d4037;      /* Rich Brown */
-  --primary-light: #8d6e63; /* Light Brown */
-  --primary-dark: #3e2723;  /* Dark Brown */
-  --accent: #f59e0b;       /* Saffron/Gold */
-  --bg-color: #f5f5f4;     /* Off-white/Cream background */
+  --primary: #0f172a;       /* Deep Ocean Blue */
+  --primary-light: #1e293b;  /* Slate Blue */
+  --accent: #f97316;        /* Vibrant Orange */
+  --accent-light: #ffedd5;
+  --bg-color: #f8fafc;      /* Crisp Off-White */
   --card-bg: #ffffff; 
-  --text-dark: #291e1b; 
-  --text-muted: #78716c; 
-  --border: #e7e5e4; 
+  --text-dark: #0f172a; 
+  --text-muted: #64748b; 
+  --border: #e2e8f0; 
   --radius: 16px; 
-  --shadow: 0 4px 15px rgba(93, 64, 55, 0.08); 
+  --shadow: 0 8px 20px rgba(15, 23, 42, 0.08); 
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -29,83 +29,85 @@ body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; 
 input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 
 /* 🌐 TOP BAR */
-.topbar { background: var(--primary); color: white; padding: 20px 20px 25px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 4px 20px rgba(93, 64, 55, 0.3); position: relative; z-index: 20;}
+.topbar { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; padding: 25px 20px 30px; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.4); position: relative; z-index: 20;}
 .topbar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;}
-.logo-area { display: flex; align-items: center; gap: 10px; }
-.logo-icon { font-size: 24px; background: rgba(255,255,255,0.15); width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2);}
-.app-title { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
-.app-subtitle { font-size: 11px; font-weight: 600; opacity: 0.8; margin-top: 2px;}
+.logo-area { display: flex; align-items: center; gap: 12px; }
+.logo-icon { font-size: 24px; background: rgba(255,255,255,0.1); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
+.app-title { font-size: 22px; font-weight: 900; letter-spacing: 0.5px; margin-bottom: 2px;}
+.app-subtitle { font-size: 11px; font-weight: 600; color: #cbd5e1; letter-spacing: 0.5px;}
 
-.location-badge { background: rgba(0,0,0,0.2); display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); }
+.location-badge { background: rgba(255,255,255,0.15); display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px);}
 
-main { max-width: 480px; margin: -15px auto 0; padding: 0 16px 20px; position: relative; z-index: 10; }
+main { max-width: 480px; margin: -20px auto 0; padding: 0 16px 20px; position: relative; z-index: 10; }
 
 /* CARDS */
-.card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); width: 100%; box-sizing: border-box; }
-.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--primary); display: flex; align-items: center; gap: 8px;}
+.card { background: var(--card-bg); border-radius: var(--radius); padding: 24px 20px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); width: 100%; box-sizing: border-box; }
+.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: var(--primary); display: flex; align-items: center; gap: 8px;}
 
-/* FORMS */
-.field { margin-bottom: 16px; width: 100%; }
-.field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
-.input-wrap { display: flex; align-items: center; background: var(--bg-color); border: 1px solid var(--border); border-radius: 12px; padding: 0 12px; transition: 0.2s; }
-.input-wrap:focus-within { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.15); background: #fff;}
-.input-wrap span { font-size: 18px; opacity: 0.7; margin-right: 8px; }
-.input-wrap input, .input-wrap select, .input-wrap textarea { width: 100%; padding: 14px 0; border: none; background: transparent; font-size: 14px; font-weight: 600; color: var(--text-dark); outline: none; }
-.optional-tag { font-size: 10px; color: #94a3b8; font-weight: 600; float: right; margin-top: 2px;}
+/* 🛠️ ALIGNMENT FIX FOR FORMS 🛠️ */
+.field { margin-bottom: 18px; width: 100%; }
+.field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+.input-wrap { display: flex; align-items: center; background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; transition: 0.2s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
+.input-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15); background: #fff;}
+.input-wrap span { font-size: 18px; opacity: 0.6; margin-right: 10px; width: 24px; text-align: center;}
+.input-wrap input, .input-wrap select, .input-wrap textarea { width: 100%; padding: 15px 0; border: none; background: transparent; font-size: 14px; font-weight: 600; color: var(--text-dark); outline: none; }
+.optional-tag { font-size: 11px; color: #94a3b8; font-weight: 600; float: right; margin-top: 2px;}
 
 /* JOB TYPE RADIO BUTTONS */
-.radio-group { display: flex; gap: 10px; }
-.radio-box { flex: 1; background: var(--bg-color); padding: 12px; border-radius: 12px; border: 1px solid var(--border); text-align: center; font-size: 13px; font-weight: 700; color: var(--text-dark); cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;}
+.radio-group { display: flex; gap: 10px; margin-top: 5px;}
+.radio-box { flex: 1; background: var(--bg-color); padding: 14px 10px; border-radius: 12px; border: 1px solid var(--border); text-align: center; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;}
 .radio-box input { display: none; }
-.radio-box.active { background: #d1fae5; border-color: #10b981; color: #059669; }
+.radio-box.active { background: var(--accent-light); border-color: var(--accent); color: #c2410c; box-shadow: 0 4px 10px rgba(249, 115, 22, 0.1);}
 
-.btn { width: 100%; padding: 16px; border: none; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; text-align: center; color: #fff; background: linear-gradient(90deg, var(--primary), var(--primary-light)); box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3); }
-.btn:active { transform: scale(0.96); }
+/* BUTTONS */
+.btn { width: 100%; padding: 16px; border: none; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; text-align: center; color: #fff; background: var(--accent); box-shadow: 0 6px 15px rgba(249, 115, 22, 0.3); margin-top: 10px;}
+.btn:active { transform: scale(0.96); box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);}
 
 /* CATEGORIES */
-.cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; margin-top: 15px;}
-.cat-card { background: var(--card-bg); padding: 16px 12px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s; cursor: pointer; }
+.cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; margin-top: 15px;}
+.cat-card { background: var(--card-bg); padding: 18px 12px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s; cursor: pointer; display: flex; flex-direction: column; align-items: center;}
 .cat-card:active { transform: scale(0.95); }
-.cat-icon { width: 46px; height: 46px; margin: 0 auto 10px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
-.cat-title { font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
-.cat-sub { font-size: 10px; font-weight: 600; color: var(--text-muted); }
+.cat-icon { width: 50px; height: 50px; margin-bottom: 12px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.cat-title { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+.cat-sub { font-size: 11px; font-weight: 600; color: var(--text-muted); }
 
-.c-blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
-.c-orange { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
-.c-green { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
-.c-purple { background: #faf5ff; color: #9333ea; border: 1px solid #e9d5ff; }
+/* PASTEL ICONS */
+.c-orange { background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; }
+.c-blue { background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; }
+.c-green { background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce3; }
+.c-purple { background: #faf5ff; color: #9333ea; border: 1px solid #f3e8ff; }
 
 /* BAZAAR SHOP LIST */
-.search-box { background: #fff; padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid var(--border); margin-top: 10px;}
-.search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 600; color: var(--text-dark); }
+.search-box { background: #fff; padding: 14px 18px; border-radius: 50px; display: flex; align-items: center; gap: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); margin-bottom: 20px; border: 1px solid var(--border); margin-top: 5px;}
+.search-box input { border: none; outline: none; width: 100%; font-size: 15px; font-weight: 600; color: var(--text-dark); }
 
-.filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 10px; scrollbar-width: none; }
+.filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 12px; scrollbar-width: none; }
 .filter-scroll::-webkit-scrollbar { display: none; }
-.filter-chip { background: #fff; border: 1px solid var(--border); padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: 0.2s;}
-.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2); }
+.filter-chip { background: #fff; border: 1px solid var(--border); padding: 10px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: 0.2s;}
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2); }
 
-.shop-card { background: #fff; border-radius: 16px; padding: 12px; display: flex; gap: 12px; margin-bottom: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); cursor: pointer; transition: transform 0.2s; }
+.shop-card { background: #fff; border-radius: 16px; padding: 14px; display: flex; gap: 14px; margin-bottom: 14px; box-shadow: var(--shadow); border: 1px solid var(--border); cursor: pointer; transition: transform 0.2s; align-items: center;}
 .shop-card:active { transform: scale(0.97); }
-.shop-img-box { width: 70px; height: 70px; border-radius: 12px; background: var(--bg-color); display: flex; align-items: center; justify-content: center; font-size: 30px; border: 1px solid var(--border); flex-shrink: 0;}
+.shop-img-box { width: 64px; height: 64px; border-radius: 14px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 30px; border: 1px solid var(--border); flex-shrink: 0;}
 .shop-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-.shop-info h3 { font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
-.shop-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
-.status-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 6px; }
-.status-open { background: #d1fae5; color: #059669; border: 1px solid #a7f3d0; }
-.status-closed { background: #fee2e2; color: #e11d48; border: 1px solid #fecaca; }
-.status-job { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+.shop-info h3 { font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+.shop-info p { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;}
+.status-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; padding: 6px 10px; border-radius: 8px; }
+.status-open { background: #dcfce3; color: #166534; border: 1px solid #bbf7d0; }
+.status-closed { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
 
-/* BOTTOM SHEET */
-.modal-overlay { position: fixed; inset: 0; background: rgba(41, 30, 27, 0.6); backdrop-filter: blur(4px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
-.bottom-sheet { background: #fff; width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px 20px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; }
-.sheet-close { width: 40px; height: 5px; background: #e7e5e4; border-radius: 10px; margin: 0 auto 20px; cursor: pointer; }
-.shop-detail-title { font-size: 20px; font-weight: 900; color: var(--primary-dark); margin-bottom: 4px; }
-.shop-detail-sub { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;}
+/* BOTTOM SHEET MODAL */
+.modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
+.bottom-sheet { background: #fff; width: 100%; max-width: 480px; border-top-left-radius: 28px; border-top-right-radius: 28px; padding: 24px 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; }
+.sheet-close { width: 40px; height: 5px; background: #cbd5e1; border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
+.shop-detail-title { font-size: 22px; font-weight: 900; color: var(--primary); margin-bottom: 6px; }
+.shop-detail-sub { font-size: 14px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;}
 
-.action-row { display: flex; gap: 10px; margin-bottom: 20px; }
-.action-btn { flex: 1; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;}
-.btn-call { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
-.btn-map { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
+.action-row { display: flex; gap: 12px; margin-bottom: 24px; }
+.action-btn { flex: 1; padding: 14px; border-radius: 14px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s;}
+.action-btn:active { transform: scale(0.95); }
+.btn-call { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.btn-map { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
 
 /* TOGGLE SWITCH */
 .switch { position: relative; display: inline-block; width: 60px; height: 32px; }
@@ -116,24 +118,24 @@ input:checked + .slider { background-color: #10b981; }
 input:checked + .slider:before { transform: translateX(28px); }
 
 /* BOTTOM NAV */
-.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: #fff; border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-around; padding: 12px 0 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 999999 !important; box-shadow: 0 -10px 25px rgba(93, 64, 55, 0.08); border-top: 1px solid var(--border); }
-.bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.bottom-nav button .ico { font-size: 22px; transition: all 0.2s; filter: grayscale(1); opacity: 0.6;}
+.bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: #fff; border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-around; padding: 14px 0 16px; padding-bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 999999 !important; box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.08); border-top: 1px solid var(--border); }
+.bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: 0.2s;}
+.bottom-nav button .ico { font-size: 24px; transition: all 0.2s; filter: grayscale(1); opacity: 0.6;}
 .bottom-nav button.active { color: var(--primary); }
 .bottom-nav button.active .ico { transform: translateY(-4px); filter: grayscale(0); opacity: 1;}
 
 .hidden { display: none !important; }
 
 /* AI CHATBOT */
-.ai-fab { position: fixed !important; bottom: 100px !important; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3); cursor: pointer; z-index: 99990; transition: transform 0.2s; border: 2px solid #fff; }
+.ai-fab { position: fixed !important; bottom: 100px !important; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 4px 15px rgba(15, 23, 42, 0.3); cursor: pointer; z-index: 99990; transition: transform 0.2s; border: 2px solid #fff; }
 .ai-fab:active { transform: scale(0.9); }
 .ai-box { background: #fff; border-radius: 24px; padding: 20px; max-width: 350px; width: 100%; box-shadow: 0 25px 50px rgba(0,0,0,0.4); }
 .chat-area { height: 250px; overflow-y: auto; background: var(--bg-color); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
-.msg-b { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 13px; font-weight: 600; line-height: 1.4;}
-.m-ai { background: var(--border); color: var(--primary-dark); align-self: flex-start; border-bottom-left-radius: 4px;}
+.msg-b { max-width: 85%; padding: 12px 16px; border-radius: 14px; font-size: 13px; font-weight: 600; line-height: 1.5;}
+.m-ai { background: #e2e8f0; color: var(--primary-dark); align-self: flex-start; border-bottom-left-radius: 4px;}
 .m-user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px;}
 .ai-opts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;}
-.ai-btn { background: #fff; border: 1px solid var(--primary-light); color: var(--primary-dark); padding: 8px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; }
+.ai-btn { background: #fff; border: 1px solid var(--border); color: var(--primary); padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
 </style>
 </head>
 <body>
@@ -153,22 +155,22 @@ input:checked + .slider:before { transform: translateX(28px); }
 </div>
 
 <main>
-    <!-- 🏠 HOME SECTION -->
+    <!-- 🏠 1. HOME SECTION -->
     <section id="home">
         <div class="search-box">
             <span>🔍</span>
             <input type="text" placeholder="दुकान, सर्विस या नौकरी खोजें...">
         </div>
 
-        <div class="news-banner" style="background: linear-gradient(135deg, #10b981, #059669); border-radius: var(--radius); padding: 16px; color: white; display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-            <div style="font-size: 30px;">✨</div>
+        <div class="card" style="background: linear-gradient(135deg, var(--accent), #ea580c); padding: 16px 20px; border: none; color: white; display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 34px;">✨</div>
             <div>
-                <b style="font-size: 14px; display: block; margin-bottom: 4px;">स्वागत है!</b>
-                <p style="font-size: 11px; font-weight: 600;">अब अपने आस-पास की सभी दुकानें, जॉब्स और सर्विस बिना लॉगिन किये आसानी से खोजें।</p>
+                <b style="font-size: 15px; display: block; margin-bottom: 4px; color: #fff;">स्वागत है!</b>
+                <p style="font-size: 12px; font-weight: 600; opacity: 0.9;">अब अपने आस-पास की सभी दुकानें, जॉब्स और सर्विस आसानी से खोजें।</p>
             </div>
         </div>
 
-        <div style="font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 12px;">सुविधाएं (Categories)</div>
+        <div style="font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 12px; margin-top: 10px;">सुविधाएं (Categories)</div>
         <div class="cat-grid">
             <div class="cat-card" onclick="openCategory('बाज़ार')">
                 <div class="cat-icon c-orange">🏬</div>
@@ -193,7 +195,7 @@ input:checked + .slider:before { transform: translateX(28px); }
         </div>
     </section>
 
-    <!-- 🏬 BAZAAR SECTION (LIST) -->
+    <!-- 🏬 2. BAZAAR SECTION (LIST) -->
     <section id="bazaar" class="hidden">
         <div class="search-box" style="margin-bottom: 16px;">
             <span>🔍</span>
@@ -208,16 +210,16 @@ input:checked + .slider:before { transform: translateX(28px); }
             <div class="filter-chip" onclick="setFilter('शिक्षा', this)">शिक्षा (Education)</div>
         </div>
         
-        <div style="font-size: 14px; font-weight: 800; color: var(--text-muted); margin-bottom: 12px; margin-top: 5px;">सूची (List) 👇</div>
+        <div style="font-size: 14px; font-weight: 800; color: var(--text-muted); margin-bottom: 12px; margin-top: 10px;">सूची (List) 👇</div>
         
         <div id="shopListContainer"></div>
     </section>
 
-    <!-- ➕ ADD SHOP/JOB SECTION -->
+    <!-- ➕ 3. ADD INFO SECTION -->
     <section id="addShop" class="hidden">
         <div class="card">
-            <h2>➕ नई जानकारी जोड़ें</h2>
-            <p style="font-size:12px; color:var(--text-muted); margin-bottom:20px; font-weight:600;">अपनी दुकान, सर्विस या कोई जॉब रजिस्टर करें ताकि लोग आपको आसानी से खोज सकें। (यह फ्री है!)</p>
+            <h2 style="font-size: 20px;">➕ नई जानकारी जोड़ें</h2>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:24px; font-weight:600; line-height:1.5;">अपनी दुकान, सर्विस या कोई जॉब रजिस्टर करें ताकि लोग आपको आसानी से खोज सकें। (यह फ्री है!)</p>
             
             <div class="field">
                 <label>मेन केटेगरी चुनें *</label>
@@ -233,7 +235,7 @@ input:checked + .slider:before { transform: translateX(28px); }
                 </div>
             </div>
 
-            <!-- JOB TYPE SPECIFIC FIELD (Hidden by default) -->
+            <!-- JOB TYPE RADIO -->
             <div class="field hidden" id="jobTypeField">
                 <label>आप क्या चाहते हैं? *</label>
                 <div class="radio-group">
@@ -246,7 +248,7 @@ input:checked + .slider:before { transform: translateX(28px); }
                 </div>
             </div>
 
-            <!-- SUB-CATEGORY (Hidden by default) -->
+            <!-- SUB-CATEGORY -->
             <div class="field hidden" id="subCatField">
                 <label>दुकान / काम का प्रकार *</label>
                 <div class="input-wrap">
@@ -262,7 +264,10 @@ input:checked + .slider:before { transform: translateX(28px); }
 
             <div class="field">
                 <label>पूरा विवरण / पता (Location) *</label>
-                <div class="input-wrap"><span>📍</span><textarea rows="2" placeholder="पूरा पता या काम की जानकारी" id="addLoc"></textarea></div>
+                <div class="input-wrap" style="align-items: flex-start; padding-top:10px;">
+                    <span style="margin-top:2px;">📍</span>
+                    <textarea rows="3" placeholder="पूरा पता या काम की जानकारी" id="addLoc" style="padding-top:0;"></textarea>
+                </div>
             </div>
 
             <div class="field">
@@ -274,26 +279,30 @@ input:checked + .slider:before { transform: translateX(28px); }
         </div>
     </section>
 
-    <!-- 👤 PROFILE SECTION -->
+    <!-- 👤 4. PROFILE SECTION (DASHBOARD) -->
     <section id="profile" class="hidden">
-        <div class="card" style="text-align: center;">
-            <div style="width: 60px; height: 60px; background: var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 10px;">👤</div>
-            <h2 style="justify-content: center; font-size: 20px; margin-bottom: 4px;">My Profile</h2>
-            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">आपकी रजिस्टर की गई जानकारी</p>
+        <div class="card" style="text-align: center; border-top: 4px solid var(--primary);">
+            <div style="width: 70px; height: 70px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 12px; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">👤</div>
+            <h2 style="justify-content: center; font-size: 22px; margin-bottom: 4px;">My Profile</h2>
+            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;">आपकी रजिस्टर की गई जानकारी</p>
             
-            <div style="background: var(--bg-color); border: 1px solid var(--primary-light); padding: 20px; border-radius: 16px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);">
-                <div style="font-size: 18px; margin-bottom: 8px;">🏬</div>
-                <h3 style="font-size: 16px; color: var(--primary-dark); font-weight: 900; margin-bottom: 4px;" id="dashShopName">Store</h3>
-                <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;" id="dashShopCat">किराना / जनरल स्टोर</p>
+            <div style="background: #f8fafc; border: 1px solid var(--border); padding: 20px; border-radius: 20px; text-align: left;">
+                <div style="display:flex; gap:14px; align-items:center; margin-bottom: 16px;">
+                    <div style="width: 50px; height: 50px; background: #fff; border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">🏬</div>
+                    <div>
+                        <h3 style="font-size: 16px; color: var(--text-dark); font-weight: 800; margin-bottom: 2px;" id="dashShopName">General Store</h3>
+                        <p style="font-size: 12px; color: var(--text-muted); font-weight: 600;" id="dashShopCat">किराना / जनरल स्टोर</p>
+                    </div>
+                </div>
                 
-                <div style="border-top: 1px dashed var(--border); padding-top: 20px; display: flex; justify-content: space-between; align-items: center;">
-                    <div style="text-align: left;">
-                        <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);">स्टेटस</div>
+                <div style="border-top: 1px dashed #cbd5e1; padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);">दुकान का स्टेटस</div>
                         <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 4px;">ग्राहक को लाइव दिखेगा</div>
                     </div>
                     
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <span id="switchText" style="font-size:12px; font-weight:800; color: #10b981;">ON (चालू है)</span>
+                        <span id="switchText" style="font-size:12px; font-weight:800; color: #16a34a;">ON (चालू है)</span>
                         <label class="switch">
                           <input type="checkbox" id="liveSwitch" checked onchange="toggleShopStatus(this)">
                           <span class="slider"></span>
@@ -309,7 +318,7 @@ input:checked + .slider:before { transform: translateX(28px); }
 <div id="shopModal" class="modal-overlay hidden" onclick="closeShopModal(event)">
     <div class="bottom-sheet" id="shopSheet">
         <div class="sheet-close"></div>
-        <div style="width: 60px; height: 60px; background: var(--bg-color); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 30px; margin-bottom: 12px;" id="mShopIcon">🏬</div>
+        <div style="width: 64px; height: 64px; background: var(--bg-color); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 16px;" id="mShopIcon">🏬</div>
         <h2 id="mShopName" class="shop-detail-title">Name</h2>
         <div class="shop-detail-sub">
             <span id="mShopCat">कैटेगरी</span> • 
@@ -321,9 +330,9 @@ input:checked + .slider:before { transform: translateX(28px); }
             <button class="action-btn btn-map" onclick="alert('मैप खुल रहा है...')">📍 रास्ता (Map)</button>
         </div>
 
-        <div style="background: var(--bg-color); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px;">📍 विवरण / पता (DETAILS)</div>
-            <div id="mShopLoc" style="font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.5;">पता यहाँ आएगा</div>
+        <div style="background: var(--bg-color); border: 1px solid var(--border); border-radius: 16px; padding: 16px;">
+            <div style="font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px;">📍 विवरण / पता (DETAILS)</div>
+            <div id="mShopLoc" style="font-size: 14px; font-weight: 600; color: var(--text-dark); line-height: 1.5;">पता यहाँ आएगा</div>
         </div>
     </div>
 </div>
@@ -332,8 +341,8 @@ input:checked + .slider:before { transform: translateX(28px); }
 <div id="aiModal" class="modal-overlay hidden" style="align-items: center;">
   <div class="ai-box">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-       <h2 style="color: var(--primary-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">🤖 AI Help Guide</h2>
-       <div style="font-size: 24px; cursor: pointer; color: var(--danger); line-height:1;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
+       <h2 style="color: var(--primary); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">🤖 AI Help Guide</h2>
+       <div style="font-size: 24px; cursor: pointer; color: #e11d48; line-height:1;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
     </div>
     <div class="chat-area" id="aiChat">
        <div class="msg-b m-ai">नमस्ते! मैं आपका AI गाइड हूँ। आप 'अपना क्षेत्र' ऐप के बारे में मुझसे सवाल पूछ सकते हैं। 👇</div>
@@ -349,7 +358,7 @@ input:checked + .slider:before { transform: translateX(28px); }
 <!-- BOTTOM NAVIGATION -->
 <nav class="bottom-nav">
   <button id="nav-home" class="active" onclick="showTab('home')"><div class="ico">🏠</div>होम</button>
-  <button id="nav-bazaar" onclick="showTab('bazaar')"><div class="ico">🏬</div>खोजें</button>
+  <button id="nav-bazaar" onclick="showTab('bazaar')"><div class="ico">🔍</div>खोजें</button>
   <button id="nav-addShop" onclick="showTab('addShop')"><div class="ico">➕</div>जोड़ें</button>
   <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div>प्रोफाइल</button>
 </nav>
@@ -358,7 +367,7 @@ input:checked + .slider:before { transform: translateX(28px); }
 <div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
 
 <script>
-// --- DATABASE MOCKUP WITH VILLAGE/CITY JOBS ---
+// --- DATABASE MOCKUP ---
 let shopsData = [
     { id: 1, type: "बाज़ार", name: "General Store", cat: "किराना / जनरल स्टोर", loc: "कनॉट प्लेस, नई दिल्ली", icon: "🛒", isOpen: true },
     { id: 2, type: "रोज़गार", name: "Ramesh Builder", cat: "राजमिस्त्री / मज़दूर (वर्कर चाहिए)", loc: "मकान बनवाने के लिए 4 मज़दूरों की ज़रूरत है।", icon: "👷", isOpen: true },
@@ -374,7 +383,7 @@ function renderShops() {
     let filtered = shopsData.filter(s => currentFilter === 'सभी' || s.type === currentFilter);
     
     if(filtered.length === 0) {
-        html = `<div style="text-align:center; padding: 30px; font-weight:600; color: var(--text-muted);">कोई जानकारी नहीं मिली।</div>`;
+        html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">कोई जानकारी नहीं मिली।</div>`;
     }
 
     filtered.forEach(shop => {
@@ -399,7 +408,7 @@ function renderShops() {
             <div class="shop-img-box">${shop.icon}</div>
             <div class="shop-info">
                 <h3>${shop.name}</h3>
-                <p>📍 ${shop.loc}</p>
+                <p><span>📍</span> <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 180px;">${shop.loc}</span></p>
                 <div>${statusBadge}</div>
             </div>
         </div>`;
@@ -430,17 +439,17 @@ function toggleShopStatus(checkbox) {
     
     if(isNowOpen) {
         textEl.textContent = "ON (चालू है)";
-        textEl.style.color = "#10b981";
+        textEl.style.color = "#16a34a";
     } else {
         textEl.textContent = "OFF (बंद है)";
-        textEl.style.color = "#e11d48";
+        textEl.style.color = "#dc2626";
     }
     
     shopsData[0].isOpen = isNowOpen;
     renderShops(); 
 }
 
-// --- DYNAMIC CATEGORY LOGIC ---
+// DYNAMIC CATEGORIES
 function updateSubCats() {
     let mainCat = document.getElementById('addMainCat').value;
     let subCatWrap = document.getElementById('subCatField');
@@ -483,7 +492,7 @@ function setJobType(type) {
     }
 }
 
-// --- SUBMIT NEW POST ---
+// SUBMIT NEW POST
 function submitShop() {
     let mainCat = document.getElementById('addMainCat').value;
     let subCat = document.getElementById('addSubCat').value;
@@ -564,7 +573,7 @@ function askAI(question) {
     
     setTimeout(() => {
         let ans = "";
-        if(question.includes('जोड़ें')) ans = "➕ जानकारी जोड़ने के लिए नीचे दिए गए '➕ जोड़ें' बटन पर क्लिक करें। अपना नाम, केटेगरी और एड्रेस डालें। यह तुरंत लिस्ट में आ जाएगी!";
+        if(question.includes('जोड़ें')) ans = "➕ जानकारी जोड़ने के लिए नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना नाम, केटेगरी और एड्रेस डालें। यह तुरंत लिस्ट में आ जाएगी!";
         else if(question.includes('फ्री')) ans = "💰 जी हाँ! यह पूरी तरह 100% फ्री है।";
         else if(question.includes('स्टेटस')) ans = "🎚️ '👤 प्रोफाइल' में जाएं। वहां आपको 'ON/OFF' का स्विच मिलेगा। चालू रखने के लिए ON करें।";
         else ans = "मुझे समझ नहीं आया। कृपया दिए गए बटनों में से चुनाव करें।";
