@@ -152,7 +152,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border);}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* AI BOX */
+/* AI BOX SPECIFIC */
 .ai-box { background: var(--card-bg); border-radius: 24px; padding: 20px; max-width: 400px; width: 90%; margin: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.6); border: 1px solid var(--border); position: relative; display: flex; flex-direction: column;}
 .chat-area { height: 220px; overflow-y: auto; background: var(--primary); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
 .msg-b { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--text-dark);}
@@ -217,9 +217,11 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
 
         <!-- 📸 STORIES / OFFERS SECTION 📸 -->
-        <div class="section-title" style="margin-bottom: 10px;"><span class="hi">🔥 आज के Offers (Stories)</span><span class="en">🔥 Today's Offers</span></div>
-        <div class="story-container" id="liveStoryContainer">
-            <!-- Stories will be injected here by JS -->
+        <div id="storySectionWrap">
+            <div class="section-title" style="margin-bottom: 10px;"><span class="hi">🔥 आज के Offers (Stories)</span><span class="en">🔥 Today's Offers</span></div>
+            <div class="story-container" id="liveStoryContainer">
+                <!-- Stories injected here -->
+            </div>
         </div>
 
         <div class="section-title"><span class="hi">मुख्य Categories</span><span class="en">Main Categories</span></div>
@@ -361,7 +363,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <div class="field" id="nameField">
                 <div class="input-wrap">
                     <span>👤</span>
-                    <input class="lang-input" id="authName" type="text" data-hi="अपना पूरा नाम" data-en="Full Name" placeholder="अपना पूरा नाम">
+                    <input class="lang-input" id="authName" type="text" data-hi="अपना पूरा नाम (दुकान का नाम)" data-en="Shop / Full Name" placeholder="अपना पूरा नाम (दुकान का नाम)">
                 </div>
             </div>
             
@@ -434,7 +436,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
     </section>
 
-    <!-- 👤 5. PROFILE SECTION (WITH ADD STORY) -->
+    <!-- 👤 5. PROFILE SECTION (WITH ADD STORY & DELETE OPTIONS) -->
     <section id="profile" class="hidden">
         <div class="card" style="text-align: center;">
             <div style="width: 70px; height: 70px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 12px; border: 2px solid var(--border);">👤</div>
@@ -446,8 +448,8 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div style="display:flex; gap:14px; align-items:center; margin-bottom: 16px;">
                     <div style="width: 46px; height: 46px; background: var(--card-bg); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:20px; border: 1px solid var(--border);">🏬</div>
                     <div>
-                        <h3 style="font-size: 15px; color: var(--text-dark); font-weight: 800; margin-bottom: 2px;" id="dashShopName">General Store</h3>
-                        <p style="font-size: 11px; color: var(--text-muted); font-weight: 600;" id="dashShopCat">किराना / जनरल स्टोर</p>
+                        <h3 style="font-size: 15px; color: var(--text-dark); font-weight: 800; margin-bottom: 2px;" id="dashShopName">My Shop</h3>
+                        <p style="font-size: 11px; color: var(--text-muted); font-weight: 600;" id="dashShopCat">Manage your store status</p>
                     </div>
                 </div>
                 
@@ -467,10 +469,14 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </div>
             </div>
 
-            <!-- 🔥 NEW: ADD STORY / OFFER BUTTON IN PROFILE 🔥 -->
+            <!-- 🔥 ADD STORY / OFFER BUTTON IN PROFILE 🔥 -->
             <div style="background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">🔥 <span class="hi">अपना Offer / Story लगाएँ</span><span class="en">Post an Offer / Story</span></div>
-                <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;"><span class="hi">यह होम स्क्रीन पर सबसे ऊपर दिखेगा ताकि ज़्यादा ग्राहक आएं।</span><span class="en">This will appear at the top of home screen.</span></p>
+                <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;"><span class="hi">यह होम स्क्रीन पर सबसे ऊपर 24 घंटे तक दिखेगा।</span><span class="en">Will be live at the top for 24 hours.</span></p>
+                
+                <!-- MY ACTIVE STORY (Auto populated via JS) -->
+                <div id="myActiveStoryArea" style="display:none; margin-bottom: 16px;"></div>
+
                 <button class="btn" style="padding: 10px; font-size: 13px; margin: 0; background: linear-gradient(90deg, #ec4899, #f97316); color: white;" onclick="document.getElementById('addStoryModal').classList.remove('hidden')">➕ <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></button>
             </div>
             
@@ -627,6 +633,7 @@ function toggleLang() {
     renderShops(); 
     renderOnlineShops();
     renderStories();
+    if(!document.getElementById('profile').classList.contains('hidden')) renderProfileStories();
 }
 
 function showToast(message, type = 'success') {
@@ -639,17 +646,32 @@ function showToast(message, type = 'success') {
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => { toast.remove(); }, 300); }, 3000);
 }
 
-// --- 📸 STORY LOGIC 📸 ---
+// --- 📸 STORY LOGIC (WITH AUTO DELETE & MANUAL DELETE) 📸 ---
 let storiesData = [
-    { icon: '🛒', name: 'General Store', badge: 'दिवाली स्पेशल छूट!', desc: 'आज सभी किराने के सामान पर 20% की छूट। तुरंत विजिट करें।' },
-    { icon: '👗', name: 'Saree Center', badge: 'नई कलेक्शन!', desc: 'लेटेस्ट डिज़ाइनर साड़ियाँ आ गई हैं। आज ही आएं।' },
-    { icon: '🏥', name: 'City Hospital', badge: 'फ्री चेकअप', desc: 'आज सुबह 10 बजे से फ्री ब्लड प्रेशर चेकअप।' },
-    { icon: '🛠️', name: 'Plumbing', badge: 'रिपेयरिंग ऑफर', desc: 'AC और वाटर प्यूरीफायर सर्विस पर 10% डिस्काउंट।' }
+    { id: 101, icon: '🛒', name: 'General Store', badge: 'दिवाली स्पेशल छूट!', desc: 'आज सभी किराने के सामान पर 20% की छूट। तुरंत विजिट करें।', time: Date.now() - 3600000 },
+    { id: 102, icon: '👗', name: 'Saree Center', badge: 'नई कलेक्शन!', desc: 'लेटेस्ट डिज़ाइनर साड़ियाँ आ गई हैं। आज ही आएं।', time: Date.now() - 7200000 },
+    { id: 103, icon: '🏥', name: 'City Hospital', badge: 'फ्री चेकअप', desc: 'आज सुबह 10 बजे से फ्री ब्लड प्रेशर चेकअप।', time: Date.now() - 14400000 },
+    { id: 104, icon: '🛠️', name: 'Plumbing', badge: 'रिपेयरिंग ऑफर', desc: 'AC और वाटर प्यूरीफायर सर्विस पर 10% डिस्काउंट।', time: Date.now() - 20000000 }
 ];
+
+function getActiveStories() {
+    let now = Date.now();
+    // Keep only stories that are less than 24 hours (24 * 60 * 60 * 1000 ms) old
+    return storiesData.filter(st => (now - st.time) <= 86400000);
+}
 
 function renderStories() {
     let html = "";
-    storiesData.forEach(st => {
+    let activeStories = getActiveStories();
+    
+    if(activeStories.length === 0) {
+        document.getElementById('storySectionWrap').style.display = 'none';
+        return;
+    } else {
+        document.getElementById('storySectionWrap').style.display = 'block';
+    }
+
+    activeStories.forEach(st => {
         let safeName = st.name.replace(/'/g, "\\'");
         let safeBadge = st.badge.replace(/'/g, "\\'");
         let safeDesc = st.desc.replace(/'/g, "\\'");
@@ -664,6 +686,34 @@ function renderStories() {
     document.getElementById('liveStoryContainer').innerHTML = html;
 }
 
+function renderProfileStories() {
+    if(!currentUser) return;
+    let html = "";
+    let activeStories = getActiveStories();
+    let myStories = activeStories.filter(st => st.name === currentUser.name);
+
+    if(myStories.length > 0) {
+        html += `<div style="font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">⏱️ <span class="hi">आपकी लाइव Story</span><span class="en">Your Live Story</span></div>`;
+        myStories.forEach(st => {
+            html += `
+            <div style="background:var(--card-bg); border:1px solid var(--border); padding:10px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <div style="font-size:24px;">${st.icon}</div>
+                    <div>
+                        <div style="font-size:12px; font-weight:800; color:var(--text-dark);">${st.badge}</div>
+                        <div style="font-size:10px; color:var(--accent);">${t('24 घंटे में हट जाएगी', 'Auto-delete in 24h')}</div>
+                    </div>
+                </div>
+                <button style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.2); padding:6px 10px; border-radius:8px; font-weight:800; font-size:11px;" onclick="deleteMyStory(${st.id})">🗑️ ${t('हटाएँ', 'Delete')}</button>
+            </div>`;
+        });
+        document.getElementById('myActiveStoryArea').innerHTML = html;
+        document.getElementById('myActiveStoryArea').style.display = 'block';
+    } else {
+        document.getElementById('myActiveStoryArea').style.display = 'none';
+    }
+}
+
 function submitStory() {
     let icon = document.getElementById('storyCat').value;
     let badge = document.getElementById('storyTitle').value;
@@ -675,14 +725,29 @@ function submitStory() {
         return;
     }
     
-    storiesData.unshift({ icon: icon, name: name, badge: badge, desc: desc });
-    renderStories();
+    // Add new story with current timestamp
+    storiesData.unshift({ id: Date.now(), icon: icon, name: name, badge: badge, desc: desc, time: Date.now() });
     
     document.getElementById('addStoryModal').classList.add('hidden');
     document.getElementById('storyTitle').value = '';
     document.getElementById('storyDesc').value = '';
+    
     showToast(t("आपका Offer (Story) लाइव हो गया है!", "Your Story is now Live!"));
-    goHome();
+    renderStories();
+    if(!document.getElementById('profile').classList.contains('hidden')) {
+        renderProfileStories();
+    } else {
+        goHome();
+    }
+}
+
+function deleteMyStory(id) {
+    if(confirm(t("क्या आप वाकई इस Story को डिलीट करना चाहते हैं?", "Are you sure you want to delete this story?"))) {
+        storiesData = storiesData.filter(st => st.id !== id);
+        renderStories();
+        renderProfileStories();
+        showToast(t("Story डिलीट कर दी गई है।", "Story deleted successfully."));
+    }
 }
 
 function openStory(icon, title, badge, desc) {
@@ -858,12 +923,16 @@ function checkAdminAccess() {
     if(currentUser) {
         document.getElementById('profileName').innerText = currentUser.name || "User";
         document.getElementById('profilePhone').innerText = "+91 " + currentUser.phone;
+        document.getElementById('dashShopName').innerText = currentUser.name;
     }
 }
 
 function showTab(tabId) {
     if((tabId === 'addShop' || tabId === 'profile' || tabId === 'admin') && !currentUser) { tabId = 'auth'; }
-    if(tabId === 'profile') checkAdminAccess();
+    if(tabId === 'profile') {
+        checkAdminAccess();
+        renderProfileStories(); // Render user's active stories in profile
+    }
     
     document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
     document.getElementById(tabId).classList.remove('hidden');
@@ -1055,4 +1124,4 @@ window.onload = () => {
 };
 </script>
 </body>
-                                                                                </html>
+                                                                                                     </html>
