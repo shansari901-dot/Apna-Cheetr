@@ -25,7 +25,7 @@
 body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
-body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 70px; overflow-x: hidden; -webkit-user-select: none; user-select: none;}
+body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none;}
 input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 
 /* 🌐 TOP BAR */
@@ -37,10 +37,9 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 .app-title { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px;}
 .app-subtitle { font-size: 10px; font-weight: 600; color: var(--text-muted); }
 
-/* TOP ACTIONS (AI HELP & LANGUAGE BUTTONS BESIDE EACH OTHER) */
 .top-actions { display: flex; gap: 8px; align-items: center;}
 .ai-top-btn { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--accent); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;}
-.lang-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--accent); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer;}
+.lang-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-dark); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer;}
 
 .location-selector { padding: 10px 16px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #f8fafc; cursor: pointer; background: var(--primary); border-bottom: 1px solid var(--border);}
 .location-selector span { font-size: 10px; color: var(--text-muted); }
@@ -63,8 +62,8 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 /* SECTION HEADINGS */
 .section-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--text-dark); border-bottom: 2px solid var(--accent); padding-bottom: 4px; display: inline-block;}
 
-/* 📱 HORIZONTAL CATEGORY GRID (8 CATEGORIES NOW) */
-.cat-grid-horz { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+/* 📱 HORIZONTAL CATEGORY GRID */
+.cat-grid-horz { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
 .cat-card-horz { background: var(--card-bg); border-radius: var(--radius); padding: 12px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s;}
 .cat-card-horz:active { transform: scale(0.97); background: var(--primary-light); }
 .cat-icon-horz { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
@@ -81,6 +80,29 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bg-pink { background: linear-gradient(135deg, #f472b6, #db2777); color: white;}
 .bg-cyan { background: linear-gradient(135deg, #38bdf8, #0284c7); color: white;}
 .bg-indigo { background: linear-gradient(135deg, #818cf8, #4f46e5); color: white;}
+
+/* 📸 STORIES / OFFERS SECTION (NEW) 📸 */
+.story-container { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; margin-bottom: 10px;}
+.story-container::-webkit-scrollbar { display: none; }
+.story-item { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; width: 66px; flex-shrink: 0;}
+.story-ring { width: 62px; height: 62px; border-radius: 50%; background: linear-gradient(45deg, #f97316, #ec4899, #8b5cf6); padding: 3px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);}
+.story-img-box { width: 100%; height: 100%; border-radius: 50%; background: var(--primary); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 24px;}
+.story-name { font-size: 10px; font-weight: 700; color: var(--text-dark); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;}
+
+/* STORY VIEW MODAL */
+.story-viewer-overlay { position: fixed; inset: 0; background: #000; z-index: 999999999; display: flex; flex-direction: column; }
+.story-progress-bar { display: flex; gap: 4px; padding: 10px; width: 100%; position: absolute; top: 0; z-index: 10;}
+.story-progress { flex: 1; height: 3px; background: rgba(255,255,255,0.3); border-radius: 10px;}
+.story-progress-fill { height: 100%; background: #fff; width: 100%; border-radius: 10px; }
+.story-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 16px 16px; position: absolute; top: 0; width: 100%; z-index: 9;}
+.story-header-left { display: flex; align-items: center; gap: 10px;}
+.story-dp { width: 36px; height: 36px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px;}
+.story-title { font-size: 14px; font-weight: 800; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
+.story-close { font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
+.story-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e3a8a, #0f172a); padding: 30px; text-align: center; color: white;}
+.story-offer-badge { background: #fde047; color: #b45309; font-size: 14px; font-weight: 900; padding: 6px 16px; border-radius: 50px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+.story-desc { font-size: 22px; font-weight: 800; line-height: 1.4; margin-bottom: 20px;}
+.story-footer { padding: 20px; background: rgba(0,0,0,0.5); display: flex; gap: 10px;}
 
 /* COMMON CARDS & FORMS */
 .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; }
@@ -130,7 +152,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border);}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* AI BOX */
+/* AI BOX SPECIFIC */
 .ai-box { background: var(--card-bg); border-radius: 24px; padding: 20px; max-width: 400px; width: 90%; margin: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.6); border: 1px solid var(--border); position: relative; display: flex; flex-direction: column;}
 .chat-area { height: 220px; overflow-y: auto; background: var(--primary); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
 .msg-b { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--text-dark);}
@@ -171,7 +193,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
        </div>
    </div>
    <div class="top-actions">
-       <!-- 🤖 AI HELP BUTTON BESIDE LANGUAGE -->
        <div class="ai-top-btn" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖 <span class="hi">सहायता</span><span class="en">Help</span></div>
        <div class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 EN</div>
    </div>
@@ -193,6 +214,35 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         <div class="search-box" onclick="showTab('bazaar')">
             <span>🔍</span>
             <input type="text" class="lang-input" data-hi="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." data-en="Search shop, service, person..." placeholder="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." readonly>
+        </div>
+
+        <!-- 📸 NEW: STORIES / OFFERS SECTION 📸 -->
+        <div class="section-title" style="margin-bottom: 10px;"><span class="hi">🔥 आज के Offers (Stories)</span><span class="en">🔥 Today's Offers</span></div>
+        <div class="story-container">
+            <div class="story-item" onclick="openStory('🛒', 'General Store', 'दिवाली स्पेशल छूट!', 'आज सभी किराने के सामान पर 20% की छूट। तुरंत विजिट करें।')">
+                <div class="story-ring">
+                    <div class="story-img-box">🛒</div>
+                </div>
+                <div class="story-name">General Store</div>
+            </div>
+            <div class="story-item" onclick="openStory('👗', 'Saree Center', 'नई कलेक्शन!', 'लेटेस्ट डिज़ाइनर साड़ियाँ आ गई हैं। आज ही आएं।')">
+                <div class="story-ring">
+                    <div class="story-img-box">👗</div>
+                </div>
+                <div class="story-name">Saree Center</div>
+            </div>
+            <div class="story-item" onclick="openStory('🏥', 'City Hospital', 'फ्री चेकअप कैंप', 'आज सुबह 10 बजे से फ्री ब्लड प्रेशर और शुगर चेकअप।')">
+                <div class="story-ring">
+                    <div class="story-img-box">🏥</div>
+                </div>
+                <div class="story-name">City Hospital</div>
+            </div>
+            <div class="story-item" onclick="openStory('🛠️', 'Sharma Plumbing', 'रिपेयरिंग ऑफर', 'AC और वाटर प्यूरीफायर सर्विस पर 10% डिस्काउंट।')">
+                <div class="story-ring">
+                    <div class="story-img-box">🛠️</div>
+                </div>
+                <div class="story-name">Sharma Plumb...</div>
+            </div>
         </div>
 
         <div class="section-title"><span class="hi">मुख्य Categories</span><span class="en">Main Categories</span></div>
@@ -457,6 +507,31 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </section>
 </main>
 
+<!-- 📸 STORY / OFFER VIEWER MODAL 📸 -->
+<div id="storyViewer" class="story-viewer-overlay hidden">
+    <div class="story-progress-bar">
+        <div class="story-progress"><div class="story-progress-fill" id="storyProgressFill"></div></div>
+    </div>
+    
+    <div class="story-header">
+        <div class="story-header-left">
+            <div class="story-dp" id="svIcon">🛒</div>
+            <div class="story-title" id="svTitle">General Store</div>
+        </div>
+        <div class="story-close" onclick="closeStory()">✖</div>
+    </div>
+    
+    <div class="story-content" id="svBg">
+        <div class="story-offer-badge" id="svBadge">दिवाली स्पेशल छूट!</div>
+        <div class="story-desc" id="svDesc">आज सभी किराने के सामान पर 20% की छूट। तुरंत विजिट करें।</div>
+    </div>
+    
+    <div class="story-footer">
+        <button class="btn" style="flex:1; margin:0; background:rgba(255,255,255,0.2); color:#fff; font-size:13px;" onclick="showToast(t('नंबर उपलब्ध नहीं है।', 'Number not available.'), 'error')">📞 कॉल करें</button>
+        <button class="btn" style="flex:1; margin:0; background:var(--accent); color:#000; font-size:13px;" onclick="showToast(t('लोकेशन मैप पर देखी जा रही है...', 'Opening Map...'), 'success')">📍 मैप (रास्ता)</button>
+    </div>
+</div>
+
 <!-- 🛒 SMART DETAIL MODAL -->
 <div id="shopModal" class="modal-overlay hidden" onclick="closeShopModal(event)">
     <div class="bottom-sheet" id="shopSheet">
@@ -480,7 +555,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- 🤖 AI ASSISTANT MODAL -->
+<!-- 🤖 AI ASSISTANT MODAL 🤖 -->
 <div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeAiModal(event)">
   <div class="ai-box" id="aiBoxContent">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -513,6 +588,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 const ADMIN_PHONE = '7318259001';
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
 let currentLang = localStorage.getItem('ac_lang') || 'hi';
+let storyTimer;
 
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
@@ -537,6 +613,41 @@ function showToast(message, type = 'success') {
     toastBox.appendChild(toast);
     setTimeout(() => { toast.classList.add('show'); }, 10);
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => { toast.remove(); }, 300); }, 3000);
+}
+
+// 📸 STORY LOGIC 📸
+function openStory(icon, title, badge, desc) {
+    document.getElementById('svIcon').innerText = icon;
+    document.getElementById('svTitle').innerText = title;
+    document.getElementById('svBadge').innerText = badge;
+    document.getElementById('svDesc').innerText = desc;
+    
+    // Dynamic BG Color based on icon
+    let bgColors = ['linear-gradient(135deg, #1e3a8a, #0f172a)', 'linear-gradient(135deg, #065f46, #022c22)', 'linear-gradient(135deg, #9d174d, #4c0519)', 'linear-gradient(135deg, #b45309, #451a03)'];
+    document.getElementById('svBg').style.background = bgColors[Math.floor(Math.random() * bgColors.length)];
+
+    let viewer = document.getElementById('storyViewer');
+    let fill = document.getElementById('storyProgressFill');
+    viewer.classList.remove('hidden');
+    
+    // Progress Animation
+    fill.style.transition = 'none';
+    fill.style.width = '0%';
+    setTimeout(() => {
+        fill.style.transition = 'width 5s linear';
+        fill.style.width = '100%';
+    }, 50);
+
+    // Auto close after 5s
+    clearTimeout(storyTimer);
+    storyTimer = setTimeout(() => {
+        closeStory();
+    }, 5000);
+}
+
+function closeStory() {
+    clearTimeout(storyTimer);
+    document.getElementById('storyViewer').classList.add('hidden');
 }
 
 // Database Mockup
@@ -868,11 +979,11 @@ function askAI(type) {
     } 
     else if(type === 'free') { 
         q = t("💰 क्या यह फ्री है?", "💰 Is it free?"); 
-        a = t("जी हाँ! यह पूरी तरह 100% फ्री है।", "Yes! It is 100% Free."); 
+        a = t("जी हाँ! यह ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है।", "Yes! It is 100% Free for both customers and shopkeepers."); 
     } 
     else if(type === 'status') { 
         q = t("🎚️ स्टेटस कैसे बदलें?", "🎚️ How to toggle status?"); 
-        a = t("'👤 प्रोफाइल' में जाएं। वहां ON/OFF स्विच है। दुकान खोलने पर ON करें।", "Go to '👤 Profile'. Use the ON/OFF switch there so people can see your live status."); 
+        a = t("'👤 प्रोफाइल' में जाएं। वहां ON/OFF स्विच है। दुकान खोलने पर ON करें ताकि लोग लाइव देख सकें।", "Go to '👤 Profile'. Use the ON/OFF switch there so people can see your live status."); 
     }
     else if(type === 'login') { 
         q = t("🔐 लॉगिन क्यों ज़रूरी है?", "🔐 Why login required?"); 
@@ -880,7 +991,7 @@ function askAI(type) {
     }
     else if(type === 'jobs') { 
         q = t("💼 जॉब कैसे खोजें?", "💼 How to find jobs?"); 
-        a = t("होम पेज पर 'रोज़गार' केटेगरी पर क्लिक करें या 'खोजें' टैब में जाएं।", "Click on 'Jobs' category on the home page or search under the search tab."); 
+        a = t("होम पेज पर 'रोज़गार' केटेगरी पर क्लिक करें या 'खोजें' टैब में जाकर रोज़गार चुनें।", "Click on 'Jobs' category on the home page or search under the search tab."); 
     }
 
     chat.innerHTML += `<div class="msg-b m-user">${q}</div>`;
@@ -900,4 +1011,4 @@ window.onload = () => {
 };
 </script>
 </body>
-</html>
+                  </html>
