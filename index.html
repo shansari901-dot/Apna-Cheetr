@@ -6,6 +6,10 @@
 <title>अपना क्षेत्र - Apna Chhetr</title>
 <meta name="description" content="लोकल जानकारी, गाँव से शहर तक">
 <meta name="theme-color" content="#0b1120">
+
+<!-- 🗺️ LEAFLET MAP CSS (Free Map API) 🗺️ -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 <style>
 /* 🌌 ULTRA PREMIUM DARK NAVY THEME 🌌 */
 :root { 
@@ -133,6 +137,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .shop-info { flex: 1; }
 .shop-info h3 { font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
 .shop-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;}
+.shop-dist { background: rgba(59, 130, 246, 0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; color: #60a5fa; font-weight: 800;}
 .status-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 6px; }
 .status-open { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
 .status-closed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
@@ -149,7 +154,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 
 /* MODALS */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(2px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
-.bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border);}
+.bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border); position: relative;}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
 /* AI BOX SPECIFIC */
@@ -175,6 +180,9 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: var(--text-muted); transition: .4s; border-radius: 50%; }
 input:checked + .slider { background-color: rgba(16, 185, 129, 0.2); border-color: var(--accent); }
 input:checked + .slider:before { transform: translateX(22px); background-color: var(--accent); }
+
+/* MAP CONTAINER */
+#map { width: 100%; height: 250px; border-radius: 12px; margin-top: 10px; z-index: 1;}
 </style>
 </head>
 <body class="lang-hi">
@@ -197,20 +205,15 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
        <div class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 EN</div>
    </div>
 </div>
-<div class="location-selector">📍 <span class="hi">नई दिल्ली, भारत</span><span class="en">New Delhi, India</span> <span>▼</span></div>
+
+<!-- 🔥 CLICKABLE LOCATION SELECTOR 🔥 -->
+<div class="location-selector" onclick="detectUserLocation()">
+    📍 <span class="hi" id="locTextHi">आपकी लोकेशन (10 KM दायरा) सेट करें</span><span class="en" id="locTextEn">Set Location (10 KM Radius)</span> <span>▼</span>
+</div>
 
 <main>
     <!-- 🏠 1. HOME SECTION -->
     <section id="home">
-        <div class="hero-banner">
-            <div class="hero-text">
-                <b><span class="hi">अपने क्षेत्र की हर ज़रूरी जानकारी</span><span class="en">All essential local info</span></b>
-                <p><span class="hi">अब सिर्फ एक ऐप में</span><span class="en">Now in just one app</span></p>
-            </div>
-            <div class="hero-icon">🏘️</div>
-            <div class="hero-badge"><span class="hi">गाँव से शहर तक</span><span class="en">Village to City</span></div>
-        </div>
-
         <div class="search-box" onclick="showTab('bazaar')">
             <span>🔍</span>
             <input type="text" class="lang-input" data-hi="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." data-en="Search shop, service, person..." placeholder="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." readonly>
@@ -225,7 +228,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
 
         <div class="section-title"><span class="hi">मुख्य Categories</span><span class="en">Main Categories</span></div>
-        
         <div class="cat-grid-horz">
             <div class="cat-card-horz" onclick="openCategory('बाज़ार')">
                 <div class="cat-icon-horz bg-green">🛒</div>
@@ -233,72 +235,55 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                     <div class="cat-title-horz"><span class="hi">स्थानीय बाज़ार</span><span class="en">Local Market</span></div>
                     <div class="cat-sub-horz"><span class="hi">किराना, सब्ज़ी, दूध, फल आदि</span><span class="en">Grocery, Veg, Milk, Fruits</span></div>
                 </div>
-                <div class="cat-arrow">›</div>
             </div>
-            
             <div class="cat-card-horz" onclick="openCategory('सेवाएं')">
                 <div class="cat-icon-horz bg-purple">🛠️</div>
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">ज़रूरी सेवाएँ</span><span class="en">Services</span></div>
                     <div class="cat-sub-horz"><span class="hi">प्लंबर, इलेक्ट्रीशियन, बढ़ई</span><span class="en">Plumber, Electrician, Carpenter</span></div>
                 </div>
-                <div class="cat-arrow">›</div>
             </div>
-            
             <div class="cat-card-horz" onclick="openCategory('स्वास्थ्य')">
                 <div class="cat-icon-horz bg-red">➕</div>
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">स्वास्थ्य</span><span class="en">Health</span></div>
                     <div class="cat-sub-horz"><span class="hi">अस्पताल, डॉक्टर, मेडिकल</span><span class="en">Hospital, Doctor, Medical</span></div>
                 </div>
-                <div class="cat-arrow">›</div>
             </div>
-            
             <div class="cat-card-horz" onclick="openCategory('रोज़गार')">
                 <div class="cat-icon-horz bg-orange">💼</div>
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">रोज़गार</span><span class="en">Jobs</span></div>
                     <div class="cat-sub-horz"><span class="hi">नौकरी, काम, स्किल ट्रेनिंग</span><span class="en">Jobs, Work, Skill Training</span></div>
                 </div>
-                <div class="cat-arrow">›</div>
             </div>
-            
             <div class="cat-card-horz" onclick="openCategory('शिक्षा')">
                 <div class="cat-icon-horz bg-blue">🎓</div>
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">शिक्षा व कोर्स</span><span class="en">Education</span></div>
                     <div class="cat-sub-horz"><span class="hi">स्कूल, कॉलेज, कोचिंग</span><span class="en">School, College, Coaching</span></div>
                 </div>
-                <div class="cat-arrow">›</div>
             </div>
-            
             <div class="cat-card-horz" onclick="openCategory('खाना')">
                 <div class="cat-icon-horz bg-pink">🍴</div>
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">खाना व रेस्टोरेंट</span><span class="en">Food</span></div>
                     <div class="cat-sub-horz"><span class="hi">रेस्टोरेंट, ढाबा, मिठाई</span><span class="en">Restaurant, Hotel, Dhaba</span></div>
                 </div>
-                <div class="cat-arrow">›</div>
             </div>
-
-            <!-- 🚗 NEW CATEGORY 1: TRANSPORT 🚗 -->
             <div class="cat-card-horz" onclick="showToast(t('वाहन व यातायात लिस्ट जल्द आ रही है!', 'Transport list coming soon!'))">
                 <div class="cat-icon-horz bg-cyan">🚗</div>
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">वाहन व यातायात</span><span class="en">Transport</span></div>
                     <div class="cat-sub-horz"><span class="hi">ऑटो, बस, टैक्सी, पेट्रोल पंप</span><span class="en">Auto, Bus, Taxi, Fuel</span></div>
                 </div>
-                <div class="cat-arrow">›</div>
             </div>
-
-            <!-- 🏠 NEW CATEGORY 2: REAL ESTATE 🏠 -->
             <div class="cat-card-horz" onclick="showToast(t('घर व प्रॉपर्टी लिस्ट जल्द आ रही है!', 'Real Estate list coming soon!'))">
                 <div class="cat-icon-horz bg-indigo">🏠</div>
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">घर व प्रॉपर्टी</span><span class="en">Real Estate</span></div>
                     <div class="cat-sub-horz"><span class="hi">किराए का मकान, प्लॉट, फ्लैट</span><span class="en">Rent House, Plot, Flat</span></div>
                 </div>
-                <div class="cat-arrow">›</div>
             </div>
         </div>
     </section>
@@ -329,12 +314,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <span class="hi">🟢 अभी जो ONLINE (चालू) हैं</span>
                 <span class="en">🟢 Currently Online (Open)</span>
             </h2>
-            <p style="font-size: 11px; color: var(--text-muted); font-weight: 600;">
-                <span class="hi">नीचे से केटेगरी बदलें और देखें कौन उपलब्ध है।</span>
-                <span class="en">Switch category below to check who is available.</span>
-            </p>
         </div>
-
         <div class="filter-scroll" id="onlineFilterContainer">
             <div class="filter-chip active" onclick="setOnlineFilter('बाज़ार', this)"><span class="hi">बाज़ार</span><span class="en">Shops</span></div>
             <div class="filter-chip" onclick="setOnlineFilter('सेवाएं', this)"><span class="hi">सेवाएं</span><span class="en">Services</span></div>
@@ -363,7 +343,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <div class="field" id="nameField">
                 <div class="input-wrap">
                     <span>👤</span>
-                    <input class="lang-input" id="authName" type="text" data-hi="अपना पूरा नाम (दुकान का नाम)" data-en="Shop / Full Name" placeholder="अपना पूरा नाम (दुकान का नाम)">
+                    <input class="lang-input" id="authName" type="text" data-hi="अपना पूरा नाम" data-en="Full Name" placeholder="अपना पूरा नाम">
                 </div>
             </div>
             
@@ -419,11 +399,15 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
+            <!-- 🔥 MAP PICKER INTEGRATION 🔥 -->
             <div class="field">
-                <label><span class="hi">पूरा विवरण / पता (Location) *</span><span class="en">Full Details / Address *</span></label>
-                <div class="input-wrap" style="align-items: flex-start; padding-top:10px;">
-                    <span style="margin-top:2px;">📍</span>
-                    <textarea rows="3" class="lang-input" data-hi="पूरा पता या काम की जानकारी" data-en="Full address or job details" placeholder="पूरा पता या काम की जानकारी" id="addLoc" style="padding-top:0;"></textarea>
+                <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
+                <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openRealMapPicker()">
+                    📍 <span class="hi">मैप पर पिन लगाएँ</span><span class="en">Drop Pin on Map</span>
+                </button>
+                <div class="input-wrap" style="align-items: flex-start; padding-top:10px; background: rgba(0,0,0,0.2);">
+                    <span style="margin-top:2px;">🏠</span>
+                    <textarea rows="2" id="addLoc" readonly style="color:var(--accent); font-weight:700; font-size:12px; padding-top:0;" placeholder="लोकेशन यहाँ अपने आप आ जाएगी..."></textarea>
                 </div>
             </div>
 
@@ -436,14 +420,13 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         </div>
     </section>
 
-    <!-- 👤 5. PROFILE SECTION (WITH ADD STORY & DELETE OPTIONS) -->
+    <!-- 👤 5. PROFILE SECTION -->
     <section id="profile" class="hidden">
         <div class="card" style="text-align: center;">
             <div style="width: 70px; height: 70px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 12px; border: 2px solid var(--border);">👤</div>
             <h2 style="justify-content: center; font-size: 20px; margin-bottom: 4px;" id="profileName">My Profile</h2>
             <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;" id="profilePhone">+91 XXXXXXXXXX</p>
             
-            <!-- STORE STATUS -->
             <div style="background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="display:flex; gap:14px; align-items:center; margin-bottom: 16px;">
                     <div style="width: 46px; height: 46px; background: var(--card-bg); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:20px; border: 1px solid var(--border);">🏬</div>
@@ -455,12 +438,11 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 
                 <div style="border-top: 1px dashed var(--border); padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <div style="font-size: 13px; font-weight: 800; color: var(--text-dark);"><span class="hi">स्टेटस</span><span class="en">Status</span></div>
-                        <div style="font-size: 10px; color: var(--text-muted); font-weight: 600; margin-top: 4px;"><span class="hi">ग्राहक को लाइव दिखेगा</span><span class="en">Visible live</span></div>
+                        <div style="font-size: 13px; font-weight: 800; color: var(--text-dark);"><span class="hi">स्टेटस</span></div>
+                        <div style="font-size: 10px; color: var(--text-muted); font-weight: 600; margin-top: 4px;"><span class="hi">ग्राहक को लाइव दिखेगा</span></div>
                     </div>
-                    
                     <div style="display:flex; align-items:center; gap:8px;">
-                        <span id="switchText" style="font-size:11px; font-weight:800; color: var(--accent);"><span class="hi">ON (चालू है)</span><span class="en">ON (Active)</span></span>
+                        <span id="switchText" style="font-size:11px; font-weight:800; color: var(--accent);"><span class="hi">ON (चालू है)</span></span>
                         <label class="switch">
                           <input type="checkbox" id="liveSwitch" checked onchange="toggleShopStatus(this)">
                           <span class="slider"></span>
@@ -469,36 +451,44 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </div>
             </div>
 
-            <!-- 🔥 ADD STORY / OFFER BUTTON IN PROFILE 🔥 -->
+            <!-- 🔥 ADD STORY BUTTON IN PROFILE 🔥 -->
             <div style="background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">🔥 <span class="hi">अपना Offer / Story लगाएँ</span><span class="en">Post an Offer / Story</span></div>
                 <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;"><span class="hi">यह होम स्क्रीन पर सबसे ऊपर 24 घंटे तक दिखेगा।</span><span class="en">Will be live at the top for 24 hours.</span></p>
                 
-                <!-- MY ACTIVE STORY (Auto populated via JS) -->
                 <div id="myActiveStoryArea" style="display:none; margin-bottom: 16px;"></div>
 
                 <button class="btn" style="padding: 10px; font-size: 13px; margin: 0; background: linear-gradient(90deg, #ec4899, #f97316); color: white;" onclick="document.getElementById('addStoryModal').classList.remove('hidden')">➕ <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></button>
             </div>
-            
+
             <button class="btn" onclick="logout()" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">🚪 लॉगआउट (Logout)</button>
-        </div>
-
-        <div id="adminPanelBtn" class="hidden">
-            <div style="font-size: 12px; color: var(--text-muted); font-weight: 700; margin: 30px 0 10px; text-align: center;">--- ADMIN ONLY ---</div>
-            <button class="btn" style="background: linear-gradient(90deg, #c2410c, #ea580c); color:white;" onclick="showTab('admin')">👑 Admin Dashboard</button>
-        </div>
-    </section>
-
-    <!-- 👑 ADMIN PANEL -->
-    <section id="admin" class="hidden">
-        <div class="card" style="border-left: 4px solid #ea580c;">
-            <h2 style="color: #ea580c;">👑 Admin Panel</h2>
-            <div id="adminShopList"></div>
         </div>
     </section>
 </main>
 
-<!-- ➕ ADD STORY / OFFER MODAL (NEW FORM) ➕ -->
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+  <button id="nav-home" class="active" onclick="showTab('home')"><div class="ico">🏠</div><span class="hi">होम</span><span class="en">Home</span></button>
+  <button id="nav-bazaar" onclick="showTab('bazaar')"><div class="ico">🔍</div><span class="hi">खोजें</span><span class="en">Search</span></button>
+  <button id="nav-addShop" onclick="showTab('addShop')"><div class="ico">➕</div><span class="hi">जोड़ें</span><span class="en">Add</span></button>
+  <button id="nav-onlineTab" onclick="showTab('onlineTab')"><div class="ico">🟢</div><span class="hi">ऑनलाइन</span><span class="en">Online</span></button>
+  <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
+</nav>
+
+<!-- 🗺️ REAL LEAFLET MAP MODAL (FOR ADDING SHOP) 🗺️ -->
+<div id="realMapModal" class="modal-overlay hidden" style="z-index: 999999999;">
+    <div class="bottom-sheet" style="height: 75vh; display: flex; flex-direction: column;">
+        <div class="sheet-close" onclick="closeRealMap()"></div>
+        <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">📍 <span class="hi">मैप पर अपनी दुकान खोजें</span><span class="en">Find Shop on Map</span></h2>
+        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;"><span class="hi">नक्शे को खिसका कर लाल पिन अपनी दुकान पर रखें।</span></p>
+        
+        <div id="map"></div> <!-- Leaflet Map Container -->
+        
+        <button class="btn" style="margin-top: 15px;" onclick="confirmMapLocation()">✅ <span class="hi">लोकेशन कन्फर्म करें</span><span class="en">Confirm Location</span></button>
+    </div>
+</div>
+
+<!-- ➕ ADD STORY MODAL -->
 <div id="addStoryModal" class="modal-overlay hidden" onclick="closeAiModal(event)">
     <div class="bottom-sheet" id="addStorySheet">
         <div class="sheet-close"></div>
@@ -536,7 +526,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- 📸 STORY / OFFER VIEWER MODAL 📸 -->
+<!-- 📸 STORY VIEWER MODAL -->
 <div id="storyViewer" class="story-viewer-overlay hidden">
     <div class="story-progress-bar">
         <div class="story-progress"><div class="story-progress-fill" id="storyProgressFill"></div></div>
@@ -561,30 +551,27 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- 🛒 SMART DETAIL MODAL -->
+<!-- 🛒 SHOP DETAIL MODAL -->
 <div id="shopModal" class="modal-overlay hidden" onclick="closeShopModal(event)">
     <div class="bottom-sheet" id="shopSheet">
         <div class="sheet-close"></div>
         <div style="width: 56px; height: 56px; background: var(--primary); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 16px;" id="mShopIcon">🏬</div>
-        <h2 id="mShopName" class="shop-detail-title">Name</h2>
-        <div class="shop-detail-sub">
-            <span id="mShopCat">कैटेगरी</span> • 
-            <span id="mShopStatus" class="status-badge status-open">🟢 चालू है</span>
+        <h2 id="mShopName" style="font-size: 22px; font-weight: 900; color: var(--text-dark); margin-bottom: 6px;">Name</h2>
+        <div style="font-size: 14px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+            <span id="mShopCat">कैटेगरी</span> • <span id="mShopStatus" class="status-badge status-open">🟢 चालू है</span>
         </div>
-        
-        <div class="action-row" style="display:flex; gap:12px; margin-bottom:20px;">
-            <button class="action-btn" style="flex:1; padding:12px; border-radius:12px; font-weight:800; background: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2);" onclick="showToast(t('नंबर उपलब्ध नहीं है।', 'Number not available.'), 'error')">📞 <span class="hi">कॉल करें</span><span class="en">Call</span></button>
-            <button class="action-btn" style="flex:1; padding:12px; border-radius:12px; font-weight:800; background: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2);" onclick="showToast(t('लोकेशन मैप पर देखी जा रही है...', 'Opening Map...'), 'success')">📍 <span class="hi">रास्ता (Map)</span><span class="en">Map</span></button>
+        <div style="display:flex; gap:12px; margin-bottom:20px;">
+            <button class="btn" style="flex:1; margin:0; background: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2);" onclick="showToast('कॉलिंग...')">📞 <span class="hi">कॉल करें</span></button>
+            <button class="btn" style="flex:1; margin:0; background: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2);" onclick="showToast('मैप खुल रहा है...')">📍 <span class="hi">रास्ता (Map)</span></button>
         </div>
-
         <div style="background: var(--primary); border: 1px solid var(--border); border-radius: 16px; padding: 16px;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px;">📍 <span class="hi">विवरण / पता (DETAILS)</span><span class="en">ADDRESS / DETAILS</span></div>
+            <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px;">📍 विवरण / पता</div>
             <div id="mShopLoc" style="font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.5;">पता यहाँ आएगा</div>
         </div>
     </div>
 </div>
 
-<!-- 🤖 AI ASSISTANT MODAL 🤖 -->
+<!-- 🤖 AI ASSISTANT MODAL -->
 <div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeAiModal(event)">
   <div class="ai-box" id="aiBoxContent">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -599,37 +586,30 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
        <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह फ्री है?</span><span class="en">Is it Free?</span></button>
        <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस कैसे बदलें?</span><span class="en">Toggle ON/OFF</span></button>
        <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span><span class="en">Why Login?</span></button>
-       <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Story (Offer) कैसे लगाएँ?</span><span class="en">Add Story?</span></button>
+       <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Story कैसे लगाएँ?</span><span class="en">Add Story?</span></button>
     </div>
   </div>
 </div>
 
-<!-- BOTTOM NAVIGATION -->
-<nav class="bottom-nav">
-  <button id="nav-home" class="active" onclick="showTab('home')"><div class="ico">🏠</div><span class="hi">होम</span><span class="en">Home</span></button>
-  <button id="nav-bazaar" onclick="showTab('bazaar')"><div class="ico">🔍</div><span class="hi">खोजें</span><span class="en">Search</span></button>
-  <button id="nav-addShop" onclick="showTab('addShop')"><div class="ico">➕</div><span class="hi">जोड़ें</span><span class="en">Add</span></button>
-  <button id="nav-onlineTab" onclick="showTab('onlineTab')"><div class="ico">🟢</div><span class="hi">ऑनलाइन</span><span class="en">Online</span></button>
-  <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
-</nav>
+<!-- LEAFLET JS SCRIPT -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-const ADMIN_PHONE = '7318259001';
+// --- GLOBALS & AUTH ---
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
-let currentLang = localStorage.getItem('ac_lang') || 'hi';
+let currentLang = 'hi';
 let storyTimer;
+let map, marker;
+let userLat = 28.6139; // Default Delhi (India Gate)
+let userLng = 77.2090;
+let isLocationTracked = false;
 
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
 function toggleLang() {
     currentLang = currentLang === 'hi' ? 'en' : 'hi';
-    localStorage.setItem('ac_lang', currentLang);
     document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
     document.body.className = 'lang-' + currentLang;
-    
-    document.querySelectorAll('.lang-input').forEach(el => {
-        el.placeholder = el.getAttribute('data-' + currentLang) || el.placeholder;
-    });
     renderShops(); 
     renderOnlineShops();
     renderStories();
@@ -646,18 +626,98 @@ function showToast(message, type = 'success') {
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => { toast.remove(); }, 300); }, 3000);
 }
 
-// --- 📸 STORY LOGIC (WITH AUTO DELETE & MANUAL DELETE) 📸 ---
+// --- 🗺️ 10 KM RADIUS MATHS (HAVERSINE FORMULA) 🗺️ ---
+function getDistance(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180; 
+    var a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d;
+}
+
+// --- 📍 DETECT USER GPS LOCATION 📍 ---
+function detectUserLocation() {
+    showToast(t("GPS से आपकी लोकेशन ट्रैक की जा रही है...", "Detecting via GPS..."));
+    
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            userLat = position.coords.latitude;
+            userLng = position.coords.longitude;
+            isLocationTracked = true;
+            
+            document.getElementById('locTextHi').innerText = "आपका क्षेत्र (10 KM दायरा)";
+            document.getElementById('locTextEn').innerText = "Your Area (10 KM Radius)";
+            showToast(t("लोकेशन सेट हो गई! अब आपको 10KM के अंदर की दुकानें दिखेंगी।", "Location set! Showing shops within 10KM."));
+            
+            renderShops(); // Refresh list based on new GPS
+            renderOnlineShops();
+        }, function(error) {
+            showToast(t("GPS लोकेशन नहीं मिल पाई।", "Could not get GPS location."), "error");
+        });
+    } else {
+        showToast("Geolocation is not supported by this browser.", "error");
+    }
+}
+
+// --- 🗺️ LEAFLET MAP PICKER (ADD SHOP) 🗺️ ---
+let pickedLat = 0, pickedLng = 0;
+
+function openRealMapPicker() {
+    document.getElementById('realMapModal').classList.remove('hidden');
+    
+    // Initialize map only once
+    if(!map) {
+        // Use user's tracked location if available, else Delhi
+        map = L.map('map').setView([userLat, userLng], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+        
+        // Add draggable marker
+        marker = L.marker([userLat, userLng], {draggable: true}).addTo(map);
+        
+        marker.on('dragend', function(event){
+            var position = marker.getLatLng();
+            pickedLat = position.lat;
+            pickedLng = position.lng;
+        });
+    } else {
+        map.invalidateSize(); // Fixes map rendering issues in modals
+        map.setView([userLat, userLng], 13);
+        marker.setLatLng([userLat, userLng]);
+    }
+    
+    pickedLat = userLat;
+    pickedLng = userLng;
+}
+
+function closeRealMap() {
+    document.getElementById('realMapModal').classList.add('hidden');
+}
+
+function confirmMapLocation() {
+    let latStr = pickedLat.toFixed(4);
+    let lngStr = pickedLng.toFixed(4);
+    document.getElementById('addLoc').value = `${latStr}° N, ${lngStr}° E (मैप से जोड़ा गया)`;
+    closeRealMap();
+    showToast(t("लोकेशन सफलतापूर्वक सेव कर ली गई!", "Location saved successfully!"));
+}
+
+// --- 📸 STORY LOGIC 📸 ---
 let storiesData = [
     { id: 101, icon: '🛒', name: 'General Store', badge: 'दिवाली स्पेशल छूट!', desc: 'आज सभी किराने के सामान पर 20% की छूट। तुरंत विजिट करें।', time: Date.now() - 3600000 },
     { id: 102, icon: '👗', name: 'Saree Center', badge: 'नई कलेक्शन!', desc: 'लेटेस्ट डिज़ाइनर साड़ियाँ आ गई हैं। आज ही आएं।', time: Date.now() - 7200000 },
-    { id: 103, icon: '🏥', name: 'City Hospital', badge: 'फ्री चेकअप', desc: 'आज सुबह 10 बजे से फ्री ब्लड प्रेशर चेकअप।', time: Date.now() - 14400000 },
-    { id: 104, icon: '🛠️', name: 'Plumbing', badge: 'रिपेयरिंग ऑफर', desc: 'AC और वाटर प्यूरीफायर सर्विस पर 10% डिस्काउंट।', time: Date.now() - 20000000 }
+    { id: 103, icon: '🏥', name: 'City Hospital', badge: 'फ्री चेकअप', desc: 'आज सुबह 10 बजे से फ्री ब्लड प्रेशर चेकअप।', time: Date.now() - 14400000 }
 ];
 
 function getActiveStories() {
     let now = Date.now();
-    // Keep only stories that are less than 24 hours (24 * 60 * 60 * 1000 ms) old
-    return storiesData.filter(st => (now - st.time) <= 86400000);
+    return storiesData.filter(st => (now - st.time) <= 86400000); // 24 hours
 }
 
 function renderStories() {
@@ -720,12 +780,8 @@ function submitStory() {
     let desc = document.getElementById('storyDesc').value;
     let name = currentUser ? currentUser.name : "My Shop";
     
-    if(!badge || !desc) {
-        showToast(t("कृपया हेडिंग और विवरण ज़रूर भरें!", "Please fill all fields!"), "error");
-        return;
-    }
+    if(!badge || !desc) { showToast(t("कृपया हेडिंग और विवरण ज़रूर भरें!", "Please fill all fields!"), "error"); return; }
     
-    // Add new story with current timestamp
     storiesData.unshift({ id: Date.now(), icon: icon, name: name, badge: badge, desc: desc, time: Date.now() });
     
     document.getElementById('addStoryModal').classList.add('hidden');
@@ -734,11 +790,7 @@ function submitStory() {
     
     showToast(t("आपका Offer (Story) लाइव हो गया है!", "Your Story is now Live!"));
     renderStories();
-    if(!document.getElementById('profile').classList.contains('hidden')) {
-        renderProfileStories();
-    } else {
-        goHome();
-    }
+    if(!document.getElementById('profile').classList.contains('hidden')) { renderProfileStories(); } else { goHome(); }
 }
 
 function deleteMyStory(id) {
@@ -779,23 +831,40 @@ function closeStory() {
     document.getElementById('storyViewer').classList.add('hidden');
 }
 
-// --- DATABASE MOCKUP ---
+// --- 🏬 DATABASE MOCKUP WITH LAT / LNG 🏬 ---
+// Delhi Default Coordinates: 28.6139, 77.2090
 let shopsData = [
-    { id: 1, type: "बाज़ार", name: "General Store", catHi: "किराना / जनरल स्टोर", catEn: "Grocery Store", loc: "कनॉट प्लेस, नई दिल्ली", icon: "🛒", isOpen: true },
-    { id: 6, type: "स्वास्थ्य", name: "City Hospital", catHi: "अस्पताल", catEn: "Hospital", loc: "NH-44, मुख्य रोड, नई दिल्ली", icon: "🏥", isOpen: true },
-    { id: 2, type: "रोज़गार", name: "Ramesh Builder", catHi: "राजमिस्त्री", catEn: "Labor", loc: "मकान बनवाने के लिए 4 मज़दूरों की ज़रूरत है।", icon: "👷", isOpen: false, isHiring: true },
-    { id: 3, type: "रोज़गार", name: "Suresh (ड्राइवर)", catHi: "ट्रैक्टर ड्राइवर", catEn: "Driver", loc: "मेरे पास 5 साल का ड्राइविंग अनुभव है, काम चाहिए।", icon: "🚜", isOpen: true, isHiring: false },
-    { id: 4, type: "सेवाएं", name: "Sharma Plumbing", catHi: "प्लंबर सर्विस", catEn: "Plumber", loc: "करोल बाग़, नई दिल्ली", icon: "🛠️", isOpen: true },
-    { id: 7, type: "खाना", name: "City Restaurant", catHi: "रेस्टोरेंट", catEn: "Restaurant", loc: "मेन मार्केट, नई दिल्ली", icon: "🍴", isOpen: false }
+    { id: 1, type: "बाज़ार", name: "General Store", catHi: "किराना", catEn: "Grocery", locText: "कनॉट प्लेस, नई दिल्ली", lat: 28.6200, lng: 77.2150, icon: "🛒", isOpen: true },
+    { id: 2, type: "रोज़गार", name: "Ramesh Builder", catHi: "राजमिस्त्री", catEn: "Labor", locText: "करोल बाग़, नई दिल्ली", lat: 28.6500, lng: 77.2000, icon: "👷", isOpen: false, isHiring: true },
+    { id: 3, type: "सेवाएं", name: "Sharma Plumbing", catHi: "प्लंबर", catEn: "Plumber", locText: "नोएडा, उत्तर प्रदेश", lat: 28.5355, lng: 77.3910, icon: "🛠️", isOpen: true } // Noida is ~20km away (Will hide on 10km filter)
 ];
 
 let currentFilter = 'बाज़ार'; 
 let currentOnlineFilter = 'बाज़ार';
 
+function getFormattedDist(distKm) {
+    if(distKm < 1) return (distKm * 1000).toFixed(0) + " m";
+    return distKm.toFixed(1) + " km";
+}
+
 function renderShops() {
     let html = "";
-    let filtered = shopsData.filter(s => s.type === currentFilter);
-    if(filtered.length === 0) { html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('कोई जानकारी नहीं मिली।','No info found.')}</div>`; }
+    let filtered = shopsData.filter(s => {
+        let matchCat = (s.type === currentFilter);
+        let dist = getDistance(userLat, userLng, s.lat, s.lng);
+        s.calculatedDist = dist; 
+        
+        // 🛑 10 KM RADIUS LOGIC 🛑
+        // If location is tracked, only show shops within 10 km.
+        let matchDist = isLocationTracked ? (dist <= 10) : true; 
+        
+        return matchCat && matchDist;
+    });
+    
+    // Sort by nearest first
+    filtered.sort((a,b) => a.calculatedDist - b.calculatedDist);
+
+    if(filtered.length === 0) { html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('10 KM के अंदर कोई जानकारी नहीं मिली।','No info found within 10 KM.')}</div>`; }
 
     filtered.forEach(shop => {
         let statusText = "";
@@ -812,9 +881,11 @@ function renderShops() {
         }
 
         let statusBadge = `<span class="status-badge ${statusClass}">${statusText}</span>`;
+        let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
+        
         let safeName = shop.name.replace(/'/g, "\\'");
         let safeCat = shopCat.replace(/'/g, "\\'");
-        let safeLoc = shop.loc.replace(/'/g, "\\'");
+        let safeLoc = shop.locText.replace(/'/g, "\\'");
         let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring})`;
         
         html += `
@@ -822,8 +893,10 @@ function renderShops() {
             <div class="shop-img-box">${shop.icon}</div>
             <div class="shop-info">
                 <h3>${shop.name}</h3>
-                <p><span>📍</span> <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 180px;">${shop.loc}</span></p>
-                <div>${statusBadge}</div>
+                <div style="display:flex; gap:8px; align-items:center; margin-top:6px;">
+                    ${statusBadge}
+                    ${distTag}
+                </div>
             </div>
         </div>`;
     });
@@ -832,8 +905,16 @@ function renderShops() {
 
 function renderOnlineShops() {
     let html = "";
-    let filtered = shopsData.filter(s => s.type === currentOnlineFilter && s.isOpen === true);
-    if(filtered.length === 0) { html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('इस केटेगरी में अभी कोई ONLINE (चालू) नहीं है।','No one is currently online in this category.')}</div>`; }
+    let filtered = shopsData.filter(s => {
+        let dist = getDistance(userLat, userLng, s.lat, s.lng);
+        s.calculatedDist = dist;
+        let matchDist = isLocationTracked ? (dist <= 10) : true; 
+        return s.type === currentOnlineFilter && s.isOpen === true && matchDist;
+    });
+    
+    filtered.sort((a,b) => a.calculatedDist - b.calculatedDist);
+
+    if(filtered.length === 0) { html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('इस केटेगरी में 10KM के अंदर अभी कोई ONLINE नहीं है।','No one is currently online within 10KM.')}</div>`; }
 
     filtered.forEach(shop => {
         let shopCat = t(shop.catHi, shop.catEn);
@@ -843,9 +924,11 @@ function renderOnlineShops() {
         }
 
         let statusBadge = `<span class="status-badge status-open">${t('🟢 चालू है', '🟢 Open')}</span>`;
+        let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
+        
         let safeName = shop.name.replace(/'/g, "\\'");
         let safeCat = shopCat.replace(/'/g, "\\'");
-        let safeLoc = shop.loc.replace(/'/g, "\\'");
+        let safeLoc = shop.locText.replace(/'/g, "\\'");
         let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring})`;
         
         html += `
@@ -853,8 +936,10 @@ function renderOnlineShops() {
             <div class="shop-img-box">${shop.icon}</div>
             <div class="shop-info">
                 <h3>${shop.name}</h3>
-                <p><span>📍</span> <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 180px;">${shop.loc}</span></p>
-                <div>${statusBadge}</div>
+                <div style="display:flex; gap:8px; align-items:center; margin-top:6px;">
+                    ${statusBadge}
+                    ${distTag}
+                </div>
             </div>
         </div>`;
     });
@@ -902,7 +987,6 @@ function doAuth() {
     currentUser = { phone: phone, name: name };
     localStorage.setItem('ac_user', JSON.stringify(currentUser));
     showToast(t("सफलतापूर्वक लॉगिन हो गया!", "Login Successful!"));
-    checkAdminAccess();
     showTab('profile'); 
 }
 
@@ -913,25 +997,15 @@ function logout() {
     showTab('home');
 }
 
-function checkAdminAccess() {
-    if(currentUser && currentUser.phone === ADMIN_PHONE) {
-        document.getElementById('adminPanelBtn').classList.remove('hidden');
-        renderAdminList();
-    } else {
-        document.getElementById('adminPanelBtn').classList.add('hidden');
-    }
-    if(currentUser) {
-        document.getElementById('profileName').innerText = currentUser.name || "User";
-        document.getElementById('profilePhone').innerText = "+91 " + currentUser.phone;
-        document.getElementById('dashShopName').innerText = currentUser.name;
-    }
-}
-
 function showTab(tabId) {
-    if((tabId === 'addShop' || tabId === 'profile' || tabId === 'admin') && !currentUser) { tabId = 'auth'; }
+    if((tabId === 'addShop' || tabId === 'profile') && !currentUser) { tabId = 'auth'; }
     if(tabId === 'profile') {
-        checkAdminAccess();
-        renderProfileStories(); // Render user's active stories in profile
+        if(currentUser) {
+            document.getElementById('profileName').innerText = currentUser.name || "User";
+            document.getElementById('profilePhone').innerText = "+91 " + currentUser.phone;
+            document.getElementById('dashShopName').innerText = currentUser.name;
+        }
+        renderProfileStories(); 
     }
     
     document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
@@ -955,15 +1029,15 @@ function submitShop() {
     let mainCat = document.getElementById('addMainCat').value;
     let subCat = document.getElementById('addSubCat').value;
     let name = document.getElementById('addName').value;
-    let loc = document.getElementById('addLoc').value;
+    let locRaw = document.getElementById('addLoc').value;
     
-    if(!mainCat || !subCat || !name || !loc) { showToast(t("कृपया सभी ज़रूरी (*) जानकारी भरें!", "Please fill all required (*) fields!"), "error"); return; }
+    if(!mainCat || !subCat || !name || !locRaw) { showToast(t("कृपया सभी ज़रूरी (*) जानकारी भरें!", "Please fill all required (*) fields!"), "error"); return; }
     
     let isHiring = false;
     if(mainCat === 'रोज़गार') { isHiring = document.querySelector('input[name="jobType"]:checked').value === 'hiring'; }
     let icon = mainCat === "बाज़ार" ? "🏬" : (mainCat === "सेवाएं" ? "🛠️" : (mainCat === "रोज़गार" ? "💼" : (mainCat === "स्वास्थ्य" ? "🏥" : (mainCat === "खाना" ? "🍴" : "🎓"))));
     
-    let newShop = { id: Date.now(), type: mainCat, name: name, catHi: subCat, catEn: subCat, loc: loc, icon: icon, isOpen: true, isHiring: isHiring };
+    let newShop = { id: Date.now(), type: mainCat, name: name, catHi: subCat, catEn: subCat, locText: "नई लोकेशन (New Loc)", lat: pickedLat, lng: pickedLng, icon: icon, isOpen: true, isHiring: isHiring };
     shopsData.unshift(newShop);
     
     showToast(t("आपकी जानकारी सफलतापुर्वक रजिस्टर हो गई!", "Successfully registered!"));
@@ -1020,32 +1094,6 @@ function setJobType(type) {
     } else {
         document.getElementById('rbSeeking').classList.add('active');
         document.querySelector('input[value="seeking"]').checked = true;
-    }
-}
-
-function renderAdminList() {
-    let html = "";
-    shopsData.forEach(shop => {
-        html += `
-        <div class="shop-card" style="position:relative; margin-bottom: 10px;">
-            <button style="position:absolute; right:10px; background:#f87171; color:#000; border:none; border-radius:50%; width:30px; height:30px;" onclick="deleteShop(${shop.id})">🗑️</button>
-            <div class="shop-img-box">${shop.icon}</div>
-            <div class="shop-info">
-                <h3 style="font-size:14px;">${shop.name}</h3>
-                <p style="font-size:11px;">${shop.type} • ${shop.isOpen ? 'ON':'OFF'}</p>
-            </div>
-        </div>`;
-    });
-    document.getElementById('adminShopList').innerHTML = html;
-}
-
-function deleteShop(id) {
-    if(confirm(t("क्या आप वाकई इस पोस्ट को डिलीट करना चाहते हैं?", "Are you sure you want to delete this post?"))) {
-        shopsData = shopsData.filter(s => s.id !== id);
-        renderAdminList();
-        renderShops();
-        renderOnlineShops();
-        showToast(t("पोस्ट डिलीट कर दी गई है।", "Post deleted successfully."));
     }
 }
 
@@ -1124,4 +1172,4 @@ window.onload = () => {
 };
 </script>
 </body>
-                                                                                                     </html>
+</html>
