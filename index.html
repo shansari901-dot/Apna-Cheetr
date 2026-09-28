@@ -413,7 +413,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 
             <div class="field">
                 <label><span class="hi">संपर्क नंबर</span><span class="en">Contact Number</span> <span class="optional-tag">(Optional)</span></label>
-                <div class="input-wrap"><span>📞</span><input type="tel" class="lang-input" data-hi="10 अंकों का नंबर" data-en="10 Digit Number" placeholder="10 अंकों का नंबर" maxlength="10"></div>
+                <div class="input-wrap"><span>📞</span><input type="tel" id="addPhone" class="lang-input" data-hi="10 अंकों का नंबर" data-en="10 Digit Number" placeholder="10 अंकों का नंबर" maxlength="10"></div>
             </div>
 
             <button class="btn" onclick="submitShop()">✅ <span class="hi">रजिस्टर करें</span><span class="en">Register</span></button>
@@ -595,14 +595,20 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+// --- CLOUDFLARE API URL ---
+const API_URL = "https://apna-chetr-dpi.ashifmd400.workers.dev";
+
 // --- GLOBALS & AUTH ---
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
 let currentLang = 'hi';
 let storyTimer;
 let map, marker;
-let userLat = 28.6139; // Default Delhi (India Gate)
+let userLat = 28.6139; // Default Delhi
 let userLng = 77.2090;
 let isLocationTracked = false;
+
+let shopsData = [];
+let storiesData = [];
 
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
@@ -626,35 +632,26 @@ function showToast(message, type = 'success') {
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => { toast.remove(); }, 300); }, 3000);
 }
 
-// --- 🗺️ 10 KM RADIUS MATHS (HAVERSINE FORMULA) 🗺️ ---
 function getDistance(lat1, lon1, lat2, lon2) {
-    var R = 6371; // Radius of the earth in km
+    var R = 6371; 
     var dLat = (lat2 - lat1) * Math.PI / 180;
     var dLon = (lon2 - lon1) * Math.PI / 180; 
-    var a = 
-        Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-        Math.sin(dLon/2) * Math.sin(dLon/2); 
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2); 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    var d = R * c; // Distance in km
-    return d;
+    return R * c; 
 }
 
-// --- 📍 DETECT USER GPS LOCATION 📍 ---
 function detectUserLocation() {
     showToast(t("GPS से आपकी लोकेशन ट्रैक की जा रही है...", "Detecting via GPS..."));
-    
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             userLat = position.coords.latitude;
             userLng = position.coords.longitude;
             isLocationTracked = true;
-            
             document.getElementById('locTextHi').innerText = "आपका क्षेत्र (10 KM दायरा)";
             document.getElementById('locTextEn').innerText = "Your Area (10 KM Radius)";
-            showToast(t("लोकेशन सेट हो गई! अब आपको 10KM के अंदर की दुकानें दिखेंगी।", "Location set! Showing shops within 10KM."));
-            
-            renderShops(); // Refresh list based on new GPS
+            showToast(t("लोकेशन सेट हो गई!", "Location set!"));
+            renderShops(); 
             renderOnlineShops();
         }, function(error) {
             showToast(t("GPS लोकेशन नहीं मिल पाई।", "Could not get GPS location."), "error");
@@ -664,41 +661,28 @@ function detectUserLocation() {
     }
 }
 
-// --- 🗺️ LEAFLET MAP PICKER (ADD SHOP) 🗺️ ---
 let pickedLat = 0, pickedLng = 0;
 
 function openRealMapPicker() {
     document.getElementById('realMapModal').classList.remove('hidden');
-    
-    // Initialize map only once
     if(!map) {
-        // Use user's tracked location if available, else Delhi
         map = L.map('map').setView([userLat, userLng], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-        
-        // Add draggable marker
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
         marker = L.marker([userLat, userLng], {draggable: true}).addTo(map);
-        
         marker.on('dragend', function(event){
             var position = marker.getLatLng();
             pickedLat = position.lat;
             pickedLng = position.lng;
         });
     } else {
-        map.invalidateSize(); // Fixes map rendering issues in modals
+        map.invalidateSize(); 
         map.setView([userLat, userLng], 13);
         marker.setLatLng([userLat, userLng]);
     }
-    
-    pickedLat = userLat;
-    pickedLng = userLng;
+    pickedLat = userLat; pickedLng = userLng;
 }
 
-function closeRealMap() {
-    document.getElementById('realMapModal').classList.add('hidden');
-}
+function closeRealMap() { document.getElementById('realMapModal').classList.add('hidden'); }
 
 function confirmMapLocation() {
     let latStr = pickedLat.toFixed(4);
@@ -708,16 +692,9 @@ function confirmMapLocation() {
     showToast(t("लोकेशन सफलतापूर्वक सेव कर ली गई!", "Location saved successfully!"));
 }
 
-// --- 📸 STORY LOGIC 📸 ---
-let storiesData = [
-    { id: 101, icon: '🛒', name: 'General Store', badge: 'दिवाली स्पेशल छूट!', desc: 'आज सभी किराने के सामान पर 20% की छूट। तुरंत विजिट करें।', time: Date.now() - 3600000 },
-    { id: 102, icon: '👗', name: 'Saree Center', badge: 'नई कलेक्शन!', desc: 'लेटेस्ट डिज़ाइनर साड़ियाँ आ गई हैं। आज ही आएं।', time: Date.now() - 7200000 },
-    { id: 103, icon: '🏥', name: 'City Hospital', badge: 'फ्री चेकअप', desc: 'आज सुबह 10 बजे से फ्री ब्लड प्रेशर चेकअप।', time: Date.now() - 14400000 }
-];
-
 function getActiveStories() {
     let now = Date.now();
-    return storiesData.filter(st => (now - st.time) <= 86400000); // 24 hours
+    return storiesData.filter(st => (now - st.time) <= 86400000); 
 }
 
 function renderStories() {
@@ -764,7 +741,6 @@ function renderProfileStories() {
                         <div style="font-size:10px; color:var(--accent);">${t('24 घंटे में हट जाएगी', 'Auto-delete in 24h')}</div>
                     </div>
                 </div>
-                <button style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.2); padding:6px 10px; border-radius:8px; font-weight:800; font-size:11px;" onclick="deleteMyStory(${st.id})">🗑️ ${t('हटाएँ', 'Delete')}</button>
             </div>`;
         });
         document.getElementById('myActiveStoryArea').innerHTML = html;
@@ -774,7 +750,7 @@ function renderProfileStories() {
     }
 }
 
-function submitStory() {
+async function submitStory() {
     let icon = document.getElementById('storyCat').value;
     let badge = document.getElementById('storyTitle').value;
     let desc = document.getElementById('storyDesc').value;
@@ -782,23 +758,26 @@ function submitStory() {
     
     if(!badge || !desc) { showToast(t("कृपया हेडिंग और विवरण ज़रूर भरें!", "Please fill all fields!"), "error"); return; }
     
-    storiesData.unshift({ id: Date.now(), icon: icon, name: name, badge: badge, desc: desc, time: Date.now() });
-    
-    document.getElementById('addStoryModal').classList.add('hidden');
-    document.getElementById('storyTitle').value = '';
-    document.getElementById('storyDesc').value = '';
-    
-    showToast(t("आपका Offer (Story) लाइव हो गया है!", "Your Story is now Live!"));
-    renderStories();
-    if(!document.getElementById('profile').classList.contains('hidden')) { renderProfileStories(); } else { goHome(); }
-}
+    let storyObj = {
+        userName: name,
+        userPhone: currentUser ? currentUser.phone : "",
+        badgeTitle: badge,
+        description: desc,
+        icon: icon
+    };
 
-function deleteMyStory(id) {
-    if(confirm(t("क्या आप वाकई इस Story को डिलीट करना चाहते हैं?", "Are you sure you want to delete this story?"))) {
-        storiesData = storiesData.filter(st => st.id !== id);
-        renderStories();
-        renderProfileStories();
-        showToast(t("Story डिलीट कर दी गई है।", "Story deleted successfully."));
+    try {
+        showToast("सेव हो रहा है...", "success");
+        await fetch(API_URL + "/stories", { method: 'POST', body: JSON.stringify(storyObj), headers: {'Content-Type': 'application/json'} });
+        
+        document.getElementById('addStoryModal').classList.add('hidden');
+        document.getElementById('storyTitle').value = '';
+        document.getElementById('storyDesc').value = '';
+        
+        showToast(t("आपका Offer लाइव हो गया है!", "Story Live!"));
+        await fetchRealData();
+    } catch(err) {
+        showToast("डेटाबेस एरर!", "error");
     }
 }
 
@@ -831,14 +810,6 @@ function closeStory() {
     document.getElementById('storyViewer').classList.add('hidden');
 }
 
-// --- 🏬 DATABASE MOCKUP WITH LAT / LNG 🏬 ---
-// Delhi Default Coordinates: 28.6139, 77.2090
-let shopsData = [
-    { id: 1, type: "बाज़ार", name: "General Store", catHi: "किराना", catEn: "Grocery", locText: "कनॉट प्लेस, नई दिल्ली", lat: 28.6200, lng: 77.2150, icon: "🛒", isOpen: true },
-    { id: 2, type: "रोज़गार", name: "Ramesh Builder", catHi: "राजमिस्त्री", catEn: "Labor", locText: "करोल बाग़, नई दिल्ली", lat: 28.6500, lng: 77.2000, icon: "👷", isOpen: false, isHiring: true },
-    { id: 3, type: "सेवाएं", name: "Sharma Plumbing", catHi: "प्लंबर", catEn: "Plumber", locText: "नोएडा, उत्तर प्रदेश", lat: 28.5355, lng: 77.3910, icon: "🛠️", isOpen: true } // Noida is ~20km away (Will hide on 10km filter)
-];
-
 let currentFilter = 'बाज़ार'; 
 let currentOnlineFilter = 'बाज़ार';
 
@@ -853,15 +824,10 @@ function renderShops() {
         let matchCat = (s.type === currentFilter);
         let dist = getDistance(userLat, userLng, s.lat, s.lng);
         s.calculatedDist = dist; 
-        
-        // 🛑 10 KM RADIUS LOGIC 🛑
-        // If location is tracked, only show shops within 10 km.
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
-        
         return matchCat && matchDist;
     });
     
-    // Sort by nearest first
     filtered.sort((a,b) => a.calculatedDist - b.calculatedDist);
 
     if(filtered.length === 0) { html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('10 KM के अंदर कोई जानकारी नहीं मिली।','No info found within 10 KM.')}</div>`; }
@@ -886,7 +852,7 @@ function renderShops() {
         let safeName = shop.name.replace(/'/g, "\\'");
         let safeCat = shopCat.replace(/'/g, "\\'");
         let safeLoc = shop.locText.replace(/'/g, "\\'");
-        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring})`;
+        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
         <div class="shop-card" onclick="${onclickData}">
@@ -929,7 +895,7 @@ function renderOnlineShops() {
         let safeName = shop.name.replace(/'/g, "\\'");
         let safeCat = shopCat.replace(/'/g, "\\'");
         let safeLoc = shop.locText.replace(/'/g, "\\'");
-        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring})`;
+        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
         <div class="shop-card" onclick="${onclickData}">
@@ -1018,18 +984,17 @@ function showTab(tabId) {
     
     let backBtn = document.getElementById('backBtn');
     if(tabId === 'home') { backBtn.style.display = 'none'; } else { backBtn.style.display = 'block'; }
-    
-    if(tabId === 'bazaar') { renderShops(); } else if(tabId === 'onlineTab') { renderOnlineShops(); }
     window.scrollTo(0,0);
 }
 
 function goHome() { showTab('home'); }
 
-function submitShop() {
+async function submitShop() {
     let mainCat = document.getElementById('addMainCat').value;
     let subCat = document.getElementById('addSubCat').value;
     let name = document.getElementById('addName').value;
     let locRaw = document.getElementById('addLoc').value;
+    let cPhone = document.getElementById('addPhone').value;
     
     if(!mainCat || !subCat || !name || !locRaw) { showToast(t("कृपया सभी ज़रूरी (*) जानकारी भरें!", "Please fill all required (*) fields!"), "error"); return; }
     
@@ -1037,12 +1002,33 @@ function submitShop() {
     if(mainCat === 'रोज़गार') { isHiring = document.querySelector('input[name="jobType"]:checked').value === 'hiring'; }
     let icon = mainCat === "बाज़ार" ? "🏬" : (mainCat === "सेवाएं" ? "🛠️" : (mainCat === "रोज़गार" ? "💼" : (mainCat === "स्वास्थ्य" ? "🏥" : (mainCat === "खाना" ? "🍴" : "🎓"))));
     
-    let newShop = { id: Date.now(), type: mainCat, name: name, catHi: subCat, catEn: subCat, locText: "नई लोकेशन (New Loc)", lat: pickedLat, lng: pickedLng, icon: icon, isOpen: true, isHiring: isHiring };
-    shopsData.unshift(newShop);
-    
-    showToast(t("आपकी जानकारी सफलतापुर्वक रजिस्टर हो गई!", "Successfully registered!"));
-    document.getElementById('addName').value = ''; document.getElementById('addLoc').value = '';
-    openCategory(mainCat);
+    let shopObj = {
+        userName: currentUser ? currentUser.name : name,
+        userPhone: currentUser ? currentUser.phone : cPhone,
+        shopName: name,
+        locationText: locRaw,
+        mainType: mainCat,
+        subTypeHi: subCat,
+        subTypeEn: subCat,
+        lat: pickedLat,
+        lng: pickedLng,
+        icon: icon,
+        isOpen: true,
+        isHiring: isHiring,
+        contactPhone: cPhone
+    };
+
+    try {
+        showToast("सेव हो रहा है...", "success");
+        await fetch(API_URL + "/shops", { method: 'POST', body: JSON.stringify(shopObj), headers: {'Content-Type': 'application/json'} });
+        
+        showToast(t("आपकी जानकारी सफलतापुर्वक रजिस्टर हो गई!", "Successfully registered!"));
+        document.getElementById('addName').value = ''; document.getElementById('addLoc').value = '';
+        await fetchRealData();
+        openCategory(mainCat);
+    } catch(err) {
+        showToast("डेटाबेस एरर!", "error");
+    }
 }
 
 function toggleShopStatus(checkbox) {
@@ -1052,16 +1038,14 @@ function toggleShopStatus(checkbox) {
     if(isNowOpen) {
         textEl.innerHTML = t("ON (चालू है)", "ON (Active)");
         textEl.style.color = "var(--accent)";
-        showToast(t('डेटाबेस अपडेट: जानकारी ऑनलाइन है।', 'Database updated: Info is online.'));
+        showToast(t('स्टेटस अपडेट हो गया।', 'Status updated.'));
     } else {
         textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
         textEl.style.color = "#f87171";
-        showToast(t('डेटाबेस अपडेट: जानकारी बंद है।', 'Database updated: Info is offline.'), 'error');
+        showToast(t('स्टेटस अपडेट हो गया।', 'Status updated.'), 'error');
     }
     
-    if(shopsData.length > 0) shopsData[0].isOpen = isNowOpen; 
-    renderShops(); 
-    renderOnlineShops();
+    // In future: Add fetch API call to update status on Cloudflare here
 }
 
 function updateSubCats() {
@@ -1097,7 +1081,7 @@ function setJobType(type) {
     }
 }
 
-function openShopModal(name, cat, isOpen, loc, icon, type, isHiring) {
+function openShopModal(name, cat, isOpen, loc, icon, type, isHiring, phone) {
     document.getElementById('mShopName').textContent = name;
     document.getElementById('mShopCat').textContent = cat;
     document.getElementById('mShopLoc').textContent = loc;
@@ -1162,14 +1146,56 @@ function askAI(type) {
     }, 600);
 }
 
-window.onload = () => { 
+// 🟢 CLOUDFLARE DATABASE FETCHING FUNCTION 🟢
+async function fetchRealData() {
+    try {
+        let shopRes = await fetch(API_URL + "/shops");
+        let sData = await shopRes.json();
+        shopsData = sData.map(s => ({
+            id: s.id || Date.now(),
+            type: s.mainType || "बाज़ार",
+            name: s.shopName || s.userName,
+            catHi: s.subTypeHi || "अन्य",
+            catEn: s.subTypeEn || "Other",
+            locText: s.locationText || "Address",
+            lat: s.lat || 28.6139,
+            lng: s.lng || 77.2090,
+            icon: s.icon || "🏬",
+            isOpen: s.isOpen === undefined ? true : s.isOpen,
+            isHiring: s.isHiring || false,
+            phone: s.contactPhone || s.userPhone || ""
+        }));
+
+        let storyRes = await fetch(API_URL + "/stories");
+        let stData = await storyRes.json();
+        storiesData = stData.map(st => ({
+            id: st.id || Date.now(),
+            icon: st.icon || "🔥",
+            name: st.userName || "Shop",
+            badge: st.badgeTitle || "Offer",
+            desc: st.description || "",
+            time: Date.now() 
+        }));
+
+        renderShops();
+        renderOnlineShops();
+        renderStories();
+        if(currentUser && !document.getElementById('profile').classList.contains('hidden')) { renderProfileStories(); }
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+
+window.onload = async () => { 
     document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
     document.body.className = 'lang-' + currentLang;
     setFilter('बाज़ार'); 
     setOnlineFilter('बाज़ार');
-    renderStories();
     document.getElementById('backBtn').style.display = 'none'; 
+    
+    // Load Live Data on Start
+    await fetchRealData();
 };
 </script>
 </body>
-</html>
+              </html>
