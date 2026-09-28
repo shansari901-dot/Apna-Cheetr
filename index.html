@@ -215,7 +215,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 <main>
     <!-- 🏠 1. HOME SECTION -->
     <section id="home">
-        <div class="search-box" onclick="showTab('bazaar')">
+        <div class="search-box" onclick="switchTab('bazaar')">
             <span>🔍</span>
             <input type="text" class="lang-input" data-hi="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." data-en="Search shop, service, person..." placeholder="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." readonly>
         </div>
@@ -223,9 +223,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         <!-- 📸 STORIES / OFFERS SECTION 📸 -->
         <div id="storySectionWrap">
             <div class="section-title" style="margin-bottom: 10px;"><span class="hi">🔥 आज के Offers (Stories)</span><span class="en">🔥 Today's Offers</span></div>
-            <div class="story-container" id="liveStoryContainer">
-                <!-- Stories injected here -->
-            </div>
+            <div class="story-container" id="liveStoryContainer"></div>
         </div>
 
         <div class="section-title"><span class="hi">मुख्य Categories</span><span class="en">Main Categories</span></div>
@@ -446,8 +444,8 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                     <div style="display:flex; align-items:center; gap:8px;">
                         <span id="switchText" style="font-size:11px; font-weight:800; color: var(--accent);"><span class="hi">ON (चालू है)</span></span>
                         <label class="switch">
-                          <!-- FIXED: Status now saves in LocalStorage properly -->
-                          <input type="checkbox" id="liveSwitch" onchange="toggleShopStatus(this)">
+                          <!-- FIXED: Status accurately controls store open/closed state -->
+                          <input type="checkbox" id="liveSwitch" checked onchange="toggleShopStatus(this)">
                           <span class="slider"></span>
                         </label>
                     </div>
@@ -621,9 +619,7 @@ let userLat = 28.6139;
 let userLng = 77.2090;
 let isLocationTracked = false;
 
-// FIXED: Remember active tab/page using LocalStorage so refresh doesn't jump to Home
 let activeTab = localStorage.getItem('ac_current_tab') || 'home';
-
 let shopsData = [];
 let storiesData = [];
 
@@ -968,7 +964,7 @@ function renderShops() {
             let jobTag = shop.isHiring ? (currentLang==='hi'?" (वर्कर चाहिए)":" (Hiring)") : (currentLang==='hi'?" (काम चाहिए)":" (Seeking Work)");
             shopCat += jobTag;
             if(shop.isHiring) { statusText = shop.isOpen ? t('🟢 अर्जेंट ज़रूरत', '🟢 Urgent Need') : t('🔴 फुल हो गया', '🔴 Filled'); } 
-            else { statusText = shop.isOpen ? t('🟢 काम के लिए खाली', '🟢 Available') : t('🔴 काम मिल गया', '🔴 Hired'); }
+            else { statusText = shop.isOpen ? t('🟢 काम के लिए खाली', '🟢 Available') : t('🔴 काम मिल गया', '🟢 Hired'); }
         } else {
             statusText = shop.isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🔴 Closed');
         }
@@ -998,6 +994,7 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
+// FIXED: Online filter now checks if currentUser owns the shop and respects live switch state
 function renderOnlineShops() {
     let html = "";
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1006,7 +1003,17 @@ function renderOnlineShops() {
         let dist = getDistance(userLat, userLng, s.lat, s.lng);
         s.calculatedDist = dist;
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
-        let isOpenCheck = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1);
+        
+        // If current logged-in user is the owner of this shop, use local toggle state
+        let shopIsOpen = s.isOpen;
+        if(currentUser && s.phone === currentUser.phone) {
+            let localSwitchState = localStorage.getItem('shop_status_open');
+            if(localSwitchState !== null) {
+                shopIsOpen = (localSwitchState === 'true');
+            }
+        }
+
+        let isOpenCheck = (shopIsOpen === true || shopIsOpen === "true" || shopIsOpen === 1);
         return s.type === currentOnlineFilter && isOpenCheck && matchDist;
     });
     
@@ -1103,7 +1110,6 @@ function logout() {
     switchTab('home');
 }
 
-// FIXED: Tab switching function that remembers state
 function switchTab(tabId) {
     if((tabId === 'addShop' || tabId === 'profile') && !currentUser) { tabId = 'auth'; }
     
@@ -1137,11 +1143,7 @@ function switchTab(tabId) {
     window.scrollTo(0,0);
 }
 
-// Alias for old code compatibility
-function showTab(tabId) {
-    switchTab(tabId);
-}
-
+function showTab(tabId) { switchTab(tabId); }
 function goHome() { switchTab('home'); }
 
 async function submitShop() {
@@ -1186,7 +1188,6 @@ async function submitShop() {
     }
 }
 
-// FIXED: Status Toggle saves state in LocalStorage so it doesn't auto-revert to ON
 function toggleShopStatus(checkbox) {
     let textEl = document.getElementById('switchText');
     let isNowOpen = checkbox.checked;
@@ -1400,13 +1401,9 @@ window.onload = async () => {
     setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
     
-    // Load Live Data on Start
     await fetchRealData();
-
-    // FIXED: Restore last active tab so refresh stays on the same page instead of jumping to Home
     switchTab(activeTab);
 
-    // Restore saved switch status if any
     let savedStatus = localStorage.getItem('shop_status_open');
     if(savedStatus !== null) {
         let isTrue = (savedStatus === 'true');
@@ -1421,6 +1418,7 @@ window.onload = async () => {
                 textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
                 textEl.style.color = "#f87171";
             }
+            if(shopsData.length > 0) shopsData[0].isOpen = isTrue;
         }
     }
 
