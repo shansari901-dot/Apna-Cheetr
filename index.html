@@ -650,7 +650,8 @@ function getDistance(lat1, lon1, lat2, lon2) {
 }
 
 function detectUserLocation() {
-    showToast(t("GPS से आपकी लोकेशन ट्रैक की जा रही है...", "Detecting via GPS..."));
+    if(isLocationTracked) return;
+    showToast(t("GPS से आपकी लोकेशन सेट हो रही है...", "Detecting via GPS..."));
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             userLat = position.coords.latitude;
@@ -662,7 +663,7 @@ function detectUserLocation() {
             renderShops(); 
             renderOnlineShops();
         }, function(error) {
-            showToast(t("GPS लोकेशन नहीं मिल पाई।", "Could not get GPS location."), "error");
+            showToast(t("GPS लोकेशन चालू करें।", "Please enable GPS."), "error");
         });
     } else {
         showToast("Geolocation is not supported by this browser.", "error");
@@ -1177,15 +1178,15 @@ function askAI(type) {
         a = t("यह ऐप आपके इलाके (लोकल एरिया) की दुकानों, ज़रूरी सेवाओं और रोज़गार की जानकारी एक जगह लाने के लिए बनाया गया है, ताकि आपको आस-पास की चीज़ें ढूँढने में कोई परेशानी न हो।", "This app is built to bring all local shops, services, and job info to one place, making it easy for you to find things nearby.");
     }
     else if(type === 'how_works') {
-        q = t("⚙️ यह ऐप कैसे काम करता है?", "⚙️ How does this app work?");
-        a = t("आप ऐप में 10KM के दायरे में खुली हुई दुकानें और उनके नए ऑफर देख सकते हैं। अगर आपकी अपनी कोई दुकान या सर्विस है, तो आप '➕ जोड़ें' बटन दबाकर उसे फ्री में यहाँ लिस्ट कर सकते हैं और ग्राहकों तक पहुँच सकते हैं।", "You can see open shops and offers within a 10KM radius. If you have a business, you can list it for free using the '➕ Add' button to reach local customers.");
+        q = t("⚙️ यह कैसे काम करता है?", "⚙️ How does this app work?");
+        a = t("आप ऐप में 10KM के दायरे में खुली हुई दुकानें और उनके नए ऑफर देख सकते हैं। अगर आपकी अपनी कोई दुकान या सर्विस है, तो आप '➕ जोड़ें' बटन दबाकर उसे फ्री में यहाँ लिस्ट कर सकते हैं।", "You can see open shops and offers within a 10KM radius. If you have a business, you can list it for free using the '➕ Add' button.");
     }
     else if(type === 'add') { 
-        q = t("➕ अपनी जानकारी कैसे जोड़ें?", "➕ How to add info?"); 
+        q = t("➕ अपनी दुकान कैसे जोड़ें?", "➕ How to add info?"); 
         a = t("नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना मोबाइल नंबर और नाम डालकर लॉगिन करें, फिर अपनी दुकान या काम की डिटेल भरकर सेव कर दें।", "Click the '➕ Add' button below. Login with your name & number, then fill your shop/job details and save."); 
     } 
     else if(type === 'free') { 
-        q = t("💰 क्या यह फ्री है?", "💰 Is it free?"); 
+        q = t("💰 क्या यह ऐप फ्री है?", "💰 Is it free?"); 
         a = t("जी हाँ! यह ऐप ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है। अपनी दुकान लिस्ट करने का कोई पैसा नहीं लगता।", "Yes! It is 100% Free for both customers and shopkeepers. No charges to list your business."); 
     } 
     else if(type === 'status') { 
@@ -1280,23 +1281,16 @@ window.onload = async () => {
     setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
     
-    // Load Live Data on Start
+    // 1. Data load hoga
     await fetchRealData();
 
-    // App khulte hi automatic location maangne ke liye code:
+    // 2. App khulne ke theek dedh (1.5) second baad automatic location permission maangega
     setTimeout(() => {
-        detectUserLocation();
-    }, 1500); // App khulne ke 1.5 second baad permission maangega
-};
-    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
-    document.body.className = 'lang-' + currentLang;
-    setFilter('बाज़ार'); 
-    setOnlineFilter('बाज़ार');
-    document.getElementById('backBtn').style.display = 'none'; 
-    
-    // Load Live Data on Start
-    await fetchRealData();
+        if(!isLocationTracked) {
+            detectUserLocation();
+        }
+    }, 1500);
 };
 </script>
 </body>
-</html>
+                                                                                       </html>
