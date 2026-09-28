@@ -400,7 +400,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
-            <!-- 🔥 UPDATED MAP PICKER & EDITABLE ADDRESS FIELD 🔥 -->
+            <!-- 🔥 MAP PICKER & ADDRESS FIELD -->
             <div class="field">
                 <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
                 <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openRealMapPicker()">
@@ -408,12 +408,11 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </button>
                 <div class="input-wrap" style="align-items: flex-start; padding-top:10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(16, 185, 129, 0.3);">
                     <span style="margin-top:2px;">🏠</span>
-                    <!-- User can easily click and edit this text -->
                     <textarea rows="3" id="addLoc" style="color:var(--accent); font-weight:700; font-size:13px; padding-top:0;" placeholder="मैप से पता यहाँ आएगा... (आप इसे खुद भी टाइप कर सकते हैं)"></textarea>
                     <span style="font-size:16px; margin-top:2px; opacity:0.8; cursor:pointer;" onclick="document.getElementById('addLoc').focus()" title="Edit Address">✏️</span>
                 </div>
                 <p style="font-size: 11px; color: #fbbf24; margin-top: 6px; font-weight:600; line-height:1.3;">
-                    ⚠️ अगर मैप ने गली या पिनकोड थोड़ा गलत बताया है, तो बॉक्स में क्लिक करके उसे <span style="text-decoration:underline;">खुद मिटाकर सही कर लें</span>।
+                    ⚠️ अगर मैप ने नाम गलत बताया है, तो बॉक्स में क्लिक करके उसे <span style="text-decoration:underline;">खुद टाइप करके सही कर लें</span>।
                 </p>
             </div>
 
@@ -641,14 +640,20 @@ function toggleLang() {
     if(!document.getElementById('profile').classList.contains('hidden')) renderProfileStories();
 }
 
+// UPDATE: SINGLE TOAST CONTROLLER (Fixes overlapping multiple warning toasts)
 function showToast(message, type = 'success') {
     const toastBox = document.getElementById('toastBox');
+    toastBox.innerHTML = ""; // Clear old stacked messages
+    
     const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
+    toast.className = `toast ${type} show`;
     toast.innerHTML = type === 'error' ? `⚠️ ${message}` : `✅ ${message}`;
     toastBox.appendChild(toast);
-    setTimeout(() => { toast.classList.add('show'); }, 10);
-    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => { toast.remove(); }, 300); }, 3000);
+    
+    setTimeout(() => { 
+        toast.classList.remove('show'); 
+        setTimeout(() => { toast.remove(); }, 300); 
+    }, 3000);
 }
 
 function getDistance(lat1, lon1, lat2, lon2) {
@@ -1381,10 +1386,10 @@ window.onload = async () => {
     // 2. App khulne ke theek dedh (1.5) second baad SILENT location permission maangega
     setTimeout(() => {
         if(!isLocationTracked) {
-            detectUserLocation(true); // 'true' means SILENT (No Toast)
+            detectUserLocation(true); 
         }
     }, 1500);
 };
 </script>
 </body>
-                  </html>
+</html>
