@@ -347,7 +347,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </div>
             </div>
             
-            <!-- BUTTON CHANGED HERE FOR CLARITY -->
             <button class="btn" onclick="doAuth()">✅ <span class="hi">लॉगिन / नया अकाउंट बनाएँ</span><span class="en">Login / Create Account</span></button>
             <p style="text-align:center; margin-top:20px; font-size:12px; color:var(--text-muted); font-weight:600;"><span class="hi">कस्टमर बिना लॉगिन के भी ऐप चला सकते हैं।</span><span class="en">Customers can use the app without login.</span></p>
         </div>
@@ -571,7 +570,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- 🤖 AI ASSISTANT MODAL -->
+<!-- 🤖 AI ASSISTANT MODAL (UPDATED WITH ALL QUESTIONS) -->
 <div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeAiModal(event)">
   <div class="ai-box" id="aiBoxContent">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -579,14 +578,22 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
        <div style="font-size: 24px; cursor: pointer; color: #ef4444; line-height:1;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
     </div>
     <div class="chat-area" id="aiChat">
-       <div class="msg-b m-ai"><span class="hi">नमस्ते! मैं आपका AI गाइड हूँ। आप नीचे दिए गए सवालों में से चुन सकते हैं। 👇</span><span class="en">Hello! I am your AI Guide. Choose from FAQs below. 👇</span></div>
+       <div class="msg-b m-ai"><span class="hi">नमस्ते! मैं आपका AI गाइड हूँ। आप नीचे दिए गए किसी भी सवाल पर क्लिक करके जवाब जान सकते हैं। 👇</span><span class="en">Hello! I am your AI Guide. Click on any question below to get answers. 👇</span></div>
     </div>
     <div class="ai-opts">
-       <button class="ai-btn" onclick="askAI('add')">➕ <span class="hi">जानकारी कैसे जोड़ें?</span><span class="en">Add Info?</span></button>
-       <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह फ्री है?</span><span class="en">Is it Free?</span></button>
-       <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस कैसे बदलें?</span><span class="en">Toggle ON/OFF</span></button>
-       <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span><span class="en">Why Login?</span></button>
-       <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Story कैसे लगाएँ?</span><span class="en">Add Story?</span></button>
+       <button class="ai-btn" onclick="askAI('why_built')">🎯 <span class="hi">यह ऐप क्यों बनाया गया है?</span></button>
+       <button class="ai-btn" onclick="askAI('how_works')">⚙️ <span class="hi">यह कैसे काम करता है?</span></button>
+       <button class="ai-btn" onclick="askAI('add')">➕ <span class="hi">अपनी दुकान कैसे जोड़ें?</span></button>
+       <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह ऐप फ्री है?</span></button>
+       <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस चालू/बंद कैसे करें?</span></button>
+       <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span></button>
+       <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Offer (Story) कैसे लगाएँ?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_bazaar')">🛒 <span class="hi">'बाज़ार' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_health')">🏥 <span class="hi">'स्वास्थ्य' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_jobs')">💼 <span class="hi">'रोज़गार' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_edu')">🎓 <span class="hi">'शिक्षा' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_food')">🍴 <span class="hi">'खाना' केटेगरी में क्या है?</span></button>
     </div>
   </div>
 </div>
@@ -1160,28 +1167,62 @@ function closeAiModal(e) {
     }
 }
 
+// 🤖 UPDATED AI BOT FUNCTION WITH ALL CATEGORIES & DETAILS 🤖
 function askAI(type) {
     const chat = document.getElementById('aiChat');
     let q = "", a = "";
-    if(type === 'add') { 
-        q = t("➕ जानकारी कैसे जोड़ें?", "➕ How to add info?"); 
-        a = t("नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना नंबर और पासवर्ड से लॉगिन करके दुकान या जॉब रजिस्टर करें।", "Click '➕ Add' below. Login with your number & password to register shop or job."); 
+    
+    if(type === 'why_built') {
+        q = t("🎯 यह ऐप क्यों बनाया गया है?", "🎯 Why was this app built?");
+        a = t("यह ऐप आपके इलाके (लोकल एरिया) की दुकानों, ज़रूरी सेवाओं और रोज़गार की जानकारी एक जगह लाने के लिए बनाया गया है, ताकि आपको आस-पास की चीज़ें ढूँढने में कोई परेशानी न हो।", "This app is built to bring all local shops, services, and job info to one place, making it easy for you to find things nearby.");
+    }
+    else if(type === 'how_works') {
+        q = t("⚙️ यह ऐप कैसे काम करता है?", "⚙️ How does this app work?");
+        a = t("आप ऐप में 10KM के दायरे में खुली हुई दुकानें और उनके नए ऑफर देख सकते हैं। अगर आपकी अपनी कोई दुकान या सर्विस है, तो आप '➕ जोड़ें' बटन दबाकर उसे फ्री में यहाँ लिस्ट कर सकते हैं और ग्राहकों तक पहुँच सकते हैं।", "You can see open shops and offers within a 10KM radius. If you have a business, you can list it for free using the '➕ Add' button to reach local customers.");
+    }
+    else if(type === 'add') { 
+        q = t("➕ अपनी जानकारी कैसे जोड़ें?", "➕ How to add info?"); 
+        a = t("नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना मोबाइल नंबर और नाम डालकर लॉगिन करें, फिर अपनी दुकान या काम की डिटेल भरकर सेव कर दें।", "Click the '➕ Add' button below. Login with your name & number, then fill your shop/job details and save."); 
     } 
     else if(type === 'free') { 
         q = t("💰 क्या यह फ्री है?", "💰 Is it free?"); 
-        a = t("जी हाँ! यह ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है।", "Yes! It is 100% Free for both customers and shopkeepers."); 
+        a = t("जी हाँ! यह ऐप ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है। अपनी दुकान लिस्ट करने का कोई पैसा नहीं लगता।", "Yes! It is 100% Free for both customers and shopkeepers. No charges to list your business."); 
     } 
     else if(type === 'status') { 
-        q = t("🎚️ स्टेटस कैसे बदलें?", "🎚️ How to toggle status?"); 
-        a = t("'👤 प्रोफाइल' में जाएं। वहां ON/OFF स्विच है। दुकान खोलने पर ON करें ताकि लोग लाइव देख सकें।", "Go to '👤 Profile'. Use the ON/OFF switch there so people can see your live status."); 
+        q = t("🎚️ स्टेटस चालू/बंद कैसे करें?", "🎚️ How to toggle ON/OFF?"); 
+        a = t("नीचे '👤 प्रोफाइल' में जाएं। वहां ON/OFF का बटन (स्विच) है। जब आप काम कर रहे हों तो इसे ON (चालू) रखें ताकि ग्राहक आपको लाइव देख सकें।", "Go to '👤 Profile'. Use the ON/OFF switch there. Keep it ON when you are working so customers can see you live."); 
     }
     else if(type === 'login') { 
         q = t("🔐 लॉगिन क्यों ज़रूरी है?", "🔐 Why login required?"); 
-        a = t("लॉगिन सिर्फ दुकानदारों के लिए ज़रूरी है ताकि कोई दूसरा आपकी दुकान का स्टेटस बंद (OFF) न कर सके।", "Login is only required for shopkeepers to protect their store's ON/OFF status."); 
+        a = t("लॉगिन सिर्फ दुकानदारों के लिए ज़रूरी है ताकि कोई दूसरा व्यक्ति आपकी दुकान की जानकारी से छेड़छाड़ न कर सके।", "Login is required for shopkeepers to securely manage their own store and prevent others from editing it."); 
     }
     else if(type === 'story') { 
-        q = t("🔥 Story (Offer) कैसे लगाएँ?", "🔥 How to post Story?"); 
-        a = t("लॉगिन करके '👤 प्रोफाइल' में जाएं, वहां 'नया Offer डालें' बटन पर क्लिक करें।", "Login and go to '👤 Profile', click on 'Add New Offer' button there."); 
+        q = t("🔥 Offer (Story) कैसे लगाएँ?", "🔥 How to post Story/Offer?"); 
+        a = t("लॉगिन करके '👤 प्रोफाइल' में जाएं, वहां 'नया Offer डालें' बटन पर क्लिक करें। यह ऑफर 24 घंटे तक होम स्क्रीन पर सबको सबसे ऊपर दिखेगा।", "Login and go to '👤 Profile', click on 'Add New Offer'. This will stay at the top of the home screen for 24 hours."); 
+    }
+    else if(type === 'cat_bazaar') {
+        q = t("🛒 'बाज़ार' केटेगरी में क्या है?", "🛒 What's in 'Shops' category?");
+        a = t("इसमें आपको आस-पास के किराने की दुकान (General Store), सब्ज़ी वाले, कपड़े की दुकान (Saree/Clothes), और इलेक्ट्रॉनिक्स की दुकानों की जानकारी मिलेगी।", "Here you will find nearby Grocery stores, Vegetable vendors, Clothing, and Electronics shops.");
+    }
+    else if(type === 'cat_services') {
+        q = t("🛠️ 'सेवाएं' केटेगरी में क्या है?", "🛠️ What's in 'Services' category?");
+        a = t("इसमें आपको प्लंबर, इलेक्ट्रीशियन, मैकेनिक, और बढ़ई (Carpenter) आदि जैसी हर घर की ज़रूरी सेवाओं के नंबर और पते मिलेंगे।", "This section provides contacts for daily essential services like Plumbers, Electricians, Mechanics, and Carpenters.");
+    }
+    else if(type === 'cat_health') {
+        q = t("🏥 'स्वास्थ्य' केटेगरी में क्या है?", "🏥 What's in 'Health' category?");
+        a = t("यहाँ से आप अपने नज़दीकी अस्पताल, क्लिनिक, डॉक्टर और मेडिकल स्टोर की जानकारी और लोकेशन ढूँढ सकते हैं।", "Find information and locations of your nearest Hospitals, Clinics, Doctors, and Medical Stores here.");
+    }
+    else if(type === 'cat_jobs') {
+        q = t("💼 'रोज़गार' केटेगरी में क्या है?", "💼 What's in 'Jobs' category?");
+        a = t("अगर आपको काम की तलाश है (जैसे मज़दूरी, ड्राइविंग), या आपको अपने काम के लिए कोई वर्कर/हेल्पर चाहिए, तो आप इस केटेगरी का इस्तेमाल कर सकते हैं।", "If you are looking for work (e.g., Labor, Driving) or need a worker/helper for your business, you can use this category.");
+    }
+    else if(type === 'cat_edu') {
+        q = t("🎓 'शिक्षा' केटेगरी में क्या है?", "🎓 What's in 'Education' category?");
+        a = t("इसमें आपको इलाके के अच्छे स्कूल, कॉलेज, कंप्यूटर सेंटर और कोचिंग क्लासेस की पूरी जानकारी मिलेगी।", "Find complete information about good Schools, Colleges, Computer Centers, and Coaching Classes in your area.");
+    }
+    else if(type === 'cat_food') {
+        q = t("🍴 'खाना' केटेगरी में क्या है?", "🍴 What's in 'Food' category?");
+        a = t("भूख लगी है? यहाँ आप अपने आस-पास के बढ़िया रेस्टोरेंट, ढाबे, और होटल ढूँढ सकते हैं।", "Hungry? Find the best Restaurants, Dhabas, and Hotels nearby in this section.");
     }
 
     chat.innerHTML += `<div class="msg-b m-user">${q}</div>`;
@@ -1244,4 +1285,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-                  </html>
+</html>
