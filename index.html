@@ -400,16 +400,21 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
-            <!-- MAP PICKER BUTTON & ADDRESS FIELD -->
+            <!-- 🔥 UPDATED MAP PICKER & EDITABLE ADDRESS FIELD 🔥 -->
             <div class="field">
                 <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
                 <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openRealMapPicker()">
                     📍 <span class="hi">मैप पर पिन लगाएँ</span><span class="en">Drop Pin on Map</span>
                 </button>
-                <div class="input-wrap" style="align-items: flex-start; padding-top:10px; background: rgba(0,0,0,0.2);">
+                <div class="input-wrap" style="align-items: flex-start; padding-top:10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(16, 185, 129, 0.3);">
                     <span style="margin-top:2px;">🏠</span>
-                    <textarea rows="3" id="addLoc" style="color:var(--accent); font-weight:700; font-size:12px; padding-top:0;" placeholder="लोकेशन यहाँ अपने आप आ जाएगी... या खुद टाइप करें"></textarea>
+                    <!-- User can easily click and edit this text -->
+                    <textarea rows="3" id="addLoc" style="color:var(--accent); font-weight:700; font-size:13px; padding-top:0;" placeholder="मैप से पता यहाँ आएगा... (आप इसे खुद भी टाइप कर सकते हैं)"></textarea>
+                    <span style="font-size:16px; margin-top:2px; opacity:0.8; cursor:pointer;" onclick="document.getElementById('addLoc').focus()" title="Edit Address">✏️</span>
                 </div>
+                <p style="font-size: 11px; color: #fbbf24; margin-top: 6px; font-weight:600; line-height:1.3;">
+                    ⚠️ अगर मैप ने गली या पिनकोड थोड़ा गलत बताया है, तो बॉक्स में क्लिक करके उसे <span style="text-decoration:underline;">खुद मिटाकर सही कर लें</span>।
+                </p>
             </div>
 
             <div class="field">
@@ -476,13 +481,12 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
   <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
 </nav>
 
-<!-- 🗺️ REAL LEAFLET MAP MODAL (UPDATED WITH SEARCH) 🗺️ -->
+<!-- 🗺️ REAL LEAFLET MAP MODAL (WITH SEARCH) 🗺️ -->
 <div id="realMapModal" class="modal-overlay hidden" style="z-index: 999999999;">
     <div class="bottom-sheet" style="height: 85vh; display: flex; flex-direction: column;">
         <div class="sheet-close" onclick="closeRealMap()"></div>
         <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">📍 <span class="hi">मैप पर अपनी जगह खोजें</span><span class="en">Find Location on Map</span></h2>
         
-        <!-- NEW: SEARCH BAR FOR MAP -->
         <input type="text" id="mapSearchInput" class="map-search-bar" placeholder="🔍 अपनी जगह का नाम लिखें (ex: Lohta, Varanasi)">
         <button class="btn" style="margin-top: 0; margin-bottom: 10px; padding: 8px; background: rgba(59, 130, 246, 0.2); color: #60a5fa;" onclick="searchOnMap()">🔍 Search</button>
 
@@ -705,7 +709,6 @@ function openRealMapPicker() {
 
 function closeRealMap() { document.getElementById('realMapModal').classList.add('hidden'); }
 
-// NEW: SEARCH PLACE ON MAP
 async function searchOnMap() {
     let query = document.getElementById('mapSearchInput').value;
     if(!query) return showToast("कृपया जगह का नाम लिखें", "error");
@@ -718,7 +721,7 @@ async function searchOnMap() {
         if(data && data.length > 0) {
             let nLat = parseFloat(data[0].lat);
             let nLng = parseFloat(data[0].lon);
-            map.setView([nLat, nLng], 16); // zoom in closely
+            map.setView([nLat, nLng], 16); 
             marker.setLatLng([nLat, nLng]);
             pickedLat = nLat;
             pickedLng = nLng;
@@ -731,7 +734,6 @@ async function searchOnMap() {
     }
 }
 
-// UPDATE: CLEAN ADDRESS EXTRACTION (Like BigBasket)
 async function confirmMapLocation() {
     let latStr = pickedLat.toFixed(4);
     let lngStr = pickedLng.toFixed(4);
@@ -746,15 +748,10 @@ async function confirmMapLocation() {
         
         if(data && data.address) {
             let ad = data.address;
-            
-            // Try to find the local area name (Road/Suburb/Village/Neighbourhood)
             let localArea = ad.road || ad.suburb || ad.neighbourhood || ad.village || ad.residential || "";
-            // Find the main city/town
             let city = ad.city || ad.town || ad.county || "";
-            // Pincode
             let pin = ad.postcode || "";
             
-            // Build the clean string
             if(localArea) finalAddress += localArea;
             if(city) { 
                 if(finalAddress) finalAddress += ", " + city; 
@@ -765,7 +762,6 @@ async function confirmMapLocation() {
                 else finalAddress += pin;
             }
             
-            // If it's still empty, use a shortened version of the display_name
             if(!finalAddress && data.display_name) {
                 let parts = data.display_name.split(',');
                 if(parts.length >= 2) finalAddress = parts[0] + ", " + parts[1];
@@ -1379,7 +1375,7 @@ window.onload = async () => {
     setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
     
-    // 1. Data load hoga
+    // Load Live Data on Start
     await fetchRealData();
 
     // 2. App khulne ke theek dedh (1.5) second baad SILENT location permission maangega
@@ -1391,4 +1387,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-                            </html>
+                  </html>
