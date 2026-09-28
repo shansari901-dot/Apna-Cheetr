@@ -446,7 +446,8 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                     <div style="display:flex; align-items:center; gap:8px;">
                         <span id="switchText" style="font-size:11px; font-weight:800; color: var(--accent);"><span class="hi">ON (चालू है)</span></span>
                         <label class="switch">
-                          <input type="checkbox" id="liveSwitch" checked onchange="toggleShopStatus(this)">
+                          <!-- FIXED: Status now saves in LocalStorage properly -->
+                          <input type="checkbox" id="liveSwitch" onchange="toggleShopStatus(this)">
                           <span class="slider"></span>
                         </label>
                     </div>
@@ -470,11 +471,11 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 
 <!-- BOTTOM NAVIGATION -->
 <nav class="bottom-nav">
-  <button id="nav-home" class="active" onclick="showTab('home')"><div class="ico">🏠</div><span class="hi">होम</span><span class="en">Home</span></button>
-  <button id="nav-bazaar" onclick="showTab('bazaar')"><div class="ico">🔍</div><span class="hi">खोजें</span><span class="en">Search</span></button>
-  <button id="nav-addShop" onclick="showTab('addShop')"><div class="ico">➕</div><span class="hi">जोड़ें</span><span class="en">Add</span></button>
-  <button id="nav-onlineTab" onclick="showTab('onlineTab')"><div class="ico">🟢</div><span class="hi">ऑनलाइन</span><span class="en">Online</span></button>
-  <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
+  <button id="nav-home" class="active" onclick="switchTab('home')"><div class="ico">🏠</div><span class="hi">होम</span><span class="en">Home</span></button>
+  <button id="nav-bazaar" onclick="switchTab('bazaar')"><div class="ico">🔍</div><span class="hi">खोजें</span><span class="en">Search</span></button>
+  <button id="nav-addShop" onclick="switchTab('addShop')"><div class="ico">➕</div><span class="hi">जोड़ें</span><span class="en">Add</span></button>
+  <button id="nav-onlineTab" onclick="switchTab('onlineTab')"><div class="ico">🟢</div><span class="hi">ऑनलाइन</span><span class="en">Online</span></button>
+  <button id="nav-profile" onclick="switchTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
 </nav>
 
 <!-- 🗺️ REAL LEAFLET MAP MODAL 🗺️ -->
@@ -596,7 +597,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
        <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span></button>
        <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Offer (Story) कैसे लगाएँ?</span></button>
        <button class="ai-btn" onclick="askAI('cat_bazaar')">🛒 <span class="hi">'बाज़ार' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn, cat_services" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' केटेगरी में क्या है?</span></button>
        <button class="ai-btn" onclick="askAI('cat_health')">🏥 <span class="hi">'स्वास्थ्य' केटेगरी में क्या है?</span></button>
        <button class="ai-btn" onclick="askAI('cat_jobs')">💼 <span class="hi">'रोज़गार' केटेगरी में क्या है?</span></button>
        <button class="ai-btn" onclick="askAI('cat_edu')">🎓 <span class="hi">'शिक्षा' केटेगरी में क्या है?</span></button>
@@ -609,11 +610,9 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-// --- CLOUDFLARE API URL ---
 const API_URL = "https://apna-chetr-dpi.ashifmd400.workers.dev";
 const ADMIN_PHONE = "7318259001"; 
 
-// --- GLOBALS & AUTH ---
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
 let currentLang = 'hi';
 let storyTimer;
@@ -621,6 +620,9 @@ let map, marker;
 let userLat = 28.6139; 
 let userLng = 77.2090;
 let isLocationTracked = false;
+
+// FIXED: Remember active tab/page using LocalStorage so refresh doesn't jump to Home
+let activeTab = localStorage.getItem('ac_current_tab') || 'home';
 
 let shopsData = [];
 let storiesData = [];
@@ -788,7 +790,6 @@ function getActiveStories() {
     return storiesData.filter(st => (now - st.time) <= 86400000); 
 }
 
-// 🗑️ ADMIN DELETE FUNCTIONS 🗑️
 async function deleteAdminShop(id) {
     if(!confirm("ADMIN: Kya aap sach me is dukaan ko delete karna chahte hain?")) return;
     try {
@@ -942,7 +943,6 @@ function getFormattedDist(distKm) {
     return distKm.toFixed(1) + " km";
 }
 
-// UPDATE: FIXED OPEN/ONLINE SHOPS RENDERING BUG
 function renderShops() {
     let html = "";
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1006,8 +1006,6 @@ function renderOnlineShops() {
         let dist = getDistance(userLat, userLng, s.lat, s.lng);
         s.calculatedDist = dist;
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
-        
-        // Strict check: matches category, is within 10km, and isOpen is explicitly true
         let isOpenCheck = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1);
         return s.type === currentOnlineFilter && isOpenCheck && matchDist;
     });
@@ -1069,7 +1067,7 @@ function setOnlineFilter(type, element) {
 }
 
 function openCategory(type) {
-    showTab('bazaar');
+    switchTab('bazaar');
     setFilter(type);
     let chips = document.getElementById('filterContainer').children;
     for(let i=0; i<chips.length; i++) {
@@ -1095,18 +1093,23 @@ function doAuth() {
         showToast(t("सफलतापूर्वक लॉगिन हो गया!", "Login Successful!"));
     }
     
-    showTab('profile'); 
+    switchTab('profile'); 
 }
 
 function logout() {
     currentUser = null;
     localStorage.removeItem('ac_user');
     showToast(t("लॉगआउट हो गया।", "Logged Out."));
-    showTab('home');
+    switchTab('home');
 }
 
-function showTab(tabId) {
+// FIXED: Tab switching function that remembers state
+function switchTab(tabId) {
     if((tabId === 'addShop' || tabId === 'profile') && !currentUser) { tabId = 'auth'; }
+    
+    activeTab = tabId;
+    localStorage.setItem('ac_current_tab', tabId);
+
     if(tabId === 'profile') {
         if(currentUser) {
             document.getElementById('profileName').innerText = currentUser.name || "User";
@@ -1117,7 +1120,8 @@ function showTab(tabId) {
     }
     
     document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-    document.getElementById(tabId).classList.remove('hidden');
+    let targetSec = document.getElementById(tabId);
+    if(targetSec) targetSec.classList.remove('hidden');
     
     document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
     let navId = tabId === 'onlineTab' ? 'nav-onlineTab' : ('nav-' + tabId);
@@ -1126,10 +1130,19 @@ function showTab(tabId) {
     
     let backBtn = document.getElementById('backBtn');
     if(tabId === 'home') { backBtn.style.display = 'none'; } else { backBtn.style.display = 'block'; }
+    
+    if(tabId === 'bazaar') { renderShops(); } 
+    else if(tabId === 'onlineTab') { renderOnlineShops(); }
+    
     window.scrollTo(0,0);
 }
 
-function goHome() { showTab('home'); }
+// Alias for old code compatibility
+function showTab(tabId) {
+    switchTab(tabId);
+}
+
+function goHome() { switchTab('home'); }
 
 async function submitShop() {
     let mainCat = document.getElementById('addMainCat').value;
@@ -1173,19 +1186,26 @@ async function submitShop() {
     }
 }
 
+// FIXED: Status Toggle saves state in LocalStorage so it doesn't auto-revert to ON
 function toggleShopStatus(checkbox) {
     let textEl = document.getElementById('switchText');
     let isNowOpen = checkbox.checked;
     
+    localStorage.setItem('shop_status_open', isNowOpen);
+
     if(isNowOpen) {
         textEl.innerHTML = t("ON (चालू है)", "ON (Active)");
         textEl.style.color = "var(--accent)";
-        showToast(t('स्टेटस अपडेट हो गया।', 'Status updated.'));
+        showToast(t('स्टेटस चालू हो गया।', 'Status is now ON.'));
     } else {
         textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
         textEl.style.color = "#f87171";
-        showToast(t('स्टेटस अपडेट हो गया।', 'Status updated.'), 'error');
+        showToast(t('स्टेटस बंद हो गया।', 'Status is now OFF.'), 'error');
     }
+    
+    if(shopsData.length > 0) shopsData[0].isOpen = isNowOpen;
+    renderShops();
+    renderOnlineShops();
 }
 
 function updateSubCats() {
@@ -1383,7 +1403,27 @@ window.onload = async () => {
     // Load Live Data on Start
     await fetchRealData();
 
-    // 2. App khulne ke theek dedh (1.5) second baad SILENT location permission maangega
+    // FIXED: Restore last active tab so refresh stays on the same page instead of jumping to Home
+    switchTab(activeTab);
+
+    // Restore saved switch status if any
+    let savedStatus = localStorage.getItem('shop_status_open');
+    if(savedStatus !== null) {
+        let isTrue = (savedStatus === 'true');
+        let sw = document.getElementById('liveSwitch');
+        if(sw) {
+            sw.checked = isTrue;
+            let textEl = document.getElementById('switchText');
+            if(isTrue) {
+                textEl.innerHTML = t("ON (चालू है)", "ON (Active)");
+                textEl.style.color = "var(--accent)";
+            } else {
+                textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
+                textEl.style.color = "#f87171";
+            }
+        }
+    }
+
     setTimeout(() => {
         if(!isLocationTracked) {
             detectUserLocation(true); 
