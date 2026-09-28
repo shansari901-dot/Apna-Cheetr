@@ -7,11 +7,11 @@
 <meta name="description" content="लोकल जानकारी, गाँव से शहर तक">
 <meta name="theme-color" content="#0b1120">
 
-<!-- 🗺️ LEAFLET MAP CSS -->
+<!-- 🗺️ LEAFLET MAP CSS (Free Map API) 🗺️ -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
-/* 🌌 CSS VARIABLES (Theme Toggle) 🌌 */
+/* 🌌 CSS VARIABLES (For Easy Light/Dark Theme Toggle) 🌌 */
 :root { 
   --primary: #0b1120;       
   --primary-light: #1e293b;  
@@ -35,33 +35,99 @@ body.theme-light {
   --border: #e2e8f0;        
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+  -webkit-tap-highlight-color: transparent; 
+}
 
 body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
-body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none; transition: background 0.3s, color 0.3s;}
-input, textarea, select { -webkit-user-select: auto; user-select: auto; color: var(--text-dark) !important;}
+body { 
+  background: var(--bg-color); 
+  color: var(--text-dark); 
+  min-height: 100vh; 
+  padding-bottom: 90px; 
+  overflow-x: hidden; 
+  -webkit-user-select: none; 
+  user-select: none; 
+  transition: background 0.3s, color 0.3s;
+}
+
+input, textarea, select { 
+  -webkit-user-select: auto; 
+  user-select: auto; 
+  color: var(--text-dark) !important;
+}
 
 /* 🌐 TOP BAR */
-.topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;}
+.topbar { 
+  background: var(--primary); 
+  padding: 15px 16px; 
+  position: sticky; 
+  top: 0; 
+  z-index: 50; 
+  border-bottom: 1px solid var(--border); 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+.back-arrow { font-size: 20px; color: var(--text-dark); cursor: pointer; padding: 4px 8px; border-radius: 50%; background: rgba(128,128,128,0.1); display: none; }
 .logo-area { display: flex; align-items: center; gap: 10px; }
 .logo-icon { font-size: 24px; }
 .app-title { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px;}
 .app-subtitle { font-size: 10px; font-weight: 600; color: var(--text-muted); }
 
 .top-actions { display: flex; gap: 12px; align-items: center;}
-.action-icon { width: 34px; height: 34px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--border); color: var(--text-dark); display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: 0.2s;}
+.action-icon { 
+  width: 34px; 
+  height: 34px; 
+  border-radius: 50%; 
+  background: var(--card-bg); 
+  border: 1px solid var(--border); 
+  color: var(--text-dark); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 15px; 
+  cursor: pointer; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+  transition: 0.2s;
+}
 .action-icon:active { transform: scale(0.9); background: var(--primary-light); }
 .lang-icon { font-size: 11px; font-weight: 900; color: var(--accent); border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.1); }
 
-.location-selector { padding: 10px 16px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #f8fafc; cursor: pointer; background: #0b1120; border-bottom: 1px solid var(--border);}
+.location-selector { 
+  padding: 10px 16px; 
+  display: flex; 
+  align-items: center; 
+  gap: 6px; 
+  font-size: 13px; 
+  font-weight: 700; 
+  color: #f8fafc; 
+  cursor: pointer; 
+  background: #0b1120; 
+  border-bottom: 1px solid var(--border);
+}
 .location-selector span { font-size: 10px; color: #94a3b8; }
 
 main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-index: 10; }
 
 /* 🔍 MAIN SEARCH BOX */
-.search-box { background: var(--card-bg); padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px; border: 1px solid var(--border);}
+.search-box { 
+  background: var(--card-bg); 
+  padding: 12px 16px; 
+  border-radius: 50px; 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  margin-bottom: 24px; 
+  border: 1px solid var(--border);
+}
 .search-box span { font-size: 16px; color: var(--text-muted); }
 .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 600; background: transparent; }
 
@@ -112,6 +178,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 
 /* COMMON CARDS & FORMS */
 .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; }
+.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: var(--text-dark); }
 .field { margin-bottom: 16px; width: 100%; }
 .field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
 .input-wrap { display: flex; align-items: center; background: var(--primary); border: 1px solid var(--border); border-radius: 12px; padding: 0 14px;}
@@ -157,7 +224,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border); position: relative;}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* AI BOX & TOASTS */
+/* AI BOX SPECIFIC */
 .ai-box { background: var(--card-bg); border-radius: 24px; padding: 20px; max-width: 400px; width: 90%; margin: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.6); border: 1px solid var(--border); position: relative; display: flex; flex-direction: column;}
 .chat-area { height: 220px; overflow-y: auto; background: var(--primary); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
 .msg-b { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--text-dark);}
@@ -166,6 +233,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .ai-opts { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-height: 120px; overflow-y: auto; padding: 4px;}
 .ai-btn { background: var(--primary); border: 1px solid var(--border); color: var(--text-dark); padding: 6px 12px; border-radius: 50px; font-size: 11px; font-weight: 800; cursor: pointer; }
 
+/* TOASTS */
 .toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 99999999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px;}
 .toast { background: #1e293b; color: white; padding: 14px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; border: 1px solid #334155;}
 .toast.show { transform: translateY(0); opacity: 1; }
@@ -179,6 +247,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 input:checked + .slider { background-color: rgba(16, 185, 129, 0.2); border-color: var(--accent); }
 input:checked + .slider:before { transform: translateX(22px); background-color: var(--accent); }
 
+/* MAP CONTAINER */
 #map { width: 100%; height: 250px; border-radius: 12px; margin-top: 10px; z-index: 1;}
 .map-search-bar { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--primary); color: var(--text-dark); margin-bottom: 10px; font-size: 14px;}
 
@@ -208,7 +277,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
            </div>
        </div>
    </div>
-   <!-- 🔥 PREMIUM ROUND ACTION BUTTONS 🔥 -->
+   <!-- 🔥 PREMIUM ROUND ACTION BUTTONS WITH THEME TOGGLE 🔥 -->
    <div class="top-actions">
        <div class="action-icon" onclick="toggleTheme()" id="themeBtn" title="Theme">☀️</div>
        <div class="action-icon" onclick="openShareModal()" title="Share">📤</div>
@@ -278,6 +347,20 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">खाना व रेस्टोरेंट</span><span class="en">Food</span></div>
                     <div class="cat-sub-horz"><span class="hi">रेस्टोरेंट, ढाबा, मिठाई</span><span class="en">Restaurant, Hotel, Dhaba</span></div>
+                </div>
+            </div>
+            <div class="cat-card-horz" onclick="showToast(t('वाहन व यातायात लिस्ट जल्द आ रही है!', 'Transport list coming soon!'))">
+                <div class="cat-icon-horz bg-cyan">🚗</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">वाहन व यातायात</span><span class="en">Transport</span></div>
+                    <div class="cat-sub-horz"><span class="hi">ऑटो, बस, टैक्सी, पेट्रोल पंप</span><span class="en">Auto, Bus, Taxi, Fuel</span></div>
+                </div>
+            </div>
+            <div class="cat-card-horz" onclick="showToast(t('घर व प्रॉपर्टी लिस्ट जल्द आ रही है!', 'Real Estate list coming soon!'))">
+                <div class="cat-icon-horz bg-indigo">🏠</div>
+                <div class="cat-info-horz">
+                    <div class="cat-title-horz"><span class="hi">घर व प्रॉपर्टी</span><span class="en">Real Estate</span></div>
+                    <div class="cat-sub-horz"><span class="hi">किराए का मकान, प्लॉट, फ्लैट</span><span class="en">Rent House, Plot, Flat</span></div>
                 </div>
             </div>
         </div>
@@ -642,10 +725,18 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
     <div class="ai-opts">
        <button class="ai-btn" onclick="askAI('why_built')">🎯 <span class="hi">यह ऐप क्यों बनाया गया है?</span></button>
+       <button class="ai-btn" onclick="askAI('how_works')">⚙️ <span class="hi">यह कैसे काम करता है?</span></button>
        <button class="ai-btn" onclick="askAI('add')">➕ <span class="hi">अपनी दुकान कैसे जोड़ें?</span></button>
        <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह ऐप फ्री है?</span></button>
        <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस चालू/बंद कैसे करें?</span></button>
+       <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span></button>
        <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Offer (Story) कैसे लगाएँ?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_bazaar')">🛒 <span class="hi">'बाज़ार' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_health')">🏥 <span class="hi">'स्वास्थ्य' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_jobs')">💼 <span class="hi">'रोज़गार' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_edu')">🎓 <span class="hi">'शिक्षा' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_food')">🍴 <span class="hi">'खाना' केटेगरी में क्या है?</span></button>
     </div>
   </div>
 </div>
@@ -671,6 +762,11 @@ let currentStoryImageBase64 = ""; // Variable to hold compressed image
 let activeTab = localStorage.getItem('ac_current_tab') || 'home';
 let shopsData = [];
 let storiesData = [];
+
+// 🔥 SAFE STRING FIX FOR STORIES AND MODALS (Fixes the clicking bug) 🔥
+function safeStr(str) {
+    return String(str || "").replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, "\\n").replace(/\r/g, "");
+}
 
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
@@ -840,6 +936,8 @@ function renderStories() {
         let isOwner = currentUser && (currentUser.phone === st.userPhone || currentUser.name === st.name);
         let canDelete = isAdmin || isOwner;
         
+        let safeName = safeStr(st.name); let safeBadge = safeStr(st.badge); let safeDesc = safeStr(st.desc);
+        
         let adminDelStory = canDelete ? `<div onclick="event.stopPropagation(); deleteAdminStory(${st.id})" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:10px; z-index:10; border:2px solid var(--primary); font-weight:bold;">✖</div>` : '';
 
         html += `
@@ -1004,7 +1102,12 @@ function renderShops() {
     if(filtered.length === 0) { html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('10 KM के अंदर कोई जानकारी नहीं मिली।','No info found within 10 KM.')}</div>`; }
 
     filtered.forEach(shop => {
-        let isOpenCheck = (shop.isOpen === true || shop.isOpen === "true" || shop.isOpen === 1 || shop.isOpen === "1");
+        let shopIsOpen = shop.isOpen;
+        if(currentUser && (shop.phone === currentUser.phone || shop.name === currentUser.name)) {
+            let localSwitchState = localStorage.getItem('shop_status_open');
+            if(localSwitchState !== null) { shopIsOpen = (localSwitchState === 'true'); }
+        }
+        let isOpenCheck = (shopIsOpen === true || shopIsOpen === "true" || shopIsOpen === 1 || shopIsOpen === "1");
 
         let statusText = ""; let statusClass = isOpenCheck ? 'status-open' : 'status-closed';
         let shopCat = t(shop.catHi, shop.catEn);
@@ -1045,7 +1148,14 @@ function renderOnlineShops() {
     let filtered = shopsData.filter(s => {
         let dist = getDistance(userLat, userLng, s.lat, s.lng); s.calculatedDist = dist;
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
-        let isOpenCheck = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1 || s.isOpen === "1");
+        
+        let shopIsOpen = s.isOpen;
+        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
+            let localSwitchState = localStorage.getItem('shop_status_open');
+            if(localSwitchState !== null) { shopIsOpen = (localSwitchState === 'true'); }
+        }
+
+        let isOpenCheck = (shopIsOpen === true || shopIsOpen === "true" || shopIsOpen === 1 || shopIsOpen === "1");
         return s.type === currentOnlineFilter && isOpenCheck && matchDist;
     });
     
