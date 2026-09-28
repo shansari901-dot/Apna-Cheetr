@@ -7,11 +7,11 @@
 <meta name="description" content="लोकल जानकारी, गाँव से शहर तक">
 <meta name="theme-color" content="#0b1120">
 
-<!-- 🗺️ LEAFLET MAP CSS (Free Map API) 🗺️ -->
+<!-- 🗺️ LEAFLET MAP CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
-/* 🌌 CSS VARIABLES (For Easy Light/Dark Theme Toggle) 🌌 */
+/* 🌌 CSS VARIABLES (Theme Toggle) 🌌 */
 :root { 
   --primary: #0b1120;       
   --primary-light: #1e293b;  
@@ -35,99 +35,33 @@ body.theme-light {
   --border: #e2e8f0;        
 }
 
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-  -webkit-tap-highlight-color: transparent; 
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
 
 body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
-body { 
-  background: var(--bg-color); 
-  color: var(--text-dark); 
-  min-height: 100vh; 
-  padding-bottom: 90px; 
-  overflow-x: hidden; 
-  -webkit-user-select: none; 
-  user-select: none; 
-  transition: background 0.3s, color 0.3s;
-}
-
-input, textarea, select { 
-  -webkit-user-select: auto; 
-  user-select: auto; 
-  color: var(--text-dark) !important;
-}
+body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none; transition: background 0.3s, color 0.3s;}
+input, textarea, select { -webkit-user-select: auto; user-select: auto; color: var(--text-dark) !important;}
 
 /* 🌐 TOP BAR */
-.topbar { 
-  background: var(--primary); 
-  padding: 15px 16px; 
-  position: sticky; 
-  top: 0; 
-  z-index: 50; 
-  border-bottom: 1px solid var(--border); 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-}
-.topbar-left { display: flex; align-items: center; gap: 10px; }
-.back-arrow { font-size: 20px; color: var(--text-dark); cursor: pointer; padding: 4px 8px; border-radius: 50%; background: rgba(128,128,128,0.1); display: none; }
+.topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;}
 .logo-area { display: flex; align-items: center; gap: 10px; }
 .logo-icon { font-size: 24px; }
 .app-title { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px;}
 .app-subtitle { font-size: 10px; font-weight: 600; color: var(--text-muted); }
 
 .top-actions { display: flex; gap: 12px; align-items: center;}
-.action-icon { 
-  width: 34px; 
-  height: 34px; 
-  border-radius: 50%; 
-  background: var(--card-bg); 
-  border: 1px solid var(--border); 
-  color: var(--text-dark); 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  font-size: 15px; 
-  cursor: pointer; 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
-  transition: 0.2s;
-}
+.action-icon { width: 34px; height: 34px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--border); color: var(--text-dark); display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: 0.2s;}
 .action-icon:active { transform: scale(0.9); background: var(--primary-light); }
 .lang-icon { font-size: 11px; font-weight: 900; color: var(--accent); border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.1); }
 
-.location-selector { 
-  padding: 10px 16px; 
-  display: flex; 
-  align-items: center; 
-  gap: 6px; 
-  font-size: 13px; 
-  font-weight: 700; 
-  color: #f8fafc; 
-  cursor: pointer; 
-  background: #0b1120; 
-  border-bottom: 1px solid var(--border);
-}
+.location-selector { padding: 10px 16px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #f8fafc; cursor: pointer; background: #0b1120; border-bottom: 1px solid var(--border);}
 .location-selector span { font-size: 10px; color: #94a3b8; }
 
 main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-index: 10; }
 
 /* 🔍 MAIN SEARCH BOX */
-.search-box { 
-  background: var(--card-bg); 
-  padding: 12px 16px; 
-  border-radius: 50px; 
-  display: flex; 
-  align-items: center; 
-  gap: 12px; 
-  margin-bottom: 24px; 
-  border: 1px solid var(--border);
-}
+.search-box { background: var(--card-bg); padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px; border: 1px solid var(--border);}
 .search-box span { font-size: 16px; color: var(--text-muted); }
 .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 600; background: transparent; }
 
@@ -173,12 +107,11 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .story-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e3a8a, #0f172a); padding: 30px; text-align: center; color: white; position: relative;}
 .story-offer-badge { background: #fde047; color: #b45309; font-size: 14px; font-weight: 900; padding: 6px 16px; border-radius: 50px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
 .story-desc { font-size: 18px; font-weight: 800; line-height: 1.4; margin-bottom: 15px; white-space: pre-wrap; z-index: 2;}
-.story-image-show { max-width: 100%; max-height: 45vh; border-radius: 12px; border: 3px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 2; margin-bottom: 15px; object-fit: contain; }
+.story-image-show { max-width: 100%; max-height: 50vh; border-radius: 12px; border: 3px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 2; margin-bottom: 15px; object-fit: contain; }
 .story-footer { padding: 20px; background: rgba(0,0,0,0.5); display: flex; gap: 10px;}
 
 /* COMMON CARDS & FORMS */
 .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; }
-.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: var(--text-dark); }
 .field { margin-bottom: 16px; width: 100%; }
 .field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
 .input-wrap { display: flex; align-items: center; background: var(--primary); border: 1px solid var(--border); border-radius: 12px; padding: 0 14px;}
@@ -224,7 +157,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border); position: relative;}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* AI BOX SPECIFIC */
+/* AI BOX & TOASTS */
 .ai-box { background: var(--card-bg); border-radius: 24px; padding: 20px; max-width: 400px; width: 90%; margin: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.6); border: 1px solid var(--border); position: relative; display: flex; flex-direction: column;}
 .chat-area { height: 220px; overflow-y: auto; background: var(--primary); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
 .msg-b { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--text-dark);}
@@ -233,13 +166,11 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .ai-opts { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-height: 120px; overflow-y: auto; padding: 4px;}
 .ai-btn { background: var(--primary); border: 1px solid var(--border); color: var(--text-dark); padding: 6px 12px; border-radius: 50px; font-size: 11px; font-weight: 800; cursor: pointer; }
 
-/* TOASTS */
 .toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 99999999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px;}
 .toast { background: #1e293b; color: white; padding: 14px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; border: 1px solid #334155;}
 .toast.show { transform: translateY(0); opacity: 1; }
 .toast.error { border-left: 4px solid #ef4444; }
 
-/* SWITCH */
 .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--primary-light); transition: .4s; border-radius: 34px; border: 1px solid var(--border);}
@@ -247,7 +178,6 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 input:checked + .slider { background-color: rgba(16, 185, 129, 0.2); border-color: var(--accent); }
 input:checked + .slider:before { transform: translateX(22px); background-color: var(--accent); }
 
-/* MAP CONTAINER */
 #map { width: 100%; height: 250px; border-radius: 12px; margin-top: 10px; z-index: 1;}
 .map-search-bar { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--primary); color: var(--text-dark); margin-bottom: 10px; font-size: 14px;}
 
@@ -277,11 +207,11 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
            </div>
        </div>
    </div>
-   <!-- 🔥 PREMIUM ROUND ACTION BUTTONS WITH THEME TOGGLE 🔥 -->
+   <!-- 🔥 PREMIUM ROUND ACTION BUTTONS 🔥 -->
    <div class="top-actions">
        <div class="action-icon" onclick="toggleTheme()" id="themeBtn" title="Theme">☀️</div>
-       <div class="action-icon" onclick="openShareModal()" title="Share">📤</div>
-       <div class="action-icon" onclick="document.getElementById('aiModal').classList.remove('hidden')" title="Help">🤖</div>
+       <div class="action-icon" onclick="openModalSafe('shareModal')" title="Share">📤</div>
+       <div class="action-icon" onclick="openModalSafe('aiModal')" title="Help">🤖</div>
        <div class="action-icon lang-icon" onclick="toggleLang()" id="langBtn" title="Language">EN</div>
    </div>
 </div>
@@ -301,7 +231,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 
         <!-- 📸 STORIES / OFFERS SECTION 📸 -->
         <div id="storySectionWrap" style="display:none;">
-            <div class="section-title" style="margin-bottom: 10px;"><span class="hi">🔥 आज के Offers (Stories)</span><span class="en">🔥 Today's Offers</span></div>
+            <div class="section-title" style="margin-bottom: 10px;"><span class="hi">🔥 आज के Offers</span><span class="en">🔥 Today's Offers</span></div>
             <div class="story-container" id="liveStoryContainer"></div>
         </div>
 
@@ -347,20 +277,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">खाना व रेस्टोरेंट</span><span class="en">Food</span></div>
                     <div class="cat-sub-horz"><span class="hi">रेस्टोरेंट, ढाबा, मिठाई</span><span class="en">Restaurant, Hotel, Dhaba</span></div>
-                </div>
-            </div>
-            <div class="cat-card-horz" onclick="showToast(t('वाहन व यातायात लिस्ट जल्द आ रही है!', 'Transport list coming soon!'))">
-                <div class="cat-icon-horz bg-cyan">🚗</div>
-                <div class="cat-info-horz">
-                    <div class="cat-title-horz"><span class="hi">वाहन व यातायात</span><span class="en">Transport</span></div>
-                    <div class="cat-sub-horz"><span class="hi">ऑटो, बस, टैक्सी, पेट्रोल पंप</span><span class="en">Auto, Bus, Taxi, Fuel</span></div>
-                </div>
-            </div>
-            <div class="cat-card-horz" onclick="showToast(t('घर व प्रॉपर्टी लिस्ट जल्द आ रही है!', 'Real Estate list coming soon!'))">
-                <div class="cat-icon-horz bg-indigo">🏠</div>
-                <div class="cat-info-horz">
-                    <div class="cat-title-horz"><span class="hi">घर व प्रॉपर्टी</span><span class="en">Real Estate</span></div>
-                    <div class="cat-sub-horz"><span class="hi">किराए का मकान, प्लॉट, फ्लैट</span><span class="en">Rent House, Plot, Flat</span></div>
                 </div>
             </div>
         </div>
@@ -426,7 +342,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             </div>
             
             <button class="btn" onclick="doAuth()">✅ <span class="hi">लॉगिन / नया अकाउंट बनाएँ</span><span class="en">Login / Create Account</span></button>
-            <p style="text-align:center; margin-top:20px; font-size:12px; color:var(--text-muted); font-weight:600;"><span class="hi">कस्टमर बिना लॉगिन के भी ऐप चला सकते हैं।</span><span class="en">Customers can use the app without login.</span></p>
         </div>
     </section>
 
@@ -456,10 +371,10 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <label><span class="hi">आप क्या चाहते हैं? *</span><span class="en">What do you want? *</span></label>
                 <div class="radio-group">
                     <label class="radio-box active" id="rbHiring" onclick="setJobType('hiring')">
-                        <input type="radio" name="jobType" value="hiring" checked> 👷 <span class="hi">वर्कर चाहिए</span><span class="en">Need Worker</span>
+                        <input type="radio" name="jobType" value="hiring" checked> 👷 <span class="hi">वर्कर चाहिए</span>
                     </label>
                     <label class="radio-box" id="rbSeeking" onclick="setJobType('seeking')">
-                        <input type="radio" name="jobType" value="seeking"> 💼 <span class="hi">काम चाहिए</span><span class="en">Need Work</span>
+                        <input type="radio" name="jobType" value="seeking"> 💼 <span class="hi">काम चाहिए</span>
                     </label>
                 </div>
             </div>
@@ -477,15 +392,14 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
-            <!-- MAP PICKER & ADDRESS FIELD -->
             <div class="field">
                 <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
-                <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openRealMapPicker()">
+                <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openModalSafe('realMapModal')">
                     📍 <span class="hi">मैप पर पिन लगाएँ</span><span class="en">Drop Pin on Map</span>
                 </button>
                 <div class="input-wrap" style="align-items: flex-start; padding-top:10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(16, 185, 129, 0.3);">
                     <span style="margin-top:2px;">🏠</span>
-                    <textarea rows="3" id="addLoc" style="font-weight:700; font-size:13px; padding-top:0;" placeholder="मैप से पता यहाँ आएगा... (आप इसे खुद भी टाइप कर सकते हैं)"></textarea>
+                    <textarea rows="3" id="addLoc" style="font-weight:700; font-size:13px; padding-top:0;" placeholder="मैप से पता यहाँ आएगा..."></textarea>
                 </div>
             </div>
 
@@ -552,7 +466,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 
                 <div id="myActiveStoryArea" style="display:none; margin-bottom: 16px;"></div>
 
-                <button class="btn" style="padding: 10px; font-size: 13px; margin: 0; background: linear-gradient(90deg, #ec4899, #f97316); color: white;" onclick="document.getElementById('addStoryModal').classList.remove('hidden')">➕ <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></button>
+                <button class="btn" style="padding: 10px; font-size: 13px; margin: 0; background: linear-gradient(90deg, #ec4899, #f97316); color: white;" onclick="openModalSafe('addStoryModal')">➕ <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></button>
             </div>
 
             <!-- MESSAGE FOR NORMAL CUSTOMERS -->
@@ -575,10 +489,10 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
   <button id="nav-profile" onclick="switchTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
 </nav>
 
-<!-- 📤 NATIVE SHARE MODAL (For AppCreator24) 📤 -->
-<div id="shareModal" class="modal-overlay hidden" onclick="closeShareModal(event)" style="z-index: 999999999;">
-    <div class="bottom-sheet" id="shareSheet">
-        <div class="sheet-close"></div>
+<!-- 📤 NATIVE SHARE MODAL 📤 -->
+<div id="shareModal" class="modal-overlay hidden" onclick="closeModalSafe('shareModal')" style="z-index: 999999999;">
+    <div class="bottom-sheet" id="shareSheet" onclick="event.stopPropagation()">
+        <div class="sheet-close" onclick="closeModalSafe('shareModal')"></div>
         <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; text-align: center;">📤 <span class="hi">ऐप शेयर करें</span><span class="en">Share App</span></h2>
         
         <div class="share-grid">
@@ -603,9 +517,9 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 </div>
 
 <!-- 🗺️ REAL LEAFLET MAP MODAL 🗺️ -->
-<div id="realMapModal" class="modal-overlay hidden" style="z-index: 999999999;">
-    <div class="bottom-sheet" style="height: 85vh; display: flex; flex-direction: column;">
-        <div class="sheet-close" onclick="closeRealMap()"></div>
+<div id="realMapModal" class="modal-overlay hidden" style="z-index: 999999999;" onclick="closeModalSafe('realMapModal')">
+    <div class="bottom-sheet" style="height: 85vh; display: flex; flex-direction: column;" onclick="event.stopPropagation()">
+        <div class="sheet-close" onclick="closeModalSafe('realMapModal')"></div>
         <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">📍 <span class="hi">मैप पर अपनी जगह खोजें</span><span class="en">Find Location on Map</span></h2>
         
         <input type="text" id="mapSearchInput" class="map-search-bar" placeholder="🔍 अपनी जगह का नाम लिखें (ex: Lohta, Varanasi)">
@@ -619,10 +533,10 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- ➕ ADD STORY MODAL (WITH IMAGE UPLOAD) -->
-<div id="addStoryModal" class="modal-overlay hidden" onclick="closeAiModal(event)">
-    <div class="bottom-sheet" id="addStorySheet">
-        <div class="sheet-close"></div>
+<!-- ➕ ADD STORY MODAL (ONLY PHOTO & CATEGORY) -->
+<div id="addStoryModal" class="modal-overlay hidden" onclick="closeModalSafe('addStoryModal')">
+    <div class="bottom-sheet" id="addStorySheet" onclick="event.stopPropagation()">
+        <div class="sheet-close" onclick="closeModalSafe('addStoryModal')"></div>
         <h2 style="font-size: 20px; font-weight: 900; color: var(--text-dark); margin-bottom: 20px;">🔥 <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></h2>
         
         <div class="field">
@@ -640,25 +554,12 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             </div>
         </div>
 
+        <!-- 🔥 NEW: ONLY PHOTO UPLOAD FOR STORY 🔥 -->
         <div class="field">
-            <label><span class="hi">ऑफर की हेडिंग (Title) *</span><span class="en">Offer Title *</span></label>
-            <div class="input-wrap"><span>✨</span><input type="text" id="storyTitle" placeholder="Ex: साड़ी पर 20% की छूट!"></div>
-        </div>
-
-        <div class="field">
-            <label><span class="hi">पूरा विवरण (Description) *</span><span class="en">Full Description *</span></label>
-            <div class="input-wrap" style="align-items: flex-start; padding-top:10px;">
-                <span style="margin-top:2px;">📝</span>
-                <textarea rows="2" id="storyDesc" placeholder="ऑफर के बारे में विस्तार से बताएं..." style="padding-top:0;"></textarea>
-            </div>
-        </div>
-
-        <!-- 🔥 NEW: PHOTO UPLOAD FOR STORY 🔥 -->
-        <div class="field">
-            <label><span class="hi">प्रोडक्ट/ऑफर की फोटो (Optional)</span><span class="en">Offer Photo (Optional)</span></label>
-            <div class="input-wrap" style="padding: 10px; flex-direction: column; align-items: flex-start;">
+            <label><span class="hi">प्रोडक्ट/ऑफर की फोटो (ज़रूरी) *</span><span class="en">Offer Photo (Required) *</span></label>
+            <div class="input-wrap" style="padding: 10px; flex-direction: column; align-items: flex-start; background: rgba(16, 185, 129, 0.05); border: 1px dashed var(--accent);">
                 <input type="file" id="storyImageInput" accept="image/*" onchange="handleStoryImageUpload(event)" style="font-size: 11px; margin-bottom: 10px; width: 100%;">
-                <img id="storyImagePreview" style="display:none; max-width: 100px; max-height: 100px; border-radius: 8px; border: 1px solid var(--border);">
+                <img id="storyImagePreview" style="display:none; max-width: 100%; max-height: 150px; border-radius: 8px; border: 1px solid var(--border);">
             </div>
         </div>
 
@@ -677,14 +578,14 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <div class="story-dp" id="svIcon">🛒</div>
             <div class="story-title" id="svTitle">General Store</div>
         </div>
-        <div class="story-close" onclick="closeStory()">✖</div>
+        <div class="story-close" onclick="closeModalSafe('storyViewer')">✖</div>
     </div>
     
     <div class="story-content" id="svBg">
-        <div class="story-offer-badge" id="svBadge">दिवाली स्पेशल छूट!</div>
-        <!-- Image Area -->
+        <div class="story-offer-badge" id="svBadge" style="display:none;">दिवाली स्पेशल छूट!</div>
+        <!-- ONLY Image Area Now -->
         <img id="svImg" class="story-image-show" style="display:none;">
-        <div class="story-desc" id="svDesc">विवरण यहाँ आएगा...</div>
+        <div class="story-desc" id="svDesc" style="display:none;"></div>
     </div>
     
     <div class="story-footer">
@@ -694,9 +595,9 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 </div>
 
 <!-- 🛒 SHOP DETAIL MODAL -->
-<div id="shopModal" class="modal-overlay hidden" onclick="closeShopModal(event)">
-    <div class="bottom-sheet" id="shopSheet">
-        <div class="sheet-close"></div>
+<div id="shopModal" class="modal-overlay hidden" onclick="closeModalSafe('shopModal')">
+    <div class="bottom-sheet" id="shopSheet" onclick="event.stopPropagation()">
+        <div class="sheet-close" onclick="closeModalSafe('shopModal')"></div>
         <div style="width: 56px; height: 56px; background: var(--primary); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 16px;" id="mShopIcon">🏬</div>
         <h2 id="mShopName" style="font-size: 22px; font-weight: 900; color: var(--text-dark); margin-bottom: 6px;">Name</h2>
         <div style="font-size: 14px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
@@ -714,29 +615,20 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 </div>
 
 <!-- 🤖 AI ASSISTANT MODAL -->
-<div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeAiModal(event)">
-  <div class="ai-box" id="aiBoxContent">
+<div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeModalSafe('aiModal')">
+  <div class="ai-box" id="aiBoxContent" onclick="event.stopPropagation()">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
        <h2 style="color: var(--text-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">🤖 AI Help Guide</h2>
-       <div style="font-size: 24px; cursor: pointer; color: #ef4444; line-height:1;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
+       <div style="font-size: 24px; cursor: pointer; color: #ef4444; line-height:1;" onclick="closeModalSafe('aiModal')">✖</div>
     </div>
     <div class="chat-area" id="aiChat">
        <div class="msg-b m-ai"><span class="hi">नमस्ते! मैं आपका AI गाइड हूँ। आप नीचे दिए गए किसी भी सवाल पर क्लिक करके जवाब जान सकते हैं। 👇</span><span class="en">Hello! I am your AI Guide. Click on any question below to get answers. 👇</span></div>
     </div>
     <div class="ai-opts">
        <button class="ai-btn" onclick="askAI('why_built')">🎯 <span class="hi">यह ऐप क्यों बनाया गया है?</span></button>
-       <button class="ai-btn" onclick="askAI('how_works')">⚙️ <span class="hi">यह कैसे काम करता है?</span></button>
        <button class="ai-btn" onclick="askAI('add')">➕ <span class="hi">अपनी दुकान कैसे जोड़ें?</span></button>
        <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह ऐप फ्री है?</span></button>
        <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस चालू/बंद कैसे करें?</span></button>
-       <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span></button>
-       <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Offer (Story) कैसे लगाएँ?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_bazaar')">🛒 <span class="hi">'बाज़ार' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_health')">🏥 <span class="hi">'स्वास्थ्य' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_jobs')">💼 <span class="hi">'रोज़गार' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_edu')">🎓 <span class="hi">'शिक्षा' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_food')">🍴 <span class="hi">'खाना' केटेगरी में क्या है?</span></button>
     </div>
   </div>
 </div>
@@ -757,16 +649,33 @@ let map, marker;
 let userLat = 28.6139; 
 let userLng = 77.2090;
 let isLocationTracked = false;
-let currentStoryImageBase64 = ""; // Variable to hold compressed image
+let currentStoryImageBase64 = ""; 
 
 let activeTab = localStorage.getItem('ac_current_tab') || 'home';
 let shopsData = [];
 let storiesData = [];
 
-// 🔥 SAFE STRING FIX FOR STORIES AND MODALS (Fixes the clicking bug) 🔥
-function safeStr(str) {
-    return String(str || "").replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, "\\n").replace(/\r/g, "");
+// 🔥 SAFE NATIVE MODAL NAVIGATION (PREVENTS APP EXIT ON BACK BUTTON) 🔥
+function openModalSafe(id) {
+    document.getElementById(id).classList.remove('hidden');
+    history.pushState({modal: id}, '', '#' + id);
 }
+
+function closeModalSafe(id) {
+    document.getElementById(id).classList.add('hidden');
+    if(window.location.hash === '#' + id) {
+        history.back(); // triggers popstate which actually removes hash cleanly
+    }
+}
+
+window.addEventListener('popstate', function(e) {
+    // Hide all modals when back button is pressed
+    const modals = ['storyViewer', 'shopModal', 'addStoryModal', 'aiModal', 'shareModal', 'realMapModal'];
+    modals.forEach(m => {
+        let el = document.getElementById(m);
+        if(el) el.classList.add('hidden');
+    });
+});
 
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
@@ -774,15 +683,19 @@ function applyThemeAndLang() {
     document.body.className = `lang-${currentLang} theme-${currentTheme}`;
     document.getElementById('langBtn').innerText = currentLang === 'hi' ? 'EN' : 'HI';
     document.getElementById('themeBtn').innerText = currentTheme === 'dark' ? '☀️' : '🌙';
+    
+    // Update Placeholders Language
+    document.querySelectorAll('.lang-input').forEach(inp => {
+        let text = inp.getAttribute('data-' + currentLang);
+        if(text) inp.placeholder = text;
+    });
 }
 
 function toggleLang() {
     currentLang = currentLang === 'hi' ? 'en' : 'hi';
     localStorage.setItem('ac_lang', currentLang);
     applyThemeAndLang();
-    renderShops(); 
-    renderOnlineShops();
-    renderStories();
+    renderShops(); renderOnlineShops(); renderStories();
     if(!document.getElementById('profile').classList.contains('hidden')) updateProfileUI();
 }
 
@@ -802,13 +715,6 @@ function showToast(message, type = 'success') {
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => { toast.remove(); }, 300); }, 3000);
 }
 
-// 📤 NATIVE SHARE MODAL CONTROLS 📤
-function openShareModal() { document.getElementById('shareModal').classList.remove('hidden'); }
-function closeShareModal(e) {
-    if(e.target.id === 'shareModal' || e.target.classList.contains('sheet-close')) {
-        document.getElementById('shareModal').classList.add('hidden');
-    }
-}
 function copyLinkOnly() {
     const dummy = document.createElement('input');
     dummy.value = "https://www.appcreator24.com/app4202235-v74isw";
@@ -817,7 +723,7 @@ function copyLinkOnly() {
     document.execCommand('copy');
     document.body.removeChild(dummy);
     showToast(t("लिंक कॉपी हो गया!", "Link copied to clipboard!"));
-    document.getElementById('shareModal').classList.add('hidden');
+    closeModalSafe('shareModal');
 }
 
 function getDistance(lat1, lon1, lat2, lon2) {
@@ -843,21 +749,6 @@ function detectUserLocation(silent = false) {
     }
 }
 
-let pickedLat = 0, pickedLng = 0;
-function openRealMapPicker() {
-    document.getElementById('realMapModal').classList.remove('hidden');
-    if(!map) {
-        map = L.map('map').setView([userLat, userLng], 14);
-        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { maxZoom: 20, attribution: '© OpenStreetMap France' }).addTo(map);
-        marker = L.marker([userLat, userLng], {draggable: true}).addTo(map);
-        marker.on('dragend', function(event){ var position = marker.getLatLng(); pickedLat = position.lat; pickedLng = position.lng; });
-    } else {
-        map.invalidateSize(); map.setView([userLat, userLng], 14); marker.setLatLng([userLat, userLng]);
-    }
-    pickedLat = userLat; pickedLng = userLng;
-}
-function closeRealMap() { document.getElementById('realMapModal').classList.add('hidden'); }
-
 async function searchOnMap() {
     let query = document.getElementById('mapSearchInput').value;
     if(!query) return showToast("कृपया जगह का नाम लिखें", "error");
@@ -875,7 +766,7 @@ async function searchOnMap() {
 
 async function confirmMapLocation() {
     let latStr = pickedLat.toFixed(4); let lngStr = pickedLng.toFixed(4);
-    closeRealMap(); showToast(t("लोकेशन सेव हो रही है...", "Saving location..."));
+    closeModalSafe('realMapModal'); showToast(t("लोकेशन सेव हो रही है...", "Saving location..."));
     try {
         let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${pickedLat}&lon=${pickedLng}`);
         let data = await response.json();
@@ -923,7 +814,6 @@ async function deleteAdminStory(id) {
     } catch(e) { showToast("Error during delete.", "error"); }
 }
 
-// 🔥 RENDER STORIES (Owner can delete their own story too) 🔥
 function renderStories() {
     let html = ""; let activeStories = getActiveStories();
     
@@ -935,8 +825,6 @@ function renderStories() {
     activeStories.forEach(st => {
         let isOwner = currentUser && (currentUser.phone === st.userPhone || currentUser.name === st.name);
         let canDelete = isAdmin || isOwner;
-        
-        let safeName = safeStr(st.name); let safeBadge = safeStr(st.badge); let safeDesc = safeStr(st.desc);
         
         let adminDelStory = canDelete ? `<div onclick="event.stopPropagation(); deleteAdminStory(${st.id})" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:10px; z-index:10; border:2px solid var(--primary); font-weight:bold;">✖</div>` : '';
 
@@ -967,7 +855,7 @@ function renderProfileStories() {
                 <div style="display:flex; align-items:center; gap:10px;">
                     <div style="font-size:24px;">${st.icon}</div>
                     <div>
-                        <div style="font-size:12px; font-weight:800; color:var(--text-dark);">${st.badge}</div>
+                        <div style="font-size:12px; font-weight:800; color:var(--text-dark);">Photo Offer</div>
                         <div style="font-size:10px; color:var(--accent);">${t('24 घंटे में हट जाएगी', 'Auto-delete in 24h')}</div>
                     </div>
                 </div>
@@ -981,7 +869,7 @@ function renderProfileStories() {
     }
 }
 
-// 🔥 IMAGE COMPRESSION FOR STORY (Base64) 🔥
+// 🔥 EXTREME COMPRESSION FOR SQLITE LIMITS 🔥
 function handleStoryImageUpload(event) {
     let file = event.target.files[0];
     if(!file) return;
@@ -991,7 +879,7 @@ function handleStoryImageUpload(event) {
         let img = new Image();
         img.onload = function() {
             let canvas = document.createElement('canvas');
-            let max_size = 400; // Resize to keep database fast
+            let max_size = 250; // Ultra compressed for Database safety
             let width = img.width; let height = img.height;
             if (width > height) { if (width > max_size) { height *= max_size / width; width = max_size; } } 
             else { if (height > max_size) { width *= max_size / height; height = max_size; } }
@@ -1000,7 +888,7 @@ function handleStoryImageUpload(event) {
             let ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0, width, height);
             
-            currentStoryImageBase64 = canvas.toDataURL('image/jpeg', 0.6); // Compress to 60%
+            currentStoryImageBase64 = canvas.toDataURL('image/jpeg', 0.4); // 40% quality
             let preview = document.getElementById('storyImagePreview');
             preview.src = currentStoryImageBase64;
             preview.style.display = 'block';
@@ -1012,20 +900,15 @@ function handleStoryImageUpload(event) {
 
 async function submitStory() {
     let icon = document.getElementById('storyCat').value;
-    let badge = document.getElementById('storyTitle').value;
-    let descRaw = document.getElementById('storyDesc').value;
     let name = currentUser ? currentUser.name : "My Shop";
     
-    if(!badge || !descRaw) { showToast(t("कृपया हेडिंग और विवरण ज़रूर भरें!", "Please fill all fields!"), "error"); return; }
+    if(!currentStoryImageBase64) { showToast(t("कृपया फोटो ज़रूर चुनें!", "Please select a photo!"), "error"); return; }
     
-    // 🔥 Saving image and text together safely in one string
-    let safeDesc = descRaw + (currentStoryImageBase64 ? "|||" + currentStoryImageBase64 : "");
-
     let storyObj = {
         userName: name,
         userPhone: currentUser ? currentUser.phone : "",
-        badgeTitle: badge,
-        description: safeDesc,
+        badgeTitle: "Offer", // No longer used in UI but kept for DB compatibility
+        description: currentStoryImageBase64, // Image is now stored as the main content
         icon: icon
     };
 
@@ -1033,9 +916,7 @@ async function submitStory() {
         showToast("सेव हो रहा है...", "success");
         await fetch(API_URL + "/stories", { method: 'POST', body: JSON.stringify(storyObj), headers: {'Content-Type': 'application/json'} });
         
-        document.getElementById('addStoryModal').classList.add('hidden');
-        document.getElementById('storyTitle').value = '';
-        document.getElementById('storyDesc').value = '';
+        closeModalSafe('addStoryModal');
         document.getElementById('storyImageInput').value = '';
         document.getElementById('storyImagePreview').style.display = 'none';
         currentStoryImageBase64 = "";
@@ -1045,27 +926,26 @@ async function submitStory() {
     } catch(err) { showToast("डेटाबेस एरर!", "error"); }
 }
 
-// 🔥 SAFE STORY OPENER (Shows image if attached) 🔥
 function openStory(id) {
     let st = storiesData.find(s => s.id === id);
     if(!st) return;
 
-    let parts = st.desc.split("|||");
-    let textOnly = parts[0];
-    let imgData = parts[1] || "";
-
     document.getElementById('svIcon').innerText = st.icon;
     document.getElementById('svTitle').innerText = st.name;
-    document.getElementById('svBadge').innerText = st.badge;
-    document.getElementById('svDesc').innerText = textOnly;
     
+    let imgData = st.desc;
     let imgEl = document.getElementById('svImg');
-    if(imgData) {
+    let descEl = document.getElementById('svDesc');
+
+    // Compatibility for old text stories vs new image stories
+    if(imgData.startsWith('data:image')) {
         imgEl.src = imgData;
         imgEl.style.display = 'block';
+        descEl.style.display = 'none';
     } else {
-        imgEl.src = "";
         imgEl.style.display = 'none';
+        descEl.innerText = imgData;
+        descEl.style.display = 'block';
     }
     
     let bgColors = ['linear-gradient(135deg, #1e3a8a, #0f172a)', 'linear-gradient(135deg, #065f46, #022c22)', 'linear-gradient(135deg, #9d174d, #4c0519)', 'linear-gradient(135deg, #b45309, #451a03)'];
@@ -1073,19 +953,24 @@ function openStory(id) {
 
     let viewer = document.getElementById('storyViewer');
     let fill = document.getElementById('storyProgressFill');
-    viewer.classList.remove('hidden');
+    
+    // Open via safe modal pushstate
+    openModalSafe('storyViewer');
     
     fill.style.transition = 'none'; fill.style.width = '0%';
     setTimeout(() => { fill.style.transition = 'width 6s linear'; fill.style.width = '100%'; }, 50);
 
     clearTimeout(storyTimer);
-    storyTimer = setTimeout(() => { closeStory(); }, 6000);
+    storyTimer = setTimeout(() => { closeModalSafe('storyViewer'); }, 6000);
 }
-
-function closeStory() { clearTimeout(storyTimer); document.getElementById('storyViewer').classList.add('hidden'); }
 
 let currentFilter = 'बाज़ार'; 
 let currentOnlineFilter = 'बाज़ार';
+
+function getFormattedDist(distKm) {
+    if(distKm < 1) return (distKm * 1000).toFixed(0) + " m";
+    return distKm.toFixed(1) + " km";
+}
 
 function renderShops() {
     let html = ""; let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1126,7 +1011,7 @@ function renderShops() {
         let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
         let safeName = String(shop.name).replace(/'/g, "\\'"); let safeCat = String(shopCat).replace(/'/g, "\\'"); let safeLoc = String(shop.locText).replace(/'/g, "\\'");
-        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${isOpenCheck}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
+        let onclickData = `openModalSafe('shopModal'); openShopModal('${safeName}', '${safeCat}', ${isOpenCheck}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
         <div class="shop-card" onclick="${onclickData}">
@@ -1172,7 +1057,7 @@ function renderOnlineShops() {
         let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
         let safeName = String(shop.name).replace(/'/g, "\\'"); let safeCat = String(shopCat).replace(/'/g, "\\'"); let safeLoc = String(shop.locText).replace(/'/g, "\\'");
-        let onclickData = `openShopModal('${safeName}', '${safeCat}', true, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
+        let onclickData = `openModalSafe('shopModal'); openShopModal('${safeName}', '${safeCat}', true, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
         <div class="shop-card" onclick="${onclickData}">
@@ -1359,21 +1244,14 @@ function openShopModal(name, cat, isOpen, loc, icon, type, isHiring, phone) {
     if (type === "रोज़गार") { if(isHiring) { statusText = isOpen ? t('🟢 अर्जेंट ज़रूरत है', '🟢 Urgent Hiring') : t('🔴 कामगार मिल गया', '🔴 Position Filled'); } else { statusText = isOpen ? t('🟢 काम के लिए खाली हूँ', '🟢 Available for Work') : t('🔴 काम मिल गया', '🔴 Hired'); } } 
     else { statusText = isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🔴 Closed'); }
     statusEl.className = isOpen ? 'status-badge status-open' : 'status-badge status-closed'; statusEl.innerHTML = statusText;
-    document.getElementById('shopModal').classList.remove('hidden');
 }
-
-function closeShopModal(e) { if(e.target.id === 'shopModal' || e.target.classList.contains('sheet-close')) { document.getElementById('shopModal').classList.add('hidden'); } }
-function closeAiModal(e) { if(e.target.id === 'aiModal' || e.target.classList.contains('sheet-close') || e.target.id === 'addStoryModal') { document.getElementById('aiModal').classList.add('hidden'); document.getElementById('addStoryModal').classList.add('hidden'); } }
 
 function askAI(type) {
     const chat = document.getElementById('aiChat'); let q = "", a = "";
     if(type === 'why_built') { q = t("🎯 यह ऐप क्यों बनाया गया है?", "🎯 Why was this app built?"); a = t("यह ऐप आपके इलाके की दुकानों, ज़रूरी सेवाओं और रोज़गार की जानकारी एक जगह लाने के लिए बनाया गया है।", "This app is built to bring all local shops, services, and job info to one place."); }
-    else if(type === 'how_works') { q = t("⚙️ यह कैसे काम करता है?", "⚙️ How does this app work?"); a = t("आप ऐप में 10KM के दायरे में खुली हुई दुकानें और उनके नए ऑफर देख सकते हैं। अगर आपकी अपनी कोई दुकान है, तो आप '➕ जोड़ें' बटन दबाकर उसे लिस्ट कर सकते हैं।", "You can see open shops and offers within a 10KM radius. If you have a business, you can list it for free using the '➕ Add' button."); }
     else if(type === 'add') { q = t("➕ अपनी दुकान कैसे जोड़ें?", "➕ How to add info?"); a = t("नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना मोबाइल नंबर और नाम डालकर लॉगिन करें, फिर अपनी दुकान की डिटेल भरकर सेव कर दें।", "Click the '➕ Add' button below. Login with your name & number, then fill your shop/job details and save."); } 
     else if(type === 'free') { q = t("💰 क्या यह ऐप फ्री है?", "💰 Is it free?"); a = t("जी हाँ! यह ऐप ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है। अपनी दुकान लिस्ट करने का कोई पैसा नहीं लगता।", "Yes! It is 100% Free for both customers and shopkeepers. No charges to list your business."); } 
     else if(type === 'status') { q = t("🎚️ स्टेटस चालू/बंद कैसे करें?", "🎚️ How to toggle ON/OFF?"); a = t("नीचे '👤 प्रोफाइल' में जाएं। वहां ON/OFF का बटन (स्विच) है। जब आप काम कर रहे हों तो इसे ON (चालू) रखें।", "Go to '👤 Profile'. Use the ON/OFF switch there. Keep it ON when you are working."); }
-    else if(type === 'login') { q = t("🔐 लॉगिन क्यों ज़रूरी है?", "🔐 Why login required?"); a = t("लॉगिन सिर्फ दुकानदारों के लिए ज़रूरी है ताकि कोई दूसरा व्यक्ति आपकी दुकान की जानकारी से छेड़छाड़ न कर सके।", "Login is required for shopkeepers to securely manage their own store and prevent others from editing it."); }
-    else if(type === 'story') { q = t("🔥 Offer (Story) कैसे लगाएँ?", "🔥 How to post Story/Offer?"); a = t("लॉगिन करके '👤 प्रोफाइल' में जाएं, वहां 'नया Offer डालें' बटन पर क्लिक करें।", "Login and go to '👤 Profile', click on 'Add New Offer'."); }
     chat.innerHTML += `<div class="msg-b m-user">${q}</div>`; chat.scrollTop = chat.scrollHeight;
     setTimeout(() => { chat.innerHTML += `<div class="msg-b m-ai">${a}</div>`; chat.scrollTop = chat.scrollHeight; }, 600);
 }
@@ -1412,7 +1290,8 @@ window.onload = async () => {
     applyThemeAndLang();
     setFilter('बाज़ार'); setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
-    
+    switchTab(activeTab, false); // Instantly load active tab
+
     let savedStatus = localStorage.getItem('shop_status_open');
     if(savedStatus !== null) {
         let isTrue = (savedStatus === 'true'); let sw = document.getElementById('liveSwitch');
@@ -1424,7 +1303,6 @@ window.onload = async () => {
     }
 
     await fetchRealData();
-    switchTab(activeTab);
 
     setTimeout(() => { if(!isLocationTracked) { detectUserLocation(true); } }, 1500);
 };
