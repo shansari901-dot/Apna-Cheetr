@@ -134,7 +134,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 /* SHOP LIST CARDS */
 .shop-card { background: var(--card-bg); border-radius: 16px; padding: 16px; display: flex; gap: 14px; margin-bottom: 16px; border: 1px solid var(--border); cursor: pointer; align-items: center;}
 .shop-img-box { width: 56px; height: 56px; border-radius: 12px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0;}
-.shop-info { flex: 1; }
+.shop-info { flex: 1; width: 100%; }
 .shop-info h3 { font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
 .shop-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;}
 .shop-dist { background: rgba(59, 130, 246, 0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; color: #60a5fa; font-weight: 800;}
@@ -347,7 +347,8 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </div>
             </div>
             
-            <button class="btn" onclick="doAuth()">✅ <span class="hi">लॉगिन करें</span><span class="en">Login / Register</span></button>
+            <!-- BUTTON CHANGED HERE FOR CLARITY -->
+            <button class="btn" onclick="doAuth()">✅ <span class="hi">लॉगिन / नया अकाउंट बनाएँ</span><span class="en">Login / Create Account</span></button>
             <p style="text-align:center; margin-top:20px; font-size:12px; color:var(--text-muted); font-weight:600;"><span class="hi">कस्टमर बिना लॉगिन के भी ऐप चला सकते हैं।</span><span class="en">Customers can use the app without login.</span></p>
         </div>
     </section>
@@ -399,7 +400,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
-            <!-- 🔥 MAP PICKER INTEGRATION 🔥 -->
             <div class="field">
                 <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
                 <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openRealMapPicker()">
@@ -482,7 +482,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">📍 <span class="hi">मैप पर अपनी दुकान खोजें</span><span class="en">Find Shop on Map</span></h2>
         <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;"><span class="hi">नक्शे को खिसका कर लाल पिन अपनी दुकान पर रखें।</span></p>
         
-        <div id="map"></div> <!-- Leaflet Map Container -->
+        <div id="map"></div>
         
         <button class="btn" style="margin-top: 15px;" onclick="confirmMapLocation()">✅ <span class="hi">लोकेशन कन्फर्म करें</span><span class="en">Confirm Location</span></button>
     </div>
@@ -597,13 +597,14 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 <script>
 // --- CLOUDFLARE API URL ---
 const API_URL = "https://apna-chetr-dpi.ashifmd400.workers.dev";
+const ADMIN_PHONE = "7318259001"; // 👑 VIP ADMIN NUMBER 👑
 
 // --- GLOBALS & AUTH ---
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
 let currentLang = 'hi';
 let storyTimer;
 let map, marker;
-let userLat = 28.6139; // Default Delhi
+let userLat = 28.6139; 
 let userLng = 77.2090;
 let isLocationTracked = false;
 
@@ -697,6 +698,31 @@ function getActiveStories() {
     return storiesData.filter(st => (now - st.time) <= 86400000); 
 }
 
+// 🗑️ ADMIN DELETE FUNCTIONS 🗑️
+async function deleteAdminShop(id) {
+    if(!confirm("ADMIN: Kya aap sach me is dukaan ko delete karna chahte hain?")) return;
+    try {
+        showToast("Delete ho raha hai...", "success");
+        await fetch(API_URL + "/shops/" + id, { method: 'DELETE' });
+        showToast("Dukaan delete ho gayi!");
+        await fetchRealData();
+    } catch(e) {
+        showToast("Database se delete nahi ho paya. Cloudflare Worker check karein.", "error");
+    }
+}
+
+async function deleteAdminStory(id) {
+    if(!confirm("ADMIN: Kya aap sach me is Story ko delete karna chahte hain?")) return;
+    try {
+        showToast("Delete ho raha hai...", "success");
+        await fetch(API_URL + "/stories/" + id, { method: 'DELETE' });
+        showToast("Story delete ho gayi!");
+        await fetchRealData();
+    } catch(e) {
+        showToast("Database se delete nahi ho paya. Cloudflare Worker check karein.", "error");
+    }
+}
+
 function renderStories() {
     let html = "";
     let activeStories = getActiveStories();
@@ -707,15 +733,23 @@ function renderStories() {
     } else {
         document.getElementById('storySectionWrap').style.display = 'block';
     }
+    
+    let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
 
     activeStories.forEach(st => {
         let safeName = st.name.replace(/'/g, "\\'");
         let safeBadge = st.badge.replace(/'/g, "\\'");
         let safeDesc = st.desc.replace(/'/g, "\\'");
+        
+        let adminDelStory = isAdmin ? `<div onclick="event.stopPropagation(); deleteAdminStory(${st.id})" style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:10px; z-index:10; border:2px solid var(--primary);">✖</div>` : '';
+
         html += `
         <div class="story-item" onclick="openStory('${st.icon}', '${safeName}', '${safeBadge}', '${safeDesc}')">
-            <div class="story-ring">
-                <div class="story-img-box">${st.icon}</div>
+            <div style="position:relative;">
+                ${adminDelStory}
+                <div class="story-ring">
+                    <div class="story-img-box">${st.icon}</div>
+                </div>
             </div>
             <div class="story-name">${st.name}</div>
         </div>`;
@@ -820,6 +854,8 @@ function getFormattedDist(distKm) {
 
 function renderShops() {
     let html = "";
+    let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
+    
     let filtered = shopsData.filter(s => {
         let matchCat = (s.type === currentFilter);
         let dist = getDistance(userLat, userLng, s.lat, s.lng);
@@ -848,6 +884,7 @@ function renderShops() {
 
         let statusBadge = `<span class="status-badge ${statusClass}">${statusText}</span>`;
         let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
+        let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
         let safeName = shop.name.replace(/'/g, "\\'");
         let safeCat = shopCat.replace(/'/g, "\\'");
@@ -859,9 +896,10 @@ function renderShops() {
             <div class="shop-img-box">${shop.icon}</div>
             <div class="shop-info">
                 <h3>${shop.name}</h3>
-                <div style="display:flex; gap:8px; align-items:center; margin-top:6px;">
+                <div style="display:flex; gap:8px; align-items:center; margin-top:6px; width:100%;">
                     ${statusBadge}
                     ${distTag}
+                    ${adminDeleteBtn}
                 </div>
             </div>
         </div>`;
@@ -871,6 +909,8 @@ function renderShops() {
 
 function renderOnlineShops() {
     let html = "";
+    let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
+    
     let filtered = shopsData.filter(s => {
         let dist = getDistance(userLat, userLng, s.lat, s.lng);
         s.calculatedDist = dist;
@@ -891,6 +931,7 @@ function renderOnlineShops() {
 
         let statusBadge = `<span class="status-badge status-open">${t('🟢 चालू है', '🟢 Open')}</span>`;
         let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
+        let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
         let safeName = shop.name.replace(/'/g, "\\'");
         let safeCat = shopCat.replace(/'/g, "\\'");
@@ -902,9 +943,10 @@ function renderOnlineShops() {
             <div class="shop-img-box">${shop.icon}</div>
             <div class="shop-info">
                 <h3>${shop.name}</h3>
-                <div style="display:flex; gap:8px; align-items:center; margin-top:6px;">
+                <div style="display:flex; gap:8px; align-items:center; margin-top:6px; width:100%;">
                     ${statusBadge}
                     ${distTag}
+                    ${adminDeleteBtn}
                 </div>
             </div>
         </div>`;
@@ -952,7 +994,13 @@ function doAuth() {
     
     currentUser = { phone: phone, name: name };
     localStorage.setItem('ac_user', JSON.stringify(currentUser));
-    showToast(t("सफलतापूर्वक लॉगिन हो गया!", "Login Successful!"));
+    
+    if(phone === ADMIN_PHONE) {
+        showToast("👑 Welcome Admin! Special powers activated.");
+    } else {
+        showToast(t("सफलतापूर्वक लॉगिन हो गया!", "Login Successful!"));
+    }
+    
     showTab('profile'); 
 }
 
@@ -1044,8 +1092,6 @@ function toggleShopStatus(checkbox) {
         textEl.style.color = "#f87171";
         showToast(t('स्टेटस अपडेट हो गया।', 'Status updated.'), 'error');
     }
-    
-    // In future: Add fetch API call to update status on Cloudflare here
 }
 
 function updateSubCats() {
@@ -1198,4 +1244,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-              </html>
+                  </html>
