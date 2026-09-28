@@ -7,11 +7,11 @@
 <meta name="description" content="लोकल जानकारी, गाँव से शहर तक">
 <meta name="theme-color" content="#0b1120">
 
-<!-- 🗺️ LEAFLET MAP CSS (Free Map API) 🗺️ -->
+<!-- 🗺️ LEAFLET MAP CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
-/* 🌌 CSS VARIABLES (For Easy Light/Dark Theme Toggle) 🌌 */
+/* 🌌 CSS VARIABLES (Theme Toggle) 🌌 */
 :root { 
   --primary: #0b1120;       
   --primary-light: #1e293b;  
@@ -45,8 +45,6 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; color: v
 
 /* 🌐 TOP BAR */
 .topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;}
-.topbar-left { display: flex; align-items: center; gap: 10px; }
-.back-arrow { font-size: 20px; color: var(--text-dark); cursor: pointer; padding: 4px 8px; border-radius: 50%; background: rgba(128,128,128,0.1); display: none; }
 .logo-area { display: flex; align-items: center; gap: 10px; }
 .logo-icon { font-size: 24px; }
 .app-title { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px;}
@@ -61,14 +59,6 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; color: v
 .location-selector span { font-size: 10px; color: #94a3b8; }
 
 main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-index: 10; }
-
-/* 🖼️ HERO BANNER */
-.hero-banner { background: linear-gradient(90deg, #1e3a8a, #0f172a); border-radius: var(--radius); padding: 16px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border: 1px solid #2563eb; position: relative; overflow: hidden;}
-.hero-icon { font-size: 40px; z-index: 2;}
-.hero-text { z-index: 2; flex: 1; color: white;}
-.hero-text b { font-size: 15px; display: block; margin-bottom: 4px; line-height: 1.3;}
-.hero-text p { font-size: 11px; font-weight: 600; color: #cbd5e1;}
-.hero-badge { background: #fde047; color: #854d0e; font-size: 10px; font-weight: 900; padding: 4px 8px; border-radius: 6px; position: absolute; right: 12px; top: 12px;}
 
 /* 🔍 MAIN SEARCH BOX */
 .search-box { background: var(--card-bg); padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px; border: 1px solid var(--border);}
@@ -86,7 +76,6 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .cat-info-horz { flex: 1; }
 .cat-title-horz { font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
 .cat-sub-horz { font-size: 10px; font-weight: 600; color: var(--text-muted); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
-.cat-arrow { font-size: 14px; color: var(--text-muted); }
 
 .bg-green { background: linear-gradient(135deg, #4ade80, #16a34a); color: white;}
 .bg-purple { background: linear-gradient(135deg, #c084fc, #9333ea); color: white;}
@@ -102,7 +91,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .story-container::-webkit-scrollbar { display: none; }
 .story-item { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; width: 66px; flex-shrink: 0;}
 .story-ring { width: 62px; height: 62px; border-radius: 50%; background: linear-gradient(45deg, #f97316, #ec4899, #8b5cf6); padding: 3px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
-.story-img-box { width: 100%; height: 100%; border-radius: 50%; background: var(--primary); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 24px;}
+.story-img-box { width: 100%; height: 100%; border-radius: 50%; background: var(--primary); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 24px; overflow: hidden;}
 .story-name { font-size: 10px; font-weight: 700; color: var(--text-dark); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;}
 
 /* STORY VIEW MODAL */
@@ -115,14 +104,14 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .story-dp { width: 36px; height: 36px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px;}
 .story-title { font-size: 14px; font-weight: 800; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
 .story-close { font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
-.story-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e3a8a, #0f172a); padding: 30px; text-align: center; color: white;}
-.story-offer-badge { background: #fde047; color: #b45309; font-size: 14px; font-weight: 900; padding: 6px 16px; border-radius: 50px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
-.story-desc { font-size: 22px; font-weight: 800; line-height: 1.4; margin-bottom: 20px; white-space: pre-wrap;}
+.story-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e3a8a, #0f172a); padding: 30px; text-align: center; color: white; position: relative;}
+.story-offer-badge { background: #fde047; color: #b45309; font-size: 14px; font-weight: 900; padding: 6px 16px; border-radius: 50px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+.story-desc { font-size: 18px; font-weight: 800; line-height: 1.4; margin-bottom: 15px; white-space: pre-wrap; z-index: 2;}
+.story-image-show { max-width: 100%; max-height: 45vh; border-radius: 12px; border: 3px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 2; margin-bottom: 15px; object-fit: contain; }
 .story-footer { padding: 20px; background: rgba(0,0,0,0.5); display: flex; gap: 10px;}
 
 /* COMMON CARDS & FORMS */
 .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; }
-.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: var(--text-dark); }
 .field { margin-bottom: 16px; width: 100%; }
 .field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
 .input-wrap { display: flex; align-items: center; background: var(--primary); border: 1px solid var(--border); border-radius: 12px; padding: 0 14px;}
@@ -149,7 +138,6 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .shop-info { flex: 1; width: 100%; }
 .shop-info h3 { font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
 .shop-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;}
-.shop-dist { background: rgba(59, 130, 246, 0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; color: #60a5fa; font-weight: 800;}
 .status-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 6px; }
 .status-open { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
 .status-closed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
@@ -169,7 +157,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border); position: relative;}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* AI BOX SPECIFIC */
+/* AI BOX & TOASTS */
 .ai-box { background: var(--card-bg); border-radius: 24px; padding: 20px; max-width: 400px; width: 90%; margin: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.6); border: 1px solid var(--border); position: relative; display: flex; flex-direction: column;}
 .chat-area { height: 220px; overflow-y: auto; background: var(--primary); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border: 1px solid var(--border);}
 .msg-b { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--text-dark);}
@@ -178,12 +166,10 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .ai-opts { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-height: 120px; overflow-y: auto; padding: 4px;}
 .ai-btn { background: var(--primary); border: 1px solid var(--border); color: var(--text-dark); padding: 6px 12px; border-radius: 50px; font-size: 11px; font-weight: 800; cursor: pointer; }
 
-/* TOASTS */
 .toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 99999999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px;}
 .toast { background: #1e293b; color: white; padding: 14px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; border: 1px solid #334155;}
 .toast.show { transform: translateY(0); opacity: 1; }
 .toast.error { border-left: 4px solid #ef4444; }
-.toast.success { border-left: 4px solid #10b981; }
 
 /* SWITCH */
 .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
@@ -193,9 +179,19 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 input:checked + .slider { background-color: rgba(16, 185, 129, 0.2); border-color: var(--accent); }
 input:checked + .slider:before { transform: translateX(22px); background-color: var(--accent); }
 
-/* MAP CONTAINER */
 #map { width: 100%; height: 250px; border-radius: 12px; margin-top: 10px; z-index: 1;}
 .map-search-bar { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--primary); color: var(--text-dark); margin-bottom: 10px; font-size: 14px;}
+
+/* 📤 CUSTOM SHARE MODAL CSS 📤 */
+.share-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
+.share-item { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; cursor: pointer;}
+.share-icon-circle { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.2s;}
+.share-item:active .share-icon-circle { transform: scale(0.9); }
+.wa-bg { background: #25D366; }
+.fb-bg { background: #1877F2; }
+.tg-bg { background: #0088cc; }
+.cp-bg { background: #64748b; }
+.share-text { font-size: 11px; font-weight: 700; color: var(--text-dark); }
 </style>
 </head>
 <body class="lang-hi theme-dark">
@@ -204,7 +200,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 
 <div class="topbar">
    <div class="topbar-left">
-       <div class="back-arrow" id="backBtn" onclick="goHome()">←</div>
        <div class="logo-area">
            <div class="logo-icon">🏘️</div>
            <div>
@@ -213,15 +208,16 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
            </div>
        </div>
    </div>
+   <!-- 🔥 PREMIUM ROUND ACTION BUTTONS 🔥 -->
    <div class="top-actions">
        <div class="action-icon" onclick="toggleTheme()" id="themeBtn" title="Theme">☀️</div>
-       <div class="action-icon" onclick="shareApp()" title="Share">📤</div>
+       <div class="action-icon" onclick="openShareModal()" title="Share">📤</div>
        <div class="action-icon" onclick="document.getElementById('aiModal').classList.remove('hidden')" title="Help">🤖</div>
        <div class="action-icon lang-icon" onclick="toggleLang()" id="langBtn" title="Language">EN</div>
    </div>
 </div>
 
-<!-- 🔥 CLICKABLE LOCATION SELECTOR 🔥 -->
+<!-- 📍 CLICKABLE LOCATION SELECTOR -->
 <div class="location-selector" onclick="detectUserLocation(false)">
     <span style="font-size: 16px;">📍</span> <span class="hi" id="locTextHi" style="font-size: 13px;">आपकी लोकेशन (10 KM दायरा) सेट करें</span><span class="en" id="locTextEn" style="font-size: 13px;">Set Location (10 KM Radius)</span> <span>▼</span>
 </div>
@@ -282,20 +278,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">खाना व रेस्टोरेंट</span><span class="en">Food</span></div>
                     <div class="cat-sub-horz"><span class="hi">रेस्टोरेंट, ढाबा, मिठाई</span><span class="en">Restaurant, Hotel, Dhaba</span></div>
-                </div>
-            </div>
-            <div class="cat-card-horz" onclick="showToast(t('वाहन व यातायात लिस्ट जल्द आ रही है!', 'Transport list coming soon!'))">
-                <div class="cat-icon-horz bg-cyan">🚗</div>
-                <div class="cat-info-horz">
-                    <div class="cat-title-horz"><span class="hi">वाहन व यातायात</span><span class="en">Transport</span></div>
-                    <div class="cat-sub-horz"><span class="hi">ऑटो, बस, टैक्सी, पेट्रोल पंप</span><span class="en">Auto, Bus, Taxi, Fuel</span></div>
-                </div>
-            </div>
-            <div class="cat-card-horz" onclick="showToast(t('घर व प्रॉपर्टी लिस्ट जल्द आ रही है!', 'Real Estate list coming soon!'))">
-                <div class="cat-icon-horz bg-indigo">🏠</div>
-                <div class="cat-info-horz">
-                    <div class="cat-title-horz"><span class="hi">घर व प्रॉपर्टी</span><span class="en">Real Estate</span></div>
-                    <div class="cat-sub-horz"><span class="hi">किराए का मकान, प्लॉट, फ्लैट</span><span class="en">Rent House, Plot, Flat</span></div>
                 </div>
             </div>
         </div>
@@ -412,6 +394,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
+            <!-- MAP PICKER & ADDRESS FIELD -->
             <div class="field">
                 <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
                 <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openRealMapPicker()">
@@ -419,8 +402,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </button>
                 <div class="input-wrap" style="align-items: flex-start; padding-top:10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(16, 185, 129, 0.3);">
                     <span style="margin-top:2px;">🏠</span>
-                    <textarea rows="3" id="addLoc" style="color:var(--accent); font-weight:700; font-size:13px; padding-top:0;" placeholder="मैप से पता यहाँ आएगा... (आप इसे खुद भी टाइप कर सकते हैं)"></textarea>
-                    <span style="font-size:16px; margin-top:2px; opacity:0.8; cursor:pointer;" onclick="document.getElementById('addLoc').focus()" title="Edit Address">✏️</span>
+                    <textarea rows="3" id="addLoc" style="font-weight:700; font-size:13px; padding-top:0;" placeholder="मैप से पता यहाँ आएगा... (आप इसे खुद भी टाइप कर सकते हैं)"></textarea>
                 </div>
             </div>
 
@@ -440,6 +422,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <h2 style="justify-content: center; font-size: 20px; margin-bottom: 4px;" id="profileName">My Profile</h2>
             <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;" id="profilePhone">+91 XXXXXXXXXX</p>
             
+            <!-- 👑 ADMIN DASHBOARD 👑 -->
             <div id="adminPanel" style="display:none; background: linear-gradient(135deg, #b91c1c, #991b1b); color: white; padding: 16px; border-radius: 16px; margin-bottom: 20px; text-align: left; box-shadow: 0 4px 15px rgba(185, 28, 28, 0.4);">
                 <div style="font-size: 16px; font-weight: 900; margin-bottom: 10px;">👑 Admin Dashboard</div>
                 <div style="display: flex; gap: 10px;">
@@ -452,9 +435,9 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                         <div style="font-size: 10px; font-weight: 600;">Active Offers</div>
                     </div>
                 </div>
-                <div style="margin-top:10px; font-size:10px; color:#fca5a5; font-weight: 700;">* You have special Delete power on all items.</div>
             </div>
 
+            <!-- 🔥 SHOP STATUS TOGGLE 🔥 -->
             <div id="shopStatusWrap" style="display:none; background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="display:flex; gap:14px; align-items:center; margin-bottom: 16px;">
                     <div style="width: 46px; height: 46px; background: var(--card-bg); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:20px; border: 1px solid var(--border);">🏬</div>
@@ -479,6 +462,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </div>
             </div>
 
+            <!-- 🔥 ADD STORY BUTTON (Visible only if user has a shop) 🔥 -->
             <div id="addStoryWrap" style="display:none; background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">🔥 <span class="hi">अपना Offer / Story लगाएँ</span><span class="en">Post an Offer / Story</span></div>
                 <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;"><span class="hi">यह होम स्क्रीन पर सबसे ऊपर 24 घंटे तक दिखेगा।</span><span class="en">Will be live at the top for 24 hours.</span></p>
@@ -488,9 +472,10 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <button class="btn" style="padding: 10px; font-size: 13px; margin: 0; background: linear-gradient(90deg, #ec4899, #f97316); color: white;" onclick="document.getElementById('addStoryModal').classList.remove('hidden')">➕ <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></button>
             </div>
 
+            <!-- MESSAGE FOR NORMAL CUSTOMERS -->
             <div id="customerMsgWrap" style="display:none; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">
-                <span class="hi">आपने अभी तक अपनी कोई जानकारी (दुकान/सर्विस) नहीं जोड़ी है। '➕ जोड़ें' बटन से पहले जानकारी जोड़ें।</span>
-                <span class="en">You haven't added any info yet. Use the '➕ Add' button below to add your shop/service.</span>
+                <span class="hi">आपने अभी तक अपनी कोई जानकारी (दुकान/सर्विस) नहीं जोड़ी है। '➕ जोड़ें' बटन से पहले जानकारी जोड़ें ताकि आप भी अपना Offer लगा सकें।</span>
+                <span class="en">You haven't added any info yet. Use the '➕ Add' button to register and unlock Offers feature.</span>
             </div>
 
             <button class="btn" onclick="logout()" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">🚪 लॉगआउट (Logout)</button>
@@ -506,6 +491,33 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
   <button id="nav-onlineTab" onclick="switchTab('onlineTab')"><div class="ico">🟢</div><span class="hi">ऑनलाइन</span><span class="en">Online</span></button>
   <button id="nav-profile" onclick="switchTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
 </nav>
+
+<!-- 📤 NATIVE SHARE MODAL (For AppCreator24) 📤 -->
+<div id="shareModal" class="modal-overlay hidden" onclick="closeShareModal(event)" style="z-index: 999999999;">
+    <div class="bottom-sheet" id="shareSheet">
+        <div class="sheet-close"></div>
+        <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; text-align: center;">📤 <span class="hi">ऐप शेयर करें</span><span class="en">Share App</span></h2>
+        
+        <div class="share-grid">
+            <a href="whatsapp://send?text=अपने इलाके की सभी दुकानें, सेवाएँ और लोकल जानकारी पाएँ 'अपना क्षेत्र' ऐप पर। अभी डाउनलोड करें: https://www.appcreator24.com/app4202235-v74isw" class="share-item">
+                <div class="share-icon-circle wa-bg">📱</div>
+                <span class="share-text">WhatsApp</span>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.appcreator24.com/app4202235-v74isw" target="_blank" class="share-item">
+                <div class="share-icon-circle fb-bg">📘</div>
+                <span class="share-text">Facebook</span>
+            </a>
+            <a href="https://t.me/share/url?url=https://www.appcreator24.com/app4202235-v74isw&text=अपने इलाके की सभी दुकानें 'अपना क्षेत्र' ऐप पर।" target="_blank" class="share-item">
+                <div class="share-icon-circle tg-bg">✈️</div>
+                <span class="share-text">Telegram</span>
+            </a>
+            <div class="share-item" onclick="copyLinkOnly()">
+                <div class="share-icon-circle cp-bg">🔗</div>
+                <span class="share-text">Copy Link</span>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- 🗺️ REAL LEAFLET MAP MODAL 🗺️ -->
 <div id="realMapModal" class="modal-overlay hidden" style="z-index: 999999999;">
@@ -524,7 +536,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- ➕ ADD STORY MODAL -->
+<!-- ➕ ADD STORY MODAL (WITH IMAGE UPLOAD) -->
 <div id="addStoryModal" class="modal-overlay hidden" onclick="closeAiModal(event)">
     <div class="bottom-sheet" id="addStorySheet">
         <div class="sheet-close"></div>
@@ -535,12 +547,12 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <div class="input-wrap">
                 <span>📑</span>
                 <select id="storyCat">
-                    <option value="🛒" class="hi">बाज़ार (Shops)</option>
-                    <option value="🛠️" class="hi">सेवाएं (Services)</option>
-                    <option value="🏥" class="hi">स्वास्थ्य (Health)</option>
-                    <option value="💼" class="hi">रोज़गार (Jobs)</option>
-                    <option value="🎓" class="hi">शिक्षा (Education)</option>
-                    <option value="🍴" class="hi">खाना (Food)</option>
+                    <option value="🛒">बाज़ार (Shops)</option>
+                    <option value="🛠️">सेवाएं (Services)</option>
+                    <option value="🏥">स्वास्थ्य (Health)</option>
+                    <option value="💼">रोज़गार (Jobs)</option>
+                    <option value="🎓">शिक्षा (Education)</option>
+                    <option value="🍴">खाना (Food)</option>
                 </select>
             </div>
         </div>
@@ -554,7 +566,16 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <label><span class="hi">पूरा विवरण (Description) *</span><span class="en">Full Description *</span></label>
             <div class="input-wrap" style="align-items: flex-start; padding-top:10px;">
                 <span style="margin-top:2px;">📝</span>
-                <textarea rows="3" id="storyDesc" placeholder="ऑफर के बारे में विस्तार से बताएं..." style="padding-top:0;"></textarea>
+                <textarea rows="2" id="storyDesc" placeholder="ऑफर के बारे में विस्तार से बताएं..." style="padding-top:0;"></textarea>
+            </div>
+        </div>
+
+        <!-- 🔥 NEW: PHOTO UPLOAD FOR STORY 🔥 -->
+        <div class="field">
+            <label><span class="hi">प्रोडक्ट/ऑफर की फोटो (Optional)</span><span class="en">Offer Photo (Optional)</span></label>
+            <div class="input-wrap" style="padding: 10px; flex-direction: column; align-items: flex-start;">
+                <input type="file" id="storyImageInput" accept="image/*" onchange="handleStoryImageUpload(event)" style="font-size: 11px; margin-bottom: 10px; width: 100%;">
+                <img id="storyImagePreview" style="display:none; max-width: 100px; max-height: 100px; border-radius: 8px; border: 1px solid var(--border);">
             </div>
         </div>
 
@@ -578,7 +599,9 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     
     <div class="story-content" id="svBg">
         <div class="story-offer-badge" id="svBadge">दिवाली स्पेशल छूट!</div>
-        <div class="story-desc" id="svDesc" style="white-space: pre-wrap;">आज सभी किराने के सामान पर 20% की छूट। तुरंत विजिट करें।</div>
+        <!-- Image Area -->
+        <img id="svImg" class="story-image-show" style="display:none;">
+        <div class="story-desc" id="svDesc">विवरण यहाँ आएगा...</div>
     </div>
     
     <div class="story-footer">
@@ -619,18 +642,10 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
     <div class="ai-opts">
        <button class="ai-btn" onclick="askAI('why_built')">🎯 <span class="hi">यह ऐप क्यों बनाया गया है?</span></button>
-       <button class="ai-btn" onclick="askAI('how_works')">⚙️ <span class="hi">यह कैसे काम करता है?</span></button>
        <button class="ai-btn" onclick="askAI('add')">➕ <span class="hi">अपनी दुकान कैसे जोड़ें?</span></button>
        <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह ऐप फ्री है?</span></button>
        <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस चालू/बंद कैसे करें?</span></button>
-       <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span></button>
        <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Offer (Story) कैसे लगाएँ?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_bazaar')">🛒 <span class="hi">'बाज़ार' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_health')">🏥 <span class="hi">'स्वास्थ्य' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_jobs')">💼 <span class="hi">'रोज़गार' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_edu')">🎓 <span class="hi">'शिक्षा' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_food')">🍴 <span class="hi">'खाना' केटेगरी में क्या है?</span></button>
     </div>
   </div>
 </div>
@@ -651,15 +666,11 @@ let map, marker;
 let userLat = 28.6139; 
 let userLng = 77.2090;
 let isLocationTracked = false;
+let currentStoryImageBase64 = ""; // Variable to hold compressed image
 
 let activeTab = localStorage.getItem('ac_current_tab') || 'home';
 let shopsData = [];
 let storiesData = [];
-
-// 🔥 SAFE STRING FIX FOR STORIES AND MODALS (Fixes the clicking bug) 🔥
-function safeStr(str) {
-    return String(str || "").replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, "\\n").replace(/\r/g, "");
-}
 
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
@@ -688,44 +699,35 @@ function toggleTheme() {
 function showToast(message, type = 'success') {
     const toastBox = document.getElementById('toastBox');
     toastBox.innerHTML = ""; 
-    
     const toast = document.createElement('div');
     toast.className = `toast ${type} show`;
     toast.innerHTML = type === 'error' ? `⚠️ ${message}` : `✅ ${message}`;
     toastBox.appendChild(toast);
-    
-    setTimeout(() => { 
-        toast.classList.remove('show'); 
-        setTimeout(() => { toast.remove(); }, 300); 
-    }, 3000);
+    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => { toast.remove(); }, 300); }, 3000);
 }
 
-function shareApp() {
-    const shareUrl = "https://www.appcreator24.com/app4202235-v74isw";
-    const shareText = "अपने इलाके की सभी दुकानें, सेवाएँ और लोकल जानकारी पाएँ 'अपना क्षेत्र' ऐप पर। अभी डाउनलोड करें: ";
-    
-    if (navigator.share) {
-        navigator.share({ title: 'अपना क्षेत्र', text: shareText, url: shareUrl })
-        .catch((error) => console.log('Error sharing:', error));
-    } else {
-        const dummy = document.createElement('input');
-        const text = shareText + shareUrl;
-        document.body.appendChild(dummy);
-        dummy.value = text;
-        dummy.select();
-        document.execCommand('copy');
-        document.body.removeChild(dummy);
-        showToast(t("लिंक कॉपी हो गया! अब आप इसे WhatsApp पर पेस्ट कर सकते हैं।", "Link copied to clipboard!"));
+// 📤 NATIVE SHARE MODAL CONTROLS 📤
+function openShareModal() { document.getElementById('shareModal').classList.remove('hidden'); }
+function closeShareModal(e) {
+    if(e.target.id === 'shareModal' || e.target.classList.contains('sheet-close')) {
+        document.getElementById('shareModal').classList.add('hidden');
     }
+}
+function copyLinkOnly() {
+    const dummy = document.createElement('input');
+    dummy.value = "https://www.appcreator24.com/app4202235-v74isw";
+    document.body.appendChild(dummy);
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
+    showToast(t("लिंक कॉपी हो गया!", "Link copied to clipboard!"));
+    document.getElementById('shareModal').classList.add('hidden');
 }
 
 function getDistance(lat1, lon1, lat2, lon2) {
-    var R = 6371; 
-    var dLat = (lat2 - lat1) * Math.PI / 180;
-    var dLon = (lon2 - lon1) * Math.PI / 180; 
+    var R = 6371; var dLat = (lat2 - lat1) * Math.PI / 180; var dLon = (lon2 - lon1) * Math.PI / 180; 
     var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2); 
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    return R * c; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); return R * c; 
 }
 
 function detectUserLocation(silent = false) {
@@ -733,90 +735,60 @@ function detectUserLocation(silent = false) {
     if(!silent) showToast(t("GPS से आपकी लोकेशन सेट हो रही है...", "Detecting via GPS..."));
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            userLat = position.coords.latitude;
-            userLng = position.coords.longitude;
+            userLat = position.coords.latitude; userLng = position.coords.longitude;
             isLocationTracked = true;
             document.getElementById('locTextHi').innerText = "आपका क्षेत्र (10 KM दायरा)";
             document.getElementById('locTextEn').innerText = "Your Area (10 KM Radius)";
             if(!silent) showToast(t("लोकेशन सेट हो गई!", "Location set!"));
-            renderShops(); 
-            renderOnlineShops();
-        }, function(error) {
-            if(!silent) showToast(t("GPS लोकेशन चालू करें।", "Please enable GPS."), "error");
-        });
+            renderShops(); renderOnlineShops();
+        }, function(error) { if(!silent) showToast(t("GPS लोकेशन चालू करें।", "Please enable GPS."), "error"); });
     } else {
         if(!silent) showToast("Geolocation is not supported by this browser.", "error");
     }
 }
 
 let pickedLat = 0, pickedLng = 0;
-
 function openRealMapPicker() {
     document.getElementById('realMapModal').classList.remove('hidden');
     if(!map) {
         map = L.map('map').setView([userLat, userLng], 14);
-        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { 
-            maxZoom: 20, attribution: '© OpenStreetMap France' 
-        }).addTo(map);
-
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { maxZoom: 20, attribution: '© OpenStreetMap France' }).addTo(map);
         marker = L.marker([userLat, userLng], {draggable: true}).addTo(map);
-        marker.on('dragend', function(event){
-            var position = marker.getLatLng();
-            pickedLat = position.lat;
-            pickedLng = position.lng;
-        });
+        marker.on('dragend', function(event){ var position = marker.getLatLng(); pickedLat = position.lat; pickedLng = position.lng; });
     } else {
-        map.invalidateSize(); 
-        map.setView([userLat, userLng], 14);
-        marker.setLatLng([userLat, userLng]);
+        map.invalidateSize(); map.setView([userLat, userLng], 14); marker.setLatLng([userLat, userLng]);
     }
     pickedLat = userLat; pickedLng = userLng;
 }
-
 function closeRealMap() { document.getElementById('realMapModal').classList.add('hidden'); }
 
 async function searchOnMap() {
     let query = document.getElementById('mapSearchInput').value;
     if(!query) return showToast("कृपया जगह का नाम लिखें", "error");
-    
     showToast("खोज रहा है...");
     try {
         let response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
         let data = await response.json();
-        
         if(data && data.length > 0) {
-            let nLat = parseFloat(data[0].lat);
-            let nLng = parseFloat(data[0].lon);
-            map.setView([nLat, nLng], 16); 
-            marker.setLatLng([nLat, nLng]);
-            pickedLat = nLat;
-            pickedLng = nLng;
+            let nLat = parseFloat(data[0].lat); let nLng = parseFloat(data[0].lon);
+            map.setView([nLat, nLng], 16); marker.setLatLng([nLat, nLng]); pickedLat = nLat; pickedLng = nLng;
             showToast("जगह मिल गई!");
-        } else {
-            showToast("जगह नहीं मिली। सही स्पेलिंग डालें।", "error");
-        }
-    } catch(err) {
-        showToast("सर्च फेल हो गया", "error");
-    }
+        } else { showToast("जगह नहीं मिली।", "error"); }
+    } catch(err) { showToast("सर्च फेल हो गया", "error"); }
 }
 
 async function confirmMapLocation() {
-    let latStr = pickedLat.toFixed(4);
-    let lngStr = pickedLng.toFixed(4);
-    closeRealMap();
-    showToast(t("लोकेशन सेव हो रही है...", "Saving location..."));
-    
+    let latStr = pickedLat.toFixed(4); let lngStr = pickedLng.toFixed(4);
+    closeRealMap(); showToast(t("लोकेशन सेव हो रही है...", "Saving location..."));
     try {
         let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${pickedLat}&lon=${pickedLng}`);
         let data = await response.json();
-        
         let finalAddress = "";
         if(data && data.address) {
             let ad = data.address;
             let localArea = ad.road || ad.suburb || ad.neighbourhood || ad.village || ad.residential || "";
             let city = ad.city || ad.town || ad.county || "";
             let pin = ad.postcode || "";
-            
             if(localArea) finalAddress += localArea;
             if(city) { if(finalAddress) finalAddress += ", " + city; else finalAddress += city; }
             if(pin) { if(finalAddress) finalAddress += " - " + pin; else finalAddress += pin; }
@@ -825,64 +797,53 @@ async function confirmMapLocation() {
                 if(parts.length >= 2) finalAddress = parts[0] + ", " + parts[1]; else finalAddress = data.display_name;
             }
         }
-        
         if(finalAddress) { document.getElementById('addLoc').value = finalAddress.trim(); } 
         else { document.getElementById('addLoc').value = `${latStr}° N, ${lngStr}° E (मैप से)`; }
         showToast(t("लोकेशन सेट हो गई!", "Location set!"));
-        
     } catch(err) {
-        document.getElementById('addLoc').value = `${latStr}° N, ${lngStr}° E (मैप से)`;
-        showToast(t("लोकेशन सेट हो गई!", "Location set!"));
+        document.getElementById('addLoc').value = `${latStr}° N, ${lngStr}° E (मैप से)`; showToast(t("लोकेशन सेट हो गई!", "Location set!"));
     }
 }
 
 function getActiveStories() {
-    let now = Date.now();
-    return storiesData.filter(st => (now - st.time) <= 86400000); 
+    let now = Date.now(); return storiesData.filter(st => (now - st.time) <= 86400000); 
 }
 
 async function deleteAdminShop(id) {
-    if(!confirm("ADMIN: Kya aap sach me is dukaan ko delete karna chahte hain?")) return;
+    if(!confirm("Kya aap sach me is dukaan ko delete karna chahte hain?")) return;
     try {
         showToast("Delete ho raha hai...", "success");
         await fetch(API_URL + "/shops/" + id, { method: 'DELETE' });
-        showToast("Dukaan delete ho gayi!");
-        await fetchRealData();
-    } catch(e) { showToast("Database se delete nahi ho paya.", "error"); }
+        showToast("Dukaan delete ho gayi!"); await fetchRealData();
+    } catch(e) { showToast("Error during delete.", "error"); }
 }
 
 async function deleteAdminStory(id) {
-    if(!confirm("ADMIN: Kya aap sach me is Story ko delete karna chahte hain?")) return;
+    if(!confirm("Kya aap sach me is Story ko delete karna chahte hain?")) return;
     try {
         showToast("Delete ho raha hai...", "success");
         await fetch(API_URL + "/stories/" + id, { method: 'DELETE' });
-        showToast("Story delete ho gayi!");
-        await fetchRealData();
-    } catch(e) { showToast("Database se delete nahi ho paya.", "error"); }
+        showToast("Story delete ho gayi!"); await fetchRealData();
+    } catch(e) { showToast("Error during delete.", "error"); }
 }
 
+// 🔥 RENDER STORIES (Owner can delete their own story too) 🔥
 function renderStories() {
-    let html = "";
-    let activeStories = getActiveStories();
+    let html = ""; let activeStories = getActiveStories();
     
-    if(activeStories.length === 0) {
-        document.getElementById('storySectionWrap').style.display = 'none';
-        return;
-    } else {
-        document.getElementById('storySectionWrap').style.display = 'block';
-    }
+    if(activeStories.length === 0) { document.getElementById('storySectionWrap').style.display = 'none'; return; } 
+    else { document.getElementById('storySectionWrap').style.display = 'block'; }
     
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
 
     activeStories.forEach(st => {
-        let safeName = safeStr(st.name);
-        let safeBadge = safeStr(st.badge);
-        let safeDesc = safeStr(st.desc);
+        let isOwner = currentUser && (currentUser.phone === st.userPhone || currentUser.name === st.name);
+        let canDelete = isAdmin || isOwner;
         
-        let adminDelStory = isAdmin ? `<div onclick="event.stopPropagation(); deleteAdminStory(${st.id})" style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:10px; z-index:10; border:2px solid var(--primary);">✖</div>` : '';
+        let adminDelStory = canDelete ? `<div onclick="event.stopPropagation(); deleteAdminStory(${st.id})" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:10px; z-index:10; border:2px solid var(--primary); font-weight:bold;">✖</div>` : '';
 
         html += `
-        <div class="story-item" onclick="openStory('${st.icon}', '${safeName}', '${safeBadge}', '${safeDesc}')">
+        <div class="story-item" onclick="openStory(${st.id})">
             <div style="position:relative;">
                 ${adminDelStory}
                 <div class="story-ring">
@@ -897,9 +858,8 @@ function renderStories() {
 
 function renderProfileStories() {
     if(!currentUser) return;
-    let html = "";
-    let activeStories = getActiveStories();
-    let myStories = activeStories.filter(st => st.name === currentUser.name);
+    let html = ""; let activeStories = getActiveStories();
+    let myStories = activeStories.filter(st => st.userPhone === currentUser.phone || st.name === currentUser.name);
 
     if(myStories.length > 0) {
         html += `<div style="font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">⏱️ <span class="hi">आपकी लाइव Story</span><span class="en">Your Live Story</span></div>`;
@@ -913,6 +873,7 @@ function renderProfileStories() {
                         <div style="font-size:10px; color:var(--accent);">${t('24 घंटे में हट जाएगी', 'Auto-delete in 24h')}</div>
                     </div>
                 </div>
+                <button onclick="deleteAdminStory(${st.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:6px 12px; border-radius:8px; font-size:11px; font-weight:bold;">🗑️ Delete</button>
             </div>`;
         });
         document.getElementById('myActiveStoryArea').innerHTML = html;
@@ -922,19 +883,51 @@ function renderProfileStories() {
     }
 }
 
+// 🔥 IMAGE COMPRESSION FOR STORY (Base64) 🔥
+function handleStoryImageUpload(event) {
+    let file = event.target.files[0];
+    if(!file) return;
+    
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        let img = new Image();
+        img.onload = function() {
+            let canvas = document.createElement('canvas');
+            let max_size = 400; // Resize to keep database fast
+            let width = img.width; let height = img.height;
+            if (width > height) { if (width > max_size) { height *= max_size / width; width = max_size; } } 
+            else { if (height > max_size) { width *= max_size / height; height = max_size; } }
+            
+            canvas.width = width; canvas.height = height;
+            let ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            currentStoryImageBase64 = canvas.toDataURL('image/jpeg', 0.6); // Compress to 60%
+            let preview = document.getElementById('storyImagePreview');
+            preview.src = currentStoryImageBase64;
+            preview.style.display = 'block';
+        }
+        img.src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+}
+
 async function submitStory() {
     let icon = document.getElementById('storyCat').value;
     let badge = document.getElementById('storyTitle').value;
-    let desc = document.getElementById('storyDesc').value;
+    let descRaw = document.getElementById('storyDesc').value;
     let name = currentUser ? currentUser.name : "My Shop";
     
-    if(!badge || !desc) { showToast(t("कृपया हेडिंग और विवरण ज़रूर भरें!", "Please fill all fields!"), "error"); return; }
+    if(!badge || !descRaw) { showToast(t("कृपया हेडिंग और विवरण ज़रूर भरें!", "Please fill all fields!"), "error"); return; }
     
+    // 🔥 Saving image and text together safely in one string
+    let safeDesc = descRaw + (currentStoryImageBase64 ? "|||" + currentStoryImageBase64 : "");
+
     let storyObj = {
         userName: name,
         userPhone: currentUser ? currentUser.phone : "",
         badgeTitle: badge,
-        description: desc,
+        description: safeDesc,
         icon: icon
     };
 
@@ -945,19 +938,37 @@ async function submitStory() {
         document.getElementById('addStoryModal').classList.add('hidden');
         document.getElementById('storyTitle').value = '';
         document.getElementById('storyDesc').value = '';
+        document.getElementById('storyImageInput').value = '';
+        document.getElementById('storyImagePreview').style.display = 'none';
+        currentStoryImageBase64 = "";
         
         showToast(t("आपका Offer लाइव हो गया है!", "Story Live!"));
         await fetchRealData();
-    } catch(err) {
-        showToast("डेटाबेस एरर!", "error");
-    }
+    } catch(err) { showToast("डेटाबेस एरर!", "error"); }
 }
 
-function openStory(icon, title, badge, desc) {
-    document.getElementById('svIcon').innerText = icon;
-    document.getElementById('svTitle').innerText = title;
-    document.getElementById('svBadge').innerText = badge;
-    document.getElementById('svDesc').innerText = desc;
+// 🔥 SAFE STORY OPENER (Shows image if attached) 🔥
+function openStory(id) {
+    let st = storiesData.find(s => s.id === id);
+    if(!st) return;
+
+    let parts = st.desc.split("|||");
+    let textOnly = parts[0];
+    let imgData = parts[1] || "";
+
+    document.getElementById('svIcon').innerText = st.icon;
+    document.getElementById('svTitle').innerText = st.name;
+    document.getElementById('svBadge').innerText = st.badge;
+    document.getElementById('svDesc').innerText = textOnly;
+    
+    let imgEl = document.getElementById('svImg');
+    if(imgData) {
+        imgEl.src = imgData;
+        imgEl.style.display = 'block';
+    } else {
+        imgEl.src = "";
+        imgEl.style.display = 'none';
+    }
     
     let bgColors = ['linear-gradient(135deg, #1e3a8a, #0f172a)', 'linear-gradient(135deg, #065f46, #022c22)', 'linear-gradient(135deg, #9d174d, #4c0519)', 'linear-gradient(135deg, #b45309, #451a03)'];
     document.getElementById('svBg').style.background = bgColors[Math.floor(Math.random() * bgColors.length)];
@@ -966,39 +977,25 @@ function openStory(icon, title, badge, desc) {
     let fill = document.getElementById('storyProgressFill');
     viewer.classList.remove('hidden');
     
-    fill.style.transition = 'none';
-    fill.style.width = '0%';
-    setTimeout(() => {
-        fill.style.transition = 'width 5s linear';
-        fill.style.width = '100%';
-    }, 50);
+    fill.style.transition = 'none'; fill.style.width = '0%';
+    setTimeout(() => { fill.style.transition = 'width 6s linear'; fill.style.width = '100%'; }, 50);
 
     clearTimeout(storyTimer);
-    storyTimer = setTimeout(() => { closeStory(); }, 5000);
+    storyTimer = setTimeout(() => { closeStory(); }, 6000);
 }
 
-function closeStory() {
-    clearTimeout(storyTimer);
-    document.getElementById('storyViewer').classList.add('hidden');
-}
+function closeStory() { clearTimeout(storyTimer); document.getElementById('storyViewer').classList.add('hidden'); }
 
 let currentFilter = 'बाज़ार'; 
 let currentOnlineFilter = 'बाज़ार';
 
-function getFormattedDist(distKm) {
-    if(distKm < 1) return (distKm * 1000).toFixed(0) + " m";
-    return distKm.toFixed(1) + " km";
-}
-
 function renderShops() {
-    let html = "";
-    let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
+    let html = ""; let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
     
     let filtered = shopsData.filter(s => {
         let matchCat = (s.type === currentFilter);
         let dist = getDistance(userLat, userLng, s.lat, s.lng);
-        s.calculatedDist = dist; 
-        let matchDist = isLocationTracked ? (dist <= 10) : true; 
+        s.calculatedDist = dist; let matchDist = isLocationTracked ? (dist <= 10) : true; 
         return matchCat && matchDist;
     });
     
@@ -1009,8 +1006,7 @@ function renderShops() {
     filtered.forEach(shop => {
         let isOpenCheck = (shop.isOpen === true || shop.isOpen === "true" || shop.isOpen === 1 || shop.isOpen === "1");
 
-        let statusText = "";
-        let statusClass = isOpenCheck ? 'status-open' : 'status-closed';
+        let statusText = ""; let statusClass = isOpenCheck ? 'status-open' : 'status-closed';
         let shopCat = t(shop.catHi, shop.catEn);
         
         if (shop.type === "रोज़गार") {
@@ -1026,9 +1022,7 @@ function renderShops() {
         let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
         let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
-        let safeName = safeStr(shop.name);
-        let safeCat = safeStr(shopCat);
-        let safeLoc = safeStr(shop.locText);
+        let safeName = String(shop.name).replace(/'/g, "\\'"); let safeCat = String(shopCat).replace(/'/g, "\\'"); let safeLoc = String(shop.locText).replace(/'/g, "\\'");
         let onclickData = `openShopModal('${safeName}', '${safeCat}', ${isOpenCheck}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
@@ -1037,9 +1031,7 @@ function renderShops() {
             <div class="shop-info">
                 <h3>${shop.name}</h3>
                 <div style="display:flex; gap:8px; align-items:center; margin-top:6px; width:100%;">
-                    ${statusBadge}
-                    ${distTag}
-                    ${adminDeleteBtn}
+                    ${statusBadge} ${distTag} ${adminDeleteBtn}
                 </div>
             </div>
         </div>`;
@@ -1048,12 +1040,10 @@ function renderShops() {
 }
 
 function renderOnlineShops() {
-    let html = "";
-    let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
+    let html = ""; let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
     
     let filtered = shopsData.filter(s => {
-        let dist = getDistance(userLat, userLng, s.lat, s.lng);
-        s.calculatedDist = dist;
+        let dist = getDistance(userLat, userLng, s.lat, s.lng); s.calculatedDist = dist;
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
         let isOpenCheck = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1 || s.isOpen === "1");
         return s.type === currentOnlineFilter && isOpenCheck && matchDist;
@@ -1065,18 +1055,13 @@ function renderOnlineShops() {
 
     filtered.forEach(shop => {
         let shopCat = t(shop.catHi, shop.catEn);
-        if (shop.type === "रोज़गार") {
-            let jobTag = shop.isHiring ? (currentLang==='hi'?" (वर्कर चाहिए)":" (Hiring)") : (currentLang==='hi'?" (काम चाहिए)":" (Seeking Work)");
-            shopCat += jobTag;
-        }
+        if (shop.type === "रोज़गार") { let jobTag = shop.isHiring ? (currentLang==='hi'?" (वर्कर चाहिए)":" (Hiring)") : (currentLang==='hi'?" (काम चाहिए)":" (Seeking Work)"); shopCat += jobTag; }
 
         let statusBadge = `<span class="status-badge status-open">${t('🟢 चालू है', '🟢 Open')}</span>`;
         let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
         let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
-        let safeName = safeStr(shop.name);
-        let safeCat = safeStr(shopCat);
-        let safeLoc = safeStr(shop.locText);
+        let safeName = String(shop.name).replace(/'/g, "\\'"); let safeCat = String(shopCat).replace(/'/g, "\\'"); let safeLoc = String(shop.locText).replace(/'/g, "\\'");
         let onclickData = `openShopModal('${safeName}', '${safeCat}', true, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
@@ -1085,9 +1070,7 @@ function renderOnlineShops() {
             <div class="shop-info">
                 <h3>${shop.name}</h3>
                 <div style="display:flex; gap:8px; align-items:center; margin-top:6px; width:100%;">
-                    ${statusBadge}
-                    ${distTag}
-                    ${adminDeleteBtn}
+                    ${statusBadge} ${distTag} ${adminDeleteBtn}
                 </div>
             </div>
         </div>`;
@@ -1096,8 +1079,7 @@ function renderOnlineShops() {
 }
 
 function setFilter(type, element) {
-    currentFilter = type;
-    let chips = document.getElementById('filterContainer').children;
+    currentFilter = type; let chips = document.getElementById('filterContainer').children;
     for(let i=0; i<chips.length; i++) {
         chips[i].classList.remove('active');
         if(chips[i].innerText.includes(t(type, type==='बाज़ार'?'Shops':type))) { chips[i].classList.add('active'); }
@@ -1106,8 +1088,7 @@ function setFilter(type, element) {
 }
 
 function setOnlineFilter(type, element) {
-    currentOnlineFilter = type;
-    let chips = document.getElementById('onlineFilterContainer').children;
+    currentOnlineFilter = type; let chips = document.getElementById('onlineFilterContainer').children;
     for(let i=0; i<chips.length; i++) {
         chips[i].classList.remove('active');
         if(chips[i].innerText.includes(t(type, type==='बाज़ार'?'Shops':type))) { chips[i].classList.add('active'); }
@@ -1116,14 +1097,12 @@ function setOnlineFilter(type, element) {
 }
 
 function openCategory(type) {
-    switchTab('bazaar');
-    setFilter(type);
+    switchTab('bazaar'); setFilter(type);
     let chips = document.getElementById('filterContainer').children;
     for(let i=0; i<chips.length; i++) {
         chips[i].classList.remove('active');
         if(chips[i].innerText.includes(t(type, type==='बाज़ार'?'Shops':type))) {
-            chips[i].classList.add('active');
-            chips[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            chips[i].classList.add('active'); chips[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
     }
 }
@@ -1136,25 +1115,18 @@ function doAuth() {
     currentUser = { phone: phone, name: name };
     localStorage.setItem('ac_user', JSON.stringify(currentUser));
     
-    if(phone === ADMIN_PHONE) {
-        showToast("👑 Welcome Admin! Special powers activated.");
-    } else {
-        showToast(t("सफलतापूर्वक लॉगिन हो गया!", "Login Successful!"));
-    }
-    
+    if(phone === ADMIN_PHONE) { showToast("👑 Welcome Admin! Special powers activated."); } 
+    else { showToast(t("सफलतापूर्वक लॉगिन हो गया!", "Login Successful!")); }
     switchTab('profile'); 
 }
 
 function logout() {
-    currentUser = null;
-    localStorage.removeItem('ac_user');
-    showToast(t("लॉगआउट हो गया।", "Logged Out."));
-    switchTab('home');
+    currentUser = null; localStorage.removeItem('ac_user');
+    showToast(t("लॉगआउट हो गया।", "Logged Out.")); switchTab('home');
 }
 
 function updateProfileUI() {
     if(!currentUser) return;
-    
     document.getElementById('profileName').innerText = currentUser.name || "User";
     document.getElementById('profilePhone').innerText = "+91 " + currentUser.phone;
 
@@ -1165,9 +1137,7 @@ function updateProfileUI() {
         document.getElementById('adminPanel').style.display = 'block';
         document.getElementById('adminTotalShops').innerText = shopsData.length;
         document.getElementById('adminTotalStories').innerText = storiesData.length;
-    } else {
-        document.getElementById('adminPanel').style.display = 'none';
-    }
+    } else { document.getElementById('adminPanel').style.display = 'none'; }
 
     if(myShops.length > 0 || isAdmin) {
         document.getElementById('shopStatusWrap').style.display = 'block';
@@ -1179,46 +1149,33 @@ function updateProfileUI() {
             let isOpenCheck = (myShops[0].isOpen === true || myShops[0].isOpen === "true" || myShops[0].isOpen === 1 || myShops[0].isOpen === "1");
             document.getElementById('liveSwitch').checked = isOpenCheck;
             let textEl = document.getElementById('switchText');
-            if(isOpenCheck) {
-                textEl.innerHTML = t("ON (चालू है)", "ON (Active)");
-                textEl.style.color = "var(--accent)";
-            } else {
-                textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
-                textEl.style.color = "#f87171";
-            }
+            if(isOpenCheck) { textEl.innerHTML = t("ON (चालू है)", "ON (Active)"); textEl.style.color = "var(--accent)"; } 
+            else { textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)"); textEl.style.color = "#f87171"; }
         }
     } else {
         document.getElementById('shopStatusWrap').style.display = 'none';
         document.getElementById('addStoryWrap').style.display = 'none';
         document.getElementById('customerMsgWrap').style.display = 'block';
     }
-
     renderProfileStories();
 }
 
 function switchTab(tabId) {
     if((tabId === 'addShop' || tabId === 'profile') && !currentUser) { tabId = 'auth'; }
-    
-    activeTab = tabId;
-    localStorage.setItem('ac_current_tab', tabId);
-
+    activeTab = tabId; localStorage.setItem('ac_current_tab', tabId);
     if(tabId === 'profile') { updateProfileUI(); }
     
     document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-    let targetSec = document.getElementById(tabId);
-    if(targetSec) targetSec.classList.remove('hidden');
+    let targetSec = document.getElementById(tabId); if(targetSec) targetSec.classList.remove('hidden');
     
     document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
     let navId = tabId === 'onlineTab' ? 'nav-onlineTab' : ('nav-' + tabId);
-    let navBtn = document.getElementById(navId);
-    if(navBtn) navBtn.classList.add('active');
+    let navBtn = document.getElementById(navId); if(navBtn) navBtn.classList.add('active');
     
     let backBtn = document.getElementById('backBtn');
     if(tabId === 'home') { backBtn.style.display = 'none'; } else { backBtn.style.display = 'block'; }
     
-    if(tabId === 'bazaar') { renderShops(); } 
-    else if(tabId === 'onlineTab') { renderOnlineShops(); }
-    
+    if(tabId === 'bazaar') { renderShops(); } else if(tabId === 'onlineTab') { renderOnlineShops(); }
     window.scrollTo(0,0);
 }
 
@@ -1226,114 +1183,51 @@ function showTab(tabId) { switchTab(tabId); }
 function goHome() { switchTab('home'); }
 
 async function submitShop() {
-    let mainCat = document.getElementById('addMainCat').value;
-    let subCat = document.getElementById('addSubCat').value;
-    let name = document.getElementById('addName').value;
-    let locRaw = document.getElementById('addLoc').value;
+    let mainCat = document.getElementById('addMainCat').value; let subCat = document.getElementById('addSubCat').value;
+    let name = document.getElementById('addName').value; let locRaw = document.getElementById('addLoc').value;
     let cPhone = document.getElementById('addPhone').value;
-    
     if(!mainCat || !subCat || !name || !locRaw) { showToast(t("कृपया सभी ज़रूरी (*) जानकारी भरें!", "Please fill all required (*) fields!"), "error"); return; }
     
-    let isHiring = false;
-    if(mainCat === 'रोज़गार') { isHiring = document.querySelector('input[name="jobType"]:checked').value === 'hiring'; }
+    let isHiring = false; if(mainCat === 'रोज़गार') { isHiring = document.querySelector('input[name="jobType"]:checked').value === 'hiring'; }
     let icon = mainCat === "बाज़ार" ? "🏬" : (mainCat === "सेवाएं" ? "🛠️" : (mainCat === "रोज़गार" ? "💼" : (mainCat === "स्वास्थ्य" ? "🏥" : (mainCat === "खाना" ? "🍴" : "🎓"))));
     
-    let shopObj = {
-        userName: currentUser ? currentUser.name : name,
-        userPhone: currentUser ? currentUser.phone : cPhone,
-        shopName: name,
-        locationText: locRaw,
-        mainType: mainCat,
-        subTypeHi: subCat,
-        subTypeEn: subCat,
-        lat: pickedLat,
-        lng: pickedLng,
-        icon: icon,
-        isOpen: true,
-        isHiring: isHiring,
-        contactPhone: cPhone
-    };
-
+    let shopObj = { userName: currentUser ? currentUser.name : name, userPhone: currentUser ? currentUser.phone : cPhone, shopName: name, locationText: locRaw, mainType: mainCat, subTypeHi: subCat, subTypeEn: subCat, lat: pickedLat, lng: pickedLng, icon: icon, isOpen: true, isHiring: isHiring, contactPhone: cPhone };
     try {
         showToast("सेव हो रहा है...", "success");
         await fetch(API_URL + "/shops", { method: 'POST', body: JSON.stringify(shopObj), headers: {'Content-Type': 'application/json'} });
-        
         showToast(t("आपकी जानकारी सफलतापुर्वक रजिस्टर हो गई!", "Successfully registered!"));
         document.getElementById('addName').value = ''; document.getElementById('addLoc').value = '';
-        await fetchRealData();
-        openCategory(mainCat);
-    } catch(err) {
-        showToast("डेटाबेस एरर!", "error");
-    }
+        await fetchRealData(); openCategory(mainCat);
+    } catch(err) { showToast("डेटाबेस एरर!", "error"); }
 }
 
 async function toggleShopStatus(checkbox) {
-    let textEl = document.getElementById('switchText');
-    let isNowOpen = checkbox.checked;
-    
+    let textEl = document.getElementById('switchText'); let isNowOpen = checkbox.checked;
     localStorage.setItem('shop_status_open', isNowOpen);
-
-    if(isNowOpen) {
-        textEl.innerHTML = t("ON (चालू है)", "ON (Active)");
-        textEl.style.color = "var(--accent)";
-        showToast(t('स्टेटस चालू हो गया।', 'Status is now ON.'));
-    } else {
-        textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
-        textEl.style.color = "#f87171";
-        showToast(t('स्टेटस बंद हो गया।', 'Status is now OFF.'), 'error');
-    }
+    if(isNowOpen) { textEl.innerHTML = t("ON (चालू है)", "ON (Active)"); textEl.style.color = "var(--accent)"; showToast(t('स्टेटस चालू हो गया।', 'Status is now ON.')); } 
+    else { textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)"); textEl.style.color = "#f87171"; showToast(t('स्टेटस बंद हो गया।', 'Status is now OFF.'), 'error'); }
     
     let myShopIds = [];
-    shopsData.forEach(s => {
-        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
-            s.isOpen = isNowOpen;
-            myShopIds.push(s.id);
-        }
-    });
-
-    renderShops();
-    renderOnlineShops();
+    shopsData.forEach(s => { if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) { s.isOpen = isNowOpen; myShopIds.push(s.id); } });
+    renderShops(); renderOnlineShops();
 
     for (let id of myShopIds) {
-        try {
-            await fetch(API_URL + "/shops/" + id, {
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ isOpen: isNowOpen })
-            });
-        } catch(err) {
-            console.log("DB update failed for ID:", id);
-        }
+        try { await fetch(API_URL + "/shops/" + id, { method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ isOpen: isNowOpen }) }); } 
+        catch(err) { console.log("DB update failed for ID:", id); }
     }
 }
 
 function updateSubCats() {
     let mainCat = document.getElementById('addMainCat').value;
-    let subCatWrap = document.getElementById('subCatField');
-    let jobTypeWrap = document.getElementById('jobTypeField');
-    let subCatSelect = document.getElementById('addSubCat');
-    let nameLabel = document.getElementById('nameLabel');
+    let subCatWrap = document.getElementById('subCatField'); let jobTypeWrap = document.getElementById('jobTypeField');
+    let subCatSelect = document.getElementById('addSubCat'); let nameLabel = document.getElementById('nameLabel');
     
     subCatWrap.classList.remove('hidden');
     if(mainCat === 'रोज़गार') { jobTypeWrap.classList.remove('hidden'); nameLabel.innerHTML = t("नाम (ठेकेदार / आपका नाम) *", "Name (Contractor / Your Name) *"); } 
     else { jobTypeWrap.classList.add('hidden'); nameLabel.innerHTML = t("नाम (दुकान / सर्विस का नाम) *", "Name (Shop / Service Name) *"); }
 
     let opts = "";
-    if(mainCat === 'बाज़ार') { 
-        opts = `
-        <option value="किराना / जनरल स्टोर">${t("किराना / जनरल स्टोर", "General Store")}</option>
-        <option value="कपड़े / साड़ी">${t("कपड़े / साड़ी", "Clothing/Saree")}</option>
-        <option value="इलेक्ट्रॉनिक्स / मोबाइल">${t("इलेक्ट्रॉनिक्स / मोबाइल", "Electronics/Mobile")}</option>
-        <option value="जूते / चप्पल">${t("जूते / चप्पल", "Footwear")}</option>
-        <option value="हार्डवेयर / पेंट">${t("हार्डवेयर / पेंट", "Hardware/Paint")}</option>
-        <option value="ज्वेलरी / सुनार">${t("ज्वेलरी / सुनार", "Jewelry")}</option>
-        <option value="ब्यूटी पार्लर / सैलून">${t("ब्यूटी पार्लर / सैलून", "Beauty Parlor/Salon")}</option>
-        <option value="कॉस्मेटिक / चूड़ी">${t("कॉस्मेटिक / चूड़ी", "Cosmetics/Bangles")}</option>
-        <option value="स्टेशनरी / किताबें">${t("स्टेशनरी / किताबें", "Stationery/Books")}</option>
-        <option value="ऑटो पार्ट्स / गैरेज">${t("ऑटो पार्ट्स / गैरेज", "Auto Parts/Garage")}</option>
-        <option value="बीज / खाद (Agriculture)">${t("बीज / खाद (Agriculture)", "Seeds/Fertilizer")}</option>
-        <option value="अन्य दुकान (Other)">${t("अन्य दुकान (Other)", "Other Shop")}</option>`; 
-    } 
+    if(mainCat === 'बाज़ार') { opts = `<option value="किराना / जनरल स्टोर">${t("किराना / जनरल स्टोर", "General Store")}</option><option value="कपड़े / साड़ी">${t("कपड़े / साड़ी", "Clothing/Saree")}</option><option value="इलेक्ट्रॉनिक्स / मोबाइल">${t("इलेक्ट्रॉनिक्स / मोबाइल", "Electronics/Mobile")}</option><option value="जूते / चप्पल">${t("जूते / चप्पल", "Footwear")}</option><option value="हार्डवेयर / पेंट">${t("हार्डवेयर / पेंट", "Hardware/Paint")}</option><option value="ज्वेलरी / सुनार">${t("ज्वेलरी / सुनार", "Jewelry")}</option><option value="ब्यूटी पार्लर / सैलून">${t("ब्यूटी पार्लर / सैलून", "Beauty Parlor/Salon")}</option><option value="कॉस्मेटिक / चूड़ी">${t("कॉस्मेटिक / चूड़ी", "Cosmetics/Bangles")}</option><option value="स्टेशनरी / किताबें">${t("स्टेशनरी / किताबें", "Stationery/Books")}</option><option value="ऑटो पार्ट्स / गैरेज">${t("ऑटो पार्ट्स / गैरेज", "Auto Parts/Garage")}</option><option value="बीज / खाद (Agriculture)">${t("बीज / खाद (Agriculture)", "Seeds/Fertilizer")}</option><option value="अन्य दुकान (Other)">${t("अन्य दुकान (Other)", "Other Shop")}</option>`; } 
     else if(mainCat === 'सेवाएं') { opts = `<option value="प्लंबर / इलेक्ट्रीशियन">${t("प्लंबर / इलेक्ट्रीशियन", "Plumber/Electrician")}</option><option value="मैकेनिक">${t("मैकेनिक", "Mechanic")}</option>`; } 
     else if(mainCat === 'स्वास्थ्य') { opts = `<option value="अस्पताल / क्लिनिक">${t("अस्पताल / क्लिनिक", "Hospital/Clinic")}</option><option value="मेडिकल स्टोर">${t("मेडिकल स्टोर", "Medical Store")}</option>`; } 
     else if(mainCat === 'रोज़गार') { opts = `<option value="राजमिस्त्री / मज़दूर">${t("राजमिस्त्री / मज़दूर", "Mason/Labor")}</option><option value="ड्राइवर">${t("ड्राइवर", "Driver")}</option><option value="दुकान हेल्पर">${t("दुकान हेल्पर", "Shop Helper")}</option>`; } 
@@ -1343,113 +1237,35 @@ function updateSubCats() {
 }
 
 function setJobType(type) {
-    document.getElementById('rbHiring').classList.remove('active');
-    document.getElementById('rbSeeking').classList.remove('active');
-    if(type === 'hiring') {
-        document.getElementById('rbHiring').classList.add('active');
-        document.querySelector('input[value="hiring"]').checked = true;
-    } else {
-        document.getElementById('rbSeeking').classList.add('active');
-        document.querySelector('input[value="seeking"]').checked = true;
-    }
+    document.getElementById('rbHiring').classList.remove('active'); document.getElementById('rbSeeking').classList.remove('active');
+    if(type === 'hiring') { document.getElementById('rbHiring').classList.add('active'); document.querySelector('input[value="hiring"]').checked = true; } 
+    else { document.getElementById('rbSeeking').classList.add('active'); document.querySelector('input[value="seeking"]').checked = true; }
 }
 
 function openShopModal(name, cat, isOpen, loc, icon, type, isHiring, phone) {
-    document.getElementById('mShopName').textContent = name;
-    document.getElementById('mShopCat').textContent = cat;
-    document.getElementById('mShopLoc').textContent = loc;
-    document.getElementById('mShopIcon').textContent = icon;
-    
-    let statusEl = document.getElementById('mShopStatus');
-    let statusText = "";
-    if (type === "रोज़गार") {
-        if(isHiring) { statusText = isOpen ? t('🟢 अर्जेंट ज़रूरत है', '🟢 Urgent Hiring') : t('🔴 कामगार मिल गया', '🔴 Position Filled'); } 
-        else { statusText = isOpen ? t('🟢 काम के लिए खाली हूँ', '🟢 Available for Work') : t('🔴 काम मिल गया', '🔴 Hired'); }
-    } else {
-        statusText = isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🔴 Closed');
-    }
-
-    statusEl.className = isOpen ? 'status-badge status-open' : 'status-badge status-closed';
-    statusEl.innerHTML = statusText;
+    document.getElementById('mShopName').textContent = name; document.getElementById('mShopCat').textContent = cat;
+    document.getElementById('mShopLoc').textContent = loc; document.getElementById('mShopIcon').textContent = icon;
+    let statusEl = document.getElementById('mShopStatus'); let statusText = "";
+    if (type === "रोज़गार") { if(isHiring) { statusText = isOpen ? t('🟢 अर्जेंट ज़रूरत है', '🟢 Urgent Hiring') : t('🔴 कामगार मिल गया', '🔴 Position Filled'); } else { statusText = isOpen ? t('🟢 काम के लिए खाली हूँ', '🟢 Available for Work') : t('🔴 काम मिल गया', '🔴 Hired'); } } 
+    else { statusText = isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🔴 Closed'); }
+    statusEl.className = isOpen ? 'status-badge status-open' : 'status-badge status-closed'; statusEl.innerHTML = statusText;
     document.getElementById('shopModal').classList.remove('hidden');
 }
 
-function closeShopModal(e) {
-    if(e.target.id === 'shopModal' || e.target.classList.contains('sheet-close')) {
-        document.getElementById('shopModal').classList.add('hidden');
-    }
-}
-
-function closeAiModal(e) {
-    if(e.target.id === 'aiModal' || e.target.classList.contains('sheet-close') || e.target.id === 'addStoryModal') {
-        document.getElementById('aiModal').classList.add('hidden');
-        document.getElementById('addStoryModal').classList.add('hidden');
-    }
-}
+function closeShopModal(e) { if(e.target.id === 'shopModal' || e.target.classList.contains('sheet-close')) { document.getElementById('shopModal').classList.add('hidden'); } }
+function closeAiModal(e) { if(e.target.id === 'aiModal' || e.target.classList.contains('sheet-close') || e.target.id === 'addStoryModal') { document.getElementById('aiModal').classList.add('hidden'); document.getElementById('addStoryModal').classList.add('hidden'); } }
 
 function askAI(type) {
-    const chat = document.getElementById('aiChat');
-    let q = "", a = "";
-    
-    if(type === 'why_built') {
-        q = t("🎯 यह ऐप क्यों बनाया गया है?", "🎯 Why was this app built?");
-        a = t("यह ऐप आपके इलाके (लोकल एरिया) की दुकानों, ज़रूरी सेवाओं और रोज़गार की जानकारी एक जगह लाने के लिए बनाया गया है, ताकि आपको आस-पास की चीज़ें ढूँढने में कोई परेशानी न हो।", "This app is built to bring all local shops, services, and job info to one place, making it easy for you to find things nearby.");
-    }
-    else if(type === 'how_works') {
-        q = t("⚙️ यह कैसे काम करता है?", "⚙️ How does this app work?");
-        a = t("आप ऐप में 10KM के दायरे में खुली हुई दुकानें और उनके नए ऑफर देख सकते हैं। अगर आपकी अपनी कोई दुकान या सर्विस है, तो आप '➕ जोड़ें' बटन दबाकर उसे फ्री में यहाँ लिस्ट कर सकते हैं।", "You can see open shops and offers within a 10KM radius. If you have a business, you can list it for free using the '➕ Add' button.");
-    }
-    else if(type === 'add') { 
-        q = t("➕ अपनी दुकान कैसे जोड़ें?", "➕ How to add info?"); 
-        a = t("नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना मोबाइल नंबर और नाम डालकर लॉगिन करें, फिर अपनी दुकान या काम की डिटेल भरकर सेव कर दें।", "Click the '➕ Add' button below. Login with your name & number, then fill your shop/job details and save."); 
-    } 
-    else if(type === 'free') { 
-        q = t("💰 क्या यह ऐप फ्री है?", "💰 Is it free?"); 
-        a = t("जी हाँ! यह ऐप ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है। अपनी दुकान लिस्ट करने का कोई पैसा नहीं लगता।", "Yes! It is 100% Free for both customers and shopkeepers. No charges to list your business."); 
-    } 
-    else if(type === 'status') { 
-        q = t("🎚️ स्टेटस चालू/बंद कैसे करें?", "🎚️ How to toggle ON/OFF?"); 
-        a = t("नीचे '👤 प्रोफाइल' में जाएं। वहां ON/OFF का बटन (स्विच) है। जब आप काम कर रहे हों तो इसे ON (चालू) रखें ताकि ग्राहक आपको लाइव देख सकें।", "Go to '👤 Profile'. Use the ON/OFF switch there. Keep it ON when you are working so customers can see you live."); 
-    }
-    else if(type === 'login') { 
-        q = t("🔐 लॉगिन क्यों ज़रूरी है?", "🔐 Why login required?"); 
-        a = t("लॉगिन सिर्फ दुकानदारों के लिए ज़रूरी है ताकि कोई दूसरा व्यक्ति आपकी दुकान की जानकारी से छेड़छाड़ न कर सके।", "Login is required for shopkeepers to securely manage their own store and prevent others from editing it."); 
-    }
-    else if(type === 'story') { 
-        q = t("🔥 Offer (Story) कैसे लगाएँ?", "🔥 How to post Story/Offer?"); 
-        a = t("लॉगिन करके '👤 प्रोफाइल' में जाएं, वहां 'नया Offer डालें' बटन पर क्लिक करें। यह ऑफर 24 घंटे तक होम स्क्रीन पर सबको सबसे ऊपर दिखेगा।", "Login and go to '👤 Profile', click on 'Add New Offer'. This will stay at the top of the home screen for 24 hours."); 
-    }
-    else if(type === 'cat_bazaar') {
-        q = t("🛒 'बाज़ार' केटेगरी में क्या है?", "🛒 What's in 'Shops' category?");
-        a = t("इसमें आपको आस-पास के किराने की दुकान (General Store), सब्ज़ी वाले, कपड़े की दुकान (Saree/Clothes), और इलेक्ट्रॉनिक्स की दुकानों की जानकारी मिलेगी।", "Here you will find nearby Grocery stores, Vegetable vendors, Clothing, and Electronics shops.");
-    }
-    else if(type === 'cat_services') {
-        q = t("🛠️ 'सेवाएं' केटेगरी में क्या है?", "🛠️ What's in 'Services' category?");
-        a = t("इसमें आपको प्लंबर, इलेक्ट्रीशियन, मैकेनिक, और बढ़ई (Carpenter) आदि जैसी हर घर की ज़रूरी सेवाओं के नंबर और पते मिलेंगे।", "This section provides contacts for daily essential services like Plumbers, Electricians, Mechanics, and Carpenters.");
-    }
-    else if(type === 'cat_health') {
-        q = t("🏥 'स्वास्थ्य' केटेगरी में क्या है?", "🏥 What's in 'Health' category?");
-        a = t("यहाँ से आप अपने नज़दीकी अस्पताल, क्लिनिक, डॉक्टर और मेडिकल स्टोर की जानकारी और लोकेशन ढूँढ सकते हैं।", "Find information and locations of your nearest Hospitals, Clinics, Doctors, and Medical Stores here.");
-    }
-    else if(type === 'cat_jobs') {
-        q = t("💼 'रोज़गार' केटेगरी में क्या है?", "💼 What's in 'Jobs' category?");
-        a = t("अगर आपको काम की तलाश है (जैसे मज़दूरी, ड्राइविंग), या आपको अपने काम के लिए कोई वर्कर/हेल्पर चाहिए, तो आप इस केटेगरी का इस्तेमाल कर सकते हैं।", "If you are looking for work (e.g., Labor, Driving) or need a worker/helper for your business, you can use this category.");
-    }
-    else if(type === 'cat_edu') {
-        q = t("🎓 'शिक्षा' केटेगरी में क्या है?", "🎓 What's in 'Education' category?");
-        a = t("इसमें आपको इलाके के अच्छे स्कूल, कॉलेज, कंप्यूटर सेंटर और कोचिंग क्लासेस की पूरी जानकारी मिलेगी।", "Find complete information about good Schools, Colleges, Computer Centers, and Coaching Classes in your area.");
-    }
-    else if(type === 'cat_food') {
-        q = t("🍴 'खाना' केटेगरी में क्या है?", "🍴 What's in 'Food' category?");
-        a = t("भूख लगी है? यहाँ आप अपने आस-पास के बढ़िया रेस्टोरेंट, ढाबे, और होटल ढूँढ सकते हैं।", "Hungry? Find the best Restaurants, Dhabas, and Hotels nearby in this section.");
-    }
-
-    chat.innerHTML += `<div class="msg-b m-user">${q}</div>`;
-    chat.scrollTop = chat.scrollHeight;
-    setTimeout(() => {
-        chat.innerHTML += `<div class="msg-b m-ai">${a}</div>`;
-        chat.scrollTop = chat.scrollHeight;
-    }, 600);
+    const chat = document.getElementById('aiChat'); let q = "", a = "";
+    if(type === 'why_built') { q = t("🎯 यह ऐप क्यों बनाया गया है?", "🎯 Why was this app built?"); a = t("यह ऐप आपके इलाके की दुकानों, ज़रूरी सेवाओं और रोज़गार की जानकारी एक जगह लाने के लिए बनाया गया है।", "This app is built to bring all local shops, services, and job info to one place."); }
+    else if(type === 'how_works') { q = t("⚙️ यह कैसे काम करता है?", "⚙️ How does this app work?"); a = t("आप ऐप में 10KM के दायरे में खुली हुई दुकानें और उनके नए ऑफर देख सकते हैं। अगर आपकी अपनी कोई दुकान है, तो आप '➕ जोड़ें' बटन दबाकर उसे लिस्ट कर सकते हैं।", "You can see open shops and offers within a 10KM radius. If you have a business, you can list it for free using the '➕ Add' button."); }
+    else if(type === 'add') { q = t("➕ अपनी दुकान कैसे जोड़ें?", "➕ How to add info?"); a = t("नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना मोबाइल नंबर और नाम डालकर लॉगिन करें, फिर अपनी दुकान की डिटेल भरकर सेव कर दें।", "Click the '➕ Add' button below. Login with your name & number, then fill your shop/job details and save."); } 
+    else if(type === 'free') { q = t("💰 क्या यह ऐप फ्री है?", "💰 Is it free?"); a = t("जी हाँ! यह ऐप ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है। अपनी दुकान लिस्ट करने का कोई पैसा नहीं लगता।", "Yes! It is 100% Free for both customers and shopkeepers. No charges to list your business."); } 
+    else if(type === 'status') { q = t("🎚️ स्टेटस चालू/बंद कैसे करें?", "🎚️ How to toggle ON/OFF?"); a = t("नीचे '👤 प्रोफाइल' में जाएं। वहां ON/OFF का बटन (स्विच) है। जब आप काम कर रहे हों तो इसे ON (चालू) रखें।", "Go to '👤 Profile'. Use the ON/OFF switch there. Keep it ON when you are working."); }
+    else if(type === 'login') { q = t("🔐 लॉगिन क्यों ज़रूरी है?", "🔐 Why login required?"); a = t("लॉगिन सिर्फ दुकानदारों के लिए ज़रूरी है ताकि कोई दूसरा व्यक्ति आपकी दुकान की जानकारी से छेड़छाड़ न कर सके।", "Login is required for shopkeepers to securely manage their own store and prevent others from editing it."); }
+    else if(type === 'story') { q = t("🔥 Offer (Story) कैसे लगाएँ?", "🔥 How to post Story/Offer?"); a = t("लॉगिन करके '👤 प्रोफाइल' में जाएं, वहां 'नया Offer डालें' बटन पर क्लिक करें।", "Login and go to '👤 Profile', click on 'Add New Offer'."); }
+    chat.innerHTML += `<div class="msg-b m-user">${q}</div>`; chat.scrollTop = chat.scrollHeight;
+    setTimeout(() => { chat.innerHTML += `<div class="msg-b m-ai">${a}</div>`; chat.scrollTop = chat.scrollHeight; }, 600);
 }
 
 // 🟢 CLOUDFLARE DATABASE FETCHING FUNCTION 🟢
@@ -1460,85 +1276,47 @@ async function fetchRealData() {
 
         shopsData = sData.map(s => {
             let isOpenVal = true; 
-            
-            if (s.isOpen !== undefined && s.isOpen !== null) {
-                isOpenVal = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1 || s.isOpen === "1");
-            }
-            
+            if (s.isOpen !== undefined && s.isOpen !== null) { isOpenVal = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1 || s.isOpen === "1"); }
             if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
                 let savedStatus = localStorage.getItem('shop_status_open');
-                if(savedStatus !== null) {
-                    isOpenVal = (savedStatus === 'true');
-                }
+                if(savedStatus !== null) { isOpenVal = (savedStatus === 'true'); }
             }
-
             return {
-                id: s.id || Date.now(),
-                type: s.mainType || "बाज़ार",
-                name: s.shopName || s.userName,
-                catHi: s.subTypeHi || "अन्य",
-                catEn: s.subTypeEn || "Other",
-                locText: s.locationText || "Address",
-                lat: s.lat || 28.6139,
-                lng: s.lng || 77.2090,
-                icon: s.icon || "🏬",
-                isOpen: isOpenVal, 
-                isHiring: s.isHiring || false,
-                phone: s.contactPhone || s.userPhone || ""
+                id: s.id || Date.now(), type: s.mainType || "बाज़ार", name: s.shopName || s.userName, catHi: s.subTypeHi || "अन्य", catEn: s.subTypeEn || "Other",
+                locText: s.locationText || "Address", lat: s.lat || 28.6139, lng: s.lng || 77.2090, icon: s.icon || "🏬", isOpen: isOpenVal, isHiring: s.isHiring || false, phone: s.contactPhone || s.userPhone || ""
             };
         });
 
         let storyRes = await fetch(API_URL + "/stories");
         let stData = await storyRes.json();
         storiesData = stData.map(st => ({
-            id: st.id || Date.now(),
-            icon: st.icon || "🔥",
-            name: st.userName || "Shop",
-            badge: st.badgeTitle || "Offer",
-            desc: st.description || "",
-            time: Date.now() 
+            id: st.id || Date.now(), icon: st.icon || "🔥", name: st.userName || "Shop", userPhone: st.userPhone || "", badge: st.badgeTitle || "Offer", desc: st.description || "", time: Date.now() 
         }));
 
-        renderShops();
-        renderOnlineShops();
-        renderStories();
+        renderShops(); renderOnlineShops(); renderStories();
         if(currentUser && !document.getElementById('profile').classList.contains('hidden')) { updateProfileUI(); }
-    } catch (error) {
-        console.error("Fetch error:", error);
-    }
+    } catch (error) { console.error("Fetch error:", error); }
 }
 
 window.onload = async () => { 
     applyThemeAndLang();
-    setFilter('बाज़ार'); 
-    setOnlineFilter('बाज़ार');
+    setFilter('बाज़ार'); setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
     
     let savedStatus = localStorage.getItem('shop_status_open');
     if(savedStatus !== null) {
-        let isTrue = (savedStatus === 'true');
-        let sw = document.getElementById('liveSwitch');
+        let isTrue = (savedStatus === 'true'); let sw = document.getElementById('liveSwitch');
         if(sw) {
-            sw.checked = isTrue;
-            let textEl = document.getElementById('switchText');
-            if(isTrue) {
-                textEl.innerHTML = t("ON (चालू है)", "ON (Active)");
-                textEl.style.color = "var(--accent)";
-            } else {
-                textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
-                textEl.style.color = "#f87171";
-            }
+            sw.checked = isTrue; let textEl = document.getElementById('switchText');
+            if(isTrue) { textEl.innerHTML = t("ON (चालू है)", "ON (Active)"); textEl.style.color = "var(--accent)"; } 
+            else { textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)"); textEl.style.color = "#f87171"; }
         }
     }
 
     await fetchRealData();
     switchTab(activeTab);
 
-    setTimeout(() => {
-        if(!isLocationTracked) {
-            detectUserLocation(true); 
-        }
-    }, 1500);
+    setTimeout(() => { if(!isLocationTracked) { detectUserLocation(true); } }, 1500);
 };
 </script>
 </body>
