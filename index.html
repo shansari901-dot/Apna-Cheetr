@@ -43,6 +43,14 @@ body.lang-en .hi { display: none !important; }
 body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none; transition: background 0.3s, color 0.3s;}
 input, textarea, select { -webkit-user-select: auto; user-select: auto; color: var(--text-dark) !important;}
 
+/* DROPDOWN FIX FOR MOBILE APP */
+select, option {
+    pointer-events: auto !important;
+    -webkit-appearance: menulist !important;
+    appearance: auto !important;
+    cursor: pointer !important;
+}
+
 /* 🌐 TOP BAR */
 .topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;}
 .topbar-left { display: flex; align-items: center; gap: 10px; }
@@ -61,14 +69,6 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; color: v
 .location-selector span { font-size: 10px; color: #94a3b8; }
 
 main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-index: 10; }
-
-/* 🖼️ HERO BANNER */
-.hero-banner { background: linear-gradient(90deg, #1e3a8a, #0f172a); border-radius: var(--radius); padding: 16px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border: 1px solid #2563eb; position: relative; overflow: hidden;}
-.hero-icon { font-size: 40px; z-index: 2;}
-.hero-text { z-index: 2; flex: 1; color: white;}
-.hero-text b { font-size: 15px; display: block; margin-bottom: 4px; line-height: 1.3;}
-.hero-text p { font-size: 11px; font-weight: 600; color: #cbd5e1;}
-.hero-badge { background: #fde047; color: #854d0e; font-size: 10px; font-weight: 900; padding: 4px 8px; border-radius: 6px; position: absolute; right: 12px; top: 12px;}
 
 /* 🔍 MAIN SEARCH BOX */
 .search-box { background: var(--card-bg); padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px; border: 1px solid var(--border);}
@@ -528,7 +528,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 <div id="addStoryModal" class="modal-overlay hidden" onclick="closeAiModal(event)">
     <div class="bottom-sheet" id="addStorySheet">
         <div class="sheet-close"></div>
-        <h2 style="font-size: 20px; font-weight: 900; color: var(--text-dark); margin-bottom: 20px;">🔥 <span class="hi">नई स्टोरी / पोस्ट डालें</span><span class="en">Add New Post</span></h2>
+        <h2 style="font-size: 20px; font-weight: 900; color: var(--text-dark); margin-bottom: 20px;">🔥 <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></h2>
         
         <div class="field">
             <label><span class="hi">श्रेणी चुनें *</span><span class="en">Select Category *</span></label>
@@ -552,10 +552,11 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div style="font-size: 13px; font-weight: 600; color: var(--accent);"><span class="hi">फोटो जोड़ने के लिए यहाँ क्लिक करें</span></div>
                 <input type="file" id="storyPhotoInput" accept="image/*" style="display: none;" onchange="previewStoryPhoto(event)">
             </div>
+            <!-- Image Preview Area -->
             <img id="storyPhotoPreview" style="width: 100%; margin-top: 12px; border-radius: 12px; display: none; border: 1px solid var(--border); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         </div>
 
-        <button class="btn" style="background: var(--accent); color: #fff; margin-top: 10px;" onclick="submitStory()">✅ <span class="hi">प्रकाशित करें</span><span class="en">Publish</span></button>
+        <button class="btn" style="background: var(--accent); color: white; margin-top: 10px;" onclick="submitStory()">✅ <span class="hi">प्रकाशित करें</span><span class="en">Publish Story</span></button>
     </div>
 </div>
 
@@ -641,7 +642,7 @@ const ADMIN_PHONE = "7318259001";
 
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
 let currentLang = localStorage.getItem('ac_lang') || 'hi'; 
-let currentTheme = localStorage.getItem('ac_theme') || 'light'; // Light theme by default
+let currentTheme = localStorage.getItem('ac_theme') || 'light'; 
 
 let storyTimer;
 let map, marker;
@@ -839,7 +840,7 @@ function getActiveStories() {
 }
 
 async function deleteAdminShop(id) {
-    if(!confirm("ADMIN: Kya aap sach me is dukaan ko delete karna chahte hain?")) return;
+    if(!confirm("Kya aap sach me is dukaan ko delete karna chahte hain?")) return;
     try {
         showToast("Delete ho raha hai...", "success");
         await fetch(API_URL + "/shops/" + id, { method: 'DELETE' });
@@ -849,7 +850,7 @@ async function deleteAdminShop(id) {
 }
 
 async function deleteAdminStory(id) {
-    if(!confirm("ADMIN: Kya aap sach me is Story ko delete karna chahte hain?")) return;
+    if(!confirm("Kya aap sach me is Story ko delete karna chahte hain?")) return;
     try {
         showToast("Delete ho raha hai...", "success");
         await fetch(API_URL + "/stories/" + id, { method: 'DELETE' });
@@ -869,6 +870,7 @@ function renderStories() {
         document.getElementById('storySectionWrap').style.display = 'block';
     }
     
+    // Check if logged in user is Admin
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
 
     activeStories.forEach(st => {
@@ -876,12 +878,18 @@ function renderStories() {
         let safeBadge = safeStr(st.badge);
         let safeDesc = safeStr(st.desc);
         
-        let adminDelStory = isAdmin ? `<div onclick="event.stopPropagation(); deleteAdminStory(${st.id})" style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:10px; z-index:10; border:2px solid var(--primary);">✖</div>` : '';
+        // Check if the story belongs to the logged-in user
+        let isMyStory = currentUser && (st.name === currentUser.name || st.userPhone === currentUser.phone);
+        
+        // Agar user Admin hai, YA phir story usi user ki hai, toh Delete button dikhao
+        let canDelete = isAdmin || isMyStory;
+
+        let deleteBtn = canDelete ? `<div onclick="event.stopPropagation(); deleteAdminStory(${st.id})" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:white; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:12px; z-index:10; border:2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">🗑️</div>` : '';
 
         html += `
         <div class="story-item" onclick="openStory('${st.icon}', '${safeName}', '${safeBadge}', '${safeDesc}')">
             <div style="position:relative;">
-                ${adminDelStory}
+                ${deleteBtn}
                 <div class="story-ring">
                     <div class="story-img-box">${st.icon}</div>
                 </div>
@@ -896,7 +904,7 @@ function renderProfileStories() {
     if(!currentUser) return;
     let html = "";
     let activeStories = getActiveStories();
-    let myStories = activeStories.filter(st => st.name === currentUser.name);
+    let myStories = activeStories.filter(st => st.name === currentUser.name || st.userPhone === currentUser.phone);
 
     if(myStories.length > 0) {
         html += `<div style="font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">⏱️ <span class="hi">आपकी लाइव Story</span><span class="en">Your Live Story</span></div>`;
@@ -904,12 +912,13 @@ function renderProfileStories() {
             html += `
             <div style="background:var(--card-bg); border:1px solid var(--border); padding:10px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <div style="font-size:24px;">${st.icon}</div>
+                    <div style="font-size:24px;">${st.icon || '📸'}</div>
                     <div>
-                        <div style="font-size:12px; font-weight:800; color:var(--text-dark);">${st.badge}</div>
+                        <div style="font-size:12px; font-weight:800; color:var(--text-dark);">${st.badge || 'Story'}</div>
                         <div style="font-size:10px; color:var(--accent);">${t('24 घंटे में हट जाएगी', 'Auto-delete in 24h')}</div>
                     </div>
                 </div>
+                <button onclick="deleteAdminStory(${st.id})" style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; cursor:pointer;">🗑️ Delete</button>
             </div>`;
         });
         document.getElementById('myActiveStoryArea').innerHTML = html;
@@ -919,7 +928,6 @@ function renderProfileStories() {
     }
 }
 
-// ---- STORY PHOTO UPLOAD LOGIC ----
 let selectedStoryPhotoBase64 = "";
 
 function previewStoryPhoto(event) {
@@ -948,18 +956,15 @@ async function submitStory() {
     let storyObj = {
         userName: name,
         userPhone: currentUser ? currentUser.phone : "",
-        category: category,
+        badgeTitle: category,
+        description: selectedStoryPhotoBase64,
         photoData: selectedStoryPhotoBase64,
         icon: "🖼️"
     };
 
     try {
         showToast("अपलोड हो रहा है...", "success");
-        await fetch(API_URL + "/stories", { 
-            method: 'POST', 
-            body: JSON.stringify(storyObj), 
-            headers: {'Content-Type': 'application/json'} 
-        });
+        await fetch(API_URL + "/stories", { method: 'POST', body: JSON.stringify(storyObj), headers: {'Content-Type': 'application/json'} });
         
         document.getElementById('addStoryModal').classList.add('hidden');
         document.getElementById('storyPhotoPreview').style.display = 'none';
@@ -1428,7 +1433,7 @@ function askAI(type) {
     }
     else if(type === 'how_works') {
         q = t("⚙️ यह कैसे काम करता है?", "⚙️ How does this app work?");
-        a = t("आप ऐप में 10KM के दायरे में खुली हुई दुकानें और उनके नए ऑफर देख सकते हैं। अगर आपकी अपनी कोई दुकान या सर्विस है, तो आप '➕ जोड़ें' बटन दबाकर उसे फ्री में यहाँ लिस्ट कर सकते हैं।", "You can see open shops and offers within a 10KM radius. If you have a business, you can list it for free using the '➕ Add' button.");
+        a = t("आप ऐप में 10KM के दायरे में खुली हुई दुकानें और उनके नए ऑफर देख सकते हैं। अगर आपकी अपनी कोई दुकान या सर्विस है, outआप '➕ जोड़ें' बटन दबाकर उसे फ्री में यहाँ लिस्ट कर सकते हैं।", "You can see open shops and offers within a 10KM radius. If you have a business, you can list it for free using the '➕ Add' button.");
     }
     else if(type === 'add') { 
         q = t("➕ अपनी दुकान कैसे जोड़ें?", "➕ How to add info?"); 
@@ -1436,7 +1441,7 @@ function askAI(type) {
     } 
     else if(type === 'free') { 
         q = t("💰 क्या यह ऐप फ्री है?", "💰 Is it free?"); 
-        a = t("जी हाँ! यह ऐप ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है। अपनी दुकान लिस्ट करने का कोई पैसा অব্যাহত नहीं लगता।", "Yes! It is 100% Free for both customers and shopkeepers. No charges to list your business."); 
+        a = t("जी हाँ! यह ऐप ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है। अपनी दुकान लिस्ट करने का कोई पैसा नहीं लगता।", "Yes! It is 100% Free for both customers and shopkeepers. No charges to list your business."); 
     } 
     else if(type === 'status') { 
         q = t("🎚️ स्टेटस चालू/बंद कैसे करें?", "🎚️ How to toggle ON/OFF?"); 
@@ -1577,4 +1582,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-                                                                                        </html>
+  </html>
