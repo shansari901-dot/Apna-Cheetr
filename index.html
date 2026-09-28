@@ -117,7 +117,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .story-close { font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
 .story-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e3a8a, #0f172a); padding: 30px; text-align: center; color: white;}
 .story-offer-badge { background: #fde047; color: #b45309; font-size: 14px; font-weight: 900; padding: 6px 16px; border-radius: 50px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
-.story-desc { font-size: 22px; font-weight: 800; line-height: 1.4; margin-bottom: 20px;}
+.story-desc { font-size: 22px; font-weight: 800; line-height: 1.4; margin-bottom: 20px; white-space: pre-wrap;}
 .story-footer { padding: 20px; background: rgba(0,0,0,0.5); display: flex; gap: 10px;}
 
 /* COMMON CARDS & FORMS */
@@ -213,7 +213,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
            </div>
        </div>
    </div>
-   <!-- 🔥 PREMIUM ROUND ACTION BUTTONS WITH THEME TOGGLE 🔥 -->
    <div class="top-actions">
        <div class="action-icon" onclick="toggleTheme()" id="themeBtn" title="Theme">☀️</div>
        <div class="action-icon" onclick="shareApp()" title="Share">📤</div>
@@ -441,7 +440,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <h2 style="justify-content: center; font-size: 20px; margin-bottom: 4px;" id="profileName">My Profile</h2>
             <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;" id="profilePhone">+91 XXXXXXXXXX</p>
             
-            <!-- 👑 NEW ADMIN DASHBOARD (Hidden for normal users) 👑 -->
             <div id="adminPanel" style="display:none; background: linear-gradient(135deg, #b91c1c, #991b1b); color: white; padding: 16px; border-radius: 16px; margin-bottom: 20px; text-align: left; box-shadow: 0 4px 15px rgba(185, 28, 28, 0.4);">
                 <div style="font-size: 16px; font-weight: 900; margin-bottom: 10px;">👑 Admin Dashboard</div>
                 <div style="display: flex; gap: 10px;">
@@ -457,7 +455,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div style="margin-top:10px; font-size:10px; color:#fca5a5; font-weight: 700;">* You have special Delete power on all items.</div>
             </div>
 
-            <!-- 🔥 SHOP STATUS TOGGLE (Visible only if user has a shop) 🔥 -->
             <div id="shopStatusWrap" style="display:none; background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="display:flex; gap:14px; align-items:center; margin-bottom: 16px;">
                     <div style="width: 46px; height: 46px; background: var(--card-bg); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:20px; border: 1px solid var(--border);">🏬</div>
@@ -482,7 +479,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </div>
             </div>
 
-            <!-- 🔥 ADD STORY BUTTON (Visible only if user has a shop) 🔥 -->
             <div id="addStoryWrap" style="display:none; background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">🔥 <span class="hi">अपना Offer / Story लगाएँ</span><span class="en">Post an Offer / Story</span></div>
                 <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;"><span class="hi">यह होम स्क्रीन पर सबसे ऊपर 24 घंटे तक दिखेगा।</span><span class="en">Will be live at the top for 24 hours.</span></p>
@@ -492,7 +488,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <button class="btn" style="padding: 10px; font-size: 13px; margin: 0; background: linear-gradient(90deg, #ec4899, #f97316); color: white;" onclick="document.getElementById('addStoryModal').classList.remove('hidden')">➕ <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></button>
             </div>
 
-            <!-- MESSAGE FOR NORMAL CUSTOMERS -->
             <div id="customerMsgWrap" style="display:none; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">
                 <span class="hi">आपने अभी तक अपनी कोई जानकारी (दुकान/सर्विस) नहीं जोड़ी है। '➕ जोड़ें' बटन से पहले जानकारी जोड़ें।</span>
                 <span class="en">You haven't added any info yet. Use the '➕ Add' button below to add your shop/service.</span>
@@ -583,7 +578,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     
     <div class="story-content" id="svBg">
         <div class="story-offer-badge" id="svBadge">दिवाली स्पेशल छूट!</div>
-        <div class="story-desc" id="svDesc">आज सभी किराने के सामान पर 20% की छूट। तुरंत विजिट करें।</div>
+        <div class="story-desc" id="svDesc" style="white-space: pre-wrap;">आज सभी किराने के सामान पर 20% की छूट। तुरंत विजिट करें।</div>
     </div>
     
     <div class="story-footer">
@@ -648,7 +643,6 @@ const API_URL = "https://apna-chetr-dpi.ashifmd400.workers.dev";
 const ADMIN_PHONE = "7318259001"; 
 
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
-// 🔥 FIXED: Lang & Theme properly loaded from phone memory 🔥
 let currentLang = localStorage.getItem('ac_lang') || 'hi'; 
 let currentTheme = localStorage.getItem('ac_theme') || 'dark';
 
@@ -662,6 +656,11 @@ let activeTab = localStorage.getItem('ac_current_tab') || 'home';
 let shopsData = [];
 let storiesData = [];
 
+// 🔥 SAFE STRING FIX FOR STORIES AND MODALS (Fixes the clicking bug) 🔥
+function safeStr(str) {
+    return String(str || "").replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, "\\n").replace(/\r/g, "");
+}
+
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
 function applyThemeAndLang() {
@@ -672,7 +671,7 @@ function applyThemeAndLang() {
 
 function toggleLang() {
     currentLang = currentLang === 'hi' ? 'en' : 'hi';
-    localStorage.setItem('ac_lang', currentLang); // Saved to phone memory!
+    localStorage.setItem('ac_lang', currentLang);
     applyThemeAndLang();
     renderShops(); 
     renderOnlineShops();
@@ -701,17 +700,13 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-// 📤 FIXED: SHARE WITHOUT GITHUB URL 
 function shareApp() {
     const shareUrl = "https://www.appcreator24.com/app4202235-v74isw";
     const shareText = "अपने इलाके की सभी दुकानें, सेवाएँ और लोकल जानकारी पाएँ 'अपना क्षेत्र' ऐप पर। अभी डाउनलोड करें: ";
     
     if (navigator.share) {
-        navigator.share({
-            title: 'अपना क्षेत्र - Apna Chhetr',
-            text: shareText,
-            url: shareUrl,
-        }).catch((error) => console.log('Error sharing:', error));
+        navigator.share({ title: 'अपना क्षेत्र', text: shareText, url: shareUrl })
+        .catch((error) => console.log('Error sharing:', error));
     } else {
         const dummy = document.createElement('input');
         const text = shareText + shareUrl;
@@ -760,10 +755,8 @@ function openRealMapPicker() {
     document.getElementById('realMapModal').classList.remove('hidden');
     if(!map) {
         map = L.map('map').setView([userLat, userLng], 14);
-        
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { 
-            maxZoom: 20, 
-            attribution: '© OpenStreetMap France' 
+            maxZoom: 20, attribution: '© OpenStreetMap France' 
         }).addTo(map);
 
         marker = L.marker([userLat, userLng], {draggable: true}).addTo(map);
@@ -855,9 +848,7 @@ async function deleteAdminShop(id) {
         await fetch(API_URL + "/shops/" + id, { method: 'DELETE' });
         showToast("Dukaan delete ho gayi!");
         await fetchRealData();
-    } catch(e) {
-        showToast("Database se delete nahi ho paya.", "error");
-    }
+    } catch(e) { showToast("Database se delete nahi ho paya.", "error"); }
 }
 
 async function deleteAdminStory(id) {
@@ -867,12 +858,9 @@ async function deleteAdminStory(id) {
         await fetch(API_URL + "/stories/" + id, { method: 'DELETE' });
         showToast("Story delete ho gayi!");
         await fetchRealData();
-    } catch(e) {
-        showToast("Database se delete nahi ho paya.", "error");
-    }
+    } catch(e) { showToast("Database se delete nahi ho paya.", "error"); }
 }
 
-// 🔥 STORY LIST RENDERING 🔥
 function renderStories() {
     let html = "";
     let activeStories = getActiveStories();
@@ -887,9 +875,9 @@ function renderStories() {
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
 
     activeStories.forEach(st => {
-        let safeName = st.name.replace(/'/g, "\\'");
-        let safeBadge = st.badge.replace(/'/g, "\\'");
-        let safeDesc = st.desc.replace(/'/g, "\\'");
+        let safeName = safeStr(st.name);
+        let safeBadge = safeStr(st.badge);
+        let safeDesc = safeStr(st.desc);
         
         let adminDelStory = isAdmin ? `<div onclick="event.stopPropagation(); deleteAdminStory(${st.id})" style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:10px; z-index:10; border:2px solid var(--primary);">✖</div>` : '';
 
@@ -908,6 +896,7 @@ function renderStories() {
 }
 
 function renderProfileStories() {
+    if(!currentUser) return;
     let html = "";
     let activeStories = getActiveStories();
     let myStories = activeStories.filter(st => st.name === currentUser.name);
@@ -1037,9 +1026,9 @@ function renderShops() {
         let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
         let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
-        let safeName = shop.name.replace(/'/g, "\\'");
-        let safeCat = shopCat.replace(/'/g, "\\'");
-        let safeLoc = shop.locText.replace(/'/g, "\\'");
+        let safeName = safeStr(shop.name);
+        let safeCat = safeStr(shopCat);
+        let safeLoc = safeStr(shop.locText);
         let onclickData = `openShopModal('${safeName}', '${safeCat}', ${isOpenCheck}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
@@ -1066,7 +1055,6 @@ function renderOnlineShops() {
         let dist = getDistance(userLat, userLng, s.lat, s.lng);
         s.calculatedDist = dist;
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
-        
         let isOpenCheck = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1 || s.isOpen === "1");
         return s.type === currentOnlineFilter && isOpenCheck && matchDist;
     });
@@ -1086,9 +1074,9 @@ function renderOnlineShops() {
         let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
         let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
-        let safeName = shop.name.replace(/'/g, "\\'");
-        let safeCat = shopCat.replace(/'/g, "\\'");
-        let safeLoc = shop.locText.replace(/'/g, "\\'");
+        let safeName = safeStr(shop.name);
+        let safeCat = safeStr(shopCat);
+        let safeLoc = safeStr(shop.locText);
         let onclickData = `openShopModal('${safeName}', '${safeCat}', true, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
@@ -1164,7 +1152,6 @@ function logout() {
     switchTab('home');
 }
 
-// 🔥 UPDATED PROFILE UI LOGIC 🔥
 function updateProfileUI() {
     if(!currentUser) return;
     
@@ -1174,7 +1161,6 @@ function updateProfileUI() {
     let isAdmin = (currentUser.phone === ADMIN_PHONE);
     let myShops = shopsData.filter(s => s.phone === currentUser.phone || s.name === currentUser.name);
     
-    // Admin Check
     if(isAdmin) {
         document.getElementById('adminPanel').style.display = 'block';
         document.getElementById('adminTotalShops').innerText = shopsData.length;
@@ -1183,7 +1169,6 @@ function updateProfileUI() {
         document.getElementById('adminPanel').style.display = 'none';
     }
 
-    // Shop Owner Check (Only shop owners can toggle status or post story)
     if(myShops.length > 0 || isAdmin) {
         document.getElementById('shopStatusWrap').style.display = 'block';
         document.getElementById('addStoryWrap').style.display = 'block';
@@ -1191,7 +1176,6 @@ function updateProfileUI() {
         
         if(myShops.length > 0) {
             document.getElementById('dashShopName').innerText = myShops[0].name;
-            // set local switch correctly
             let isOpenCheck = (myShops[0].isOpen === true || myShops[0].isOpen === "true" || myShops[0].isOpen === 1 || myShops[0].isOpen === "1");
             document.getElementById('liveSwitch').checked = isOpenCheck;
             let textEl = document.getElementById('switchText');
@@ -1204,7 +1188,6 @@ function updateProfileUI() {
             }
         }
     } else {
-        // Normal Customer View
         document.getElementById('shopStatusWrap').style.display = 'none';
         document.getElementById('addStoryWrap').style.display = 'none';
         document.getElementById('customerMsgWrap').style.display = 'block';
@@ -1311,7 +1294,6 @@ async function toggleShopStatus(checkbox) {
     renderShops();
     renderOnlineShops();
 
-    // 📡 Sending explicit PATCH to Database
     for (let id of myShopIds) {
         try {
             await fetch(API_URL + "/shops/" + id, {
@@ -1479,9 +1461,15 @@ async function fetchRealData() {
         shopsData = sData.map(s => {
             let isOpenVal = true; 
             
-            // Database Priority (Sakti Se)
             if (s.isOpen !== undefined && s.isOpen !== null) {
                 isOpenVal = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1 || s.isOpen === "1");
+            }
+            
+            if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
+                let savedStatus = localStorage.getItem('shop_status_open');
+                if(savedStatus !== null) {
+                    isOpenVal = (savedStatus === 'true');
+                }
             }
 
             return {
@@ -1525,6 +1513,23 @@ window.onload = async () => {
     setFilter('बाज़ार'); 
     setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
+    
+    let savedStatus = localStorage.getItem('shop_status_open');
+    if(savedStatus !== null) {
+        let isTrue = (savedStatus === 'true');
+        let sw = document.getElementById('liveSwitch');
+        if(sw) {
+            sw.checked = isTrue;
+            let textEl = document.getElementById('switchText');
+            if(isTrue) {
+                textEl.innerHTML = t("ON (चालू है)", "ON (Active)");
+                textEl.style.color = "var(--accent)";
+            } else {
+                textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
+                textEl.style.color = "#f87171";
+            }
+        }
+    }
 
     await fetchRealData();
     switchTab(activeTab);
