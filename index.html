@@ -207,7 +207,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 </div>
 
 <!-- 🔥 CLICKABLE LOCATION SELECTOR 🔥 -->
-<div class="location-selector" onclick="detectUserLocation()">
+<div class="location-selector" onclick="detectUserLocation(false)">
     📍 <span class="hi" id="locTextHi">आपकी लोकेशन (10 KM दायरा) सेट करें</span><span class="en" id="locTextEn">Set Location (10 KM Radius)</span> <span>▼</span>
 </div>
 
@@ -233,7 +233,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="cat-icon-horz bg-green">🛒</div>
                 <div class="cat-info-horz">
                     <div class="cat-title-horz"><span class="hi">स्थानीय बाज़ार</span><span class="en">Local Market</span></div>
-                    <div class="cat-sub-horz"><span class="hi">किराना, सब्ज़ी, दूध, फल आदि</span><span class="en">Grocery, Veg, Milk, Fruits</span></div>
+                    <div class="cat-sub-horz"><span class="hi">किराना, सब्ज़ी, कपड़े, इलेक्ट्रॉनिक्स</span><span class="en">Grocery, Veg, Clothes, Electronics</span></div>
                 </div>
             </div>
             <div class="cat-card-horz" onclick="openCategory('सेवाएं')">
@@ -395,7 +395,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             </div>
 
             <div class="field">
-                <label id="nameLabel"><span class="hi">नाम *</span><span class="en">Name *</span></label>
+                <label id="nameLabel"><span class="hi">नाम (दुकान / सर्विस का नाम) *</span><span class="en">Name *</span></label>
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
@@ -407,8 +407,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </button>
                 <div class="input-wrap" style="align-items: flex-start; padding-top:10px; background: rgba(0,0,0,0.2);">
                     <span style="margin-top:2px;">🏠</span>
-                    <!-- READONLY HATA DIYA, AB ADDRESS EDIT BHI HO SAKTA HAI -->
-                    <textarea rows="2" id="addLoc" style="color:var(--accent); font-weight:700; font-size:12px; padding-top:0;" placeholder="लोकेशन यहाँ अपने आप आ जाएगी... या खुद टाइप करें"></textarea>
+                    <textarea rows="3" id="addLoc" style="color:var(--accent); font-weight:700; font-size:12px; padding-top:0;" placeholder="लोकेशन यहाँ अपने आप आ जाएगी... या खुद टाइप करें"></textarea>
                 </div>
             </div>
 
@@ -572,7 +571,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- 🤖 AI ASSISTANT MODAL (UPDATED WITH ALL QUESTIONS) -->
+<!-- 🤖 AI ASSISTANT MODAL -->
 <div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeAiModal(event)">
   <div class="ai-box" id="aiBoxContent">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -651,9 +650,10 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return R * c; 
 }
 
-function detectUserLocation() {
+// UPDATE: SILENT BACKGROUND GPS FETCH (No irritating toasts when app opens)
+function detectUserLocation(silent = false) {
     if(isLocationTracked) return;
-    showToast(t("GPS से आपकी लोकेशन सेट हो रही है...", "Detecting via GPS..."));
+    if(!silent) showToast(t("GPS से आपकी लोकेशन सेट हो रही है...", "Detecting via GPS..."));
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             userLat = position.coords.latitude;
@@ -661,14 +661,14 @@ function detectUserLocation() {
             isLocationTracked = true;
             document.getElementById('locTextHi').innerText = "आपका क्षेत्र (10 KM दायरा)";
             document.getElementById('locTextEn').innerText = "Your Area (10 KM Radius)";
-            showToast(t("लोकेशन सेट हो गई!", "Location set!"));
+            if(!silent) showToast(t("लोकेशन सेट हो गई!", "Location set!"));
             renderShops(); 
             renderOnlineShops();
         }, function(error) {
-            showToast(t("GPS लोकेशन चालू करें।", "Please enable GPS."), "error");
+            if(!silent) showToast(t("GPS लोकेशन चालू करें।", "Please enable GPS."), "error");
         });
     } else {
-        showToast("Geolocation is not supported by this browser.", "error");
+        if(!silent) showToast("Geolocation is not supported by this browser.", "error");
     }
 }
 
@@ -677,9 +677,8 @@ let pickedLat = 0, pickedLng = 0;
 function openRealMapPicker() {
     document.getElementById('realMapModal').classList.remove('hidden');
     if(!map) {
-        map = L.map('map').setView([userLat, userLng], 14); // ZOOM LEVEL BADHAYA GAYA HAI
+        map = L.map('map').setView([userLat, userLng], 14);
         
-        // BETTER GOOGLE MAPS LIKE STREET LAYER
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { 
             maxZoom: 20, 
             attribution: '© OpenStreetMap France | © OpenStreetMap contributors' 
@@ -701,7 +700,7 @@ function openRealMapPicker() {
 
 function closeRealMap() { document.getElementById('realMapModal').classList.add('hidden'); }
 
-// FREE ADDRESS FETCHING (Reverse Geocoding)
+// UPDATE: FETCHING FULL DETAILED ADDRESS 
 async function confirmMapLocation() {
     let latStr = pickedLat.toFixed(4);
     let lngStr = pickedLng.toFixed(4);
@@ -709,28 +708,12 @@ async function confirmMapLocation() {
     showToast(t("लोकेशन सेव हो रही है...", "Saving location..."));
     
     try {
-        // Fetching Real Address from Nominatim API
         let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${pickedLat}&lon=${pickedLng}`);
         let data = await response.json();
         
-        let address = "";
-        if(data && data.address) {
-            let area = data.address.suburb || data.address.neighbourhood || data.address.village || "";
-            let city = data.address.city || data.address.town || data.address.county || "";
-            let state = data.address.state || "";
-            
-            if(area) address += area + ", ";
-            if(city) address += city + ", ";
-            if(state) address += state;
-            
-            // Fallback if no specific area found
-            if(address.length < 5 && data.display_name) {
-                address = data.display_name.substring(0, 50) + "...";
-            }
-        }
-        
-        if(address.length > 2) {
-            document.getElementById('addLoc').value = address;
+        // Use full detailed string provided by API
+        if(data && data.display_name) {
+            document.getElementById('addLoc').value = data.display_name;
         } else {
             document.getElementById('addLoc').value = `${latStr}° N, ${lngStr}° E (मैप से)`;
         }
@@ -1143,6 +1126,7 @@ function toggleShopStatus(checkbox) {
     }
 }
 
+// UPDATE: Added many more subcategories for Bazaar
 function updateSubCats() {
     let mainCat = document.getElementById('addMainCat').value;
     let subCatWrap = document.getElementById('subCatField');
@@ -1155,7 +1139,21 @@ function updateSubCats() {
     else { jobTypeWrap.classList.add('hidden'); nameLabel.innerHTML = t("नाम (दुकान / सर्विस का नाम) *", "Name (Shop / Service Name) *"); }
 
     let opts = "";
-    if(mainCat === 'बाज़ार') { opts = `<option value="किराना / जनरल स्टोर">${t("किराना / जनरल स्टोर", "General Store")}</option><option value="कपड़े / साड़ी">${t("कपड़े / साड़ी", "Clothing/Saree")}</option><option value="इलेक्ट्रॉनिक्स">${t("इलेक्ट्रॉनिक्स", "Electronics")}</option>`; } 
+    if(mainCat === 'बाज़ार') { 
+        opts = `
+        <option value="किराना / जनरल स्टोर">${t("किराना / जनरल स्टोर", "General Store")}</option>
+        <option value="कपड़े / साड़ी">${t("कपड़े / साड़ी", "Clothing/Saree")}</option>
+        <option value="इलेक्ट्रॉनिक्स / मोबाइल">${t("इलेक्ट्रॉनिक्स / मोबाइल", "Electronics/Mobile")}</option>
+        <option value="जूते / चप्पल">${t("जूते / चप्पल", "Footwear")}</option>
+        <option value="हार्डवेयर / पेंट">${t("हार्डवेयर / पेंट", "Hardware/Paint")}</option>
+        <option value="ज्वेलरी / सुनार">${t("ज्वेलरी / सुनार", "Jewelry")}</option>
+        <option value="ब्यूटी पार्लर / सैलून">${t("ब्यूटी पार्लर / सैलून", "Beauty Parlor/Salon")}</option>
+        <option value="कॉस्मेटिक / चूड़ी">${t("कॉस्मेटिक / चूड़ी", "Cosmetics/Bangles")}</option>
+        <option value="स्टेशनरी / किताबें">${t("स्टेशनरी / किताबें", "Stationery/Books")}</option>
+        <option value="ऑटो पार्ट्स / गैरेज">${t("ऑटो पार्ट्स / गैरेज", "Auto Parts/Garage")}</option>
+        <option value="बीज / खाद (Agriculture)">${t("बीज / खाद (Agriculture)", "Seeds/Fertilizer")}</option>
+        <option value="अन्य दुकान (Other)">${t("अन्य दुकान (Other)", "Other Shop")}</option>`; 
+    } 
     else if(mainCat === 'सेवाएं') { opts = `<option value="प्लंबर / इलेक्ट्रीशियन">${t("प्लंबर / इलेक्ट्रीशियन", "Plumber/Electrician")}</option><option value="मैकेनिक">${t("मैकेनिक", "Mechanic")}</option>`; } 
     else if(mainCat === 'स्वास्थ्य') { opts = `<option value="अस्पताल / क्लिनिक">${t("अस्पताल / क्लिनिक", "Hospital/Clinic")}</option><option value="मेडिकल स्टोर">${t("मेडिकल स्टोर", "Medical Store")}</option>`; } 
     else if(mainCat === 'रोज़गार') { opts = `<option value="राजमिस्त्री / मज़दूर">${t("राजमिस्त्री / मज़दूर", "Mason/Labor")}</option><option value="ड्राइवर">${t("ड्राइवर", "Driver")}</option><option value="दुकान हेल्पर">${t("दुकान हेल्पर", "Shop Helper")}</option>`; } 
@@ -1209,7 +1207,7 @@ function closeAiModal(e) {
     }
 }
 
-// 🤖 UPDATED AI BOT FUNCTION WITH ALL CATEGORIES & DETAILS 🤖
+// 🤖 AI BOT FUNCTION
 function askAI(type) {
     const chat = document.getElementById('aiChat');
     let q = "", a = "";
@@ -1247,7 +1245,7 @@ function askAI(type) {
         a = t("इसमें आपको आस-पास के किराने की दुकान (General Store), सब्ज़ी वाले, कपड़े की दुकान (Saree/Clothes), और इलेक्ट्रॉनिक्स की दुकानों की जानकारी मिलेगी।", "Here you will find nearby Grocery stores, Vegetable vendors, Clothing, and Electronics shops.");
     }
     else if(type === 'cat_services') {
-        q = t("🛠️ 'सेवाएं' केटेगरी में primary?", "🛠️ What's in 'Services' category?");
+        q = t("🛠️ 'सेवाएं' केटेगरी में क्या है?", "🛠️ What's in 'Services' category?");
         a = t("इसमें आपको प्लंबर, इलेक्ट्रीशियन, मैकेनिक, और बढ़ई (Carpenter) आदि जैसी हर घर की ज़रूरी सेवाओं के नंबर और पते मिलेंगे।", "This section provides contacts for daily essential services like Plumbers, Electricians, Mechanics, and Carpenters.");
     }
     else if(type === 'cat_health') {
@@ -1325,13 +1323,13 @@ window.onload = async () => {
     // 1. Data load hoga
     await fetchRealData();
 
-    // 2. App khulne ke theek dedh (1.5) second baad automatic location permission maangega
+    // 2. App khulne ke theek dedh (1.5) second baad SILENT location permission maangega
     setTimeout(() => {
         if(!isLocationTracked) {
-            detectUserLocation();
+            detectUserLocation(true); // 'true' means SILENT (No Toast)
         }
     }, 1500);
 };
 </script>
 </body>
-                                                                                   </html>
+</html>
