@@ -399,6 +399,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
+            <!-- MAP PICKER -->
             <div class="field">
                 <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
                 <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openRealMapPicker()">
@@ -406,7 +407,8 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </button>
                 <div class="input-wrap" style="align-items: flex-start; padding-top:10px; background: rgba(0,0,0,0.2);">
                     <span style="margin-top:2px;">🏠</span>
-                    <textarea rows="2" id="addLoc" readonly style="color:var(--accent); font-weight:700; font-size:12px; padding-top:0;" placeholder="लोकेशन यहाँ अपने आप आ जाएगी..."></textarea>
+                    <!-- READONLY HATA DIYA, AB ADDRESS EDIT BHI HO SAKTA HAI -->
+                    <textarea rows="2" id="addLoc" style="color:var(--accent); font-weight:700; font-size:12px; padding-top:0;" placeholder="लोकेशन यहाँ अपने आप आ जाएगी... या खुद टाइप करें"></textarea>
                 </div>
             </div>
 
@@ -675,8 +677,14 @@ let pickedLat = 0, pickedLng = 0;
 function openRealMapPicker() {
     document.getElementById('realMapModal').classList.remove('hidden');
     if(!map) {
-        map = L.map('map').setView([userLat, userLng], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+        map = L.map('map').setView([userLat, userLng], 14); // ZOOM LEVEL BADHAYA GAYA HAI
+        
+        // BETTER GOOGLE MAPS LIKE STREET LAYER
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { 
+            maxZoom: 20, 
+            attribution: '© OpenStreetMap France | © OpenStreetMap contributors' 
+        }).addTo(map);
+
         marker = L.marker([userLat, userLng], {draggable: true}).addTo(map);
         marker.on('dragend', function(event){
             var position = marker.getLatLng();
@@ -685,7 +693,7 @@ function openRealMapPicker() {
         });
     } else {
         map.invalidateSize(); 
-        map.setView([userLat, userLng], 13);
+        map.setView([userLat, userLng], 14);
         marker.setLatLng([userLat, userLng]);
     }
     pickedLat = userLat; pickedLng = userLng;
@@ -693,12 +701,45 @@ function openRealMapPicker() {
 
 function closeRealMap() { document.getElementById('realMapModal').classList.add('hidden'); }
 
-function confirmMapLocation() {
+// FREE ADDRESS FETCHING (Reverse Geocoding)
+async function confirmMapLocation() {
     let latStr = pickedLat.toFixed(4);
     let lngStr = pickedLng.toFixed(4);
-    document.getElementById('addLoc').value = `${latStr}° N, ${lngStr}° E (मैप से जोड़ा गया)`;
     closeRealMap();
-    showToast(t("लोकेशन सफलतापूर्वक सेव कर ली गई!", "Location saved successfully!"));
+    showToast(t("लोकेशन सेव हो रही है...", "Saving location..."));
+    
+    try {
+        // Fetching Real Address from Nominatim API
+        let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${pickedLat}&lon=${pickedLng}`);
+        let data = await response.json();
+        
+        let address = "";
+        if(data && data.address) {
+            let area = data.address.suburb || data.address.neighbourhood || data.address.village || "";
+            let city = data.address.city || data.address.town || data.address.county || "";
+            let state = data.address.state || "";
+            
+            if(area) address += area + ", ";
+            if(city) address += city + ", ";
+            if(state) address += state;
+            
+            // Fallback if no specific area found
+            if(address.length < 5 && data.display_name) {
+                address = data.display_name.substring(0, 50) + "...";
+            }
+        }
+        
+        if(address.length > 2) {
+            document.getElementById('addLoc').value = address;
+        } else {
+            document.getElementById('addLoc').value = `${latStr}° N, ${lngStr}° E (मैप से)`;
+        }
+        showToast(t("लोकेशन सेट हो गई!", "Location set!"));
+        
+    } catch(err) {
+        document.getElementById('addLoc').value = `${latStr}° N, ${lngStr}° E (मैप से)`;
+        showToast(t("लोकेशन सेट हो गई!", "Location set!"));
+    }
 }
 
 function getActiveStories() {
@@ -1206,7 +1247,7 @@ function askAI(type) {
         a = t("इसमें आपको आस-पास के किराने की दुकान (General Store), सब्ज़ी वाले, कपड़े की दुकान (Saree/Clothes), और इलेक्ट्रॉनिक्स की दुकानों की जानकारी मिलेगी।", "Here you will find nearby Grocery stores, Vegetable vendors, Clothing, and Electronics shops.");
     }
     else if(type === 'cat_services') {
-        q = t("🛠️ 'सेवाएं' केटेगरी में क्या है?", "🛠️ What's in 'Services' category?");
+        q = t("🛠️ 'सेवाएं' केटेगरी में primary?", "🛠️ What's in 'Services' category?");
         a = t("इसमें आपको प्लंबर, इलेक्ट्रीशियन, मैकेनिक, और बढ़ई (Carpenter) आदि जैसी हर घर की ज़रूरी सेवाओं के नंबर और पते मिलेंगे।", "This section provides contacts for daily essential services like Plumbers, Electricians, Mechanics, and Carpenters.");
     }
     else if(type === 'cat_health') {
@@ -1293,4 +1334,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-                                                                                       </html>
+                                                                                   </html>
