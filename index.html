@@ -1282,6 +1282,20 @@ window.onload = async () => {
     
     // Load Live Data on Start
     await fetchRealData();
+
+    // App khulte hi automatic location maangne ke liye code:
+    setTimeout(() => {
+        detectUserLocation();
+    }, 1500); // App khulne ke 1.5 second baad permission maangega
+};
+    document.getElementById('langBtn').innerText = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
+    document.body.className = 'lang-' + currentLang;
+    setFilter('बाज़ार'); 
+    setOnlineFilter('बाज़ार');
+    document.getElementById('backBtn').style.display = 'none'; 
+    
+    // Load Live Data on Start
+    await fetchRealData();
 };
 </script>
 </body>
