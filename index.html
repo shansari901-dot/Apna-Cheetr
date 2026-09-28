@@ -444,7 +444,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                     <div style="display:flex; align-items:center; gap:8px;">
                         <span id="switchText" style="font-size:11px; font-weight:800; color: var(--accent);"><span class="hi">ON (चालू है)</span></span>
                         <label class="switch">
-                          <!-- FIXED: Status accurately controls store open/closed state -->
                           <input type="checkbox" id="liveSwitch" checked onchange="toggleShopStatus(this)">
                           <span class="slider"></span>
                         </label>
@@ -964,7 +963,7 @@ function renderShops() {
             let jobTag = shop.isHiring ? (currentLang==='hi'?" (वर्कर चाहिए)":" (Hiring)") : (currentLang==='hi'?" (काम चाहिए)":" (Seeking Work)");
             shopCat += jobTag;
             if(shop.isHiring) { statusText = shop.isOpen ? t('🟢 अर्जेंट ज़रूरत', '🟢 Urgent Need') : t('🔴 फुल हो गया', '🔴 Filled'); } 
-            else { statusText = shop.isOpen ? t('🟢 काम के लिए खाली', '🟢 Available') : t('🔴 काम मिल गया', '🟢 Hired'); }
+            else { statusText = shop.isOpen ? t('🟢 काम के लिए खाली', '🟢 Available') : t('🔴 काम मिल गया', '🔴 Hired'); }
         } else {
             statusText = shop.isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🔴 Closed');
         }
@@ -994,7 +993,7 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
-// FIXED: Online filter now checks if currentUser owns the shop and respects live switch state
+// FIXED: Properly checking local switch state against user's specific shop
 function renderOnlineShops() {
     let html = "";
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1004,9 +1003,8 @@ function renderOnlineShops() {
         s.calculatedDist = dist;
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
         
-        // If current logged-in user is the owner of this shop, use local toggle state
         let shopIsOpen = s.isOpen;
-        if(currentUser && s.phone === currentUser.phone) {
+        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
             let localSwitchState = localStorage.getItem('shop_status_open');
             if(localSwitchState !== null) {
                 shopIsOpen = (localSwitchState === 'true');
@@ -1188,6 +1186,7 @@ async function submitShop() {
     }
 }
 
+// FIXED: Status Toggle instantly updates local memory and re-renders lists without flashing
 function toggleShopStatus(checkbox) {
     let textEl = document.getElementById('switchText');
     let isNowOpen = checkbox.checked;
@@ -1204,7 +1203,12 @@ function toggleShopStatus(checkbox) {
         showToast(t('स्टेटस बंद हो गया।', 'Status is now OFF.'), 'error');
     }
     
-    if(shopsData.length > 0) shopsData[0].isOpen = isNowOpen;
+    shopsData.forEach(s => {
+        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
+            s.isOpen = isNowOpen;
+        }
+    });
+
     renderShops();
     renderOnlineShops();
 }
@@ -1268,7 +1272,7 @@ function openShopModal(name, cat, isOpen, loc, icon, type, isHiring, phone) {
         if(isHiring) { statusText = isOpen ? t('🟢 अर्जेंट ज़रूरत है', '🟢 Urgent Hiring') : t('🔴 कामगार मिल गया', '🔴 Position Filled'); } 
         else { statusText = isOpen ? t('🟢 काम के लिए खाली हूँ', '🟢 Available for Work') : t('🔴 काम मिल गया', '🔴 Hired'); }
     } else {
-        statusText = isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🔴 Closed');
+        statusText = isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🟢 Closed');
     }
 
     statusEl.className = isOpen ? 'status-badge status-open' : 'status-badge status-closed';
@@ -1359,20 +1363,30 @@ async function fetchRealData() {
     try {
         let shopRes = await fetch(API_URL + "/shops");
         let sData = await shopRes.json();
-        shopsData = sData.map(s => ({
-            id: s.id || Date.now(),
-            type: s.mainType || "बाज़ार",
-            name: s.shopName || s.userName,
-            catHi: s.subTypeHi || "अन्य",
-            catEn: s.subTypeEn || "Other",
-            locText: s.locationText || "Address",
-            lat: s.lat || 28.6139,
-            lng: s.lng || 77.2090,
-            icon: s.icon || "🏬",
-            isOpen: s.isOpen === undefined ? true : s.isOpen,
-            isHiring: s.isHiring || false,
-            phone: s.contactPhone || s.userPhone || ""
-        }));
+        
+        let savedStatus = localStorage.getItem('shop_status_open');
+        let localIsOpen = savedStatus !== null ? (savedStatus === 'true') : true;
+
+        shopsData = sData.map(s => {
+            let isOpenVal = s.isOpen;
+            if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
+                isOpenVal = localIsOpen;
+            }
+            return {
+                id: s.id || Date.now(),
+                type: s.mainType || "बाज़ार",
+                name: s.shopName || s.userName,
+                catHi: s.subTypeHi || "अन्य",
+                catEn: s.subTypeEn || "Other",
+                locText: s.locationText || "Address",
+                lat: s.lat || 28.6139,
+                lng: s.lng || 77.2090,
+                icon: s.icon || "🏬",
+                isOpen: isOpenVal,
+                isHiring: s.isHiring || false,
+                phone: s.contactPhone || s.userPhone || ""
+            };
+        });
 
         let storyRes = await fetch(API_URL + "/stories");
         let stData = await storyRes.json();
@@ -1401,9 +1415,6 @@ window.onload = async () => {
     setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
     
-    await fetchRealData();
-    switchTab(activeTab);
-
     let savedStatus = localStorage.getItem('shop_status_open');
     if(savedStatus !== null) {
         let isTrue = (savedStatus === 'true');
@@ -1418,9 +1429,11 @@ window.onload = async () => {
                 textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)");
                 textEl.style.color = "#f87171";
             }
-            if(shopsData.length > 0) shopsData[0].isOpen = isTrue;
         }
     }
+
+    await fetchRealData();
+    switchTab(activeTab);
 
     setTimeout(() => {
         if(!isLocationTracked) {
