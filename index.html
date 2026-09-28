@@ -614,7 +614,9 @@ const API_URL = "https://apna-chetr-dpi.ashifmd400.workers.dev";
 const ADMIN_PHONE = "7318259001"; 
 
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
-let currentLang = 'hi';
+// 🔥 FIXED: Language save function 🔥
+let currentLang = localStorage.getItem('ac_lang') || 'hi'; 
+
 let storyTimer;
 let map, marker;
 let userLat = 28.6139; 
@@ -629,6 +631,7 @@ function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
 function toggleLang() {
     currentLang = currentLang === 'hi' ? 'en' : 'hi';
+    localStorage.setItem('ac_lang', currentLang); // Save language to phone
     document.getElementById('langBtn').innerText = currentLang === 'hi' ? 'EN' : 'HI';
     document.body.className = 'lang-' + currentLang;
     renderShops(); 
@@ -652,7 +655,7 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-// 📤 🔥 SHARE APP FEATURE 🔥 📤
+// 📤 SHARE APP FUNCTION 
 function shareApp() {
     const shareUrl = "https://www.appcreator24.com/app4202235-v74isw";
     const shareText = "अपने इलाके की सभी दुकानें, सेवाएँ और लोकल जानकारी पाएँ 'अपना क्षेत्र' ऐप पर। अभी डाउनलोड करें: ";
@@ -662,8 +665,7 @@ function shareApp() {
             title: 'अपना क्षेत्र - Apna Chhetr',
             text: shareText,
             url: shareUrl,
-        })
-        .catch((error) => console.log('Error sharing:', error));
+        }).catch((error) => console.log('Error sharing:', error));
     } else {
         const dummy = document.createElement('input');
         const text = shareText + shareUrl;
@@ -965,7 +967,6 @@ function getFormattedDist(distKm) {
     return distKm.toFixed(1) + " km";
 }
 
-// 🟢 🔥 FIXED RENDER SHOPS: Strictly check true/false value 🔥 🟢
 function renderShops() {
     let html = "";
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1023,7 +1024,6 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
-// 🟢 🔥 FIXED ONLINE SHOPS: Sirf 'ON' wale dikhenge 🔥 🟢
 function renderOnlineShops() {
     let html = "";
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1208,7 +1208,7 @@ async function submitShop() {
     }
 }
 
-// 🟢 🔥 FIXED: Backend LIVE Sync of Status Switch 🔥 🟢
+// 🔥 FIXED: Direct Backend UPDATE for Status 🔥
 async function toggleShopStatus(checkbox) {
     let textEl = document.getElementById('switchText');
     let isNowOpen = checkbox.checked;
@@ -1225,27 +1225,27 @@ async function toggleShopStatus(checkbox) {
         showToast(t('स्टेटस बंद हो गया।', 'Status is now OFF.'), 'error');
     }
     
-    let myShop = null;
+    let myShopIds = [];
     shopsData.forEach(s => {
         if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
             s.isOpen = isNowOpen;
-            myShop = s;
+            myShopIds.push(s.id);
         }
     });
 
     renderShops();
     renderOnlineShops();
 
-    // Sends the exact OFF/ON command directly to the Cloudflare Database
-    if(myShop && myShop.id) {
+    // 📡 Cloudflare API ko update request bhej raha hai
+    for (let id of myShopIds) {
         try {
-            await fetch(API_URL + "/shops/" + myShop.id, {
+            await fetch(API_URL + "/shops/" + id, {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ isOpen: isNowOpen })
             });
         } catch(err) {
-            console.log("DB update failed");
+            console.log("DB update failed for ID:", id);
         }
     }
 }
@@ -1404,12 +1404,12 @@ async function fetchRealData() {
         shopsData = sData.map(s => {
             let isOpenVal = true; 
             
-            // 🔥 Check real database value strictly
+            // Database priority rule
             if (s.isOpen !== undefined && s.isOpen !== null) {
                 isOpenVal = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1 || s.isOpen === "1");
             }
             
-            // 🔥 User's local override
+            // LOCAL FIX: Agar database apdate fail ho jaye, to apna dukan sahi dikhane k liye local memory use hogi
             if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
                 let savedStatus = localStorage.getItem('shop_status_open');
                 if(savedStatus !== null) {
@@ -1427,7 +1427,7 @@ async function fetchRealData() {
                 lat: s.lat || 28.6139,
                 lng: s.lng || 77.2090,
                 icon: s.icon || "🏬",
-                isOpen: isOpenVal, // EXACT BOOLEAN SAVED HERE
+                isOpen: isOpenVal, 
                 isHiring: s.isHiring || false,
                 phone: s.contactPhone || s.userPhone || ""
             };
@@ -1454,8 +1454,10 @@ async function fetchRealData() {
 }
 
 window.onload = async () => { 
+    // 🔥 FIXED: Language Local Storage Initialization 🔥
     document.getElementById('langBtn').innerText = currentLang === 'hi' ? 'EN' : 'HI';
     document.body.className = 'lang-' + currentLang;
+    
     setFilter('बाज़ार'); 
     setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
@@ -1488,4 +1490,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-  </html>
+                                                                                        </html>
