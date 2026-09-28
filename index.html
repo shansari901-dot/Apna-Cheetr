@@ -43,9 +43,6 @@ body.lang-en .hi { display: none !important; }
 body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none; transition: background 0.3s, color 0.3s;}
 input, textarea, select { -webkit-user-select: auto; user-select: auto; color: var(--text-dark) !important;}
 
-/* DROPDOWN FIX FOR MOBILE APP */
-select, option { pointer-events: auto !important; -webkit-appearance: menulist !important; appearance: auto !important; cursor: pointer !important; }
-
 /* 🌐 TOP BAR */
 .topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;}
 .topbar-left { display: flex; align-items: center; gap: 10px; }
@@ -161,12 +158,12 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .hidden { display: none !important; }
 
 /* MODALS */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(2px); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; }
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); transform: translateY(0); transition: transform 0.3s ease-out; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border); position: relative;}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* CUSTOM CONFIRM DIALOG (To hide Github.io alert) */
-.custom-alert-box { background: var(--card-bg); border-radius: 16px; padding: 24px; width: 90%; max-width: 320px; text-align: center; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+/* CUSTOM CONFIRM DIALOG */
+.custom-alert-box { background: var(--card-bg); border-radius: 16px; padding: 24px; width: 90%; max-width: 320px; text-align: center; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: auto;}
 .custom-alert-title { font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; }
 .custom-alert-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
 .custom-alert-btns { display: flex; gap: 12px; justify-content: center; }
@@ -211,6 +208,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
    <div class="top-actions">
        <div class="action-icon" onclick="toggleTheme()" id="themeBtn" title="Theme">🌙</div>
        <div class="action-icon" onclick="shareApp()" title="Share">📤</div>
+       <div class="action-icon" onclick="openAiModal()" title="Help">🤖</div>
        <div class="action-icon lang-icon" onclick="toggleLang()" id="langBtn" title="Language">EN</div>
    </div>
 </div>
@@ -366,7 +364,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             
             <div class="field">
                 <label><span class="hi">मेन केटेगरी चुनें *</span><span class="en">Select Main Category *</span></label>
-                <div class="input-wrap">
+                <div class="input-wrap" style="position:relative; z-index:10;">
                     <span>📑</span>
                     <select id="addMainCat" onchange="updateSubCats()">
                         <option value="" disabled selected class="hi">-- केटेगरी चुनें --</option>
@@ -395,7 +393,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 
             <div class="field hidden" id="subCatField">
                 <label><span class="hi">काम का प्रकार *</span><span class="en">Type *</span></label>
-                <div class="input-wrap">
+                <div class="input-wrap" style="position:relative; z-index:9;">
                     <span>📋</span>
                     <select id="addSubCat"></select>
                 </div>
@@ -479,7 +477,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 
                 <div id="myActiveStoryArea" style="display:none; margin-bottom: 16px;"></div>
 
-                <button class="btn" style="padding: 10px; font-size: 13px; margin: 0; background: linear-gradient(90deg, #ec4899, #f97316); color: white;" onclick="document.getElementById('addStoryModal').classList.remove('hidden')">➕ <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></button>
+                <button class="btn" style="padding: 10px; font-size: 13px; margin: 0; background: linear-gradient(90deg, #ec4899, #f97316); color: white;" onclick="openAddStoryModal()">➕ <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></button>
             </div>
 
             <div id="customerMsgWrap" style="display:none; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">
@@ -526,7 +524,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         
         <div class="field">
             <label><span class="hi">श्रेणी चुनें *</span><span class="en">Select Category *</span></label>
-            <div class="input-wrap">
+            <div class="input-wrap" style="position:relative; z-index:10;">
                 <span>📑</span>
                 <select id="storyCat">
                     <option value="लोकल मार्केट" class="hi">लोकल मार्केट</option>
@@ -594,7 +592,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 </div>
 
 <!-- 🚨 CUSTOM CONFIRM DELETE MODAL -->
-<div id="confirmModal" class="modal-overlay hidden" style="z-index: 9999999999;">
+<div id="confirmModal" class="modal-overlay hidden" style="z-index: 9999999999; align-items: center;">
     <div class="custom-alert-box">
         <div class="custom-alert-title">⚠️ कन्फर्म करें</div>
         <div class="custom-alert-desc">क्या आप सच में इसे डिलीट करना चाहते हैं? यह वापस नहीं आएगा।</div>
@@ -603,6 +601,34 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <button class="btn-danger" id="confirmDeleteBtn">हाँ, डिलीट करें</button>
         </div>
     </div>
+</div>
+
+<!-- 🤖 AI ASSISTANT MODAL -->
+<div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeModals(event)">
+  <div class="ai-box" id="aiBoxContent">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+       <h2 style="color: var(--text-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">🤖 AI Help Guide</h2>
+       <div style="font-size: 24px; cursor: pointer; color: #ef4444; line-height:1;" onclick="closeAiModal()">✖</div>
+    </div>
+    <div class="chat-area" id="aiChat">
+       <div class="msg-b m-ai"><span class="hi">नमस्ते! मैं आपका AI गाइड हूँ। आप नीचे दिए गए किसी भी सवाल पर क्लिक करके जवाब जान सकते हैं। 👇</span><span class="en">Hello! I am your AI Guide. Click on any question below to get answers. 👇</span></div>
+    </div>
+    <div class="ai-opts">
+       <button class="ai-btn" onclick="askAI('why_built')">🎯 <span class="hi">यह ऐप क्यों बनाया गया है?</span></button>
+       <button class="ai-btn" onclick="askAI('how_works')">⚙️ <span class="hi">यह कैसे काम करता है?</span></button>
+       <button class="ai-btn" onclick="askAI('add')">➕ <span class="hi">अपनी दुकान कैसे जोड़ें?</span></button>
+       <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह ऐप फ्री है?</span></button>
+       <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस चालू/बंद कैसे करें?</span></button>
+       <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span></button>
+       <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Offer (Story) कैसे लगाएँ?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_bazaar')">🛒 <span class="hi">'बाज़ार' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_health')">🏥 <span class="hi">'स्वास्थ्य' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_jobs')">💼 <span class="hi">'रोज़गार' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_edu')">🎓 <span class="hi">'शिक्षा' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_food')">🍴 <span class="hi">'खाना' केटेगरी में क्या है?</span></button>
+    </div>
+  </div>
 </div>
 
 <!-- LEAFLET JS SCRIPT -->
@@ -676,16 +702,13 @@ function shareApp() {
     const shareUrl = "https://www.appcreator24.com/app4202235-v74isw";
     const shareText = "अपने इलाके की सभी दुकानें, सेवाएँ और लोकल जानकारी पाएँ 'अपना क्षेत्र' ऐप पर। अभी डाउनलोड करें: " + shareUrl;
     
-    // Pehle try karte hain native Android share (Web Share API)
     if (navigator.share) {
         navigator.share({ title: 'अपना क्षेत्र', text: shareText })
         .catch((error) => {
             console.log('Error sharing:', error);
-            // Agar AppCreator24 mein fail ho, toh WhatsApp intent use karo
             window.location.href = "whatsapp://send?text=" + encodeURIComponent(shareText);
         });
     } else {
-        // Fallback to WhatsApp deep link directly
         window.location.href = "whatsapp://send?text=" + encodeURIComponent(shareText);
     }
 }
@@ -924,6 +947,39 @@ function renderProfileStories() {
     }
 }
 
+// ---- MODAL OPEN/CLOSE LOGIC FIX ----
+function openAddStoryModal() {
+    document.getElementById('addStoryModal').classList.remove('hidden');
+    window.history.pushState({ modal: 'addStory' }, 'Add Story', '#addStoryModal');
+}
+
+function openAiModal() {
+    document.getElementById('aiModal').classList.remove('hidden');
+    window.history.pushState({ modal: 'ai' }, 'AI Help', '#aiModal');
+}
+
+function closeModals(e) {
+    if(e.target.id === 'aiModal' || e.target.classList.contains('sheet-close') || e.target.id === 'addStoryModal') {
+        let ai = document.getElementById('aiModal');
+        let addSt = document.getElementById('addStoryModal');
+        
+        if (!ai.classList.contains('hidden')) {
+            ai.classList.add('hidden');
+            if (window.location.hash === '#aiModal') window.history.back();
+        }
+        if (!addSt.classList.contains('hidden')) {
+            addSt.classList.add('hidden');
+            if (window.location.hash === '#addStoryModal') window.history.back();
+        }
+    }
+}
+
+function closeAiModal() {
+    document.getElementById('aiModal').classList.add('hidden');
+    if (window.location.hash === '#aiModal') window.history.back();
+}
+
+
 // ---- STORY PHOTO UPLOAD LOGIC ----
 let selectedStoryPhotoBase64 = "";
 
@@ -967,6 +1023,8 @@ async function submitStory() {
         document.getElementById('storyPhotoPreview').style.display = 'none';
         selectedStoryPhotoBase64 = ""; 
         
+        if (window.location.hash === '#addStoryModal') window.history.back();
+        
         showToast(t("आपकी पोस्ट लाइव हो गई है!", "Post Published!"));
         await fetchRealData();
     } catch(err) {
@@ -980,14 +1038,12 @@ function openStory(imageData, title, badge) {
     document.getElementById('svTitle').innerText = title;
     document.getElementById('svBadge').innerText = badge;
     
-    // Display the image fullscreen
     document.getElementById('svBg').innerHTML = `<img src="${imageData}"><div class="story-offer-badge" id="svBadge">${badge}</div>`;
 
     let viewer = document.getElementById('storyViewer');
     let fill = document.getElementById('storyProgressFill');
     viewer.classList.remove('hidden');
     
-    // Fake History State Add Karna (Taaki back button sirf story band kare)
     window.history.pushState({ modal: 'story' }, 'Story', '#story');
 
     fill.style.transition = 'none';
@@ -1006,7 +1062,6 @@ function closeStory() {
     let viewer = document.getElementById('storyViewer');
     if (!viewer.classList.contains('hidden')) {
         viewer.classList.add('hidden');
-        // Back history theek karne ke liye (agar fake state #story exist karti hai)
         if (window.location.hash === '#story') {
             window.history.back();
         }
@@ -1231,13 +1286,23 @@ function updateProfileUI() {
 window.addEventListener("hashchange", () => {
     let hashTab = window.location.hash.replace('#', '') || 'home';
     
-    // Agar story khuli thi aur user ne back dabaya, toh app close na ho
-    if(hashTab !== 'story' && !document.getElementById('storyViewer').classList.contains('hidden')) {
-        closeStory();
-        return; // Tab switch matt karo, sirf story band karo
+    // Modals handle
+    let viewer = document.getElementById('storyViewer');
+    if(hashTab !== 'story' && !viewer.classList.contains('hidden')) {
+        viewer.classList.add('hidden');
+        clearTimeout(storyTimer);
+    }
+    let addStory = document.getElementById('addStoryModal');
+    if(hashTab !== 'addStoryModal' && !addStory.classList.contains('hidden')) {
+        addStory.classList.add('hidden');
+    }
+    let aiModal = document.getElementById('aiModal');
+    if(hashTab !== 'aiModal' && !aiModal.classList.contains('hidden')) {
+        aiModal.classList.add('hidden');
     }
 
-    if(activeTab !== hashTab && hashTab !== 'story') {
+    let validTabs = ['home', 'bazaar', 'addShop', 'onlineTab', 'profile', 'auth'];
+    if(validTabs.includes(hashTab) && activeTab !== hashTab) {
         switchTab(hashTab, false);
     }
 });
@@ -1430,13 +1495,6 @@ function closeShopModal(e) {
     }
 }
 
-function closeModals(e) {
-    if(e.target.id === 'aiModal' || e.target.classList.contains('sheet-close') || e.target.id === 'addStoryModal') {
-        document.getElementById('aiModal').classList.add('hidden');
-        document.getElementById('addStoryModal').classList.add('hidden');
-    }
-}
-
 function askAI(type) {
     const chat = document.getElementById('aiChat');
     let q = "", a = "";
@@ -1448,6 +1506,50 @@ function askAI(type) {
     else if(type === 'how_works') {
         q = t("⚙️ यह कैसे काम करता है?", "⚙️ How does this app work?");
         a = t("आप ऐप में 10KM के दायरे में खुली हुई दुकानें और उनके नए ऑफर देख सकते हैं। अगर आपकी अपनी कोई दुकान या सर्विस है, तो आप '➕ जोड़ें' बटन दबाकर उसे फ्री में यहाँ लिस्ट कर सकते हैं।", "You can see open shops and offers within a 10KM radius. If you have a business, you can list it for free using the '➕ Add' button.");
+    }
+    else if(type === 'add') { 
+        q = t("➕ अपनी दुकान कैसे जोड़ें?", "➕ How to add info?"); 
+        a = t("नीचे '➕ जोड़ें' बटन पर क्लिक करें। अपना मोबाइल नंबर और नाम डालकर लॉगिन करें, फिर अपनी दुकान या काम की डिटेल भरकर सेव कर दें।", "Click the '➕ Add' button below. Login with your name & number, then fill your shop/job details and save."); 
+    } 
+    else if(type === 'free') { 
+        q = t("💰 क्या यह ऐप फ्री है?", "💰 Is it free?"); 
+        a = t("जी हाँ! यह ऐप ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है। अपनी दुकान लिस्ट करने का कोई पैसा नहीं लगता।", "Yes! It is 100% Free for both customers and shopkeepers. No charges to list your business."); 
+    } 
+    else if(type === 'status') { 
+        q = t("🎚️ स्टेटस चालू/बंद कैसे करें?", "🎚️ How to toggle ON/OFF?"); 
+        a = t("नीचे '👤 प्रोफाइल' में जाएं। वहां ON/OFF का बटन (स्विच) है। जब आप काम कर रहे हों तो इसे ON (चालू) रखें ताकि ग्राहक आपको लाइव देख सकें।", "Go to '👤 Profile'. Use the ON/OFF switch there. Keep it ON when you are working so customers can see you live."); 
+    }
+    else if(type === 'login') { 
+        q = t("🔐 लॉगिन क्यों ज़रूरी है?", "🔐 Why login required?"); 
+        a = t("लॉगिन सिर्फ दुकानदारों के लिए ज़रूरी है ताकि कोई दूसरा व्यक्ति आपकी दुकान की जानकारी से छेड़छाड़ न कर सके।", "Login is required for shopkeepers to securely manage their own store and prevent others from editing it."); 
+    }
+    else if(type === 'story') { 
+        q = t("🔥 Offer (Story) कैसे लगाएँ?", "🔥 How to post Story/Offer?"); 
+        a = t("लॉगिन करके '👤 प्रोफाइल' में जाएं, वहां 'नया Offer डालें' बटन पर क्लिक करें। यह ऑफर 24 घंटे तक होम स्क्रीन पर सबको सबसे ऊपर दिखेगा।", "Login and go to '👤 Profile', click on 'Add New Offer'. This will stay at the top of the home screen for 24 hours."); 
+    }
+    else if(type === 'cat_bazaar') {
+        q = t("🛒 'बाज़ार' केटेगरी में क्या है?", "🛒 What's in 'Shops' category?");
+        a = t("इसमें आपको आस-पास के किराने की दुकान (General Store), सब्ज़ी वाले, कपड़े की दुकान (Saree/Clothes), और इलेक्ट्रॉनिक्स की दुकानों की जानकारी मिलेगी।", "Here you will find nearby Grocery stores, Vegetable vendors, Clothing, and Electronics shops.");
+    }
+    else if(type === 'cat_services') {
+        q = t("🛠️ 'सेवाएं' केटेगरी में क्या है?", "🛠️ What's in 'Services' category?");
+        a = t("इसमें आपको प्लंबर, इलेक्ट्रीशियन, मैकेनिक, और बढ़ई (Carpenter) आदि जैसी हर घर की ज़रूरी सेवाओं के नंबर और पते मिलेंगे।", "This section provides contacts for daily essential services like Plumbers, Electricians, Mechanics, and Carpenters.");
+    }
+    else if(type === 'cat_health') {
+        q = t("🏥 'स्वास्थ्य' केटेगरी में क्या है?", "🏥 What's in 'Health' category?");
+        a = t("यहाँ से आप अपने नज़दीकी अस्पताल, क्लिनिक, डॉक्टर और मेडिकल स्टोर की जानकारी और लोकेशन ढूँढ सकते हैं।", "Find information and locations of your nearest Hospitals, Clinics, Doctors, and Medical Stores here.");
+    }
+    else if(type === 'cat_jobs') {
+        q = t("💼 'रोज़गार' केटेगरी में क्या है?", "💼 What's in 'Jobs' category?");
+        a = t("अगर आपको काम की तलाश है (जैसे मज़दूरी, ड्राइविंग), या आपको अपने काम के लिए कोई वर्कर/हेल्पर चाहिए, तो आप इस केटेगरी का इस्तेमाल कर सकते हैं।", "If you are looking for work (e.g., Labor, Driving) or need a worker/helper for your business, you can use this category.");
+    }
+    else if(type === 'cat_edu') {
+        q = t("🎓 'शिक्षा' केटेगरी में क्या है?", "🎓 What's in 'Education' category?");
+        a = t("इसमें आपको इलाके के अच्छे स्कूल, कॉलेज, कंप्यूटर सेंटर और कोचिंग क्लासेस की पूरी जानकारी मिलेगी।", "Find complete information about good Schools, Colleges, Computer Centers, and Coaching Classes in your area.");
+    }
+    else if(type === 'cat_food') {
+        q = t("🍴 'खाना' केटेगरी में क्या है?", "🍴 What's in 'Food' category?");
+        a = t("भूख लगी है? यहाँ आप अपने आस-पास के बढ़िया रेस्टोरेंट, ढाबे, और होटल ढूँढ सकते हैं।", "Hungry? Find the best Restaurants, Dhabas, and Hotels nearby in this section.");
     }
 
     chat.innerHTML += `<div class="msg-b m-user">${q}</div>`;
