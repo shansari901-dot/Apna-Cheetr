@@ -993,7 +993,6 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
-// FIXED: Properly checking local switch state against user's specific shop
 function renderOnlineShops() {
     let html = "";
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1003,15 +1002,7 @@ function renderOnlineShops() {
         s.calculatedDist = dist;
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
         
-        let shopIsOpen = s.isOpen;
-        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
-            let localSwitchState = localStorage.getItem('shop_status_open');
-            if(localSwitchState !== null) {
-                shopIsOpen = (localSwitchState === 'true');
-            }
-        }
-
-        let isOpenCheck = (shopIsOpen === true || shopIsOpen === "true" || shopIsOpen === 1);
+        let isOpenCheck = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1);
         return s.type === currentOnlineFilter && isOpenCheck && matchDist;
     });
     
@@ -1186,8 +1177,8 @@ async function submitShop() {
     }
 }
 
-// FIXED: Status Toggle instantly updates local memory and re-renders lists without flashing
-function toggleShopStatus(checkbox) {
+// 🔥 FIXED: Live Database Update for Status 🔥
+async function toggleShopStatus(checkbox) {
     let textEl = document.getElementById('switchText');
     let isNowOpen = checkbox.checked;
     
@@ -1203,11 +1194,26 @@ function toggleShopStatus(checkbox) {
         showToast(t('स्टेटस बंद हो गया।', 'Status is now OFF.'), 'error');
     }
     
+    let myShop = null;
     shopsData.forEach(s => {
         if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
             s.isOpen = isNowOpen;
+            myShop = s;
         }
     });
+
+    // Cloudflare Database me Live status update bhejna
+    if(myShop) {
+        try {
+            await fetch(API_URL + "/shops/" + myShop.id, {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ isOpen: isNowOpen })
+            });
+        } catch(err) {
+            console.log("Database Status Update Failed");
+        }
+    }
 
     renderShops();
     renderOnlineShops();
@@ -1272,7 +1278,7 @@ function openShopModal(name, cat, isOpen, loc, icon, type, isHiring, phone) {
         if(isHiring) { statusText = isOpen ? t('🟢 अर्जेंट ज़रूरत है', '🟢 Urgent Hiring') : t('🔴 कामगार मिल गया', '🔴 Position Filled'); } 
         else { statusText = isOpen ? t('🟢 काम के लिए खाली हूँ', '🟢 Available for Work') : t('🔴 काम मिल गया', '🔴 Hired'); }
     } else {
-        statusText = isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🟢 Closed');
+        statusText = isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🔴 Closed');
     }
 
     statusEl.className = isOpen ? 'status-badge status-open' : 'status-badge status-closed';
@@ -1370,7 +1376,8 @@ async function fetchRealData() {
         shopsData = sData.map(s => {
             let isOpenVal = s.isOpen;
             if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
-                isOpenVal = localIsOpen;
+                // If backend has the updated status, respect it, else use local backup
+                isOpenVal = (s.isOpen !== undefined) ? s.isOpen : localIsOpen;
             }
             return {
                 id: s.id || Date.now(),
