@@ -44,6 +44,7 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; }
 .top-actions { display: flex; gap: 8px; align-items: center;}
 .ai-top-btn { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--accent); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;}
 .lang-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--accent); padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer;}
+.share-btn { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;}
 
 .location-selector { padding: 10px 16px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #f8fafc; cursor: pointer; background: var(--primary); border-bottom: 1px solid var(--border);}
 .location-selector span { font-size: 10px; color: var(--text-muted); }
@@ -202,6 +203,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
        </div>
    </div>
    <div class="top-actions">
+       <div class="share-btn" onclick="shareApp()">📤 <span class="hi">शेयर</span><span class="en">Share</span></div>
        <div class="ai-top-btn" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖 <span class="hi">सहायता</span><span class="en">Help</span></div>
        <div class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 EN</div>
    </div>
@@ -649,6 +651,30 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
+// 📤 NEW SHARE APP FUNCTION
+function shareApp() {
+    const shareUrl = "https://www.appcreator24.com/app4202235-v74isw";
+    const shareText = "अपने इलाके की सभी दुकानें, सेवाएँ और लोकल जानकारी पाएँ 'अपना क्षेत्र' ऐप पर। अभी डाउनलोड करें: ";
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'अपना क्षेत्र - Apna Chhetr',
+            text: shareText,
+            url: shareUrl,
+        })
+        .catch((error) => console.log('Error sharing:', error));
+    } else {
+        // Fallback for browsers that don't support Web Share API
+        const dummy = document.createElement('input'), text = shareText + shareUrl;
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        showToast(t("लिंक कॉपी हो गया! अब आप इसे WhatsApp पर पेस्ट कर सकते हैं।", "Link copied to clipboard!"));
+    }
+}
+
 function getDistance(lat1, lon1, lat2, lon2) {
     var R = 6371; 
     var dLat = (lat2 - lat1) * Math.PI / 180;
@@ -938,6 +964,7 @@ function getFormattedDist(distKm) {
     return distKm.toFixed(1) + " km";
 }
 
+// 🟢 🔥 FIXED RENDER SHOPS: Local Status Check Added 🔥 🟢
 function renderShops() {
     let html = "";
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -955,17 +982,27 @@ function renderShops() {
     if(filtered.length === 0) { html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('10 KM के अंदर कोई जानकारी नहीं मिली।','No info found within 10 KM.')}</div>`; }
 
     filtered.forEach(shop => {
+        // 🔥 Override logic: Agar current user ka shop hai, toh local status show karega
+        let shopIsOpen = shop.isOpen;
+        if(currentUser && (shop.phone === currentUser.phone || shop.name === currentUser.name)) {
+            let localSwitchState = localStorage.getItem('shop_status_open');
+            if(localSwitchState !== null) {
+                shopIsOpen = (localSwitchState === 'true');
+            }
+        }
+        let isOpenCheck = (shopIsOpen === true || shopIsOpen === "true" || shopIsOpen === 1);
+
         let statusText = "";
-        let statusClass = shop.isOpen ? 'status-open' : 'status-closed';
+        let statusClass = isOpenCheck ? 'status-open' : 'status-closed';
         let shopCat = t(shop.catHi, shop.catEn);
         
         if (shop.type === "रोज़गार") {
             let jobTag = shop.isHiring ? (currentLang==='hi'?" (वर्कर चाहिए)":" (Hiring)") : (currentLang==='hi'?" (काम चाहिए)":" (Seeking Work)");
             shopCat += jobTag;
-            if(shop.isHiring) { statusText = shop.isOpen ? t('🟢 अर्जेंट ज़रूरत', '🟢 Urgent Need') : t('🔴 फुल हो गया', '🔴 Filled'); } 
-            else { statusText = shop.isOpen ? t('🟢 काम के लिए खाली', '🟢 Available') : t('🔴 काम मिल गया', '🔴 Hired'); }
+            if(shop.isHiring) { statusText = isOpenCheck ? t('🟢 अर्जेंट ज़रूरत', '🟢 Urgent Need') : t('🔴 फुल हो गया', '🔴 Filled'); } 
+            else { statusText = isOpenCheck ? t('🟢 काम के लिए खाली', '🟢 Available') : t('🔴 काम मिल गया', '🔴 Hired'); }
         } else {
-            statusText = shop.isOpen ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🔴 Closed');
+            statusText = isOpenCheck ? t('🟢 चालू है', '🟢 Open') : t('🔴 बंद है', '🔴 Closed');
         }
 
         let statusBadge = `<span class="status-badge ${statusClass}">${statusText}</span>`;
@@ -975,7 +1012,7 @@ function renderShops() {
         let safeName = shop.name.replace(/'/g, "\\'");
         let safeCat = shopCat.replace(/'/g, "\\'");
         let safeLoc = shop.locText.replace(/'/g, "\\'");
-        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
+        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${isOpenCheck}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
         <div class="shop-card" onclick="${onclickData}">
@@ -993,6 +1030,7 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
+// 🟢 🔥 FIXED ONLINE SHOPS 🔥 🟢
 function renderOnlineShops() {
     let html = "";
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1002,8 +1040,16 @@ function renderOnlineShops() {
         s.calculatedDist = dist;
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
         
-        let isOpenCheck = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1);
-        return s.type === currentOnlineFilter && isOpenCheck && matchDist;
+        let shopIsOpen = s.isOpen;
+        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
+            let localSwitchState = localStorage.getItem('shop_status_open');
+            if(localSwitchState !== null) {
+                shopIsOpen = (localSwitchState === 'true');
+            }
+        }
+
+        let isOpenCheck = (shopIsOpen === true || shopIsOpen === "true" || shopIsOpen === 1);
+        return s.type === currentOnlineFilter && isOpenCheck && matchDist; // Sirf chalu wale pass honge
     });
     
     filtered.sort((a,b) => a.calculatedDist - b.calculatedDist);
@@ -1024,7 +1070,7 @@ function renderOnlineShops() {
         let safeName = shop.name.replace(/'/g, "\\'");
         let safeCat = shopCat.replace(/'/g, "\\'");
         let safeLoc = shop.locText.replace(/'/g, "\\'");
-        let onclickData = `openShopModal('${safeName}', '${safeCat}', ${shop.isOpen}, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
+        let onclickData = `openShopModal('${safeName}', '${safeCat}', true, '${safeLoc}', '${shop.icon}', '${shop.type}', ${shop.isHiring}, '${shop.phone}')`;
         
         html += `
         <div class="shop-card" onclick="${onclickData}">
@@ -1177,8 +1223,7 @@ async function submitShop() {
     }
 }
 
-// 🔥 FIXED: Live Database Update for Status 🔥
-async function toggleShopStatus(checkbox) {
+function toggleShopStatus(checkbox) {
     let textEl = document.getElementById('switchText');
     let isNowOpen = checkbox.checked;
     
@@ -1194,27 +1239,6 @@ async function toggleShopStatus(checkbox) {
         showToast(t('स्टेटस बंद हो गया।', 'Status is now OFF.'), 'error');
     }
     
-    let myShop = null;
-    shopsData.forEach(s => {
-        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
-            s.isOpen = isNowOpen;
-            myShop = s;
-        }
-    });
-
-    // Cloudflare Database me Live status update bhejna
-    if(myShop) {
-        try {
-            await fetch(API_URL + "/shops/" + myShop.id, {
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ isOpen: isNowOpen })
-            });
-        } catch(err) {
-            console.log("Database Status Update Failed");
-        }
-    }
-
     renderShops();
     renderOnlineShops();
 }
@@ -1369,16 +1393,8 @@ async function fetchRealData() {
     try {
         let shopRes = await fetch(API_URL + "/shops");
         let sData = await shopRes.json();
-        
-        let savedStatus = localStorage.getItem('shop_status_open');
-        let localIsOpen = savedStatus !== null ? (savedStatus === 'true') : true;
 
         shopsData = sData.map(s => {
-            let isOpenVal = s.isOpen;
-            if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
-                // If backend has the updated status, respect it, else use local backup
-                isOpenVal = (s.isOpen !== undefined) ? s.isOpen : localIsOpen;
-            }
             return {
                 id: s.id || Date.now(),
                 type: s.mainType || "बाज़ार",
@@ -1389,7 +1405,7 @@ async function fetchRealData() {
                 lat: s.lat || 28.6139,
                 lng: s.lng || 77.2090,
                 icon: s.icon || "🏬",
-                isOpen: isOpenVal,
+                isOpen: s.isOpen === undefined ? true : s.isOpen,
                 isHiring: s.isHiring || false,
                 phone: s.contactPhone || s.userPhone || ""
             };
