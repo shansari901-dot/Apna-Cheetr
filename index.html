@@ -183,6 +183,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 
 /* MAP CONTAINER */
 #map { width: 100%; height: 250px; border-radius: 12px; margin-top: 10px; z-index: 1;}
+.map-search-bar { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--primary); color: var(--text-dark); margin-bottom: 10px; font-size: 14px;}
 </style>
 </head>
 <body class="lang-hi">
@@ -399,7 +400,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
-            <!-- MAP PICKER -->
+            <!-- MAP PICKER BUTTON & ADDRESS FIELD -->
             <div class="field">
                 <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
                 <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openRealMapPicker()">
@@ -475,14 +476,19 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
   <button id="nav-profile" onclick="showTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
 </nav>
 
-<!-- 🗺️ REAL LEAFLET MAP MODAL (FOR ADDING SHOP) 🗺️ -->
+<!-- 🗺️ REAL LEAFLET MAP MODAL (UPDATED WITH SEARCH) 🗺️ -->
 <div id="realMapModal" class="modal-overlay hidden" style="z-index: 999999999;">
-    <div class="bottom-sheet" style="height: 75vh; display: flex; flex-direction: column;">
+    <div class="bottom-sheet" style="height: 85vh; display: flex; flex-direction: column;">
         <div class="sheet-close" onclick="closeRealMap()"></div>
-        <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">📍 <span class="hi">मैप पर अपनी दुकान खोजें</span><span class="en">Find Shop on Map</span></h2>
-        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;"><span class="hi">नक्शे को खिसका कर लाल पिन अपनी दुकान पर रखें।</span></p>
+        <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">📍 <span class="hi">मैप पर अपनी जगह खोजें</span><span class="en">Find Location on Map</span></h2>
         
-        <div id="map"></div>
+        <!-- NEW: SEARCH BAR FOR MAP -->
+        <input type="text" id="mapSearchInput" class="map-search-bar" placeholder="🔍 अपनी जगह का नाम लिखें (ex: Lohta, Varanasi)">
+        <button class="btn" style="margin-top: 0; margin-bottom: 10px; padding: 8px; background: rgba(59, 130, 246, 0.2); color: #60a5fa;" onclick="searchOnMap()">🔍 Search</button>
+
+        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;"><span class="hi">नक्शे को खिसका कर लाल पिन अपनी सही दुकान पर रखें।</span></p>
+        
+        <div id="map" style="flex:1;"></div>
         
         <button class="btn" style="margin-top: 15px;" onclick="confirmMapLocation()">✅ <span class="hi">लोकेशन कन्फर्म करें</span><span class="en">Confirm Location</span></button>
     </div>
@@ -605,7 +611,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 <script>
 // --- CLOUDFLARE API URL ---
 const API_URL = "https://apna-chetr-dpi.ashifmd400.workers.dev";
-const ADMIN_PHONE = "7318259001"; // 👑 VIP ADMIN NUMBER 👑
+const ADMIN_PHONE = "7318259001"; 
 
 // --- GLOBALS & AUTH ---
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
@@ -650,7 +656,6 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return R * c; 
 }
 
-// UPDATE: SILENT BACKGROUND GPS FETCH (No irritating toasts when app opens)
 function detectUserLocation(silent = false) {
     if(isLocationTracked) return;
     if(!silent) showToast(t("GPS से आपकी लोकेशन सेट हो रही है...", "Detecting via GPS..."));
@@ -700,7 +705,33 @@ function openRealMapPicker() {
 
 function closeRealMap() { document.getElementById('realMapModal').classList.add('hidden'); }
 
-// UPDATE: FETCHING FULL DETAILED ADDRESS 
+// NEW: SEARCH PLACE ON MAP
+async function searchOnMap() {
+    let query = document.getElementById('mapSearchInput').value;
+    if(!query) return showToast("कृपया जगह का नाम लिखें", "error");
+    
+    showToast("खोज रहा है...");
+    try {
+        let response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
+        let data = await response.json();
+        
+        if(data && data.length > 0) {
+            let nLat = parseFloat(data[0].lat);
+            let nLng = parseFloat(data[0].lon);
+            map.setView([nLat, nLng], 16); // zoom in closely
+            marker.setLatLng([nLat, nLng]);
+            pickedLat = nLat;
+            pickedLng = nLng;
+            showToast("जगह मिल गई!");
+        } else {
+            showToast("जगह नहीं मिली। सही स्पेलिंग डालें।", "error");
+        }
+    } catch(err) {
+        showToast("सर्च फेल हो गया", "error");
+    }
+}
+
+// UPDATE: CLEAN ADDRESS EXTRACTION (Like BigBasket)
 async function confirmMapLocation() {
     let latStr = pickedLat.toFixed(4);
     let lngStr = pickedLng.toFixed(4);
@@ -711,9 +742,39 @@ async function confirmMapLocation() {
         let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${pickedLat}&lon=${pickedLng}`);
         let data = await response.json();
         
-        // Use full detailed string provided by API
-        if(data && data.display_name) {
-            document.getElementById('addLoc').value = data.display_name;
+        let finalAddress = "";
+        
+        if(data && data.address) {
+            let ad = data.address;
+            
+            // Try to find the local area name (Road/Suburb/Village/Neighbourhood)
+            let localArea = ad.road || ad.suburb || ad.neighbourhood || ad.village || ad.residential || "";
+            // Find the main city/town
+            let city = ad.city || ad.town || ad.county || "";
+            // Pincode
+            let pin = ad.postcode || "";
+            
+            // Build the clean string
+            if(localArea) finalAddress += localArea;
+            if(city) { 
+                if(finalAddress) finalAddress += ", " + city; 
+                else finalAddress += city; 
+            }
+            if(pin) {
+                if(finalAddress) finalAddress += " - " + pin;
+                else finalAddress += pin;
+            }
+            
+            // If it's still empty, use a shortened version of the display_name
+            if(!finalAddress && data.display_name) {
+                let parts = data.display_name.split(',');
+                if(parts.length >= 2) finalAddress = parts[0] + ", " + parts[1];
+                else finalAddress = data.display_name;
+            }
+        }
+        
+        if(finalAddress) {
+            document.getElementById('addLoc').value = finalAddress.trim();
         } else {
             document.getElementById('addLoc').value = `${latStr}° N, ${lngStr}° E (मैप से)`;
         }
@@ -739,7 +800,7 @@ async function deleteAdminShop(id) {
         showToast("Dukaan delete ho gayi!");
         await fetchRealData();
     } catch(e) {
-        showToast("Database se delete nahi ho paya. Cloudflare Worker check karein.", "error");
+        showToast("Database se delete nahi ho paya.", "error");
     }
 }
 
@@ -751,7 +812,7 @@ async function deleteAdminStory(id) {
         showToast("Story delete ho gayi!");
         await fetchRealData();
     } catch(e) {
-        showToast("Database se delete nahi ho paya. Cloudflare Worker check karein.", "error");
+        showToast("Database se delete nahi ho paya.", "error");
     }
 }
 
@@ -1126,7 +1187,6 @@ function toggleShopStatus(checkbox) {
     }
 }
 
-// UPDATE: Added many more subcategories for Bazaar
 function updateSubCats() {
     let mainCat = document.getElementById('addMainCat').value;
     let subCatWrap = document.getElementById('subCatField');
@@ -1207,7 +1267,6 @@ function closeAiModal(e) {
     }
 }
 
-// 🤖 AI BOT FUNCTION
 function askAI(type) {
     const chat = document.getElementById('aiChat');
     let q = "", a = "";
@@ -1332,4 +1391,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-</html>
+                            </html>
