@@ -35,157 +35,35 @@ body.theme-light {
   --border: #e2e8f0;        
 }
 
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-  -webkit-tap-highlight-color: transparent; 
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
 
 body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
-body { 
-  background: var(--bg-color); 
-  color: var(--text-dark); 
-  min-height: 100vh; 
-  padding-bottom: 90px; 
-  overflow-x: hidden; 
-  -webkit-user-select: none; 
-  user-select: none; 
-  transition: background 0.3s, color 0.3s;
-}
-
-input, textarea, select { 
-  -webkit-user-select: auto; 
-  user-select: auto; 
-  color: var(--text-dark) !important;
-}
+body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none; transition: background 0.3s, color 0.3s;}
+input, textarea, select { -webkit-user-select: auto; user-select: auto; color: var(--text-dark) !important;}
 
 /* 🌐 TOP BAR */
-.topbar { 
-  background: var(--primary); 
-  padding: 15px 16px; 
-  position: sticky; 
-  top: 0; 
-  z-index: 50; 
-  border-bottom: 1px solid var(--border); 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-}
-
-.topbar-left { 
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
-}
-
-.back-arrow { 
-  font-size: 20px; 
-  color: var(--text-dark); 
-  cursor: pointer; 
-  padding: 4px 8px; 
-  border-radius: 50%; 
-  background: rgba(128,128,128,0.1); 
-  display: none; 
-}
-
-.logo-area { 
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
-}
-
+.topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;}
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+.back-arrow { font-size: 20px; color: var(--text-dark); cursor: pointer; padding: 4px 8px; border-radius: 50%; background: rgba(128,128,128,0.1); display: none; }
+.logo-area { display: flex; align-items: center; gap: 10px; }
 .logo-icon { font-size: 24px; }
+.app-title { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px;}
+.app-subtitle { font-size: 10px; font-weight: 600; color: var(--text-muted); }
 
-.app-title { 
-  font-size: 18px; 
-  font-weight: 800; 
-  letter-spacing: 0.5px; 
-  margin-bottom: 2px;
-}
+.top-actions { display: flex; gap: 12px; align-items: center;}
+.action-icon { width: 34px; height: 34px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--border); color: var(--text-dark); display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: 0.2s;}
+.action-icon:active { transform: scale(0.9); background: var(--primary-light); }
+.lang-icon { font-size: 11px; font-weight: 900; color: var(--accent); border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.1); }
 
-.app-subtitle { 
-  font-size: 10px; 
-  font-weight: 600; 
-  color: var(--text-muted); 
-}
+.location-selector { padding: 10px 16px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #f8fafc; cursor: pointer; background: #0b1120; border-bottom: 1px solid var(--border);}
+.location-selector span { font-size: 10px; color: #94a3b8; }
 
-.top-actions { 
-  display: flex; 
-  gap: 12px; 
-  align-items: center;
-}
-
-.action-icon { 
-  width: 34px; 
-  height: 34px; 
-  border-radius: 50%; 
-  background: var(--card-bg); 
-  border: 1px solid var(--border); 
-  color: var(--text-dark); 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  font-size: 15px; 
-  cursor: pointer; 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
-  transition: 0.2s;
-}
-
-.action-icon:active { 
-  transform: scale(0.9); 
-  background: var(--primary-light); 
-}
-
-.lang-icon { 
-  font-size: 11px; 
-  font-weight: 900; 
-  color: var(--accent); 
-  border-color: rgba(16, 185, 129, 0.3); 
-  background: rgba(16, 185, 129, 0.1); 
-}
-
-.location-selector { 
-  padding: 10px 16px; 
-  display: flex; 
-  align-items: center; 
-  gap: 6px; 
-  font-size: 13px; 
-  font-weight: 700; 
-  color: #f8fafc; 
-  cursor: pointer; 
-  background: #0b1120; 
-  border-bottom: 1px solid var(--border);
-}
-
-.location-selector span { 
-  font-size: 10px; 
-  color: #94a3b8; 
-}
-
-main { 
-  max-width: 480px; 
-  margin: 0 auto; 
-  padding: 16px; 
-  position: relative; 
-  z-index: 10; 
-}
+main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-index: 10; }
 
 /* 🔍 MAIN SEARCH BOX */
-.search-box { 
-  background: var(--card-bg); 
-  padding: 12px 16px; 
-  border-radius: 50px; 
-  display: flex; 
-  align-items: center; 
-  gap: 12px; 
-  margin-bottom: 24px; 
-  border: 1px solid var(--border);
-}
-
+.search-box { background: var(--card-bg); padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px; border: 1px solid var(--border);}
 .search-box span { font-size: 16px; color: var(--text-muted); }
 .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 600; background: transparent; }
 
@@ -194,38 +72,13 @@ main {
 
 /* 📱 HORIZONTAL CATEGORY GRID */
 .cat-grid-horz { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
-
-.cat-card-horz { 
-  background: var(--card-bg); 
-  border-radius: var(--radius); 
-  padding: 12px; 
-  display: flex; 
-  align-items: center; 
-  gap: 12px; 
-  border: 1px solid var(--border); 
-  cursor: pointer; 
-  transition: 0.2s;
-}
-
+.cat-card-horz { background: var(--card-bg); border-radius: var(--radius); padding: 12px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s;}
 .cat-card-horz:active { transform: scale(0.97); background: var(--primary-light); }
-
-.cat-icon-horz { 
-  width: 44px; 
-  height: 44px; 
-  border-radius: 12px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  font-size: 22px; 
-  flex-shrink: 0; 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
+.cat-icon-horz { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
 .cat-info-horz { flex: 1; }
 .cat-title-horz { font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
 .cat-sub-horz { font-size: 10px; font-weight: 600; color: var(--text-muted); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
 
-/* CATEGORY COLORS */
 .bg-green { background: linear-gradient(135deg, #4ade80, #16a34a); color: white;}
 .bg-purple { background: linear-gradient(135deg, #c084fc, #9333ea); color: white;}
 .bg-red { background: linear-gradient(135deg, #f87171, #dc2626); color: white;}
@@ -236,124 +89,40 @@ main {
 .bg-indigo { background: linear-gradient(135deg, #818cf8, #4f46e5); color: white;}
 
 /* 📸 STORIES / OFFERS SECTION 📸 */
-.story-container { 
-  display: flex; 
-  gap: 14px; 
-  overflow-x: auto; 
-  padding-bottom: 10px; 
-  scrollbar-width: none; 
-  margin-bottom: 10px;
-}
-
+.story-container { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; margin-bottom: 10px;}
 .story-container::-webkit-scrollbar { display: none; }
-
-.story-item { 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  gap: 6px; 
-  cursor: pointer; 
-  width: 66px; 
-  flex-shrink: 0;
-}
-
-.story-ring { 
-  width: 62px; 
-  height: 62px; 
-  border-radius: 50%; 
-  background: linear-gradient(45deg, #f97316, #ec4899, #8b5cf6); 
-  padding: 3px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.story-img-box { 
-  width: 100%; 
-  height: 100%; 
-  border-radius: 50%; 
-  background: var(--primary); 
-  border: 2px solid var(--primary); 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  font-size: 24px; 
-  overflow: hidden;
-}
-
-.story-name { 
-  font-size: 10px; 
-  font-weight: 700; 
-  color: var(--text-dark); 
-  text-align: center; 
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  width: 100%;
-}
+.story-item { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; width: 66px; flex-shrink: 0;}
+.story-ring { width: 62px; height: 62px; border-radius: 50%; background: linear-gradient(45deg, #f97316, #ec4899, #8b5cf6); padding: 3px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+.story-img-box { width: 100%; height: 100%; border-radius: 50%; background: var(--primary); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 24px; overflow: hidden;}
+.story-name { font-size: 10px; font-weight: 700; color: var(--text-dark); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;}
 
 /* STORY VIEW MODAL */
-.story-viewer-overlay { 
-  position: fixed; 
-  inset: 0; 
-  background: #000; 
-  z-index: 999999999; 
-  display: flex; 
-  flex-direction: column; 
-}
-
+.story-viewer-overlay { position: fixed; inset: 0; background: #000; z-index: 999999999; display: flex; flex-direction: column; }
 .story-progress-bar { display: flex; gap: 4px; padding: 10px; width: 100%; position: absolute; top: 0; z-index: 10;}
 .story-progress { flex: 1; height: 3px; background: rgba(255,255,255,0.3); border-radius: 10px;}
 .story-progress-fill { height: 100%; background: #fff; width: 100%; border-radius: 10px; }
-
 .story-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 16px 16px; position: absolute; top: 0; width: 100%; z-index: 9;}
 .story-header-left { display: flex; align-items: center; gap: 10px;}
 .story-dp { width: 36px; height: 36px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px;}
 .story-title { font-size: 14px; font-weight: 800; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
 .story-close { font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
-
-.story-content { 
-  flex: 1; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center; 
-  background: #0b1120; 
-  padding: 30px; 
-  text-align: center; 
-  color: white; 
-  position: relative;
-}
-
-.story-image-show { 
-  max-width: 100%; 
-  max-height: 60vh; 
-  border-radius: 12px; 
-  border: 3px solid white; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-  z-index: 2; 
-  margin-bottom: 15px; 
-  object-fit: contain; 
-}
-
+.story-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0b1120; padding: 30px; text-align: center; color: white; position: relative;}
+.story-offer-badge { background: #fde047; color: #b45309; font-size: 14px; font-weight: 900; padding: 6px 16px; border-radius: 50px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+.story-image-show { max-width: 100%; max-height: 55vh; border-radius: 12px; border: 3px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 2; margin-bottom: 15px; object-fit: contain; }
 .story-footer { padding: 20px; background: rgba(0,0,0,0.5); display: flex; gap: 10px;}
 
 /* COMMON CARDS & FORMS */
 .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; }
 .field { margin-bottom: 16px; width: 100%; }
 .field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
-
 .input-wrap { display: flex; align-items: center; background: var(--primary); border: 1px solid var(--border); border-radius: 12px; padding: 0 14px;}
 .input-wrap:focus-within { border-color: var(--accent); }
 .input-wrap span { font-size: 16px; opacity: 0.6; margin-right: 8px;}
 .input-wrap input, .input-wrap select, .input-wrap textarea { width: 100%; padding: 14px 0; border: none; background: transparent; font-size: 13px; font-weight: 600; outline: none; }
 .input-wrap select option { background: var(--primary-light); color: var(--text-dark); }
-
 .radio-group { display: flex; gap: 10px; margin-top: 5px;}
 .radio-box { flex: 1; background: var(--primary); padding: 12px; border-radius: 12px; border: 1px solid var(--border); text-align: center; font-size: 12px; font-weight: 700; color: var(--text-muted); cursor: pointer;}
 .radio-box.active { background: rgba(16, 185, 129, 0.1); border-color: var(--accent); color: var(--accent);}
-
 .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 14px; font-weight: 800; cursor: pointer; color: #000; background: var(--accent); margin-top: 10px;}
 .btn:active { transform: scale(0.97); }
 
@@ -624,7 +393,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>👤</span><input type="text" class="lang-input" data-hi="नाम लिखें..." data-en="Enter Name..." placeholder="नाम लिखें..." id="addName"></div>
             </div>
 
-            <!-- MAP PICKER & ADDRESS FIELD -->
             <div class="field">
                 <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
                 <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openModalSafe('realMapModal')">
@@ -652,7 +420,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <h2 style="justify-content: center; font-size: 20px; margin-bottom: 4px;" id="profileName">My Profile</h2>
             <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;" id="profilePhone">+91 XXXXXXXXXX</p>
             
-            <!-- 👑 ADMIN DASHBOARD 👑 -->
             <div id="adminPanel" style="display:none; background: linear-gradient(135deg, #b91c1c, #991b1b); color: white; padding: 16px; border-radius: 16px; margin-bottom: 20px; text-align: left; box-shadow: 0 4px 15px rgba(185, 28, 28, 0.4);">
                 <div style="font-size: 16px; font-weight: 900; margin-bottom: 10px;">👑 Admin Dashboard</div>
                 <div style="display: flex; gap: 10px;">
@@ -667,7 +434,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </div>
             </div>
 
-            <!-- 🔥 SHOP STATUS TOGGLE 🔥 -->
             <div id="shopStatusWrap" style="display:none; background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="display:flex; gap:14px; align-items:center; margin-bottom: 16px;">
                     <div style="width: 46px; height: 46px; background: var(--card-bg); border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:20px; border: 1px solid var(--border);">🏬</div>
@@ -692,7 +458,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 </div>
             </div>
 
-            <!-- 🔥 ADD STORY BUTTON (Visible only if user has a shop) 🔥 -->
+            <!-- 🔥 ADD STORY BUTTON 🔥 -->
             <div id="addStoryWrap" style="display:none; background: var(--primary); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; margin-bottom:20px;">
                 <div style="font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">🔥 <span class="hi">अपना Offer / Story लगाएँ</span><span class="en">Post an Offer / Story</span></div>
                 <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;"><span class="hi">यह होम स्क्रीन पर सबसे ऊपर 24 घंटे तक दिखेगा।</span><span class="en">Will be live at the top for 24 hours.</span></p>
@@ -702,7 +468,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <button class="btn" style="padding: 10px; font-size: 13px; margin: 0; background: linear-gradient(90deg, #ec4899, #f97316); color: white;" onclick="openModalSafe('addStoryModal')">➕ <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></button>
             </div>
 
-            <!-- MESSAGE FOR NORMAL CUSTOMERS -->
             <div id="customerMsgWrap" style="display:none; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px;">
                 <span class="hi">आपने अभी तक अपनी कोई जानकारी (दुकान/सर्विस) नहीं जोड़ी है। '➕ जोड़ें' बटन से पहले जानकारी जोड़ें ताकि आप भी अपना Offer लगा सकें।</span>
                 <span class="en">You haven't added any info yet. Use the '➕ Add' button to register and unlock Offers feature.</span>
@@ -766,28 +531,37 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- ➕ ADD STORY MODAL (ONLY PHOTO & CATEGORY) -->
+<!-- 🔥 NEW STORY MODAL (ONLY PHOTO & CATEGORY + SUB-CATEGORY) 🔥 -->
 <div id="addStoryModal" class="modal-overlay hidden" onclick="closeModalSafe('addStoryModal')">
     <div class="bottom-sheet" id="addStorySheet" onclick="event.stopPropagation()">
         <div class="sheet-close" onclick="closeModalSafe('addStoryModal')"></div>
         <h2 style="font-size: 20px; font-weight: 900; color: var(--text-dark); margin-bottom: 20px;">🔥 <span class="hi">नया Offer डालें</span><span class="en">Add New Offer</span></h2>
         
         <div class="field">
-            <label><span class="hi">केटेगरी चुनें *</span><span class="en">Select Category *</span></label>
+            <label><span class="hi">मेन केटेगरी चुनें *</span><span class="en">Select Main Category *</span></label>
             <div class="input-wrap">
                 <span>📑</span>
-                <select id="storyCat">
-                    <option value="🛒">बाज़ार (Shops)</option>
-                    <option value="🛠️">सेवाएं (Services)</option>
-                    <option value="🏥">स्वास्थ्य (Health)</option>
-                    <option value="💼">रोज़गार (Jobs)</option>
-                    <option value="🎓">शिक्षा (Education)</option>
-                    <option value="🍴">खाना (Food)</option>
+                <select id="storyMainCat" onchange="updateStorySubCats()">
+                    <option value="" disabled selected class="hi">-- केटेगरी चुनें --</option>
+                    <option value="" disabled selected class="en">-- Select Category --</option>
+                    <option value="बाज़ार">लोकल बाज़ार (Shops)</option>
+                    <option value="सेवाएं">ज़रूरी सेवाएं (Services)</option>
+                    <option value="स्वास्थ्य">स्वास्थ्य (Health/Medical)</option>
+                    <option value="रोज़गार">रोज़गार (Jobs)</option>
+                    <option value="शिक्षा">शिक्षा (Education)</option>
+                    <option value="खाना">खाना (Food)</option>
                 </select>
             </div>
         </div>
 
-        <!-- 🔥 ONLY PHOTO UPLOAD FOR STORY 🔥 -->
+        <div class="field hidden" id="storySubCatField">
+            <label><span class="hi">सब-केटेगरी चुनें *</span><span class="en">Sub Category *</span></label>
+            <div class="input-wrap">
+                <span>📋</span>
+                <select id="storySubCat"></select>
+            </div>
+        </div>
+
         <div class="field">
             <label><span class="hi">प्रोडक्ट/ऑफर की फोटो (ज़रूरी) *</span><span class="en">Offer Photo (Required) *</span></label>
             <div class="input-wrap" style="padding: 10px; flex-direction: column; align-items: flex-start; background: rgba(16, 185, 129, 0.05); border: 1px dashed var(--accent);">
@@ -815,7 +589,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
     
     <div class="story-content" id="svBg">
-        <!-- ONLY Image Area Now -->
+        <div class="story-offer-badge" id="svBadge" style="display:none;">Offer</div>
         <img id="svImg" class="story-image-show" style="display:none;">
     </div>
     
@@ -845,7 +619,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- 🤖 AI ASSISTANT MODAL -->
+<!-- 🤖 FULL AI ASSISTANT MODAL (12 Questions Restored) -->
 <div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeModalSafe('aiModal')">
   <div class="ai-box" id="aiBoxContent" onclick="event.stopPropagation()">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -857,9 +631,18 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
     <div class="ai-opts">
        <button class="ai-btn" onclick="askAI('why_built')">🎯 <span class="hi">यह ऐप क्यों बनाया गया है?</span></button>
+       <button class="ai-btn" onclick="askAI('how_works')">⚙️ <span class="hi">यह कैसे काम करता है?</span></button>
        <button class="ai-btn" onclick="askAI('add')">➕ <span class="hi">अपनी दुकान कैसे जोड़ें?</span></button>
        <button class="ai-btn" onclick="askAI('free')">💰 <span class="hi">क्या यह ऐप फ्री है?</span></button>
        <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस चालू/बंद कैसे करें?</span></button>
+       <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span></button>
+       <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Offer (Story) कैसे लगाएँ?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_bazaar')">🛒 <span class="hi">'बाज़ार' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_health')">🏥 <span class="hi">'स्वास्थ्य' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_jobs')">💼 <span class="hi">'रोज़गार' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_edu')">🎓 <span class="hi">'शिक्षा' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_food')">🍴 <span class="hi">'खाना' केटेगरी में क्या है?</span></button>
     </div>
   </div>
 </div>
@@ -886,7 +669,7 @@ let activeTab = localStorage.getItem('ac_current_tab') || 'home';
 let shopsData = [];
 let storiesData = [];
 
-// 🔥 SAFE NATIVE MODAL NAVIGATION (PREVENTS APP EXIT ON BACK BUTTON) 🔥
+// 🔥 SAFE NATIVE MODAL NAVIGATION (Fixes App Exit Bug) 🔥
 function openModalSafe(id) {
     document.getElementById(id).classList.remove('hidden');
     history.pushState({modal: id}, '', '#' + id);
@@ -1131,7 +914,7 @@ function renderProfileStories() {
                 <div style="display:flex; align-items:center; gap:10px;">
                     <div style="font-size:24px;">${st.icon}</div>
                     <div>
-                        <div style="font-size:12px; font-weight:800; color:var(--text-dark);">Photo Offer</div>
+                        <div style="font-size:12px; font-weight:800; color:var(--text-dark);">${st.badge}</div>
                         <div style="font-size:10px; color:var(--accent);">${t('24 घंटे में हट जाएगी', 'Auto-delete in 24h')}</div>
                     </div>
                 </div>
@@ -1145,7 +928,26 @@ function renderProfileStories() {
     }
 }
 
-// 🔥 EXTREME COMPRESSION FOR SQLITE LIMITS 🔥
+// 🔥 STORY SUBCATEGORY UPDATE (Like Registration) 🔥
+function updateStorySubCats() {
+    let mainCat = document.getElementById('storyMainCat').value;
+    let subCatWrap = document.getElementById('storySubCatField'); 
+    let subCatSelect = document.getElementById('storySubCat'); 
+    
+    subCatWrap.classList.remove('hidden');
+
+    let opts = "";
+    if(mainCat === 'बाज़ार') { opts = `<option value="किराना / जनरल स्टोर">${t("किराना / जनरल स्टोर", "General Store")}</option><option value="कपड़े / साड़ी">${t("कपड़े / साड़ी", "Clothing/Saree")}</option><option value="इलेक्ट्रॉनिक्स / मोबाइल">${t("इलेक्ट्रॉनिक्स / मोबाइल", "Electronics/Mobile")}</option><option value="जूते / चप्पल">${t("जूते / चप्पल", "Footwear")}</option><option value="हार्डवेयर / पेंट">${t("हार्डवेयर / पेंट", "Hardware/Paint")}</option><option value="ज्वेलरी / सुनार">${t("ज्वेलरी / सुनार", "Jewelry")}</option><option value="ब्यूटी पार्लर / सैलून">${t("ब्यूटी पार्लर / सैलून", "Beauty Parlor/Salon")}</option><option value="कॉस्मेटिक / चूड़ी">${t("कॉस्मेटिक / चूड़ी", "Cosmetics/Bangles")}</option><option value="स्टेशनरी / किताबें">${t("स्टेशनरी / किताबें", "Stationery/Books")}</option><option value="ऑटो पार्ट्स / गैरेज">${t("ऑटो पार्ट्स / गैरेज", "Auto Parts/Garage")}</option><option value="बीज / खाद (Agriculture)">${t("बीज / खाद (Agriculture)", "Seeds/Fertilizer")}</option><option value="अन्य दुकान (Other)">${t("अन्य दुकान (Other)", "Other Shop")}</option>`; } 
+    else if(mainCat === 'सेवाएं') { opts = `<option value="प्लंबर / इलेक्ट्रीशियन">${t("प्लंबर / इलेक्ट्रीशियन", "Plumber/Electrician")}</option><option value="मैकेनिक">${t("मैकेनिक", "Mechanic")}</option>`; } 
+    else if(mainCat === 'स्वास्थ्य') { opts = `<option value="अस्पताल / क्लिनिक">${t("अस्पताल / क्लिनिक", "Hospital/Clinic")}</option><option value="मेडिकल स्टोर">${t("मेडिकल स्टोर", "Medical Store")}</option>`; } 
+    else if(mainCat === 'रोज़गार') { opts = `<option value="राजमिस्त्री / मज़दूर">${t("राजमिस्त्री / मज़दूर", "Mason/Labor")}</option><option value="ड्राइवर">${t("ड्राइवर", "Driver")}</option><option value="दुकान हेल्पर">${t("दुकान हेल्पर", "Shop Helper")}</option>`; } 
+    else if(mainCat === 'शिक्षा') { opts = `<option value="स्कूल / कॉलेज">${t("स्कूल / कॉलेज", "School/College")}</option><option value="कंप्यूटर कोर्स">${t("कंप्यूटर कोर्स", "Computer Course")}</option>`; }
+    else if(mainCat === 'खाना') { opts = `<option value="रेस्टोरेंट">${t("रेस्टोरेंट", "Restaurant")}</option><option value="ढाबा">${t("ढाबा", "Dhaba")}</option>`; }
+    
+    subCatSelect.innerHTML = opts;
+}
+
+// 🔥 EXTREME COMPRESSION FOR IMAGE SAFETY 🔥
 function handleStoryImageUpload(event) {
     let file = event.target.files[0];
     if(!file) return;
@@ -1155,7 +957,7 @@ function handleStoryImageUpload(event) {
         let img = new Image();
         img.onload = function() {
             let canvas = document.createElement('canvas');
-            let max_size = 250; // Ultra compressed for Database safety
+            let max_size = 300; 
             let width = img.width; 
             let height = img.height;
             if (width > height) { 
@@ -1180,18 +982,20 @@ function handleStoryImageUpload(event) {
 }
 
 async function submitStory() {
-    let icon = document.getElementById('storyCat').value;
+    let mainCat = document.getElementById('storyMainCat').value;
+    let subCat = document.getElementById('storySubCat').value;
+    let icon = mainCat === "बाज़ार" ? "🏬" : (mainCat === "सेवाएं" ? "🛠️" : (mainCat === "रोज़गार" ? "💼" : (mainCat === "स्वास्थ्य" ? "🏥" : (mainCat === "खाना" ? "🍴" : "🎓"))));
     let name = currentUser ? currentUser.name : "My Shop";
     
-    if(!currentStoryImageBase64) { 
-        showToast(t("कृपया फोटो ज़रूर चुनें!", "Please select a photo!"), "error"); 
+    if(!mainCat || !subCat || !currentStoryImageBase64) { 
+        showToast(t("कृपया केटेगरी और फोटो ज़रूर चुनें!", "Please select category and photo!"), "error"); 
         return; 
     }
     
     let storyObj = {
         userName: name,
         userPhone: currentUser ? currentUser.phone : "",
-        badgeTitle: "Offer", 
+        badgeTitle: subCat, // Saving subcategory as badge
         description: currentStoryImageBase64, 
         icon: icon
     };
@@ -1212,13 +1016,15 @@ async function submitStory() {
     }
 }
 
-// 🔥 SAFE STORY OPENER (Shows image) 🔥
+// 🔥 SAFE STORY OPENER 🔥
 function openStory(id) {
     let st = storiesData.find(s => s.id === id);
     if(!st) return;
 
     document.getElementById('svIcon').innerText = st.icon;
     document.getElementById('svTitle').innerText = st.name;
+    document.getElementById('svBadge').innerText = st.badge;
+    document.getElementById('svBadge').style.display = 'block';
     
     let imgEl = document.getElementById('svImg');
     
@@ -1275,14 +1081,7 @@ function renderShops() {
     }
 
     filtered.forEach(shop => {
-        let shopIsOpen = shop.isOpen;
-        if(currentUser && (shop.phone === currentUser.phone || shop.name === currentUser.name)) {
-            let localSwitchState = localStorage.getItem('shop_status_open');
-            if(localSwitchState !== null) { 
-                shopIsOpen = (localSwitchState === 'true'); 
-            }
-        }
-        let isOpenCheck = (shopIsOpen === true || shopIsOpen === "true" || shopIsOpen === 1 || shopIsOpen === "1");
+        let isOpenCheck = (shop.isOpen == true || shop.isOpen == "true" || shop.isOpen == 1 || shop.isOpen == "1");
 
         let statusText = ""; 
         let statusClass = isOpenCheck ? 'status-open' : 'status-closed';
@@ -1324,6 +1123,7 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
+// 🔥 ONLINE SHOPS ONLY SHOWS ON 🔥
 function renderOnlineShops() {
     let html = ""; 
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1333,15 +1133,7 @@ function renderOnlineShops() {
         s.calculatedDist = dist;
         let matchDist = isLocationTracked ? (dist <= 10) : true; 
         
-        let shopIsOpen = s.isOpen;
-        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
-            let localSwitchState = localStorage.getItem('shop_status_open');
-            if(localSwitchState !== null) { 
-                shopIsOpen = (localSwitchState === 'true'); 
-            }
-        }
-
-        let isOpenCheck = (shopIsOpen === true || shopIsOpen === "true" || shopIsOpen === 1 || shopIsOpen === "1");
+        let isOpenCheck = (s.isOpen == true || s.isOpen == "true" || s.isOpen == 1 || s.isOpen == "1");
         return s.type === currentOnlineFilter && isOpenCheck && matchDist;
     });
     
@@ -1470,7 +1262,7 @@ function updateProfileUI() {
         
         if(myShops.length > 0) {
             document.getElementById('dashShopName').innerText = myShops[0].name;
-            let isOpenCheck = (myShops[0].isOpen === true || myShops[0].isOpen === "true" || myShops[0].isOpen === 1 || myShops[0].isOpen === "1");
+            let isOpenCheck = (myShops[0].isOpen == true || myShops[0].isOpen == "true" || myShops[0].isOpen == 1 || myShops[0].isOpen == "1");
             
             document.getElementById('liveSwitch').checked = isOpenCheck;
             let textEl = document.getElementById('switchText');
@@ -1576,11 +1368,10 @@ async function submitShop() {
     }
 }
 
+// 🔥 DIRECT LOCAL & DB UPDATE FOR ON/OFF 🔥
 async function toggleShopStatus(checkbox) {
     let textEl = document.getElementById('switchText'); 
     let isNowOpen = checkbox.checked;
-    
-    localStorage.setItem('shop_status_open', isNowOpen);
     
     if(isNowOpen) { 
         textEl.innerHTML = t("ON (चालू है)", "ON (Active)"); 
@@ -1595,7 +1386,7 @@ async function toggleShopStatus(checkbox) {
     let myShopIds = [];
     shopsData.forEach(s => { 
         if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) { 
-            s.isOpen = isNowOpen; 
+            s.isOpen = isNowOpen ? 1 : 0; 
             myShopIds.push(s.id); 
         } 
     });
@@ -1697,6 +1488,13 @@ function askAI(type) {
     else if(type === 'free') { q = t("💰 क्या यह ऐप फ्री है?", "💰 Is it free?"); a = t("जी हाँ! यह ऐप ग्राहकों और दुकानदारों दोनों के लिए 100% फ्री है। अपनी दुकान लिस्ट करने का कोई पैसा नहीं लगता।", "Yes! It is 100% Free for both customers and shopkeepers. No charges to list your business."); } 
     else if(type === 'status') { q = t("🎚️ स्टेटस चालू/बंद कैसे करें?", "🎚️ How to toggle ON/OFF?"); a = t("नीचे '👤 प्रोफाइल' में जाएं। वहां ON/OFF का बटन (स्विच) है। जब आप काम कर रहे हों तो इसे ON (चालू) रखें।", "Go to '👤 Profile'. Use the ON/OFF switch there. Keep it ON when you are working."); }
     else if(type === 'login') { q = t("🔐 लॉगिन क्यों ज़रूरी है?", "🔐 Why login required?"); a = t("लॉगिन सिर्फ दुकानदारों के लिए ज़रूरी है ताकि कोई दूसरा व्यक्ति आपकी दुकान की जानकारी से छेड़छाड़ न कर सके।", "Login is required for shopkeepers to securely manage their own store and prevent others from editing it."); }
+    else if(type === 'story') { q = t("🔥 Offer (Story) कैसे लगाएँ?", "🔥 How to post Story/Offer?"); a = t("लॉगिन करके '👤 प्रोफाइल' में जाएं, वहां 'नया Offer डालें' बटन पर क्लिक करें।", "Login and go to '👤 Profile', click on 'Add New Offer'."); }
+    else if(type === 'cat_bazaar') { q = t("🛒 'बाज़ार' केटेगरी में क्या है?", "🛒 What's in 'Shops' category?"); a = t("इसमें आपको आस-पास के किराने की दुकान (General Store), सब्ज़ी वाले, कपड़े की दुकान (Saree/Clothes), और इलेक्ट्रॉनिक्स की दुकानों की जानकारी मिलेगी।", "Here you will find nearby Grocery stores, Vegetable vendors, Clothing, and Electronics shops."); }
+    else if(type === 'cat_services') { q = t("🛠️ 'सेवाएं' केटेगरी में क्या है?", "🛠️ What's in 'Services' category?"); a = t("इसमें आपको प्लंबर, इलेक्ट्रीशियन, मैकेनिक, और बढ़ई (Carpenter) आदि जैसी हर घर की ज़रूरी सेवाओं के नंबर और पते मिलेंगे।", "This section provides contacts for daily essential services like Plumbers, Electricians, Mechanics, and Carpenters."); }
+    else if(type === 'cat_health') { q = t("🏥 'स्वास्थ्य' केटेगरी में क्या है?", "🏥 What's in 'Health' category?"); a = t("यहाँ से आप अपने नज़दीकी अस्पताल, क्लिनिक, डॉक्टर और मेडिकल स्टोर की जानकारी और लोकेशन ढूँढ सकते हैं।", "Find information and locations of your nearest Hospitals, Clinics, Doctors, and Medical Stores here."); }
+    else if(type === 'cat_jobs') { q = t("💼 'रोज़गार' केटेगरी में क्या है?", "💼 What's in 'Jobs' category?"); a = t("अगर आपको काम की तलाश है (जैसे मज़दूरी, ड्राइविंग), या आपको अपने काम के लिए कोई वर्कर/हेल्पर चाहिए, तो आप इस केटेगरी का इस्तेमाल कर सकते हैं।", "If you are looking for work (e.g., Labor, Driving) or need a worker/helper for your business, you can use this category."); }
+    else if(type === 'cat_edu') { q = t("🎓 'शिक्षा' केटेगरी में क्या है?", "🎓 What's in 'Education' category?"); a = t("इसमें आपको इलाके के अच्छे स्कूल, कॉलेज, कंप्यूटर सेंटर और कोचिंग क्लासेस की पूरी जानकारी मिलेगी।", "Find complete information about good Schools, Colleges, Computer Centers, and Coaching Classes in your area."); }
+    else if(type === 'cat_food') { q = t("🍴 'खाना' केटेगरी में क्या है?", "🍴 What's in 'Food' category?"); a = t("भूख लगी है? यहाँ आप अपने आस-पास के बढ़िया रेस्टोरेंट, ढाबे, और होटल ढूँढ सकते हैं।", "Hungry? Find the best Restaurants, Dhabas, and Hotels nearby in this section."); }
     
     chat.innerHTML += `<div class="msg-b m-user">${q}</div>`; 
     chat.scrollTop = chat.scrollHeight;
@@ -1717,14 +1515,7 @@ async function fetchRealData() {
             let isOpenVal = true; 
             
             if (s.isOpen !== undefined && s.isOpen !== null) { 
-                isOpenVal = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1 || s.isOpen === "1"); 
-            }
-            
-            if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
-                let savedStatus = localStorage.getItem('shop_status_open');
-                if(savedStatus !== null) { 
-                    isOpenVal = (savedStatus === 'true'); 
-                }
+                isOpenVal = (s.isOpen == true || s.isOpen == "true" || s.isOpen == 1 || s.isOpen == "1"); 
             }
             
             return {
@@ -1772,29 +1563,12 @@ window.onload = async () => {
     setFilter('बाज़ार'); 
     setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
-    
-    let savedStatus = localStorage.getItem('shop_status_open');
-    if(savedStatus !== null) {
-        let isTrue = (savedStatus === 'true'); 
-        let sw = document.getElementById('liveSwitch');
-        if(sw) {
-            sw.checked = isTrue; 
-            let textEl = document.getElementById('switchText');
-            if(isTrue) { 
-                textEl.innerHTML = t("ON (चालू है)", "ON (Active)"); 
-                textEl.style.color = "var(--accent)"; 
-            } else { 
-                textEl.innerHTML = t("OFF (बंद है)", "OFF (Closed)"); 
-                textEl.style.color = "#f87171"; 
-            }
-        }
-    }
 
-    // Load active tab BEFORE fetching data so it doesn't wait
+    // 🔥 FIXED: PEHLE REAL DATA AAYEGA, FIR TAB KHULEGA 🔥
+    await fetchRealData();
+    
     let savedTab = localStorage.getItem('ac_current_tab') || 'home';
     switchTab(savedTab);
-
-    await fetchRealData();
 
     setTimeout(() => { 
         if(!isLocationTracked) { 
@@ -1804,4 +1578,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-  </html>
+                                                                                                                 </html>
