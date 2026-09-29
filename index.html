@@ -35,16 +35,47 @@ body.theme-light {
   --border: #e2e8f0;        
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+  -webkit-tap-highlight-color: transparent; 
+}
 
 body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
-body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none; transition: background 0.3s, color 0.3s;}
-input, textarea, select { -webkit-user-select: auto; user-select: auto; color: var(--text-dark) !important;}
+body { 
+  background: var(--bg-color); 
+  color: var(--text-dark); 
+  min-height: 100vh; 
+  padding-bottom: 90px; 
+  overflow-x: hidden; 
+  -webkit-user-select: none; 
+  user-select: none; 
+  transition: background 0.3s, color 0.3s;
+}
+
+input, textarea, select { 
+  -webkit-user-select: auto; 
+  user-select: auto; 
+  color: var(--text-dark) !important;
+}
 
 /* 🌐 TOP BAR */
-.topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;}
+.topbar { 
+  background: var(--primary); 
+  padding: 15px 16px; 
+  position: sticky; 
+  top: 0; 
+  z-index: 50; 
+  border-bottom: 1px solid var(--border); 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+
 .topbar-left { display: flex; align-items: center; gap: 10px; }
 .back-arrow { font-size: 20px; color: var(--text-dark); cursor: pointer; padding: 4px 8px; border-radius: 50%; background: rgba(128,128,128,0.1); display: none; }
 .logo-area { display: flex; align-items: center; gap: 10px; }
@@ -79,7 +110,6 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .cat-title-horz { font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
 .cat-sub-horz { font-size: 10px; font-weight: 600; color: var(--text-muted); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
 
-/* CATEGORY COLORS */
 .bg-green { background: linear-gradient(135deg, #4ade80, #16a34a); color: white;}
 .bg-purple { background: linear-gradient(135deg, #c084fc, #9333ea); color: white;}
 .bg-red { background: linear-gradient(135deg, #f87171, #dc2626); color: white;}
@@ -172,6 +202,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .toast.show { transform: translateY(0); opacity: 1; }
 .toast.error { border-left: 4px solid #ef4444; }
 
+/* SWITCH */
 .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--primary-light); transition: .4s; border-radius: 34px; border: 1px solid var(--border);}
@@ -224,7 +255,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 
 <main>
     <!-- 🏠 1. HOME SECTION -->
-    <section id="home" class="hidden">
+    <section id="home">
         <div class="search-box" onclick="switchTab('bazaar')">
             <span>🔍</span>
             <input type="text" class="lang-input" data-hi="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." data-en="Search shop, service, person..." placeholder="किसी भी सेवा, दुकान, व्यक्ति को खोजें..." readonly>
@@ -623,7 +654,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- 🤖 FULL AI ASSISTANT MODAL (12 Questions Restored) -->
+<!-- 🤖 FULL AI ASSISTANT MODAL (13 Questions Restored) -->
 <div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeModalSafe('aiModal')">
   <div class="ai-box" id="aiBoxContent" onclick="event.stopPropagation()">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -641,12 +672,12 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
        <button class="ai-btn" onclick="askAI('status')">🎚️ <span class="hi">स्टेटस चालू/बंद कैसे करें?</span></button>
        <button class="ai-btn" onclick="askAI('login')">🔐 <span class="hi">लॉगिन क्यों ज़रूरी है?</span></button>
        <button class="ai-btn" onclick="askAI('story')">🔥 <span class="hi">Offer (Story) कैसे लगाएँ?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_bazaar')">🛒 <span class="hi">'बाज़ार' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_health')">🏥 <span class="hi">'स्वास्थ्य' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_jobs')">💼 <span class="hi">'रोज़गार' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_edu')">🎓 <span class="hi">'शिक्षा' केटेगरी में क्या है?</span></button>
-       <button class="ai-btn" onclick="askAI('cat_food')">🍴 <span class="hi">'खाना' केटेगरी में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_bazaar')">🛒 <span class="hi">'बाज़ार' में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_services')">🛠️ <span class="hi">'सेवाएं' में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_health')">🏥 <span class="hi">'स्वास्थ्य' में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_jobs')">💼 <span class="hi">'रोज़गार' में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_edu')">🎓 <span class="hi">'शिक्षा' में क्या है?</span></button>
+       <button class="ai-btn" onclick="askAI('cat_food')">🍴 <span class="hi">'खाना' में क्या है?</span></button>
     </div>
   </div>
 </div>
@@ -655,6 +686,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+// 🟢 SARE MAIN FUNCTIONS & DATABASE LOGIC 🟢
 const API_URL = "https://apna-chetr-dpi.ashifmd400.workers.dev";
 const ADMIN_PHONE = "7318259001"; 
 
@@ -669,7 +701,6 @@ let userLng = 77.2090;
 let isLocationTracked = false;
 let currentStoryImageBase64 = ""; 
 
-// Global Variable for Active Tab (Home bypass fixed)
 let activeTab = localStorage.getItem('ac_current_tab') || 'home';
 let shopsData = [];
 let storiesData = [];
@@ -699,6 +730,13 @@ window.addEventListener('popstate', function(e) {
 
 function t(hiText, enText) { 
     return currentLang === 'hi' ? hiText : enText; 
+}
+
+// 🟢 BOOELAN FIX: Parses database true/false securely 🟢
+function parseIsOpen(val) {
+    if (val === undefined || val === null) return true; 
+    let str = String(val).toLowerCase().trim();
+    return (str === "true" || str === "1" || str === "on" || str === "yes");
 }
 
 function applyThemeAndLang() {
@@ -919,7 +957,7 @@ function renderProfileStories() {
                 <div style="display:flex; align-items:center; gap:10px;">
                     <div style="font-size:24px;">${st.icon}</div>
                     <div>
-                        <div style="font-size:12px; font-weight:800; color:var(--text-dark);">Photo Offer</div>
+                        <div style="font-size:12px; font-weight:800; color:var(--text-dark);">${st.badge}</div>
                         <div style="font-size:10px; color:var(--accent);">${t('24 घंटे में हट जाएगी', 'Auto-delete in 24h')}</div>
                     </div>
                 </div>
@@ -952,7 +990,7 @@ function updateStorySubCats() {
     subCatSelect.innerHTML = opts;
 }
 
-// 🔥 EXTREME COMPRESSION FOR SQLITE LIMITS 🔥
+// 🔥 EXTREME COMPRESSION FOR IMAGE SAFETY 🔥
 function handleStoryImageUpload(event) {
     let file = event.target.files[0];
     if(!file) return;
@@ -962,7 +1000,7 @@ function handleStoryImageUpload(event) {
         let img = new Image();
         img.onload = function() {
             let canvas = document.createElement('canvas');
-            let max_size = 250; // Ultra compressed for Database safety
+            let max_size = 250; 
             let width = img.width; 
             let height = img.height;
             if (width > height) { 
@@ -1021,7 +1059,7 @@ async function submitStory() {
     }
 }
 
-// 🔥 SAFE STORY OPENER (Shows image) 🔥
+// 🔥 SAFE STORY OPENER 🔥
 function openStory(id) {
     let st = storiesData.find(s => s.id === id);
     if(!st) return;
@@ -1075,7 +1113,12 @@ function renderShops() {
         let matchCat = (s.type === currentFilter);
         let dist = getDistance(userLat, userLng, s.lat, s.lng);
         s.calculatedDist = dist; 
-        let matchDist = isLocationTracked ? (dist <= 10) : true; 
+        
+        let matchDist = true;
+        if(isLocationTracked && s.lat !== 0 && s.lng !== 0) {
+            matchDist = (dist <= 20); // 20KM Check
+        }
+        
         return matchCat && matchDist;
     });
     
@@ -1086,17 +1129,14 @@ function renderShops() {
     }
 
     filtered.forEach(shop => {
-        // 🔥 ONLINE SYSTEM LOGIC: 
-        // 1. Agar shop aapki hai, to apke switch (phone me save) se check hoga.
-        // 2. Agar shop kisi aur ki hai, to asli Database (shop.isOpen) se check hoga.
         let shopIsOpen = shop.isOpen;
-        if(currentUser && shop.phone === currentUser.phone && shop.phone !== "") {
+        if(currentUser && (shop.phone === currentUser.phone || shop.name === currentUser.name)) {
             let localSwitchState = localStorage.getItem('shop_status_open');
             if(localSwitchState !== null) { 
                 shopIsOpen = (localSwitchState === 'true'); 
             }
         }
-        let isOpenCheck = (String(shopIsOpen) === "true" || shopIsOpen === true || String(shopIsOpen) === "1");
+        let isOpenCheck = (shopIsOpen === true);
 
         let statusText = ""; 
         let statusClass = isOpenCheck ? 'status-open' : 'status-closed';
@@ -1138,6 +1178,7 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
+// 🔥 FIXED ONLINE TAB: Will show strictly based on DB true/false 🔥
 function renderOnlineShops() {
     let html = ""; 
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
@@ -1145,18 +1186,20 @@ function renderOnlineShops() {
     let filtered = shopsData.filter(s => {
         let dist = getDistance(userLat, userLng, s.lat, s.lng); 
         s.calculatedDist = dist;
-        let matchDist = isLocationTracked ? (dist <= 10) : true; 
+        let matchDist = true;
+        if(isLocationTracked && s.lat !== 0 && s.lng !== 0) {
+            matchDist = (dist <= 20); // 20KM Check
+        }
         
         let shopIsOpen = s.isOpen;
-        if(currentUser && s.phone === currentUser.phone && s.phone !== "") {
+        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
             let localSwitchState = localStorage.getItem('shop_status_open');
             if(localSwitchState !== null) { 
                 shopIsOpen = (localSwitchState === 'true'); 
             }
         }
 
-        // 🔥 ONLY SHOW IF REALLY ONLINE 🔥
-        let isOpenCheck = (String(shopIsOpen) === "true" || shopIsOpen === true || String(shopIsOpen) === "1");
+        let isOpenCheck = (shopIsOpen === true);
         return s.type === currentOnlineFilter && isOpenCheck && matchDist;
     });
     
@@ -1268,7 +1311,7 @@ function updateProfileUI() {
     document.getElementById('profilePhone').innerText = "+91 " + currentUser.phone;
 
     let isAdmin = (currentUser.phone === ADMIN_PHONE);
-    let myShops = shopsData.filter(s => s.phone === currentUser.phone && s.phone !== "");
+    let myShops = shopsData.filter(s => s.phone === currentUser.phone || s.name === currentUser.name);
     
     if(isAdmin) {
         document.getElementById('adminPanel').style.display = 'block';
@@ -1285,7 +1328,7 @@ function updateProfileUI() {
         
         if(myShops.length > 0) {
             document.getElementById('dashShopName').innerText = myShops[0].name;
-            let isOpenCheck = (String(myShops[0].isOpen) === "true" || String(myShops[0].isOpen) === "1" || myShops[0].isOpen === true);
+            let isOpenCheck = (myShops[0].isOpen === true);
             
             document.getElementById('liveSwitch').checked = isOpenCheck;
             let textEl = document.getElementById('switchText');
@@ -1410,7 +1453,7 @@ async function toggleShopStatus(checkbox) {
     
     let myShopIds = [];
     shopsData.forEach(s => { 
-        if(currentUser && s.phone === currentUser.phone && s.phone !== "") { 
+        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) { 
             s.isOpen = isNowOpen; 
             myShopIds.push(s.id); 
         } 
@@ -1503,7 +1546,7 @@ function openShopModal(name, cat, isOpen, loc, icon, type, isHiring, phone) {
     statusEl.innerHTML = statusText;
 }
 
-// 🔥 12 CHATBOT QUESTIONS (RESTORED COMPLETELY) 🔥
+// 🔥 13 CHATBOT QUESTIONS (RESTORED COMPLETELY) 🔥
 function askAI(type) {
     const chat = document.getElementById('aiChat'); 
     let q = "", a = "";
@@ -1515,12 +1558,12 @@ function askAI(type) {
     else if(type === 'status') { q = t("🎚️ स्टेटस चालू/बंद कैसे करें?", "🎚️ How to toggle ON/OFF?"); a = t("नीचे '👤 प्रोफाइल' में जाएं। वहां ON/OFF का बटन (स्विच) है। जब आप काम कर रहे हों तो इसे ON (चालू) रखें।", "Go to '👤 Profile'. Use the ON/OFF switch there. Keep it ON when you are working."); }
     else if(type === 'login') { q = t("🔐 लॉगिन क्यों ज़रूरी है?", "🔐 Why login required?"); a = t("लॉगिन सिर्फ दुकानदारों के लिए ज़रूरी है ताकि कोई दूसरा व्यक्ति आपकी दुकान की जानकारी से छेड़छाड़ न कर सके।", "Login is required for shopkeepers to securely manage their own store and prevent others from editing it."); }
     else if(type === 'story') { q = t("🔥 Offer (Story) कैसे लगाएँ?", "🔥 How to post Story/Offer?"); a = t("लॉगिन करके '👤 प्रोफाइल' में जाएं, वहां 'नया Offer डालें' बटन पर क्लिक करें।", "Login and go to '👤 Profile', click on 'Add New Offer'."); }
-    else if(type === 'cat_bazaar') { q = t("🛒 'बाज़ार' केटेगरी में क्या है?", "🛒 What's in 'Shops' category?"); a = t("इसमें किराने की दुकान, सब्ज़ी वाले, कपड़े, और इलेक्ट्रॉनिक्स की दुकानों की जानकारी मिलेगी।", "Here you will find Grocery stores, Vegetable vendors, Clothing, and Electronics shops."); }
-    else if(type === 'cat_services') { q = t("🛠️ 'सेवाएं' केटेगरी में क्या है?", "🛠️ What's in 'Services' category?"); a = t("इसमें प्लंबर, इलेक्ट्रीशियन, मैकेनिक, और बढ़ई (Carpenter) आदि सेवाओं के नंबर मिलेंगे।", "Provides contacts for daily services like Plumbers, Electricians, Mechanics, and Carpenters."); }
-    else if(type === 'cat_health') { q = t("🏥 'स्वास्थ्य' केटेगरी में क्या है?", "🏥 What's in 'Health' category?"); a = t("यहाँ से आप अस्पताल, क्लिनिक, डॉक्टर और मेडिकल स्टोर की जानकारी ढूँढ सकते हैं।", "Find information and locations of Hospitals, Clinics, Doctors, and Medical Stores."); }
-    else if(type === 'cat_jobs') { q = t("💼 'रोज़गार' केटेगरी में क्या है?", "💼 What's in 'Jobs' category?"); a = t("काम की तलाश करने वालों (जैसे मज़दूरी, ड्राइविंग) या वर्कर ढूंढने वालों के लिए।", "If you are looking for work or need a worker for your business, use this category."); }
-    else if(type === 'cat_edu') { q = t("🎓 'शिक्षा' केटेगरी में क्या है?", "🎓 What's in 'Education' category?"); a = t("इसमें स्कूल, कॉलेज, कंप्यूटर सेंटर और कोचिंग क्लासेस की पूरी जानकारी मिलेगी।", "Find complete information about Schools, Colleges, Computer Centers, and Coaching."); }
-    else if(type === 'cat_food') { q = t("🍴 'खाना' केटेगरी में क्या है?", "🍴 What's in 'Food' category?"); a = t("यहाँ आप रेस्टोरेंट, ढाबे, और होटल ढूँढ सकते हैं।", "Find the best Restaurants, Dhabas, and Hotels nearby in this section."); }
+    else if(type === 'cat_bazaar') { q = t("🛒 'बाज़ार' में क्या है?", "🛒 What's in 'Shops' category?"); a = t("इसमें किराने की दुकान, सब्ज़ी वाले, कपड़े, और इलेक्ट्रॉनिक्स की दुकानों की जानकारी मिलेगी।", "Here you will find Grocery stores, Vegetable vendors, Clothing, and Electronics shops."); }
+    else if(type === 'cat_services') { q = t("🛠️ 'सेवाएं' में क्या है?", "🛠️ What's in 'Services' category?"); a = t("इसमें प्लंबर, इलेक्ट्रीशियन, मैकेनिक, और बढ़ई (Carpenter) आदि सेवाओं के नंबर मिलेंगे।", "Provides contacts for daily services like Plumbers, Electricians, Mechanics, and Carpenters."); }
+    else if(type === 'cat_health') { q = t("🏥 'स्वास्थ्य' में क्या है?", "🏥 What's in 'Health' category?"); a = t("यहाँ से आप अस्पताल, क्लिनिक, डॉक्टर और मेडिकल स्टोर की जानकारी ढूँढ सकते हैं।", "Find information and locations of Hospitals, Clinics, Doctors, and Medical Stores."); }
+    else if(type === 'cat_jobs') { q = t("💼 'रोज़गार' में क्या है?", "💼 What's in 'Jobs' category?"); a = t("काम की तलाश करने वालों (जैसे मज़दूरी, ड्राइविंग) या वर्कर ढूंढने वालों के लिए।", "If you are looking for work or need a worker for your business, use this category."); }
+    else if(type === 'cat_edu') { q = t("🎓 'शिक्षा' में क्या है?", "🎓 What's in 'Education' category?"); a = t("इसमें स्कूल, कॉलेज, कंप्यूटर सेंटर और कोचिंग क्लासेस की पूरी जानकारी मिलेगी।", "Find complete information about Schools, Colleges, Computer Centers, and Coaching."); }
+    else if(type === 'cat_food') { q = t("🍴 'खाना' में क्या है?", "🍴 What's in 'Food' category?"); a = t("यहाँ आप रेस्टोरेंट, ढाबे, और होटल ढूँढ सकते हैं।", "Find the best Restaurants, Dhabas, and Hotels nearby in this section."); }
     
     chat.innerHTML += `<div class="msg-b m-user">${q}</div>`; 
     chat.scrollTop = chat.scrollHeight;
@@ -1538,20 +1581,10 @@ async function fetchRealData() {
         let sData = await shopRes.json();
 
         shopsData = sData.map(s => {
-            let isOpenVal = true; 
+            let isOpenVal = parseIsOpen(s.isOpen); 
             
-            // Database Priority (Sakti Se)
-            if (s.isOpen !== undefined && s.isOpen !== null) { 
-                isOpenVal = (String(s.isOpen) === "true" || String(s.isOpen) === "1"); 
-            }
-            
-            // LOCAL FIX: Sirf usi ka switch effect daalega jiski asli ID/Number ho! (No name clash anymore)
-            if(currentUser && s.userPhone === currentUser.phone && currentUser.phone !== "") {
-                let savedStatus = localStorage.getItem('shop_status_open');
-                if(savedStatus !== null) { 
-                    isOpenVal = (savedStatus === 'true'); 
-                }
-            } else if (currentUser && s.contactPhone === currentUser.phone && currentUser.phone !== "") {
+            // LOCAL FIX: Sirf usi ka switch update hoga jiski id/phone exact match kare
+            if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
                 let savedStatus = localStorage.getItem('shop_status_open');
                 if(savedStatus !== null) { 
                     isOpenVal = (savedStatus === 'true'); 
@@ -1565,8 +1598,8 @@ async function fetchRealData() {
                 catHi: s.subTypeHi || "अन्य", 
                 catEn: s.subTypeEn || "Other",
                 locText: s.locationText || "Address", 
-                lat: parseFloat(s.lat) || 28.6139, 
-                lng: parseFloat(s.lng) || 77.2090, 
+                lat: parseFloat(s.lat) || 0, 
+                lng: parseFloat(s.lng) || 0, 
                 icon: s.icon || "🏬", 
                 isOpen: isOpenVal, 
                 isHiring: s.isHiring || false, 
@@ -1598,21 +1631,16 @@ async function fetchRealData() {
     }
 }
 
-window.onload = async () => { 
+window.onload = () => { 
     applyThemeAndLang();
-    setFilter('बाज़ार'); 
-    setOnlineFilter('बाज़ार');
     document.getElementById('backBtn').style.display = 'none'; 
     
-    // 🔥 SAFE REFRESH TAB SYSTEM 🔥
-    document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-    let targetSec = document.getElementById(activeTab);
-    if(targetSec) targetSec.classList.remove('hidden');
-
-    document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
-    let navId = activeTab === 'onlineTab' ? 'nav-onlineTab' : ('nav-' + activeTab);
-    let navBtn = document.getElementById(navId); 
-    if(navBtn) navBtn.classList.add('active');
+    // 🔥 TURANT UI DIKHAO (No White Screen Problem) 🔥
+    let savedTab = localStorage.getItem('ac_current_tab') || 'home';
+    switchTab(savedTab);
+    
+    setFilter('बाज़ार'); 
+    setOnlineFilter('बाज़ार');
 
     // Visual set of toggle switch before DB returns
     let savedStatus = localStorage.getItem('shop_status_open');
@@ -1632,8 +1660,8 @@ window.onload = async () => {
         }
     }
 
-    await fetchRealData();
-    switchTab(activeTab);
+    // Load data in background quietly
+    fetchRealData();
 
     setTimeout(() => { 
         if(!isLocationTracked) { 
@@ -1643,4 +1671,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-                                                                                                                                                </html>
+                                                  </html>
