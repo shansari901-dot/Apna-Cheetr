@@ -43,8 +43,8 @@ body.lang-en .hi { display: none !important; }
 body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none; transition: background 0.3s, color 0.3s;}
 input, textarea, select { -webkit-user-select: auto; user-select: auto; color: var(--text-dark) !important;}
 
-/* 🌐 NEW GRADIENT HEADER */
-.app-header { background: var(--header-grad); padding: 16px 16px 20px; position: sticky; top: 0; z-index: 50; border-bottom-left-radius: 0; border-bottom-right-radius: 0; color: white;}
+/* HEADER */
+.app-header { background: var(--header-grad); padding: 16px 16px 20px; position: sticky; top: 0; z-index: 50; color: white;}
 .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;}
 .header-left { display: flex; align-items: center; gap: 10px; }
 .back-arrow { font-size: 22px; color: white; cursor: pointer; padding: 4px 10px; border-radius: 50%; background: rgba(255,255,255,0.1); display: none; }
@@ -58,7 +58,6 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; color: v
 .hdr-icon:active { transform: scale(0.9); background: rgba(255,255,255,0.2); }
 .lang-icon { font-size: 11px; font-weight: 900; color: #4ade80; }
 
-/* 🔥 LOCATION PILL */
 .loc-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 700; color: white; cursor: pointer; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);}
 .loc-pill:active { background: rgba(255,255,255,0.2); }
 .loc-pill .arr { font-size: 9px; opacity: 0.7; }
@@ -66,7 +65,6 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; color: v
 .loc-dot.active { background: #4ade80; box-shadow: 0 0 10px #4ade80; animation: pulseDot 1.5s infinite; }
 @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-/* 🔍 HEADER SEARCH */
 .header-search { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 12px 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.15);}
 .header-search .s-icon { font-size: 16px; color: #64748b;}
 .header-search input { border: none; outline: none; width: 100%; font-size: 13px; font-weight: 600; background: transparent; color: #0f172a !important;}
@@ -74,12 +72,10 @@ input, textarea, select { -webkit-user-select: auto; user-select: auto; color: v
 
 main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-index: 10; }
 
-/* 🎨 SECTION HEADINGS */
 .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; margin-top: 4px;}
 .section-title { font-size: 16px; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 6px;}
 .section-link { font-size: 11px; font-weight: 700; color: var(--accent); text-decoration: none; cursor: pointer;}
 
-/* 🌟 HERO BANNER */
 .hero-banner { background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 18px; padding: 20px; margin-bottom: 22px; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25);}
 .hero-banner::before { content: '🏘️'; position: absolute; right: -10px; bottom: -10px; font-size: 110px; opacity: 0.18; transform: rotate(-8deg);}
 .hero-banner h3 { font-size: 20px; font-weight: 900; color: white; margin-bottom: 6px; line-height: 1.25; position: relative;}
@@ -87,7 +83,6 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .hero-btn { display: inline-flex; align-items: center; gap: 6px; background: white; color: var(--accent-dark); padding: 9px 16px; border-radius: 50px; font-size: 12px; font-weight: 800; border: none; cursor: pointer; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
 .hero-btn:active { transform: scale(0.95); }
 
-/* 📸 STORIES / OFFERS */
 .story-container { display: flex; gap: 14px; overflow-x: auto; padding: 4px 4px 12px; scrollbar-width: none; margin-bottom: 6px;}
 .story-container::-webkit-scrollbar { display: none; }
 .story-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; width: 74px; flex-shrink: 0;}
@@ -99,13 +94,11 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .story-badge { position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); background: #ef4444; color: white; font-size: 8px; font-weight: 800; padding: 2px 6px; border-radius: 10px; white-space: nowrap; box-shadow: 0 2px 6px rgba(0,0,0,0.2); border: 1.5px solid var(--bg-color);}
 .story-badge.text-only { background: #8b5cf6; }
 
-/* 🏷️ CATEGORY GRID */
 .cat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 22px;}
 .cat-card-v { background: var(--card-bg); border-radius: var(--radius); padding: 14px 8px; display: flex; flex-direction: column; align-items: center; gap: 8px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s; text-align: center; position: relative; overflow: hidden;}
 .cat-card-v:active { transform: scale(0.96); background: var(--primary-light); }
 .cat-card-v .cat-ico { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.12);}
 .cat-card-v .cat-lbl { font-size: 11px; font-weight: 800; color: var(--text-dark); line-height: 1.2;}
-.cat-card-v .cat-count { font-size: 9px; font-weight: 700; color: var(--text-muted);}
 
 .bg-green { background: linear-gradient(135deg, #4ade80, #16a34a); color: white;}
 .bg-purple { background: linear-gradient(135deg, #c084fc, #9333ea); color: white;}
@@ -116,12 +109,11 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .bg-cyan { background: linear-gradient(135deg, #38bdf8, #0284c7); color: white;}
 .bg-indigo { background: linear-gradient(135deg, #818cf8, #4f46e5); color: white;}
 .bg-teal { background: linear-gradient(135deg, #2dd4bf, #0d9488); color: white;}
+.bg-amber { background: linear-gradient(135deg, #fcd34d, #f59e0b); color: white;}
 
-/* 📋 SHOP CARDS (horizontal in home + full in list) */
 .shop-card { background: var(--card-bg); border-radius: 16px; padding: 14px; display: flex; gap: 12px; margin-bottom: 12px; border: 1px solid var(--border); cursor: pointer; align-items: center; transition: 0.2s; position: relative; overflow: hidden;}
 .shop-card:active { transform: scale(0.99); }
 .shop-img-box { width: 60px; height: 60px; border-radius: 14px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; border: 1px solid var(--border); overflow: hidden;}
-.shop-img-box img { width: 100%; height: 100%; object-fit: cover;}
 .shop-info { flex: 1; width: 100%; min-width: 0;}
 .shop-info h3 { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px;}
 .shop-info .cat-lbl { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
@@ -130,24 +122,19 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .status-open { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
 .status-closed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
 .rating-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 800; padding: 3px 6px; border-radius: 6px; background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3);}
-.shop-arrow { font-size: 18px; color: var(--text-muted); opacity: 0.5;}
 
-/* LIVE PULSE */
 .live-pulse { display: inline-block; width: 7px; height: 7px; background: #10b981; border-radius: 50%; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); animation: pulseLive 2s infinite;}
 @keyframes pulseLive { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
 
-/* MAIN SEARCH BOX (page-level) */
 .search-box { background: var(--card-bg); padding: 12px 16px; border-radius: 50px; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; border: 1px solid var(--border);}
 .search-box span { font-size: 16px; color: var(--text-muted); }
 .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 600; background: transparent; }
 
-/* FILTER CHIPS */
 .filter-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 12px; scrollbar-width: none; }
 .filter-scroll::-webkit-scrollbar { display: none; }
 .filter-chip { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: 0.2s; display:flex; align-items:center; gap:6px;}
 .filter-chip.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
 
-/* STORY VIEWER */
 .story-viewer-overlay { position: fixed; inset: 0; background: #000; z-index: 999999999; display: flex; flex-direction: column; }
 .story-progress-bar { display: flex; gap: 4px; padding: 10px; width: 100%; position: absolute; top: 0; z-index: 10;}
 .story-progress { flex: 1; height: 3px; background: rgba(255,255,255,0.3); border-radius: 10px;}
@@ -166,7 +153,6 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .story-text-only .sub-text { font-size: 14px; color: rgba(255,255,255,0.8); margin-top: 14px; font-weight: 600;}
 .story-offer-badge { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(16, 185, 129, 0.95); color: #fff; font-size: 13px; font-weight: 900; padding: 10px 22px; border-radius: 50px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.5); text-align: center; white-space: nowrap;}
 
-/* CARDS & FORMS */
 .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); width: 100%; }
 .card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: var(--text-dark); }
 .field { margin-bottom: 16px; width: 100%; }
@@ -183,20 +169,17 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 14px; font-weight: 800; cursor: pointer; color: white; background: var(--accent); margin-top: 10px; transition: 0.2s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);}
 .btn:active { transform: scale(0.97); }
 
-/* LOCATION PICKER */
 .loc-preview { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: rgba(16, 185, 129, 0.05); border: 1px dashed var(--accent); border-radius: 12px; margin-bottom: 10px;}
 .loc-preview textarea { border: none; background: transparent; outline: none; width: 100%; font-size: 13px; font-weight: 700; color: var(--accent); resize: none; font-family: inherit;}
 .map-pick-btn { width: 100%; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15)); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom: 10px; padding: 14px; display:flex; align-items:center; justify-content:center; gap:8px; font-size: 13px; font-weight: 800; border-radius: 12px; cursor: pointer; transition: 0.2s;}
 .map-pick-btn:active { transform: scale(0.98); }
 .map-pick-btn.picked { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15)); color: var(--accent); border-color: var(--accent); border-style: solid;}
 
-/* EMPTY STATE */
 .empty-state { text-align: center; padding: 40px 20px; }
 .empty-state .icon { font-size: 50px; margin-bottom: 12px; opacity: 0.6;}
 .empty-state .title { font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;}
 .empty-state .desc { font-size: 12px; font-weight: 600; color: var(--text-muted); line-height: 1.5;}
 
-/* BOTTOM NAV */
 .bottom-nav { position: fixed !important; bottom: 0px !important; left: 0; right: 0; width: 100%; background: var(--card-bg); display: flex; justify-content: space-around; padding: 8px 0 10px; padding-bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 999999 !important; border-top: 1px solid var(--border); box-shadow: 0 -4px 20px rgba(0,0,0,0.08);}
 .bottom-nav button { flex: 1; background: none; border: none; font-size: 10px; font-weight: 700; color: var(--text-muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative; padding: 4px 0;}
 .bottom-nav button .ico { font-size: 20px; filter: grayscale(1); opacity: 0.6; transition: 0.2s;}
@@ -206,12 +189,10 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 
 .hidden { display: none !important; }
 
-/* MODALS */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); z-index: 9999999; display: flex; align-items: flex-end; justify-content: center; backdrop-filter: blur(4px); }
 .bottom-sheet { background: var(--card-bg); width: 100%; max-width: 480px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.4); max-height: 88vh; overflow-y: auto; border-top: 1px solid var(--border); position: relative;}
 .sheet-close { width: 40px; height: 5px; background: var(--text-muted); border-radius: 10px; margin: 0 auto 24px; cursor: pointer; }
 
-/* CUSTOM CONFIRM */
 .custom-alert-box { background: var(--card-bg); border-radius: 16px; padding: 24px; width: 90%; max-width: 320px; text-align: center; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: auto;}
 .custom-alert-title { font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; }
 .custom-alert-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
@@ -219,14 +200,12 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-dark); padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; }
 .btn-danger { background: #ef4444; border: none; color: white; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; }
 
-/* TOASTS */
 .toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 99999999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px;}
 .toast { background: #1e293b; color: white; padding: 14px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; border: 1px solid #334155;}
 .toast.show { transform: translateY(0); opacity: 1; }
 .toast.error { border-left: 4px solid #ef4444; }
 .toast.success { border-left: 4px solid #10b981; }
 
-/* SWITCH */
 .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--primary-light); transition: .4s; border-radius: 34px; border: 1px solid var(--border);}
@@ -237,7 +216,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 #map { width: 100%; height: 250px; border-radius: 12px; margin-top: 10px; z-index: 1;}
 .map-search-bar { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--primary); color: var(--text-dark); margin-bottom: 10px; font-size: 13px; outline: none;}
 
-/* AI MODAL */
 .ai-box { background: var(--card-bg); border-radius: 20px; padding: 20px; width: 92%; max-width: 420px; margin: auto; max-height: 85vh; overflow-y: auto; border: 1px solid var(--border);}
 .chat-area { max-height: 250px; overflow-y: auto; padding: 10px 0; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;}
 .msg-b { padding: 10px 14px; border-radius: 14px; font-size: 12px; font-weight: 600; line-height: 1.5; max-width: 90%;}
@@ -247,7 +225,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 .ai-btn { background: var(--primary); border: 1px solid var(--border); color: var(--text-dark); padding: 12px 14px; border-radius: 10px; text-align: left; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;}
 .ai-btn:active { background: var(--primary-light); transform: scale(0.98);}
 
-/* STORY TYPE TOGGLE */
 .type-toggle { display: flex; gap: 8px; margin-bottom: 16px; background: var(--primary); padding: 4px; border-radius: 12px; border: 1px solid var(--border);}
 .type-toggle button { flex: 1; padding: 10px; border: none; background: transparent; border-radius: 9px; font-size: 12px; font-weight: 800; color: var(--text-muted); cursor: pointer; transition: 0.2s;}
 .type-toggle button.active { background: var(--accent); color: white; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);}
@@ -257,7 +234,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 
 <div class="toast-container" id="toastBox"></div>
 
-<!-- 🌐 NEW HEADER -->
 <header class="app-header">
    <div class="header-top">
        <div class="header-left">
@@ -294,16 +270,13 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
 </header>
 
 <main>
-    <!-- 🏠 HOME SECTION -->
     <section id="home">
-        <!-- HERO BANNER -->
         <div class="hero-banner">
             <h3><span class="hi">अपना क्षेत्र,<br>अपनी ज़रूरत,<br>एक ही जगह</span><span class="en">Your Area,<br>Your Needs,<br>All in One Place</span></h3>
             <p><span class="hi">10 KM के अंदर की सभी दुकानें और सेवाएँ</span><span class="en">All shops within 10 KM</span></p>
             <button class="hero-btn" onclick="switchTab('bazaar')">🔍 <span class="hi">अभी खोजें</span><span class="en">Search Now</span></button>
         </div>
 
-        <!-- STORIES / OFFERS -->
         <div id="storySectionWrap" style="display:none;">
             <div class="section-header">
                 <div class="section-title">🔥 <span class="hi">आज की खास ऑफर</span><span class="en">Today's Offers</span></div>
@@ -312,7 +285,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <div class="story-container" id="liveStoryContainer"></div>
         </div>
 
-        <!-- CATEGORIES -->
         <div class="section-header">
             <div class="section-title"><span class="hi">मुख्य श्रेणियाँ</span><span class="en">Main Categories</span></div>
             <span class="section-link" onclick="switchTab('bazaar')"><span class="hi">सभी →</span><span class="en">All →</span></span>
@@ -342,28 +314,26 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="cat-ico bg-pink">🍴</div>
                 <div class="cat-lbl"><span class="hi">खाना</span><span class="en">Food</span></div>
             </div>
-            <div class="cat-card-v" onclick="showToast(t('वाहन सेवा जल्द आ रही है!','Transport coming soon!'))">
+            <div class="cat-card-v" onclick="openCategory('वाहन')">
                 <div class="cat-ico bg-cyan">🚗</div>
                 <div class="cat-lbl"><span class="hi">वाहन</span><span class="en">Transport</span></div>
             </div>
-            <div class="cat-card-v" onclick="showToast(t('प्रॉपर्टी जल्द आ रही है!','Property coming soon!'))">
+            <div class="cat-card-v" onclick="openCategory('प्रॉपर्टी')">
                 <div class="cat-ico bg-indigo">🏠</div>
                 <div class="cat-lbl"><span class="hi">प्रॉपर्टी</span><span class="en">Property</span></div>
             </div>
-            <div class="cat-card-v" onclick="showToast(t('जल्द आ रहा है!','Coming soon!'))">
-                <div class="cat-ico bg-teal">🎉</div>
-                <div class="cat-lbl"><span class="hi">और</span><span class="en">More</span></div>
+            <div class="cat-card-v" onclick="openCategory('अन्य')">
+                <div class="cat-ico bg-amber">🎉</div>
+                <div class="cat-lbl"><span class="hi">और सेवाएँ</span><span class="en">More</span></div>
             </div>
         </div>
 
-        <!-- 🔥 NEARBY SHOPS PREVIEW ON HOME -->
         <div class="section-header" id="nearbyHeader" style="display:none;">
             <div class="section-title">📍 <span class="hi">आपके पास की दुकानें</span><span class="en">Nearby Shops</span></div>
             <span class="section-link" onclick="switchTab('bazaar')"><span class="hi">सभी →</span><span class="en">All →</span></span>
         </div>
         <div id="nearbyShopsContainer"></div>
 
-        <!-- 🟢 ONLINE NOW PREVIEW -->
         <div class="section-header" id="onlinePrevHeader" style="display:none; margin-top: 22px;">
             <div class="section-title"><span class="live-pulse" style="margin-right:6px;"></span><span class="hi">अभी ऑनलाइन</span><span class="en">Online Now</span></div>
             <span class="section-link" onclick="switchTab('onlineTab')"><span class="hi">सभी →</span><span class="en">All →</span></span>
@@ -371,7 +341,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
         <div id="onlinePrevContainer"></div>
     </section>
 
-    <!-- 🏬 BAZAAR SECTION -->
     <section id="bazaar" class="hidden">
         <div class="search-box">
             <span>🔍</span>
@@ -385,12 +354,14 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <div class="filter-chip" data-val="रोज़गार" onclick="setFilter('रोज़गार', this)">💼 <span class="hi">रोज़गार</span><span class="en">Jobs</span></div>
             <div class="filter-chip" data-val="शिक्षा" onclick="setFilter('शिक्षा', this)">🎓 <span class="hi">शिक्षा</span><span class="en">Education</span></div>
             <div class="filter-chip" data-val="खाना" onclick="setFilter('खाना', this)">🍴 <span class="hi">खाना</span><span class="en">Food</span></div>
+            <div class="filter-chip" data-val="वाहन" onclick="setFilter('वाहन', this)">🚗 <span class="hi">वाहन</span><span class="en">Transport</span></div>
+            <div class="filter-chip" data-val="प्रॉपर्टी" onclick="setFilter('प्रॉपर्टी', this)">🏠 <span class="hi">प्रॉपर्टी</span><span class="en">Property</span></div>
+            <div class="filter-chip" data-val="अन्य" onclick="setFilter('अन्य', this)">🎉 <span class="hi">और</span><span class="en">More</span></div>
         </div>
         
         <div id="shopListContainer"></div>
     </section>
 
-    <!-- 🟢 ONLINE TAB -->
     <section id="onlineTab" class="hidden">
         <div style="margin-bottom: 16px;">
             <h2 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; display:flex; align-items:center; gap:8px;">
@@ -407,52 +378,48 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <div class="filter-chip" data-val="रोज़गार" onclick="setOnlineFilter('रोज़गार', this)">💼 <span class="hi">रोज़गार</span></div>
             <div class="filter-chip" data-val="शिक्षा" onclick="setOnlineFilter('शिक्षा', this)">🎓 <span class="hi">शिक्षा</span></div>
             <div class="filter-chip" data-val="खाना" onclick="setOnlineFilter('खाना', this)">🍴 <span class="hi">खाना</span></div>
+            <div class="filter-chip" data-val="वाहन" onclick="setOnlineFilter('वाहन', this)">🚗 <span class="hi">वाहन</span></div>
+            <div class="filter-chip" data-val="प्रॉपर्टी" onclick="setOnlineFilter('प्रॉपर्टी', this)">🏠 <span class="hi">प्रॉपर्टी</span></div>
+            <div class="filter-chip" data-val="अन्य" onclick="setOnlineFilter('अन्य', this)">🎉 <span class="hi">और</span></div>
         </div>
         <div id="onlineShopListContainer" style="margin-top: 16px;"></div>
     </section>
 
-    <!-- AUTH -->
     <section id="auth" class="hidden">
         <div class="card" style="text-align: center; padding-top: 30px;">
             <div style="font-size: 44px; margin-bottom: 10px;">🏘️</div>
-            <h2 style="font-size: 22px; margin-bottom: 8px;"><span class="hi">लॉगिन / रजिस्टर</span><span class="en">Login / Register</span></h2>
-            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;"><span class="hi">दुकान या सर्विस जोड़ने के लिए लॉगिन करें।</span><span class="en">Login to add your shop or service.</span></p>
-            
+            <h2 style="font-size: 22px; margin-bottom: 8px;"><span class="hi">लॉगिन / रजिस्टर</span></h2>
+            <p style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 24px;"><span class="hi">दुकान या सर्विस जोड़ने के लिए लॉगिन करें।</span></p>
             <div class="field">
-                <div class="input-wrap">
-                    <span>📱</span>
-                    <input id="authPhone" type="tel" placeholder="10 अंकों का नंबर" maxlength="10">
-                </div>
+                <div class="input-wrap"><span>📱</span><input id="authPhone" type="tel" placeholder="10 अंकों का नंबर" maxlength="10"></div>
             </div>
             <div class="field">
-                <div class="input-wrap">
-                    <span>👤</span>
-                    <input id="authName" type="text" placeholder="अपना पूरा नाम">
-                </div>
+                <div class="input-wrap"><span>👤</span><input id="authName" type="text" placeholder="अपना पूरा नाम"></div>
             </div>
-            
-            <button class="btn" onclick="doAuth()">✅ <span class="hi">लॉगिन / नया अकाउंट</span><span class="en">Login / Create</span></button>
+            <button class="btn" onclick="doAuth()">✅ <span class="hi">लॉगिन / नया अकाउंट</span></button>
             <p style="text-align:center; margin-top:20px; font-size:12px; color:var(--text-muted); font-weight:600;"><span class="hi">कस्टमर बिना लॉगिन के भी ऐप चला सकते हैं।</span></p>
         </div>
     </section>
 
-    <!-- ADD SHOP -->
     <section id="addShop" class="hidden">
         <div class="card">
-            <h2 style="font-size: 20px;">➕ <span class="hi">नई जानकारी जोड़ें</span><span class="en">Add New Info</span></h2>
+            <h2 style="font-size: 20px;">➕ <span class="hi">नई जानकारी जोड़ें</span></h2>
             
             <div class="field">
-                <label><span class="hi">मेन केटेगरी *</span><span class="en">Main Category *</span></label>
+                <label><span class="hi">मेन केटेगरी *</span></label>
                 <div class="input-wrap" style="position:relative; z-index:10;">
                     <span>📑</span>
                     <select id="addMainCat" onchange="updateSubCats()">
                         <option value="" disabled selected>-- चुनें --</option>
-                        <option value="बाज़ार">लोकल बाज़ार</option>
-                        <option value="सेवाएं">ज़रूरी सेवाएं</option>
-                        <option value="स्वास्थ्य">स्वास्थ्य</option>
-                        <option value="रोज़गार">रोज़गार</option>
-                        <option value="शिक्षा">शिक्षा</option>
-                        <option value="खाना">खाना</option>
+                        <option value="बाज़ार">🛒 लोकल बाज़ार</option>
+                        <option value="सेवाएं">🛠️ ज़रूरी सेवाएं</option>
+                        <option value="स्वास्थ्य">🏥 स्वास्थ्य</option>
+                        <option value="रोज़गार">💼 रोज़गार</option>
+                        <option value="शिक्षा">🎓 शिक्षा</option>
+                        <option value="खाना">🍴 खाना</option>
+                        <option value="वाहन">🚗 वाहन / यातायात</option>
+                        <option value="प्रॉपर्टी">🏠 प्रॉपर्टी / रियल एस्टेट</option>
+                        <option value="अन्य">🎉 अन्य सेवाएं</option>
                     </select>
                 </div>
             </div>
@@ -499,11 +466,10 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                 <div class="input-wrap"><span>📞</span><input type="tel" id="addPhone" placeholder="10 अंकों का नंबर" maxlength="10"></div>
             </div>
 
-            <button class="btn" onclick="submitShop()">✅ <span class="hi">रजिस्टर करें</span><span class="en">Register</span></button>
+            <button class="btn" onclick="submitShop()">✅ <span class="hi">रजिस्टर करें</span></button>
         </div>
     </section>
 
-    <!-- PROFILE -->
     <section id="profile" class="hidden">
         <div class="card" style="text-align: center;">
             <div style="width: 74px; height: 74px; background: var(--header-grad); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 12px; border: 3px solid var(--accent);">👤</div>
@@ -533,7 +499,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                         <p style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Manage store status</p>
                     </div>
                 </div>
-                
                 <div style="border-top: 1px dashed var(--border); padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <div style="font-size: 13px; font-weight: 800; color: var(--text-dark);"><span class="hi">स्टेटस</span></div>
@@ -565,7 +530,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </section>
 </main>
 
-<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <button id="nav-home" class="active" onclick="switchTab('home')"><div class="ico">🏠</div><span class="hi">होम</span><span class="en">Home</span></button>
   <button id="nav-bazaar" onclick="switchTab('bazaar')"><div class="ico">🔍</div><span class="hi">खोजें</span><span class="en">Search</span></button>
@@ -574,7 +538,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
   <button id="nav-profile" onclick="switchTab('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
 </nav>
 
-<!-- MAP MODAL -->
 <div id="realMapModal" class="modal-overlay hidden" style="z-index: 999999999;">
     <div class="bottom-sheet" style="height: 85vh; display: flex; flex-direction: column;">
         <div class="sheet-close" onclick="closeRealMap()"></div>
@@ -587,19 +550,16 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- 🔥 ADD STORY MODAL (FIXED + TEXT OPTION) -->
 <div id="addStoryModal" class="modal-overlay hidden" onclick="closeModals(event)">
     <div class="bottom-sheet" id="addStorySheet">
         <div class="sheet-close"></div>
         <h2 style="font-size: 20px; font-weight: 900; color: var(--text-dark); margin-bottom: 16px;">🔥 <span class="hi">नया ऑफर डालें</span></h2>
         
-        <!-- TYPE TOGGLE -->
         <div class="type-toggle">
             <button class="active" id="typePhotoBtn" onclick="setStoryType('photo')">📸 <span class="hi">फोटो</span></button>
             <button id="typeTextBtn" onclick="setStoryType('text')">✍️ <span class="hi">टेक्स्ट</span></button>
         </div>
         
-        <!-- MAIN CATEGORY -->
         <div class="field">
             <label><span class="hi">मुख्य श्रेणी चुनें *</span></label>
             <div class="input-wrap">
@@ -612,11 +572,13 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
                     <option value="नौकरी">💼 नौकरी / जॉब</option>
                     <option value="शिक्षा">🎓 शिक्षा</option>
                     <option value="खाना">🍴 खाना-पीना</option>
+                    <option value="वाहन">🚗 वाहन</option>
+                    <option value="प्रॉपर्टी">🏠 प्रॉपर्टी</option>
+                    <option value="अन्य">🎉 अन्य सेवाएं</option>
                 </select>
             </div>
         </div>
 
-        <!-- SUB CATEGORY (depends on main) -->
         <div class="field">
             <label><span class="hi">उप-श्रेणी चुनें *</span></label>
             <div class="input-wrap">
@@ -627,7 +589,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             </div>
         </div>
 
-        <!-- PHOTO UPLOAD (visible in photo mode) -->
         <div class="field" id="storyPhotoField">
             <label><span class="hi">फोटो अपलोड करें *</span></label>
             <div class="input-wrap" style="padding: 20px; text-align: center; display: block; border: 2px dashed var(--accent); background: rgba(16, 185, 129, 0.05); cursor: pointer; border-radius: 12px;" onclick="document.getElementById('storyPhotoInput').click()">
@@ -638,7 +599,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <img id="storyPhotoPreview" style="width: 100%; margin-top: 12px; border-radius: 12px; display: none; border: 1px solid var(--border);">
         </div>
 
-        <!-- TEXT INPUT (visible in text mode) -->
         <div class="field hidden" id="storyTextField">
             <label><span class="hi">ऑफर / जानकारी लिखें *</span></label>
             <div class="input-wrap" style="padding: 8px 14px;">
@@ -651,7 +611,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- STORY VIEWER -->
 <div id="storyViewer" class="story-viewer-overlay hidden">
     <div class="story-progress-bar">
         <div class="story-progress"><div class="story-progress-fill" id="storyProgressFill"></div></div>
@@ -666,7 +625,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     <div class="story-content" id="svBg"></div>
 </div>
 
-<!-- SHOP DETAIL MODAL -->
 <div id="shopModal" class="modal-overlay hidden" onclick="closeShopModal(event)">
     <div class="bottom-sheet" id="shopSheet">
         <div class="sheet-close"></div>
@@ -686,7 +644,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- CONFIRM DELETE -->
 <div id="confirmModal" class="modal-overlay hidden" style="z-index: 9999999999; align-items: center;">
     <div class="custom-alert-box">
         <div class="custom-alert-title">⚠️ कन्फर्म करें</div>
@@ -698,7 +655,6 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
     </div>
 </div>
 
-<!-- AI MODAL -->
 <div id="aiModal" class="modal-overlay hidden" style="align-items: center;" onclick="closeModals(event)">
   <div class="ai-box" id="aiBoxContent">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -728,25 +684,26 @@ const ADMIN_PHONE = "7318259001";
 let currentUser = JSON.parse(localStorage.getItem('ac_user')) || null;
 let currentLang = localStorage.getItem('ac_lang') || 'hi'; 
 let currentTheme = localStorage.getItem('ac_theme') || 'light'; 
-
 let storyTimer;
 let map, marker;
 let userLat = 28.6139, userLng = 77.2090;
 let isLocationTracked = false;
-
 let activeTab = localStorage.getItem('ac_current_tab') || 'home';
 let shopsData = [];
 let storiesData = [];
 let pendingDeleteId = null;
 
-// 🔥 STORY SUBCATEGORIES MAP
+// 🔥 ALL SUB-CATEGORIES (including new ones)
 const STORY_SUBCATS = {
     'लोकल मार्केट': ['किराना','सब्जी-फल','कपड़े','इलेक्ट्रॉनिक्स','ज्वेलरी','ब्यूटी','स्टेशनरी','अन्य'],
-    'सेवाएं': ['प्लंबर','इलेक्ट्रीशियन','मैकेनिक','बढ़ई','पेंटर','सफाई','अन्य'],
+    'सेवाएं': ['प्लंबर','इलेक्ट्रीशियन','मैकेनिक','बढ़ई','पेंटर','सफाई','AC रिपेयर','अन्य'],
     'स्वास्थ्य': ['अस्पताल','डॉक्टर','मेडिकल','डायग्नोस्टिक','टीका','अन्य'],
     'नौकरी': ['वर्कर चाहिए','काम चाहिए','ड्राइवर','हेल्पर','ट्रेनिंग','अन्य'],
     'शिक्षा': ['स्कूल','कॉलेज','कोचिंग','कंप्यूटर कोर्स','अन्य'],
-    'खाना': ['रेस्टोरेंट','ढाबा','मिठाई','फास्ट फूड','होम डिलीवरी','अन्य']
+    'खाना': ['रेस्टोरेंट','ढाबा','मिठाई','फास्ट फूड','होम डिलीवरी','अन्य'],
+    'वाहन': ['ऑटो रिक्शा','बस सर्विस','टैक्सी/कैब','पेट्रोल पंप','बाइक शोरूम','कार शोरूम','ट्रक/ट्रांसपोर्ट','रिपेयर/सर्विसिंग','ट्रैक्टर','अन्य'],
+    'प्रॉपर्टी': ['किराए का मकान','प्लॉट/जमीन','फ्लैट','दुकान किराए पर','गोदाम','PG/हॉस्टल','फार्म हाउस','अन्य'],
+    'अन्य': ['टेंट हाउस','मैरिज गार्डन','फोटोग्राफर','ट्रेवल्स','पेट सर्विस','लॉन्ड्री','ज्योतिषी','धार्मिक स्थल','इवेंट प्लानर','अन्य']
 };
 
 function safeStr(str) {
@@ -953,7 +910,6 @@ function renderStories() {
 
     activeStories.forEach(st => {
         let safeName = safeStr(st.name);
-        let safeBadge = safeStr(st.badge);
         let isMyStory = currentUser && (st.name === currentUser.name || st.userPhone === currentUser.phone);
         let canDelete = isAdmin || isMyStory;
         let deleteBtn = canDelete ? `<div onclick="event.stopPropagation(); deleteAdminStory(${st.id})" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:white; border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; font-size:11px; z-index:10; border:2px solid var(--card-bg);">🗑️</div>` : '';
@@ -1027,7 +983,6 @@ function closeAiModal() {
     if (window.location.hash === '#aiModal') window.history.back();
 }
 
-// 🔥 STORY TYPE TOGGLE
 let storyType = 'photo';
 function setStoryType(type) {
     storyType = type;
@@ -1037,7 +992,6 @@ function setStoryType(type) {
     document.getElementById('storyTextField').classList.toggle('hidden', type !== 'text');
 }
 
-// 🔥 STORY SUBCATEGORY UPDATE
 function updateStorySubCats() {
     let main = document.getElementById('storyCat').value;
     let sub = document.getElementById('storySubCat');
@@ -1046,7 +1000,6 @@ function updateStorySubCats() {
     opts.forEach(o => { sub.innerHTML += `<option value="${o}">${o}</option>`; });
 }
 
-// char counter
 document.addEventListener('input', e => {
     if(e.target.id === 'storyTextInput') {
         document.getElementById('storyCharCount').innerText = e.target.value.length;
@@ -1077,9 +1030,7 @@ async function submitStory() {
     if(!mainCat) { showToast(t("मुख्य श्रेणी चुनें!","Select main category!"), "error"); return; }
     if(!subCat) { showToast(t("उप-श्रेणी चुनें!","Select sub category!"), "error"); return; }
     
-    let desc = "";
-    let badge = mainCat;
-    let icon = "🔥";
+    let desc = "", badge = mainCat, icon = "🔥";
     
     if(storyType === 'photo') {
         if(!selectedStoryPhotoBase64) { showToast(t("फोटो चुनें!","Select photo!"), "error"); return; }
@@ -1199,9 +1150,7 @@ function renderShops() {
         html = `<div class="empty-state"><div class="icon">🏪</div><div class="title">${t('कुछ नहीं मिला','Nothing found')}</div><div class="desc">${t('10 KM के अंदर इस श्रेणी में कोई जानकारी नहीं।','No info in this category within 10 KM.')}</div></div>`; 
     }
 
-    filtered.forEach(shop => {
-        html += buildShopCard(shop, isAdmin);
-    });
+    filtered.forEach(shop => { html += buildShopCard(shop, isAdmin); });
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
@@ -1233,11 +1182,9 @@ function renderOnlineShops() {
     document.getElementById('onlineShopListContainer').innerHTML = html;
 }
 
-// 🔥 HOME PREVIEW: nearby + online
 function renderHomePreviews() {
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
     
-    // Nearby (top 4 by distance, all categories)
     if(isLocationTracked && shopsData.length > 0) {
         let nearby = shopsData.filter(s => s.lat && s.lng && s.lat !== 0).map(s => {
             s.calculatedDist = getDistance(userLat, userLng, s.lat, s.lng);
@@ -1252,7 +1199,6 @@ function renderHomePreviews() {
             document.getElementById('nearbyShopsContainer').innerHTML = '';
         }
         
-        // Online
         let online = shopsData.filter(s => {
             if(!s.lat || s.lat === 0) return false;
             let isOpenCheck = (s.isOpen === true || s.isOpen === "true" || s.isOpen === 1 || s.isOpen === "1");
@@ -1448,7 +1394,20 @@ async function submitShop() {
     
     let isHiring = false;
     if(mainCat === 'रोज़गार') isHiring = document.querySelector('input[name="jobType"]:checked').value === 'hiring';
-    let icon = mainCat === "बाज़ार" ? "🏬" : (mainCat === "सेवाएं" ? "🛠️" : (mainCat === "रोज़गार" ? "💼" : (mainCat === "स्वास्थ्य" ? "🏥" : (mainCat === "खाना" ? "🍴" : "🎓"))));
+    
+    // 🔥 ICON MAPPING for all categories
+    let iconMap = {
+        "बाज़ार": "🏬",
+        "सेवाएं": "🛠️",
+        "स्वास्थ्य": "🏥",
+        "रोज़गार": "💼",
+        "शिक्षा": "🎓",
+        "खाना": "🍴",
+        "वाहन": "🚗",
+        "प्रॉपर्टी": "🏠",
+        "अन्य": "🎉"
+    };
+    let icon = iconMap[mainCat] || "🏬";
     
     let shopObj = {
         userName: currentUser ? currentUser.name : name,
@@ -1506,6 +1465,7 @@ async function toggleShopStatus(checkbox) {
     setTimeout(() => fetchRealData(), 500);
 }
 
+// 🔥 UPDATED: All categories including new ones
 function updateSubCats() {
     let mainCat = document.getElementById('addMainCat').value;
     let subCatWrap = document.getElementById('subCatField');
@@ -1514,18 +1474,111 @@ function updateSubCats() {
     let nameLabel = document.getElementById('nameLabel');
     
     subCatWrap.classList.remove('hidden');
-    if(mainCat === 'रोज़गार') { jobTypeWrap.classList.remove('hidden'); nameLabel.innerHTML = t("नाम (ठेकेदार / आपका नाम) *", "Name *"); } 
-    else { jobTypeWrap.classList.add('hidden'); nameLabel.innerHTML = t("नाम (दुकान / सर्विस) *", "Name *"); }
+    if(mainCat === 'रोज़गार') { 
+        jobTypeWrap.classList.remove('hidden'); 
+        nameLabel.innerHTML = t("नाम (ठेकेदार / आपका नाम) *", "Name *"); 
+    } else { 
+        jobTypeWrap.classList.add('hidden'); 
+        nameLabel.innerHTML = t("नाम (दुकान / सर्विस) *", "Name *"); 
+    }
 
     let opts = "";
+    
     if(mainCat === 'बाज़ार') { 
-        opts = `<option value="किराना / जनरल स्टोर">${t("किराना / जनरल स्टोर", "General Store")}</option><option value="कपड़े / साड़ी">${t("कपड़े / साड़ी", "Clothing")}</option><option value="इलेक्ट्रॉनिक्स / मोबाइल">${t("इलेक्ट्रॉनिक्स", "Electronics")}</option><option value="जूते / चप्पल">${t("जूते / चप्पल", "Footwear")}</option><option value="हार्डवेयर / पेंट">${t("हार्डवेयर", "Hardware")}</option><option value="ज्वेलरी / सुनार">${t("ज्वेलरी", "Jewelry")}</option><option value="ब्यूटी पार्लर / सैलून">${t("ब्यूटी पार्लर", "Beauty")}</option><option value="स्टेशनरी / किताबें">${t("स्टेशनरी", "Stationery")}</option><option value="ऑटो पार्ट्स / गैरेज">${t("ऑटो पार्ट्स", "Auto Parts")}</option><option value="बीज / खाद">${t("बीज / खाद", "Seeds")}</option><option value="अन्य">${t("अन्य", "Other")}</option>`; 
+        opts = `
+        <option value="किराना / जनरल स्टोर">${t("किराना / जनरल स्टोर", "General Store")}</option>
+        <option value="कपड़े / साड़ी">${t("कपड़े / साड़ी", "Clothing")}</option>
+        <option value="इलेक्ट्रॉनिक्स / मोबाइल">${t("इलेक्ट्रॉनिक्स", "Electronics")}</option>
+        <option value="जूते / चप्पल">${t("जूते / चप्पल", "Footwear")}</option>
+        <option value="हार्डवेयर / पेंट">${t("हार्डवेयर", "Hardware")}</option>
+        <option value="ज्वेलरी / सुनार">${t("ज्वेलरी", "Jewelry")}</option>
+        <option value="ब्यूटी पार्लर / सैलून">${t("ब्यूटी पार्लर", "Beauty")}</option>
+        <option value="स्टेशनरी / किताबें">${t("स्टेशनरी", "Stationery")}</option>
+        <option value="ऑटो पार्ट्स / गैरेज">${t("ऑटो पार्ट्स", "Auto Parts")}</option>
+        <option value="बीज / खाद">${t("बीज / खाद", "Seeds")}</option>
+        <option value="अन्य">${t("अन्य", "Other")}</option>`; 
     } 
-    else if(mainCat === 'सेवाएं') { opts = `<option value="प्लंबर">${t("प्लंबर", "Plumber")}</option><option value="इलेक्ट्रीशियन">${t("इलेक्ट्रीशियन", "Electrician")}</option><option value="मैकेनिक">${t("मैकेनिक", "Mechanic")}</option><option value="बढ़ई">${t("बढ़ई", "Carpenter")}</option>`; } 
-    else if(mainCat === 'स्वास्थ्य') { opts = `<option value="अस्पताल / क्लिनिक">${t("अस्पताल", "Hospital")}</option><option value="डॉक्टर">${t("डॉक्टर", "Doctor")}</option><option value="मेडिकल स्टोर">${t("मेडिकल स्टोर", "Medical")}</option>`; } 
-    else if(mainCat === 'रोज़गार') { opts = `<option value="राजमिस्त्री / मज़दूर">${t("राजमिस्त्री", "Mason")}</option><option value="ड्राइवर">${t("ड्राइवर", "Driver")}</option><option value="दुकान हेल्पर">${t("दुकान हेल्पर", "Helper")}</option>`; } 
-    else if(mainCat === 'शिक्षा') { opts = `<option value="स्कूल / कॉलेज">${t("स्कूल", "School")}</option><option value="कंप्यूटर कोर्स">${t("कंप्यूटर कोर्स", "Computer")}</option><option value="कोचिंग">${t("कोचिंग", "Coaching")}</option>`; }
-    else if(mainCat === 'खाना') { opts = `<option value="रेस्टोरेंट">${t("रेस्टोरेंट", "Restaurant")}</option><option value="ढाबा">${t("ढाबा", "Dhaba")}</option><option value="मिठाई">${t("मिठाई", "Sweets")}</option>`; }
+    else if(mainCat === 'सेवाएं') { 
+        opts = `
+        <option value="प्लंबर">${t("प्लंबर", "Plumber")}</option>
+        <option value="इलेक्ट्रीशियन">${t("इलेक्ट्रीशियन", "Electrician")}</option>
+        <option value="मैकेनिक">${t("मैकेनिक", "Mechanic")}</option>
+        <option value="बढ़ई">${t("बढ़ई", "Carpenter")}</option>
+        <option value="पेंटर">${t("पेंटर", "Painter")}</option>
+        <option value="सफाई सेवा">${t("सफाई सेवा", "Cleaning")}</option>
+        <option value="AC रिपेयर">${t("AC रिपेयर", "AC Repair")}</option>
+        <option value="अन्य">${t("अन्य", "Other")}</option>`; 
+    } 
+    else if(mainCat === 'स्वास्थ्य') { 
+        opts = `
+        <option value="अस्पताल / क्लिनिक">${t("अस्पताल / क्लिनिक", "Hospital")}</option>
+        <option value="डॉक्टर">${t("डॉक्टर", "Doctor")}</option>
+        <option value="मेडिकल स्टोर">${t("मेडिकल स्टोर", "Medical Store")}</option>
+        <option value="डायग्नोस्टिक">${t("डायग्नोस्टिक", "Diagnostic")}</option>
+        <option value="अन्य">${t("अन्य", "Other")}</option>`; 
+    } 
+    else if(mainCat === 'रोज़गार') { 
+        opts = `
+        <option value="राजमिस्त्री / मज़दूर">${t("राजमिस्त्री / मज़दूर", "Mason/Labor")}</option>
+        <option value="ड्राइवर">${t("ड्राइवर", "Driver")}</option>
+        <option value="दुकान हेल्पर">${t("दुकान हेल्पर", "Shop Helper")}</option>
+        <option value="कंप्यूटर ऑपरेटर">${t("कंप्यूटर ऑपरेटर", "Computer Operator")}</option>
+        <option value="अन्य">${t("अन्य", "Other")}</option>`; 
+    } 
+    else if(mainCat === 'शिक्षा') { 
+        opts = `
+        <option value="स्कूल / कॉलेज">${t("स्कूल / कॉलेज", "School/College")}</option>
+        <option value="कोचिंग">${t("कोचिंग", "Coaching")}</option>
+        <option value="कंप्यूटर कोर्स">${t("कंप्यूटर कोर्स", "Computer Course")}</option>
+        <option value="अन्य">${t("अन्य", "Other")}</option>`; 
+    }
+    else if(mainCat === 'खाना') { 
+        opts = `
+        <option value="रेस्टोरेंट">${t("रेस्टोरेंट", "Restaurant")}</option>
+        <option value="ढाबा">${t("ढाबा", "Dhaba")}</option>
+        <option value="मिठाई">${t("मिठाई", "Sweets")}</option>
+        <option value="फास्ट फूड">${t("फास्ट फूड", "Fast Food")}</option>
+        <option value="होम डिलीवरी">${t("होम डिलीवरी", "Home Delivery")}</option>
+        <option value="अन्य">${t("अन्य", "Other")}</option>`; 
+    }
+    else if(mainCat === 'वाहन') { 
+        opts = `
+        <option value="ऑटो रिक्शा">${t("ऑटो रिक्शा", "Auto Rickshaw")}</option>
+        <option value="बस सर्विस">${t("बस सर्विस", "Bus Service")}</option>
+        <option value="टैक्सी / कैब">${t("टैक्सी / कैब", "Taxi/Cab")}</option>
+        <option value="पेट्रोल पंप">${t("पेट्रोल पंप", "Petrol Pump")}</option>
+        <option value="बाइक शोरूम">${t("बाइक शोरूम", "Bike Showroom")}</option>
+        <option value="कार शोरूम">${t("कार शोरूम", "Car Showroom")}</option>
+        <option value="ट्रक / ट्रांसपोर्ट">${t("ट्रक / ट्रांसपोर्ट", "Truck/Transport")}</option>
+        <option value="रिपेयर / सर्विसिंग">${t("रिपेयर / सर्विसिंग", "Repair/Service")}</option>
+        <option value="ट्रैक्टर">${t("ट्रैक्टर", "Tractor")}</option>
+        <option value="अन्य">${t("अन्य", "Other")}</option>`; 
+    }
+    else if(mainCat === 'प्रॉपर्टी') { 
+        opts = `
+        <option value="किराए का मकान">${t("किराए का मकान", "Rent House")}</option>
+        <option value="प्लॉट / जमीन">${t("प्लॉट / जमीन", "Plot/Land")}</option>
+        <option value="फ्लैट">${t("फ्लैट", "Flat")}</option>
+        <option value="दुकान किराए पर">${t("दुकान किराए पर", "Shop for Rent")}</option>
+        <option value="गोदाम">${t("गोदाम", "Warehouse")}</option>
+        <option value="PG / हॉस्टल">${t("PG / हॉस्टल", "PG/Hostel")}</option>
+        <option value="फार्म हाउस">${t("फार्म हाउस", "Farm House")}</option>
+        <option value="अन्य">${t("अन्य", "Other")}</option>`; 
+    }
+    else if(mainCat === 'अन्य') { 
+        opts = `
+        <option value="टेंट हाउस">${t("टेंट हाउस", "Tent House")}</option>
+        <option value="मैरिज गार्डन">${t("मैरिज गार्डन", "Marriage Garden")}</option>
+        <option value="फोटोग्राफर">${t("फोटोग्राफर", "Photographer")}</option>
+        <option value="ट्रेवल्स">${t("ट्रेवल्स", "Travels")}</option>
+        <option value="पेट सर्विस">${t("पेट सर्विस", "Pet Service")}</option>
+        <option value="लॉन्ड्री">${t("लॉन्ड्री", "Laundry")}</option>
+        <option value="ज्योतिषी">${t("ज्योतिषी", "Astrologer")}</option>
+        <option value="धार्मिक स्थल">${t("धार्मिक स्थल", "Religious Place")}</option>
+        <option value="इवेंट प्लानर">${t("इवेंट प्लानर", "Event Planner")}</option>
+        <option value="अन्य">${t("अन्य", "Other")}</option>`; 
+    }
+    
     subCatSelect.innerHTML = opts;
 }
 
@@ -1634,4 +1687,4 @@ window.onload = async () => {
 };
 </script>
 </body>
-</html>
+                  </html>
