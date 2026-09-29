@@ -35,47 +35,16 @@ body.theme-light {
   --border: #e2e8f0;        
 }
 
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-  -webkit-tap-highlight-color: transparent; 
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
 
 body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
-body { 
-  background: var(--bg-color); 
-  color: var(--text-dark); 
-  min-height: 100vh; 
-  padding-bottom: 90px; 
-  overflow-x: hidden; 
-  -webkit-user-select: none; 
-  user-select: none; 
-  transition: background 0.3s, color 0.3s;
-}
-
-input, textarea, select { 
-  -webkit-user-select: auto; 
-  user-select: auto; 
-  color: var(--text-dark) !important;
-}
+body { background: var(--bg-color); color: var(--text-dark); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; -webkit-user-select: none; user-select: none; transition: background 0.3s, color 0.3s;}
+input, textarea, select { -webkit-user-select: auto; user-select: auto; color: var(--text-dark) !important;}
 
 /* 🌐 TOP BAR */
-.topbar { 
-  background: var(--primary); 
-  padding: 15px 16px; 
-  position: sticky; 
-  top: 0; 
-  z-index: 50; 
-  border-bottom: 1px solid var(--border); 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-}
-
+.topbar { background: var(--primary); padding: 15px 16px; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;}
 .topbar-left { display: flex; align-items: center; gap: 10px; }
 .back-arrow { font-size: 20px; color: var(--text-dark); cursor: pointer; padding: 4px 8px; border-radius: 50%; background: rgba(128,128,128,0.1); display: none; }
 .logo-area { display: flex; align-items: center; gap: 10px; }
@@ -110,6 +79,7 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .cat-title-horz { font-size: 13px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
 .cat-sub-horz { font-size: 10px; font-weight: 600; color: var(--text-muted); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
 
+/* CATEGORY COLORS */
 .bg-green { background: linear-gradient(135deg, #4ade80, #16a34a); color: white;}
 .bg-purple { background: linear-gradient(135deg, #c084fc, #9333ea); color: white;}
 .bg-red { background: linear-gradient(135deg, #f87171, #dc2626); color: white;}
@@ -202,7 +172,6 @@ main { max-width: 480px; margin: 0 auto; padding: 16px; position: relative; z-in
 .toast.show { transform: translateY(0); opacity: 1; }
 .toast.error { border-left: 4px solid #ef4444; }
 
-/* SWITCH */
 .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--primary-light); transition: .4s; border-radius: 34px; border: 1px solid var(--border);}
@@ -427,7 +396,7 @@ input:checked + .slider:before { transform: translateX(22px); background-color: 
             <!-- MAP PICKER & ADDRESS FIELD -->
             <div class="field">
                 <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location (Map) *</span></label>
-                <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openModalSafe('realMapModal')">
+                <button class="btn" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px dashed #3b82f6; margin-bottom:10px; padding: 12px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openRealMapPicker()">
                     📍 <span class="hi">मैप पर पिन लगाएँ</span><span class="en">Drop Pin on Map</span>
                 </button>
                 <div class="input-wrap" style="align-items: flex-start; padding-top:10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(16, 185, 129, 0.3);">
@@ -708,6 +677,10 @@ let storiesData = [];
 // 🔥 SAFE NATIVE MODAL NAVIGATION (Fixes App Exit Bug) 🔥
 function openModalSafe(id) {
     document.getElementById(id).classList.remove('hidden');
+    // Call map invalidateSize if it's the map modal
+    if(id === 'realMapModal') {
+        setTimeout(() => { if(map) map.invalidateSize(); }, 300);
+    }
     history.pushState({modal: id}, '', '#' + id);
 }
 
@@ -730,13 +703,6 @@ window.addEventListener('popstate', function(e) {
 
 function t(hiText, enText) { 
     return currentLang === 'hi' ? hiText : enText; 
-}
-
-// 🟢 BOOELAN FIX: Parses database true/false securely 🟢
-function parseIsOpen(val) {
-    if (val === undefined || val === null) return true; 
-    let str = String(val).toLowerCase().trim();
-    return (str === "true" || str === "1" || str === "on" || str === "yes");
 }
 
 function applyThemeAndLang() {
@@ -819,6 +785,27 @@ function detectUserLocation(silent = false) {
     } else {
         if(!silent) showToast("Geolocation is not supported by this browser.", "error");
     }
+}
+
+function openRealMapPicker() {
+    openModalSafe('realMapModal');
+    if(!map) {
+        map = L.map('map').setView([userLat, userLng], 14);
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { 
+            maxZoom: 20, attribution: '© OpenStreetMap France' 
+        }).addTo(map);
+
+        marker = L.marker([userLat, userLng], {draggable: true}).addTo(map);
+        marker.on('dragend', function(event){ 
+            var position = marker.getLatLng(); 
+            pickedLat = position.lat; 
+            pickedLng = position.lng; 
+        });
+    } else {
+        map.setView([userLat, userLng], 14);
+        marker.setLatLng([userLat, userLng]);
+    }
+    pickedLat = userLat; pickedLng = userLng;
 }
 
 async function searchOnMap() {
@@ -1059,7 +1046,6 @@ async function submitStory() {
     }
 }
 
-// 🔥 SAFE STORY OPENER 🔥
 function openStory(id) {
     let st = storiesData.find(s => s.id === id);
     if(!st) return;
@@ -1105,18 +1091,21 @@ function getFormattedDist(distKm) {
     return distKm.toFixed(1) + " km";
 }
 
+// 🔥 REVISED FILTER LOGIC FOR SHOPS (Shows everything perfectly) 🔥
 function renderShops() {
     let html = ""; 
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
     
     let filtered = shopsData.filter(s => {
         let matchCat = (s.type === currentFilter);
-        let dist = getDistance(userLat, userLng, s.lat, s.lng);
-        s.calculatedDist = dist; 
-        
         let matchDist = true;
-        if(isLocationTracked && s.lat !== 0 && s.lng !== 0) {
-            matchDist = (dist <= 20); // 20KM Check
+        
+        if (isLocationTracked && s.lat && s.lng && s.lat !== 0) {
+            let dist = getDistance(userLat, userLng, s.lat, s.lng);
+            s.calculatedDist = dist;
+            if (dist > 50) matchDist = false; // 50KM Area Limit
+        } else {
+            s.calculatedDist = 999; // If Location broken, show at bottom
         }
         
         return matchCat && matchDist;
@@ -1125,18 +1114,18 @@ function renderShops() {
     filtered.sort((a,b) => a.calculatedDist - b.calculatedDist);
 
     if(filtered.length === 0) { 
-        html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('10 KM के अंदर कोई जानकारी नहीं मिली।','No info found within 10 KM.')}</div>`; 
+        html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('इस केटेगरी में कोई जानकारी नहीं मिली।','No info found.')}</div>`; 
     }
 
     filtered.forEach(shop => {
         let shopIsOpen = shop.isOpen;
-        if(currentUser && (shop.phone === currentUser.phone || shop.name === currentUser.name)) {
+        if(currentUser && shop.phone === currentUser.phone && shop.phone !== "") {
             let localSwitchState = localStorage.getItem('shop_status_open');
             if(localSwitchState !== null) { 
                 shopIsOpen = (localSwitchState === 'true'); 
             }
         }
-        let isOpenCheck = (shopIsOpen === true);
+        let isOpenCheck = (String(shopIsOpen) === "true" || shopIsOpen === true || String(shopIsOpen) === "1");
 
         let statusText = ""; 
         let statusClass = isOpenCheck ? 'status-open' : 'status-closed';
@@ -1155,9 +1144,10 @@ function renderShops() {
         }
 
         let statusBadge = `<span class="status-badge ${statusClass}">${statusText}</span>`;
-        let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
+        let distTag = (isLocationTracked && shop.lat !== 0) ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
         let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
+        // Remove quotes from names for safety
         let safeName = String(shop.name).replace(/'/g, "\\'"); 
         let safeCat = String(shopCat).replace(/'/g, "\\'"); 
         let safeLoc = String(shop.locText).replace(/'/g, "\\'");
@@ -1178,35 +1168,40 @@ function renderShops() {
     document.getElementById('shopListContainer').innerHTML = html;
 }
 
-// 🔥 FIXED ONLINE TAB: Will show strictly based on DB true/false 🔥
+// 🔥 REVISED ONLINE TAB LOGIC 🔥
 function renderOnlineShops() {
     let html = ""; 
     let isAdmin = currentUser && currentUser.phone === ADMIN_PHONE;
     
     let filtered = shopsData.filter(s => {
-        let dist = getDistance(userLat, userLng, s.lat, s.lng); 
-        s.calculatedDist = dist;
+        let matchCat = (s.type === currentOnlineFilter);
+        
         let matchDist = true;
-        if(isLocationTracked && s.lat !== 0 && s.lng !== 0) {
-            matchDist = (dist <= 20); // 20KM Check
+        if (isLocationTracked && s.lat && s.lng && s.lat !== 0) {
+            let dist = getDistance(userLat, userLng, s.lat, s.lng);
+            s.calculatedDist = dist;
+            if (dist > 50) matchDist = false; 
+        } else {
+            s.calculatedDist = 999; 
         }
         
         let shopIsOpen = s.isOpen;
-        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
+        if(currentUser && s.phone === currentUser.phone && s.phone !== "") {
             let localSwitchState = localStorage.getItem('shop_status_open');
             if(localSwitchState !== null) { 
                 shopIsOpen = (localSwitchState === 'true'); 
             }
         }
 
-        let isOpenCheck = (shopIsOpen === true);
-        return s.type === currentOnlineFilter && isOpenCheck && matchDist;
+        // Must be TRUE to show here
+        let isOpenCheck = (String(shopIsOpen) === "true" || shopIsOpen === true || String(shopIsOpen) === "1");
+        return matchCat && matchDist && isOpenCheck;
     });
     
     filtered.sort((a,b) => a.calculatedDist - b.calculatedDist);
 
     if(filtered.length === 0) { 
-        html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('इस केटेगरी में 10KM के अंदर अभी कोई ONLINE नहीं है।','No one is currently online within 10KM.')}</div>`; 
+        html = `<div style="text-align:center; padding: 40px 20px; font-weight:600; color: var(--text-muted);">${t('इस केटेगरी में अभी कोई ONLINE नहीं है।','No one is currently online.')}</div>`; 
     }
 
     filtered.forEach(shop => {
@@ -1217,7 +1212,7 @@ function renderOnlineShops() {
         }
 
         let statusBadge = `<span class="status-badge status-open">${t('🟢 चालू है', '🟢 Open')}</span>`;
-        let distTag = isLocationTracked ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
+        let distTag = (isLocationTracked && shop.lat !== 0) ? `<span style="background:rgba(59, 130, 246, 0.2); padding:2px 6px; border-radius:4px; font-size:10px; color:#60a5fa; font-weight:800;">📍 ${getFormattedDist(shop.calculatedDist)}</span>` : '';
         let adminDeleteBtn = isAdmin ? `<button onclick="event.stopPropagation(); deleteAdminShop(${shop.id})" style="background:rgba(239, 68, 68, 0.1); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); padding:4px 8px; border-radius:6px; font-size:10px; font-weight:bold; margin-left:auto;">🗑️ Delete</button>` : '';
         
         let safeName = String(shop.name).replace(/'/g, "\\'"); 
@@ -1311,7 +1306,7 @@ function updateProfileUI() {
     document.getElementById('profilePhone').innerText = "+91 " + currentUser.phone;
 
     let isAdmin = (currentUser.phone === ADMIN_PHONE);
-    let myShops = shopsData.filter(s => s.phone === currentUser.phone || s.name === currentUser.name);
+    let myShops = shopsData.filter(s => s.phone === currentUser.phone && s.phone !== "");
     
     if(isAdmin) {
         document.getElementById('adminPanel').style.display = 'block';
@@ -1328,7 +1323,7 @@ function updateProfileUI() {
         
         if(myShops.length > 0) {
             document.getElementById('dashShopName').innerText = myShops[0].name;
-            let isOpenCheck = (myShops[0].isOpen === true);
+            let isOpenCheck = (String(myShops[0].isOpen) === "true" || String(myShops[0].isOpen) === "1" || myShops[0].isOpen === true);
             
             document.getElementById('liveSwitch').checked = isOpenCheck;
             let textEl = document.getElementById('switchText');
@@ -1350,7 +1345,6 @@ function updateProfileUI() {
     renderProfileStories();
 }
 
-// 🔥 FIXED: TABS KEEP USERS ON SAME PAGE EVEN ON REFRESH 🔥
 function switchTab(tabId) {
     if((tabId === 'addShop' || tabId === 'profile') && !currentUser) { 
         tabId = 'auth'; 
@@ -1361,23 +1355,22 @@ function switchTab(tabId) {
     
     if(tabId === 'profile') { updateProfileUI(); }
     
+    // UI Updates
     document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-    
     let targetSec = document.getElementById(tabId); 
     if(targetSec) targetSec.classList.remove('hidden');
     
     document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
-    
     let navId = tabId === 'onlineTab' ? 'nav-onlineTab' : ('nav-' + tabId);
     let navBtn = document.getElementById(navId); 
     if(navBtn) navBtn.classList.add('active');
     
+    // Fix SubCats drop-down when going to Add Shop
+    if(tabId === 'addShop') { updateSubCats(); }
+    
+    // Top Bar 
     let backBtn = document.getElementById('backBtn');
-    if(tabId === 'home') { 
-        backBtn.style.display = 'none'; 
-    } else { 
-        backBtn.style.display = 'block'; 
-    }
+    if(tabId === 'home') { backBtn.style.display = 'none'; } else { backBtn.style.display = 'block'; }
     
     if(tabId === 'bazaar') { renderShops(); } 
     else if(tabId === 'onlineTab') { renderOnlineShops(); }
@@ -1453,7 +1446,7 @@ async function toggleShopStatus(checkbox) {
     
     let myShopIds = [];
     shopsData.forEach(s => { 
-        if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) { 
+        if(currentUser && s.phone === currentUser.phone && s.phone !== "") { 
             s.isOpen = isNowOpen; 
             myShopIds.push(s.id); 
         } 
@@ -1546,7 +1539,6 @@ function openShopModal(name, cat, isOpen, loc, icon, type, isHiring, phone) {
     statusEl.innerHTML = statusText;
 }
 
-// 🔥 13 CHATBOT QUESTIONS (RESTORED COMPLETELY) 🔥
 function askAI(type) {
     const chat = document.getElementById('aiChat'); 
     let q = "", a = "";
@@ -1581,10 +1573,13 @@ async function fetchRealData() {
         let sData = await shopRes.json();
 
         shopsData = sData.map(s => {
-            let isOpenVal = parseIsOpen(s.isOpen); 
+            let isOpenVal = true; 
             
-            // LOCAL FIX: Sirf usi ka switch update hoga jiski id/phone exact match kare
-            if(currentUser && (s.phone === currentUser.phone || s.name === currentUser.name)) {
+            if (s.isOpen !== undefined && s.isOpen !== null) { 
+                isOpenVal = (String(s.isOpen) === "true" || String(s.isOpen) === "1"); 
+            }
+            
+            if(currentUser && s.contactPhone === currentUser.phone && currentUser.phone !== "") {
                 let savedStatus = localStorage.getItem('shop_status_open');
                 if(savedStatus !== null) { 
                     isOpenVal = (savedStatus === 'true'); 
@@ -1635,14 +1630,13 @@ window.onload = () => {
     applyThemeAndLang();
     document.getElementById('backBtn').style.display = 'none'; 
     
-    // 🔥 TURANT UI DIKHAO (No White Screen Problem) 🔥
+    // Switch to active tab instantly, avoiding white screen
     let savedTab = localStorage.getItem('ac_current_tab') || 'home';
     switchTab(savedTab);
     
     setFilter('बाज़ार'); 
     setOnlineFilter('बाज़ार');
 
-    // Visual set of toggle switch before DB returns
     let savedStatus = localStorage.getItem('shop_status_open');
     if(savedStatus !== null) {
         let isTrue = (savedStatus === 'true'); 
@@ -1671,4 +1665,4 @@ window.onload = () => {
 };
 </script>
 </body>
-                                                  </html>
+                  </html>
