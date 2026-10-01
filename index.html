@@ -1686,5 +1686,24 @@ window.onload = async () => {
     setTimeout(() => { if(!isLocationTracked) detectUserLocation(true); }, 1500);
 };
 </script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAdg2ZLjrpIWryYjRnsus3MvtRDR2SqztI",
+    authDomain: "apna-chhetr.firebaseapp.com",
+    projectId: "apna-chhetr",
+    storageBucket: "apna-chhetr.firebasestorage.app",
+    messagingSenderId: "755973559107",
+    appId: "1:755973559107:web:29cc37faba90f65d3d15f6"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 </body>
                   </html>
