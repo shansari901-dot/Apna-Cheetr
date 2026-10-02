@@ -41,18 +41,22 @@ main{max-width:480px;margin:0 auto;padding:16px}
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;margin-top:4px}
 .section-title{font-size:16px;font-weight:800;color:var(--text-dark);display:flex;align-items:center;gap:6px}
 .section-link{font-size:11px;font-weight:700;color:var(--accent);cursor:pointer;background:none;border:none}
-.hero-banner{background:linear-gradient(135deg,#10b981 0%,#059669 100%);border-radius:18px;padding:20px;margin-bottom:22px;position:relative;overflow:hidden;box-shadow:0 8px 25px rgba(16,185,129,.25)}
-.hero-banner::before{content:'🏘️';position:absolute;right:-10px;bottom:-10px;font-size:110px;opacity:.18}
-.hero-banner h3{font-size:20px;font-weight:900;color:#fff;margin-bottom:6px;line-height:1.25;position:relative}
-.hero-banner p{font-size:12px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:14px;position:relative}
-.hero-btn{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--accent-dark);padding:9px 16px;border-radius:50px;font-size:12px;font-weight:800;border:none;cursor:pointer;position:relative}
-.my-area-card{background:var(--card-bg);border-radius:var(--radius);padding:14px;margin-bottom:20px;border:1px solid var(--border)}
+.hero-banner{background:linear-gradient(135deg,#10b981 0%,#059669 100%);border-radius:16px;padding:14px 18px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(16,185,129,.22)}
+.hero-banner::before{content:'🏘️';position:absolute;right:-8px;bottom:-10px;font-size:80px;opacity:.15}
+.hero-banner h3{font-size:16px;font-weight:900;color:#fff;margin-bottom:4px;line-height:1.25;position:relative}
+.hero-banner p{font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:10px;position:relative}
+.hero-btn{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--accent-dark);padding:7px 14px;border-radius:50px;font-size:11px;font-weight:800;border:none;cursor:pointer;position:relative}
+.my-area-card{background:var(--card-bg);border-radius:var(--radius);padding:14px;margin-bottom:16px;border:1px solid var(--border)}
 .my-area-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .my-area-title{font-size:14px;font-weight:800;color:var(--text-dark);display:flex;align-items:center;gap:6px}
 .my-area-refresh{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.3);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer}
 #myAreaMap{width:100%;height:200px;border-radius:12px;border:1px solid var(--border);z-index:1}
 .area-status{font-size:11px;font-weight:700;color:var(--text-muted);margin-top:10px;text-align:center}
 .area-status.ok{color:#34d399}
+.my-area-card.collapsed #myAreaMap{display:none!important}
+.my-area-card.collapsed .area-status{margin-top:4px;font-size:10px}
+.my-area-card.collapsed{padding:12px 14px;margin-bottom:12px}
+.my-area-card.collapsed .my-area-head{margin-bottom:0}
 .story-container{display:flex;gap:14px;overflow-x:auto;padding:4px 4px 12px;scrollbar-width:none;margin-bottom:6px}
 .story-container::-webkit-scrollbar{display:none}
 .story-item{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;width:74px;flex-shrink:0}
@@ -217,7 +221,7 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 .review-text{font-size:12px;color:var(--text-muted);line-height:1.5}
 .hours-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.3)}
 
-/* ===== NEW: CUSTOM REPORT MODAL ===== */
+/* ===== CUSTOM REPORT MODAL ===== */
 .report-modal-box{background:var(--card-bg);border-radius:18px;padding:22px;width:92%;max-width:380px;margin:auto;border:1px solid var(--border);box-shadow:0 20px 50px rgba(0,0,0,.4)}
 .report-modal-title{font-size:17px;font-weight:900;color:var(--text-dark);margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .report-modal-desc{font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:14px;line-height:1.5}
@@ -230,7 +234,7 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 .report-cancel-btn{background:var(--primary-light);color:var(--text-dark);border:1px solid var(--border)!important}
 .report-submit-btn{background:#ef4444;color:#fff}
 .report-submit-btn:disabled{opacity:.4}
-/* ===== END NEW ===== */
+/* ===== END REPORT MODAL ===== */
 
 @media(max-width:360px){.brand-title{font-size:14px}}
 </style>
@@ -276,10 +280,13 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
             <button class="hero-btn" onclick="switchTab('bazaar')">🔍 <span class="hi">अभी खोजें</span><span class="en">Search Now</span></button>
         </div>
 
-        <div class="my-area-card" id="myAreaCard" style="display:none;">
-            <div class="my-area-head">
+        <div class="my-area-card collapsed" id="myAreaCard" style="display:none;">
+            <div class="my-area-head" onclick="toggleAreaMap()" style="cursor:pointer;">
                 <div class="my-area-title">📍 <span class="hi">आपका क्षेत्र (10 KM)</span><span class="en">Your Area (10 KM)</span></div>
-                <button class="my-area-refresh" onclick="recenterArea()">🔄 <span class="hi">री-सेंटर</span><span class="en">Recenter</span></button>
+                <div style="display:flex;gap:6px;align-items:center;">
+                    <button class="my-area-refresh" onclick="event.stopPropagation();recenterArea()">🔄 <span class="hi">री-सेंटर</span><span class="en">Recenter</span></button>
+                    <span id="areaToggleIcon" style="color:var(--text-muted);font-size:14px;font-weight:900;padding:0 4px;">▼</span>
+                </div>
             </div>
             <div id="myAreaMap"></div>
             <div class="area-status" id="areaStatus"><span class="hi">GPS ट्रैक हो रहा है...</span><span class="en">Tracking GPS...</span></div>
@@ -600,7 +607,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
     </div>
 </div>
 
-<!-- ===== NEW: CUSTOM REPORT MODAL ===== -->
 <div id="reportModal" class="modal-overlay hidden" style="z-index:9999999999;align-items:center;" onclick="if(event.target.id==='reportModal')closeReportModal()">
     <div class="report-modal-box">
         <div class="report-modal-title">⚠️ <span class="hi">रिपोर्ट करें</span><span class="en">Report</span></div>
@@ -619,7 +625,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
         </div>
     </div>
 </div>
-<!-- ===== END NEW ===== -->
 
 <div id="confirmModal" class="modal-overlay hidden" style="z-index:9999999999;align-items:center;">
     <div class="custom-alert-box">
@@ -668,7 +673,7 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"6.2.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"6.3.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह नंबर पहले से रजिस्टर है!",invalidPhone:"सही नंबर डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Number already registered!",invalidPhone:"Enter valid phone.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -753,11 +758,24 @@ function detectUserLocation(silent=false){
   );
 }
 
+function toggleAreaMap(){
+  const card=document.getElementById("myAreaCard");
+  const icon=document.getElementById("areaToggleIcon");
+  if(!card)return;
+  const collapsed=card.classList.toggle("collapsed");
+  if(icon)icon.innerText=collapsed?"▼":"▲";
+  if(!collapsed){
+    renderMyAreaMap();
+    setTimeout(()=>{if(areaMap){try{areaMap.invalidateSize()}catch(e){}}},250);
+  }
+}
+
 function renderMyAreaMap(){
   const card=document.getElementById("myAreaCard");
   if(!card)return;
   if(!STATE.isLocationTracked){card.style.display="none";return}
   card.style.display="block";
+  if(card.classList.contains("collapsed"))return;
   setTimeout(()=>{
     const mapEl=document.getElementById("myAreaMap");
     if(!mapEl)return;
@@ -816,7 +834,6 @@ async function adminBanOwner(shopId,phone){if(!phone||phone.length<6)return show
 async function adminUnban(id){try{const fs=await waitForFS(3000);if(fs.unbanUser)await fs.unbanUser(id);showToast("✅ Unbanned!");await renderAdminContent()}catch(e){showToast("Failed","error")}}
 async function adminRejectStory(id){if(!confirm("Delete story?"))return;try{const fs=await waitForFS(3000);await fs.deleteStory(id);showToast("🗑️ Deleted!");await fetchRealData()}catch(e){showToast("Failed","error")}}
 
-/* ===== NEW: CUSTOM REPORT FUNCTIONS ===== */
 function reportShop(shopId){
   if(flag("require_login_report")&&!STATE.user){showToast(t("reportLogin"),"error");switchTab("auth");return}
   const reportedKey="ac_reported_"+shopId;
@@ -858,7 +875,6 @@ async function submitReport(){
   }catch(e){console.warn(e);showToast("Failed","error")}
   reportTarget=null;reportReason="";
 }
-/* ===== END NEW ===== */
 
 function initAddShopSelects(){document.getElementById("addMainCat").innerHTML=`<option value="" disabled selected>-- ${STATE.lang==="hi"?"चुनें":"Select"} --</option>`+MAIN_CATS.map(c=>`<option value="${c.key}">${c.icon} ${STATE.lang==="hi"?c.hi:c.en}</option>`).join("")}
 function updateSubCats(){const main=document.getElementById("addMainCat").value;const subWrap=document.getElementById("subCatField");const jobWrap=document.getElementById("jobTypeField");const subSel=document.getElementById("addSubCat");const nameLabel=document.getElementById("nameLabel");subWrap.classList.remove("hidden");if(main==="रोज़गार"){jobWrap.classList.remove("hidden");nameLabel.innerHTML=`<span class="hi">नाम *</span><span class="en">Name *</span>`}else{jobWrap.classList.add("hidden");nameLabel.innerHTML=`<span class="hi">नाम (दुकान / सर्विस) *</span><span class="en">Name *</span>`}const list=SUBCATS[main]||["अन्य"];subSel.innerHTML=`<option value="" disabled selected>-- ${STATE.lang==="hi"?"चुनें":"Select"} --</option>`+list.map(s=>`<option value="${Utils.esc(s)}">${Utils.esc(s)}</option>`).join("")}
@@ -940,4 +956,4 @@ window.FS={
 console.log("✅ Firestore ready");
 </script>
 </body>
-                                                                                                                                  </html>
+               </html>
