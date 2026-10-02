@@ -236,21 +236,27 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 .report-cancel-btn{background:var(--primary-light);color:var(--text-dark);border:1px solid var(--border)!important}
 .report-submit-btn{background:#ef4444;color:#fff}
 .report-submit-btn:disabled{opacity:.4}
-.premium-gold-card{background:linear-gradient(135deg,#fef3c7 0%,#fbbf24 25%,#f59e0b 50%,#d97706 75%,#fbbf24 100%);border-radius:18px;padding:20px;margin-bottom:18px;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(251,191,36,.4),inset 0 1px 0 rgba(255,255,255,.5);border:2px solid rgba(255,255,255,.4)}
-.premium-gold-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);animation:goldShine 4s infinite}
-@keyframes goldShine{0%{transform:translateX(-100%) translateY(-100%) rotate(45deg)}100%{transform:translateX(100%) translateY(100%) rotate(45deg)}}
-.premium-gold-card .gc-inner{position:relative;z-index:2}
-.premium-gold-card .gc-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(120,53,15,.9);color:#fef3c7;padding:4px 12px;border-radius:50px;font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
-.premium-gold-card .gc-user{font-size:16px;font-weight:900;color:#78350f;margin-bottom:4px;text-shadow:0 1px 0 rgba(255,255,255,.5)}
-.premium-gold-card .gc-phone{font-size:11px;font-weight:700;color:#92400e;letter-spacing:.5px;margin-bottom:16px}
-.premium-gold-card .gc-label{font-size:9px;font-weight:900;color:#78350f;opacity:.8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
-.premium-gold-card .gc-value{font-size:15px;font-weight:900;color:#78350f;margin-bottom:14px}
-.premium-gold-card .gc-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(120,53,15,.25);padding-top:12px;margin-top:12px}
-.premium-gold-card .gc-days{font-size:11px;font-weight:800;color:#78350f}
-.premium-gold-card .gc-days span{font-size:22px;font-weight:900}
-.premium-gold-card .gc-plan{font-size:10px;font-weight:900;color:#78350f;text-align:right;letter-spacing:1px;text-transform:uppercase}
-.premium-gold-card .gc-chip{width:36px;height:26px;background:linear-gradient(135deg,#fde68a,#d97706);border-radius:5px;position:relative;border:1px solid rgba(255,255,255,.6)}
-.premium-gold-card .gc-chip::before{content:'';position:absolute;top:6px;left:6px;right:6px;height:1.5px;background:rgba(120,53,15,.4);box-shadow:0 5px 0 rgba(120,53,15,.4),0 10px 0 rgba(120,53,15,.4)}
+
+/* ===== GOLD CARD — BLACK + GOLD CREDIT CARD STYLE ===== */
+.premium-gold-card{background:linear-gradient(135deg,#1a1a1a 0%,#2d2416 25%,#4a3a1a 50%,#2d2416 75%,#1a1a1a 100%);border-radius:14px;padding:18px 20px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.5),inset 0 1px 0 rgba(212,175,55,.3);border:1px solid rgba(212,175,55,.4);aspect-ratio:1.586;max-height:220px}
+.premium-gold-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(212,175,55,.4),transparent);animation:goldShine 5s infinite}
+.premium-gold-card::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 20%,rgba(255,215,0,.15),transparent 60%);pointer-events:none}
+@keyframes goldShine{0%{left:-100%}100%{left:100%}}
+.premium-gold-card .gc-inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.premium-gold-card .gc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.premium-gold-card .gc-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#d4af37,#b8860b);color:#1a1a1a;padding:3px 10px;border-radius:4px;font-size:9px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,.3)}
+.premium-gold-card .gc-chip{width:34px;height:26px;background:linear-gradient(135deg,#f4e5a1,#d4af37,#b8860b);border-radius:5px;position:relative;border:1px solid rgba(255,255,255,.4);box-shadow:0 2px 4px rgba(0,0,0,.4)}
+.premium-gold-card .gc-chip::before{content:'';position:absolute;top:5px;left:5px;right:5px;height:1.5px;background:rgba(90,60,10,.5);box-shadow:0 5px 0 rgba(90,60,10,.5),0 10px 0 rgba(90,60,10,.5)}
+.premium-gold-card .gc-chip::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.4) 50%,transparent 60%);border-radius:5px}
+.premium-gold-card .gc-cardno{font-size:14px;font-weight:700;color:#e8d9a8;letter-spacing:2.5px;font-family:'Courier New',monospace;margin:6px 0 10px;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.premium-gold-card .gc-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.premium-gold-card .gc-label{font-size:8px;font-weight:800;color:rgba(212,175,55,.7);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px}
+.premium-gold-card .gc-user{font-size:11px;font-weight:800;color:#e8d9a8;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+.premium-gold-card .gc-value{font-size:11px;font-weight:800;color:#e8d9a8;letter-spacing:.8px;font-family:'Courier New',monospace}
+.premium-gold-card .gc-days{position:absolute;bottom:6px;right:12px;font-size:9px;font-weight:700;color:rgba(212,175,55,.85);background:rgba(0,0,0,.4);padding:3px 8px;border-radius:10px;border:1px solid rgba(212,175,55,.3);z-index:3}
+.premium-gold-card .gc-logo{font-size:9px;font-weight:900;color:rgba(212,175,55,.8);letter-spacing:1.5px;position:absolute;top:14px;right:16px;z-index:3}
+/* ===== END GOLD CARD ===== */
+
 @media(max-width:360px){.brand-title{font-size:14px}}
 </style>
 </head>
@@ -452,13 +458,13 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
             <h2 style="font-size:20px;margin-bottom:4px;" id="profileName">My Profile</h2>
             <p style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:4px;" id="profilePhone"></p>
             <p style="font-size:10px;color:var(--accent);font-weight:800;margin-bottom:24px;">✅ <span class="hi">वेरिफाइड यूज़र</span><span class="en">Verified User</span></p>
-            <div id="premiumActiveCard" style="display:none;background:linear-gradient(135deg,#10b981,#059669);border-radius:16px;padding:18px;margin-bottom:20px;color:#fff;text-align:left;">
+            <div id="premiumActiveCard" style="display:none;background:linear-gradient(135deg,#1a1a1a,#2d2416);border-radius:16px;padding:18px;margin-bottom:20px;color:#e8d9a8;text-align:left;border:1px solid rgba(212,175,55,.4);">
                 <div style="font-size:17px;font-weight:900;margin-bottom:4px;">⭐ <span class="hi">Premium Active</span><span class="en">Premium Active</span></div>
-                <div style="font-size:11px;opacity:.95;margin-bottom:10px;">
+                <div style="font-size:11px;opacity:.95;margin-bottom:10px;color:#d4af37;">
                     <span class="hi">आपकी premium membership चालू है — Settings में गोल्ड कार्ड देखें</span>
                     <span class="en">Your premium is active — View gold card in Settings</span>
                 </div>
-                <div style="background:rgba(0,0,0,.2);padding:10px 14px;border-radius:10px;font-size:12px;font-weight:700;">
+                <div style="background:rgba(212,175,55,.15);padding:10px 14px;border-radius:10px;font-size:12px;font-weight:700;color:#d4af37;">
                     ⏱️ <span id="premiumDaysLeft">0</span> <span class="hi">दिन बाकी</span><span class="en">days left</span>
                 </div>
             </div>
@@ -730,33 +736,31 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
     <div class="bottom-sheet">
         <button class="sheet-close" onclick="closePrefs()"></button>
         <h2 style="font-size:20px;font-weight:900;color:var(--text-dark);margin-bottom:20px;">⚙️ <span class="hi">सेटिंग्स</span><span class="en">Settings</span></h2>
-        <div id="goldCardWrap" style="display:none;margin-bottom:20px;">
+        <div id="goldCardWrap" style="display:none;margin-bottom:16px;">
             <div class="premium-gold-card" id="goldCard">
+                <div class="gc-logo">PREMIUM</div>
                 <div class="gc-inner">
-                    <div class="gc-badge">⭐ PREMIUM MEMBER</div>
-                    <div class="gc-user" id="gcUserName">User Name</div>
-                    <div class="gc-phone" id="gcUserPhone">+91 XXXXXXXXXX</div>
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                        <div>
-                            <div class="gc-label">Card Number</div>
-                            <div style="font-size:14px;font-weight:800;color:#78350f;letter-spacing:2px;font-family:monospace;" id="gcCardNo">● ● ● ● &nbsp;● ● ● ● &nbsp;● ● ● ● &nbsp;2025</div>
-                        </div>
+                    <div class="gc-top">
+                        <div class="gc-badge">⭐ MEMBER</div>
                         <div class="gc-chip"></div>
                     </div>
-                    <div class="gc-footer">
+                    <div class="gc-cardno" id="gcCardNo">●●●● ●●●● ●●●● 0000</div>
+                    <div class="gc-bottom">
+                        <div style="flex:1;min-width:0;">
+                            <div class="gc-label">Card Holder</div>
+                            <div class="gc-user" id="gcUserName">USER NAME</div>
+                        </div>
                         <div>
                             <div class="gc-label">Valid Till</div>
-                            <div class="gc-value" id="gcExpiry" style="margin-bottom:0;">-- / --</div>
+                            <div class="gc-value" id="gcExpiry">--/--</div>
                         </div>
-                        <div style="text-align:right;">
+                        <div>
                             <div class="gc-label">Plan</div>
-                            <div class="gc-plan" id="gcPlan">MONTHLY</div>
+                            <div class="gc-value" id="gcPlan">MONTHLY</div>
                         </div>
-                    </div>
-                    <div class="gc-days" style="text-align:center;margin-top:12px;padding-top:10px;border-top:1px dashed rgba(120,53,15,.3);">
-                        ⏱️ <span id="gcDaysLeft">0</span> days remaining
                     </div>
                 </div>
+                <div class="gc-days">⏱️ <span id="gcDaysLeft">0</span> days left</div>
             </div>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);">
@@ -792,7 +796,7 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"7.2.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"8.0.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह नंबर पहले से रजिस्टर है!",invalidPhone:"सही नंबर डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Number already registered!",invalidPhone:"Enter valid phone.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -1141,7 +1145,7 @@ async function renderPremiumUsersList(){
         const fs=await waitForFS(3000);
         if(!fs)return;
         if(!fs.getAllUsers){
-            el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">⚠️ getAllUsers function missing — Firestore script me add karo</div>';
+            el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">⚠️ getAllUsers function missing</div>';
             return;
         }
         const users=await fs.getAllUsers();
@@ -1168,6 +1172,70 @@ async function renderPremiumUsersList(){
         }).join("");
     }catch(e){console.warn(e);el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">Error</div>'}
 }
+
+/* ===== EXPIRY NOTIFICATION ===== */
+async function requestNotificationPermission(){
+    if(!("Notification" in window))return false;
+    if(Notification.permission==="granted")return true;
+    if(Notification.permission==="denied")return false;
+    try{
+        const perm=await Notification.requestPermission();
+        return perm==="granted";
+    }catch(e){return false}
+}
+function showLocalNotification(title,body){
+    if(!("Notification" in window)||Notification.permission!=="granted")return;
+    try{
+        new Notification(title,{
+            body:body,
+            icon:"icon-512.png",
+            badge:"icon-512.png",
+            tag:"premium-expiry",
+            requireInteraction:true
+        });
+    }catch(e){console.warn("Notification failed:",e)}
+}
+async function checkPremiumExpiry(){
+    if(!STATE.user||!STATE.user.isPremium)return;
+    if(!STATE.user.premiumUntil)return;
+    const daysLeft=Math.ceil((STATE.user.premiumUntil-Date.now())/86400000);
+    if(daysLeft<=0){
+        STATE.user.isPremium=false;
+        AUTH.set(STATE.user);
+        return;
+    }
+    const lastNotified=parseInt(localStorage.getItem("ac_premium_notified")||"0");
+    const today=Math.floor(Date.now()/86400000);
+    if(lastNotified===today)return;
+    let shouldNotify=false;
+    let title="";
+    let body="";
+    if(daysLeft<=1){
+        title="⚠️ Premium Expiring Today!";
+        body="Aapki Premium membership aaj khatam ho rahi hai. Renew karein!";
+        shouldNotify=true;
+    }else if(daysLeft<=3){
+        title="⏰ Premium "+daysLeft+" Days Left";
+        body="Sirf "+daysLeft+" din bache hain. Renew karke benefits continue rakhein.";
+        shouldNotify=true;
+    }else if(daysLeft<=7){
+        title="⭐ Premium "+daysLeft+" Days Left";
+        body="Aapki Premium membership "+daysLeft+" din me khatam hogi. Renew karein!";
+        shouldNotify=true;
+    }
+    if(shouldNotify){
+        const granted=await requestNotificationPermission();
+        if(granted){
+            showLocalNotification(title,body);
+            localStorage.setItem("ac_premium_notified",String(today));
+        }else{
+            showToast(title+" — "+body,"info");
+            localStorage.setItem("ac_premium_notified",String(today));
+        }
+    }
+}
+/* ===== END EXPIRY NOTIFICATION ===== */
+
 function renderGoldCard(){
     const wrap=document.getElementById("goldCardWrap");
     if(!wrap)return;
@@ -1176,15 +1244,14 @@ function renderGoldCard(){
     wrap.style.display="block";
     const userName=STATE.user.name||"User";
     const userPhone=STATE.user.phone||"";
-    document.getElementById("gcUserName").innerText=userName;
-    document.getElementById("gcUserPhone").innerText=userPhone;
-    const last4=userPhone.replace(/\D/g,"").slice(-4)||"2025";
-    document.getElementById("gcCardNo").innerHTML=`● ● ● ● &nbsp;● ● ● ● &nbsp;● ● ● ● &nbsp;${last4}`;
+    document.getElementById("gcUserName").innerText=userName.toUpperCase();
+    const last4=userPhone.replace(/\D/g,"").slice(-4)||"0000";
+    document.getElementById("gcCardNo").innerHTML=`●●●● &nbsp;●●●● &nbsp;●●●● &nbsp;${last4}`;
     const until=STATE.user.premiumUntil||Date.now();
     const d=new Date(until);
-    const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-    const expiryStr=months[d.getMonth()]+" "+d.getFullYear();
-    document.getElementById("gcExpiry").innerText=expiryStr;
+    const mm=String(d.getMonth()+1).padStart(2,"0");
+    const yy=String(d.getFullYear()).slice(-2);
+    document.getElementById("gcExpiry").innerText=mm+"/"+yy;
     const plan=STATE.user.premiumPlan||"monthly";
     document.getElementById("gcPlan").innerText=plan.toUpperCase();
     const daysLeft=Math.max(0,Math.ceil((until-Date.now())/86400000));
@@ -1250,7 +1317,7 @@ function askAI(key){const qs=JSON.parse(document.getElementById("aiOpts").datase
 function openPrefsModal(){renderGoldCard();document.getElementById("prefsModal").classList.remove("hidden")}
 function closePrefs(){document.getElementById("prefsModal").classList.add("hidden")}
 function shareApp(){if(!flag("enable_share"))return;const url=location.origin+location.pathname;const text=STATE.lang==="hi"?"'अपना क्षेत्र' ऐप पर सभी दुकानें और सेवाएँ देखें: ":"Find local shops on 'My Local Area': ";if(navigator.share){navigator.share({title:STATE.lang==="hi"?"अपना क्षेत्र":"My Local Area",text:text+url}).catch(()=>{window.location.href="whatsapp://send?text="+encodeURIComponent(text+url)})}else{window.location.href="whatsapp://send?text="+encodeURIComponent(text+url)}}
-async function switchTab(tabId,updateHash=true){if((tabId==="addShop"||tabId==="profile")&&!STATE.user)tabId="auth";STATE.activeTab=tabId;localStorage.setItem("ac_current_tab",tabId);if(updateHash)window.history.pushState(null,null,"#"+tabId);if(tabId==="profile"){await refreshCurrentUser();updateProfileUI();if(AUTH.isAdmin(STATE.user))refreshAdminData()}document.querySelectorAll("main > section").forEach(sec=>sec.classList.add("hidden"));const target=document.getElementById(tabId);if(target)target.classList.remove("hidden");document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));const navId=tabId==="onlineTab"?"nav-onlineTab":("nav-"+tabId);const navBtn=document.getElementById(navId);if(navBtn)navBtn.classList.add("active");document.getElementById("backBtn").style.display=(tabId==="home")?"none":"block";if(tabId==="bazaar")renderShops();else if(tabId==="onlineTab")renderOnlineShops();else if(tabId==="home"){renderHomePreviews();renderMyAreaMap()}window.scrollTo(0,0)}
+async function switchTab(tabId,updateHash=true){if((tabId==="addShop"||tabId==="profile")&&!STATE.user)tabId="auth";STATE.activeTab=tabId;localStorage.setItem("ac_current_tab",tabId);if(updateHash)window.history.pushState(null,null,"#"+tabId);if(tabId==="profile"){await refreshCurrentUser();updateProfileUI();if(AUTH.isAdmin(STATE.user))refreshAdminData();await checkPremiumExpiry()}document.querySelectorAll("main > section").forEach(sec=>sec.classList.add("hidden"));const target=document.getElementById(tabId);if(target)target.classList.remove("hidden");document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));const navId=tabId==="onlineTab"?"nav-onlineTab":("nav-"+tabId);const navBtn=document.getElementById(navId);if(navBtn)navBtn.classList.add("active");document.getElementById("backBtn").style.display=(tabId==="home")?"none":"block";if(tabId==="bazaar")renderShops();else if(tabId==="onlineTab")renderOnlineShops();else if(tabId==="home"){renderHomePreviews();renderMyAreaMap()}window.scrollTo(0,0)}
 function goHome(){switchTab("home")}
 function onSearchInput(val){debouncedRenderShops();if(val.trim().length>2)saveRecentSearch(val.trim())}
 function showRecentSearches(){if(!flag("enable_recent_search"))return;const box=document.getElementById("recentBox");if(STATE.recentSearch.length===0){box.style.display="none";return}box.innerHTML=STATE.recentSearch.slice(0,5).map(s=>`<div class="recent-item" onclick="applyRecentSearch('${Utils.escAttr(s)}')"><span>🕒 ${Utils.esc(s)}</span><span onclick="event.stopPropagation();clearRecentSearch('${Utils.escAttr(s)}')" style="opacity:.5;">✖</span></div>`).join("")+`<div class="recent-item" onclick="clearAllRecent()" style="color:#ef4444;font-weight:800;">${STATE.lang==="hi"?"सभी हटाएँ":"Clear all"}</div>`;box.style.display="block"}
@@ -1263,7 +1330,7 @@ window.addEventListener("hashchange",()=>{const hash=window.location.hash.replac
 async function fetchRealData(){try{const [shops,stories,reviews,settings]=await Promise.all([DB.getAllShops(),DB.getAllStories(),DB.getAllReviews(),(async()=>{const fs=await waitForFS(2000);if(fs&&fs.getSettings){try{return await fs.getSettings()}catch{return null}}return null})()]);if(settings)STATE.currentFlags={...DEFAULT_FLAGS,...settings};STATE.allShopsCache=shops||[];const isAdminUser=AUTH.isAdmin(STATE.user);const visibleShops=(shops||[]).filter(s=>{if(isAdminUser)return true;if(s.pending===true)return false;if(s.hidden===true)return false;return true});STATE.shops=visibleShops.map(s=>{let isOpen=true;if(s.isOpen!==undefined&&s.isOpen!==null){isOpen=(s.isOpen===true||s.isOpen==="true"||s.isOpen===1||s.isOpen==="1")}return{id:s.id,type:s.mainType||"बाज़ार",name:s.shopName||s.userName||"Shop",catHi:s.subTypeHi||"अन्य",catEn:s.subTypeEn||"Other",locText:s.locationText||"",lat:parseFloat(s.lat)||0,lng:parseFloat(s.lng)||0,icon:s.icon||"🏬",isOpen,isHiring:!!s.isHiring,phone:s.contactPhone||s.userPhone||"",createdAt:s.createdAt||0,pending:s.pending===true,hidden:s.hidden===true,verified:s.verified===true,reports:s.reports||0,views:s.views||0,ratingSum:s.ratingSum||0,ratingCount:s.ratingCount||0,rating:s.rating||0,businessHours:s.businessHours||null,isPremium:s.isPremium===true}});STATE.stories=(stories||[]).map(st=>({id:st.id,icon:st.icon||"🔥",name:st.userName||"Shop",userPhone:st.userPhone||"",badge:st.badgeTitle||"Offer",desc:st.description||"",time:st.createdAt?new Date(st.createdAt).getTime():Date.now()}));STATE.reviews=reviews||[];renderShops();renderOnlineShops();renderStories();renderHomePreviews();renderMyAreaMap();if(STATE.user&&!document.getElementById("profile").classList.contains("hidden"))updateProfileUI();checkUserCountForPremium()}catch(e){console.error("Fetch:",e)}}
 window.addEventListener("online",()=>showToast(STATE.lang==="hi"?"इंटरनेट वापस":"Back online","success"));
 window.addEventListener("offline",()=>showToast(STATE.lang==="hi"?"इंटरनेट नहीं है":"Offline","error"));
-window.addEventListener("load",async()=>{applyThemeAndLang();fillCountrySelects();renderCatGrid();renderFilterChips();initAddShopSelects();initStoryCats();initAiOptions();document.getElementById("backBtn").style.display="none";const rs=document.getElementById("radiusRange");if(rs)rs.value=STATE.radius;if(STATE.user&&STATE.user.country){const ac=document.getElementById("authCountry");if(ac)ac.value=STATE.user.country;const sc=document.getElementById("shopCountry");if(sc)sc.value=STATE.user.country;const an=document.getElementById("authName");if(an&&STATE.user.name)an.value=STATE.user.name}const hash=window.location.hash.replace("#","");const initial=hash||localStorage.getItem("ac_current_tab")||"home";await fetchRealData();await refreshCurrentUser();switchTab(initial);setTimeout(()=>{if(!STATE.isLocationTracked)detectUserLocation(true)},1500)});
+window.addEventListener("load",async()=>{applyThemeAndLang();fillCountrySelects();renderCatGrid();renderFilterChips();initAddShopSelects();initStoryCats();initAiOptions();document.getElementById("backBtn").style.display="none";const rs=document.getElementById("radiusRange");if(rs)rs.value=STATE.radius;if(STATE.user&&STATE.user.country){const ac=document.getElementById("authCountry");if(ac)ac.value=STATE.user.country;const sc=document.getElementById("shopCountry");if(sc)sc.value=STATE.user.country;const an=document.getElementById("authName");if(an&&STATE.user.name)an.value=STATE.user.name}const hash=window.location.hash.replace("#","");const initial=hash||localStorage.getItem("ac_current_tab")||"home";await fetchRealData();await refreshCurrentUser();await checkPremiumExpiry();switchTab(initial);setTimeout(()=>{if(!STATE.isLocationTracked)detectUserLocation(true)},1500)});
 </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
@@ -1315,4 +1382,4 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 </body>
-   </html>
+                                                                    </html>
