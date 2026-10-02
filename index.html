@@ -236,6 +236,21 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 .report-cancel-btn{background:var(--primary-light);color:var(--text-dark);border:1px solid var(--border)!important}
 .report-submit-btn{background:#ef4444;color:#fff}
 .report-submit-btn:disabled{opacity:.4}
+.premium-gold-card{background:linear-gradient(135deg,#fef3c7 0%,#fbbf24 25%,#f59e0b 50%,#d97706 75%,#fbbf24 100%);border-radius:18px;padding:20px;margin-bottom:18px;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(251,191,36,.4),inset 0 1px 0 rgba(255,255,255,.5);border:2px solid rgba(255,255,255,.4)}
+.premium-gold-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);animation:goldShine 4s infinite}
+@keyframes goldShine{0%{transform:translateX(-100%) translateY(-100%) rotate(45deg)}100%{transform:translateX(100%) translateY(100%) rotate(45deg)}}
+.premium-gold-card .gc-inner{position:relative;z-index:2}
+.premium-gold-card .gc-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(120,53,15,.9);color:#fef3c7;padding:4px 12px;border-radius:50px;font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.premium-gold-card .gc-user{font-size:16px;font-weight:900;color:#78350f;margin-bottom:4px;text-shadow:0 1px 0 rgba(255,255,255,.5)}
+.premium-gold-card .gc-phone{font-size:11px;font-weight:700;color:#92400e;letter-spacing:.5px;margin-bottom:16px}
+.premium-gold-card .gc-label{font-size:9px;font-weight:900;color:#78350f;opacity:.8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+.premium-gold-card .gc-value{font-size:15px;font-weight:900;color:#78350f;margin-bottom:14px}
+.premium-gold-card .gc-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(120,53,15,.25);padding-top:12px;margin-top:12px}
+.premium-gold-card .gc-days{font-size:11px;font-weight:800;color:#78350f}
+.premium-gold-card .gc-days span{font-size:22px;font-weight:900}
+.premium-gold-card .gc-plan{font-size:10px;font-weight:900;color:#78350f;text-align:right;letter-spacing:1px;text-transform:uppercase}
+.premium-gold-card .gc-chip{width:36px;height:26px;background:linear-gradient(135deg,#fde68a,#d97706);border-radius:5px;position:relative;border:1px solid rgba(255,255,255,.6)}
+.premium-gold-card .gc-chip::before{content:'';position:absolute;top:6px;left:6px;right:6px;height:1.5px;background:rgba(120,53,15,.4);box-shadow:0 5px 0 rgba(120,53,15,.4),0 10px 0 rgba(120,53,15,.4)}
 @media(max-width:360px){.brand-title{font-size:14px}}
 </style>
 </head>
@@ -279,7 +294,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
             <p><span class="hi">10 KM के अंदर की सभी दुकानें और सेवाएँ</span><span class="en">All shops within 10 KM</span></p>
             <button class="hero-btn" onclick="switchTab('bazaar')">🔍 <span class="hi">अभी खोजें</span><span class="en">Search Now</span></button>
         </div>
-
         <div class="my-area-card collapsed" id="myAreaCard" style="display:none;">
             <div class="my-area-head" onclick="toggleAreaMap()" style="cursor:pointer;">
                 <div class="my-area-title">📍 <span class="hi">आपका क्षेत्र (10 KM)</span><span class="en">Your Area (10 KM)</span></div>
@@ -291,7 +305,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
             <div id="myAreaMap"></div>
             <div class="area-status" id="areaStatus"><span class="hi">GPS ट्रैक हो रहा है...</span><span class="en">Tracking GPS...</span></div>
         </div>
-
         <div id="storySectionWrap" style="display:none;">
             <div class="section-header">
                 <div class="section-title">🔥 <span class="hi">आज की खास ऑफर</span><span class="en">Today's Offers</span></div>
@@ -439,20 +452,16 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
             <h2 style="font-size:20px;margin-bottom:4px;" id="profileName">My Profile</h2>
             <p style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:4px;" id="profilePhone"></p>
             <p style="font-size:10px;color:var(--accent);font-weight:800;margin-bottom:24px;">✅ <span class="hi">वेरिफाइड यूज़र</span><span class="en">Verified User</span></p>
-
-            <!-- PREMIUM ACTIVE CARD -->
             <div id="premiumActiveCard" style="display:none;background:linear-gradient(135deg,#10b981,#059669);border-radius:16px;padding:18px;margin-bottom:20px;color:#fff;text-align:left;">
                 <div style="font-size:17px;font-weight:900;margin-bottom:4px;">⭐ <span class="hi">Premium Active</span><span class="en">Premium Active</span></div>
                 <div style="font-size:11px;opacity:.95;margin-bottom:10px;">
-                    <span class="hi">आपकी premium membership चालू है</span>
-                    <span class="en">Your premium membership is active</span>
+                    <span class="hi">आपकी premium membership चालू है — Settings में गोल्ड कार्ड देखें</span>
+                    <span class="en">Your premium is active — View gold card in Settings</span>
                 </div>
                 <div style="background:rgba(0,0,0,.2);padding:10px 14px;border-radius:10px;font-size:12px;font-weight:700;">
                     ⏱️ <span id="premiumDaysLeft">0</span> <span class="hi">दिन बाकी</span><span class="en">days left</span>
                 </div>
             </div>
-
-            <!-- PREMIUM UPGRADE CARD (hidden by default) -->
             <div id="premiumCard" style="display:none;background:linear-gradient(135deg,#fbbf24,#f59e0b,#ea580c);border-radius:16px;padding:18px;margin-bottom:20px;color:#fff;text-align:left;position:relative;overflow:hidden;">
                 <div style="position:absolute;top:-20px;right:-20px;font-size:80px;opacity:.15;">⭐</div>
                 <div style="font-size:17px;font-weight:900;margin-bottom:6px;">⭐ Premium Membership</div>
@@ -472,7 +481,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
                     <span class="en">7-day free trial • UPI payment</span>
                 </div>
             </div>
-
             <div id="adminPanel" style="display:none;background:linear-gradient(135deg,#b91c1c,#991b1b);color:#fff;padding:16px;border-radius:16px;margin-bottom:20px;text-align:left;">
                 <div style="font-size:16px;font-weight:900;margin-bottom:10px;">👑 Admin Dashboard</div>
                 <div style="display:flex;gap:10px;margin-bottom:14px;">
@@ -641,8 +649,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
         </div>
     </div>
 </div>
-
-<!-- REPORT MODAL -->
 <div id="reportModal" class="modal-overlay hidden" style="z-index:9999999999;align-items:center;" onclick="if(event.target.id==='reportModal')closeReportModal()">
     <div class="report-modal-box">
         <div class="report-modal-title">⚠️ <span class="hi">रिपोर्ट करें</span><span class="en">Report</span></div>
@@ -661,8 +667,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
         </div>
     </div>
 </div>
-
-<!-- PREMIUM MODAL -->
 <div id="premiumModal" class="modal-overlay hidden" style="z-index:9999999999;align-items:center;" onclick="if(event.target.id==='premiumModal')closePremiumModal()">
     <div style="background:var(--card-bg);border-radius:20px;padding:24px;width:92%;max-width:420px;margin:auto;border:1px solid var(--border);max-height:90vh;overflow-y:auto;">
         <div style="text-align:center;margin-bottom:20px;">
@@ -675,7 +679,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
                 <span class="en">Grow your business</span>
             </div>
         </div>
-
         <div style="background:var(--primary);border-radius:14px;padding:14px;margin-bottom:16px;">
             <div style="font-size:12px;font-weight:800;color:var(--text-dark);margin-bottom:10px;">✅ <span class="hi">क्या-क्या मिलेगा</span><span class="en">What you get</span></div>
             <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--text-muted);font-weight:600;">
@@ -684,21 +687,19 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
                 <div>✅ <span class="hi">Verified badge (✔️)</span><span class="en">Verified badge</span></div>
                 <div>✅ <span class="hi">Priority support</span><span class="en">Priority support</span></div>
                 <div>✅ <span class="hi">Unlimited stories</span><span class="en">Unlimited stories</span></div>
+                <div>✅ <span class="hi">Gold Membership Card</span><span class="en">Gold Membership Card</span></div>
             </div>
         </div>
-
         <div class="type-toggle" style="margin-bottom:14px;">
             <button class="active" id="planMonthlyBtn" onclick="setPremiumPlan('monthly')">📅 <span class="hi">महीना</span><span class="en">Monthly</span></button>
             <button id="planYearlyBtn" onclick="setPremiumPlan('yearly')">🎉 <span class="hi">साल</span><span class="en">Yearly</span> (SAVE 60%)</button>
         </div>
-
         <div style="background:linear-gradient(135deg,#10b981,#059669);border-radius:14px;padding:16px;margin-bottom:16px;color:#fff;text-align:center;">
             <div style="font-size:32px;font-weight:900;" id="premiumSelectedPrice">₹99</div>
             <div style="font-size:11px;opacity:.9;margin-top:4px;" id="premiumSelectedDuration">
                 <span class="hi">प्रति महीना</span><span class="en">per month</span>
             </div>
         </div>
-
         <div style="background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:12px;padding:12px;margin-bottom:16px;">
             <div style="font-size:11px;font-weight:800;color:#fbbf24;margin-bottom:6px;">📱 <span class="hi">UPI से पेमेंट करें</span><span class="en">Pay via UPI</span></div>
             <div style="font-size:12px;color:var(--text-dark);font-weight:700;margin-bottom:4px;">UPI ID: <span id="premiumUpiId">ashifmd400@upi</span></div>
@@ -707,7 +708,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
                 <span class="en">After payment, send screenshot on WhatsApp. Admin will activate in 5 minutes.</span>
             </div>
         </div>
-
         <button class="btn" onclick="requestPremium()" style="background:linear-gradient(135deg,#fbbf24,#ea580c);margin-top:0;">
             💳 <span class="hi">पेमेंट करने के बाद यहाँ क्लिक करें</span><span class="en">Click after payment</span>
         </button>
@@ -716,7 +716,6 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
         </button>
     </div>
 </div>
-
 <div id="confirmModal" class="modal-overlay hidden" style="z-index:9999999999;align-items:center;">
     <div class="custom-alert-box">
         <div class="custom-alert-title">⚠️ <span class="hi">कन्फर्म करें</span><span class="en">Confirm</span></div>
@@ -731,6 +730,36 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
     <div class="bottom-sheet">
         <button class="sheet-close" onclick="closePrefs()"></button>
         <h2 style="font-size:20px;font-weight:900;color:var(--text-dark);margin-bottom:20px;">⚙️ <span class="hi">सेटिंग्स</span><span class="en">Settings</span></h2>
+        <!-- GOLD PREMIUM CARD -->
+        <div id="goldCardWrap" style="display:none;margin-bottom:20px;">
+            <div class="premium-gold-card" id="goldCard">
+                <div class="gc-inner">
+                    <div class="gc-badge">⭐ PREMIUM MEMBER</div>
+                    <div class="gc-user" id="gcUserName">User Name</div>
+                    <div class="gc-phone" id="gcUserPhone">+91 XXXXXXXXXX</div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                        <div>
+                            <div class="gc-label">Card Number</div>
+                            <div style="font-size:14px;font-weight:800;color:#78350f;letter-spacing:2px;font-family:monospace;" id="gcCardNo">● ● ● ● &nbsp;● ● ● ● &nbsp;● ● ● ● &nbsp;2025</div>
+                        </div>
+                        <div class="gc-chip"></div>
+                    </div>
+                    <div class="gc-footer">
+                        <div>
+                            <div class="gc-label">Valid Till</div>
+                            <div class="gc-value" id="gcExpiry" style="margin-bottom:0;">-- / --</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div class="gc-label">Plan</div>
+                            <div class="gc-plan" id="gcPlan">MONTHLY</div>
+                        </div>
+                    </div>
+                    <div class="gc-days" style="text-align:center;margin-top:12px;padding-top:10px;border-top:1px dashed rgba(120,53,15,.3);">
+                        ⏱️ <span id="gcDaysLeft">0</span> days remaining
+                    </div>
+                </div>
+            </div>
+        </div>
         <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);">
             <div><div style="font-size:13px;font-weight:800;color:var(--text-dark);"><span class="hi">भाषा</span><span class="en">Language</span></div></div>
             <button class="btn btn-secondary" style="width:auto;padding:8px 16px;margin:0;" onclick="toggleLang()"><span id="prefLangBtn">हिन्दी</span></button>
@@ -764,7 +793,7 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"7.0.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"7.1.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह नंबर पहले से रजिस्टर है!",invalidPhone:"सही नंबर डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Number already registered!",invalidPhone:"Enter valid phone.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -812,7 +841,6 @@ async function renderReviews(shopId){const wrap=document.getElementById("reviews
 function bindStars(){const stars=document.querySelectorAll("#mStars .star");STATE.currentReviewRating=0;stars.forEach(s=>{s.onclick=()=>{STATE.currentReviewRating=parseInt(s.dataset.val);stars.forEach(x=>x.classList.toggle("active",parseInt(x.dataset.val)<=STATE.currentReviewRating))}})}
 async function submitReview(){if(!STATE.user)return showToast(t("loginRequired"),"error");if(!STATE.currentReviewRating)return showToast(t("ratingRequired"),"error");const shop=STATE.currentShop;if(!shop)return;const comment=(document.getElementById("mReviewText")?.value||"").trim().substring(0,200);const review={shopId:String(shop.id),userPhone:STATE.user.phone,userName:STATE.user.name,rating:STATE.currentReviewRating,comment,createdAt:Date.now()};try{await DB.addReview(review);STATE.reviews.push(review);const shopLocal=STATE.shops.find(s=>String(s.id)===String(shop.id));const shopCache=STATE.allShopsCache.find(s=>String(s.id)===String(shop.id));const newSum=(shop.ratingSum||0)+STATE.currentReviewRating;const newCount=(shop.ratingCount||0)+1;const newAvg=newSum/newCount;if(shopLocal){shopLocal.ratingSum=newSum;shopLocal.ratingCount=newCount;shopLocal.rating=newAvg}if(shopCache){shopCache.ratingSum=newSum;shopCache.ratingCount=newCount;shopCache.rating=newAvg}const fs=await waitForFS(2000);if(fs){await fs.updateShop(shop.id,{ratingSum:newSum,ratingCount:newCount,rating:newAvg})}showToast(t("reviewAdded"));STATE.currentReviewRating=0;await renderReviews(shop.id);renderShops()}catch(e){console.warn(e);showToast(t("failed"),"error")}}
 function closeShopModal(e){if(e.target.id==="shopModal"||e.target.classList.contains("sheet-close")){document.getElementById("shopModal").classList.add("hidden")}}
-
 function detectUserLocation(silent=false){
   if(!navigator.geolocation){if(!silent)showToast("Geolocation not supported","error");return}
   const dot=document.getElementById("locDot");
@@ -849,7 +877,6 @@ function detectUserLocation(silent=false){
     {enableHighAccuracy:true,timeout:20000,maximumAge:5000}
   );
 }
-
 function toggleAreaMap(){
   const card=document.getElementById("myAreaCard");
   const icon=document.getElementById("areaToggleIcon");
@@ -861,7 +888,6 @@ function toggleAreaMap(){
     setTimeout(()=>{if(areaMap){try{areaMap.invalidateSize()}catch(e){}}},250);
   }
 }
-
 function renderMyAreaMap(){
   const card=document.getElementById("myAreaCard");
   if(!card)return;
@@ -894,7 +920,6 @@ function renderMyAreaMap(){
     }
   },150);
 }
-
 function recenterArea(){
   if(areaMap&&STATE.isLocationTracked){
     areaMap.setView([STATE.userLat,STATE.userLng],14);
@@ -903,7 +928,6 @@ function recenterArea(){
     detectUserLocation(false);
   }
 }
-
 function openRealMapPicker(){document.getElementById("realMapModal").classList.remove("hidden");setTimeout(()=>{if(!STATE.map){STATE.map=L.map("map").setView([STATE.userLat,STATE.userLng],14);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:20,attribution:"© OSM"}).addTo(STATE.map);STATE.marker=L.marker([STATE.userLat,STATE.userLng],{draggable:true}).addTo(STATE.map);STATE.marker.on("dragend",()=>{const p=STATE.marker.getLatLng();STATE.pickedLat=p.lat;STATE.pickedLng=p.lng});STATE.map.on("click",e=>{STATE.marker.setLatLng(e.latlng);STATE.pickedLat=e.latlng.lat;STATE.pickedLng=e.latlng.lng})}else{STATE.map.invalidateSize();STATE.map.setView([STATE.userLat,STATE.userLng],14);STATE.marker.setLatLng([STATE.userLat,STATE.userLng])}STATE.pickedLat=STATE.userLat;STATE.pickedLng=STATE.userLng},200)}
 function closeRealMap(){document.getElementById("realMapModal").classList.add("hidden")}
 async function searchOnMap(){const q=document.getElementById("mapSearchInput").value.trim();if(!q)return showToast(STATE.lang==="hi"?"जगह का नाम लिखें":"Enter place","error");showToast(STATE.lang==="hi"?"खोज रहा है...":"Searching...","info");try{const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=1`);const d=await r.json();if(d&&d.length){const nLat=parseFloat(d[0].lat),nLng=parseFloat(d[0].lon);STATE.map.setView([nLat,nLng],16);STATE.marker.setLatLng([nLat,nLng]);STATE.pickedLat=nLat;STATE.pickedLng=nLng;showToast(STATE.lang==="hi"?"जगह मिल गई!":"Found!")}else showToast(STATE.lang==="hi"?"जगह नहीं मिली।":"Not found.","error")}catch{showToast("Search failed","error")}}
@@ -921,7 +945,6 @@ function updateProfileUI(){
   const myShops=STATE.shops.filter(s=>s.phone===STATE.user.phone||s.name===STATE.user.name);
   document.getElementById("adminPanel").style.display=isAdmin?"block":"none";
   if(isAdmin){document.getElementById("adminTotalShops").innerText=STATE.allShopsCache.length;document.getElementById("adminTotalStories").innerText=STATE.stories.length;const pendingCount=STATE.allShopsCache.filter(s=>s.pending===true).length;document.getElementById("adminPendingCount").innerText=pendingCount;renderAdminContent()}
-  // Premium cards
   const premiumCard=document.getElementById("premiumCard");
   if(premiumCard){
     const shouldShow=flag("enable_premium")&&!checkPremiumStatus();
@@ -937,27 +960,20 @@ function updateProfileUI(){
       document.getElementById("premiumDaysLeft").innerText=daysLeft;
     }
   }
-  if(myShops.length>0||isAdmin){document.getElementById("shopStatusWrap").style.display="block";document.getElementById("addStoryWrap").style.display=flag("enable_story_posting")?"block":"none";document.getElementById("customerMsgWrap").style.display="none";if(myShops.length>0){document.getElementById("dashShopName").innerText=myShops[0].name;document.getElementById("dashShopStats").innerText=`👁️ ${myShops[0].views||0} ${STATE.lang==="hi"?"व्यू":"views"} • ⭐ ${(myShops[0].rating||0).toFixed(1)} (${myShops[0].ratingCount||0})`;const isOpen=myShops[0].isOpen;document.getElementById("liveSwitch").checked=isOpen;const te=document.getElementById("switchText");te.innerHTML=isOpen?"ON":"OFF";te.style.color=isOpen?"var(--accent)":"#f87171"}}else{document.getElementById("shopStatusWrap").style.display="none";document.getElementById("addStoryWrap").style.display="none";document.getElementById("customerMsgWrap").style.display="block"}renderProfileStories()}
+  if(myShops.length>0||isAdmin){document.getElementById("shopStatusWrap").style.display="block";document.getElementById("addStoryWrap").style.display=flag("enable_story_posting")?"block":"none";document.getElementById("customerMsgWrap").style.display="none";if(myShops.length>0){document.getElementById("dashShopName").innerText=myShops[0].name;document.getElementById("dashShopStats").innerText=`👁️ ${myShops[0].views||0} ${STATE.lang==="hi"?"व्यू":"views"} • ⭐ ${(myShops[0].rating||0).toFixed(1)} (${myShops[0].ratingCount||0})`;const isOpen=myShops[0].isOpen;document.getElementById("liveSwitch").checked=isOpen;const te=document.getElementById("switchText");te.innerHTML=isOpen?"ON":"OFF";te.style.color=isOpen?"var(--accent)":"#f87171"}}else{document.getElementById("shopStatusWrap").style.display="none";document.getElementById("addStoryWrap").style.display="none";document.getElementById("customerMsgWrap").style.display="block"}renderProfileStories();setTimeout(renderGoldCard,100)}
 function setAdminTab(tab){STATE.adminTab=tab;document.querySelectorAll(".admin-tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===tab));renderAdminContent()}
 async function renderAdminContent(){const cont=document.getElementById("adminContent");if(!cont)return;cont.innerHTML='<div style="text-align:center;padding:20px;">Loading...</div>';if(!AUTH.isAdmin(STATE.user))return;try{const fs=await waitForFS(3000);if(!fs)return cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">Firebase not ready</div>';if(STATE.adminTab==="pending"){const pending=STATE.allShopsCache.filter(s=>s.pending===true);if(pending.length===0){cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">✅ No pending</div>';return}cont.innerHTML=pending.map(s=>{const safeId=Utils.escAttr(String(s.id));return`<div class="admin-item"><div class="admin-item-name">${Utils.esc(s.shopName||s.userName||"Shop")}</div><div class="admin-item-meta">${Utils.esc(s.mainType||"")} • 📞 ${Utils.esc(s.contactPhone||s.userPhone||"")}</div><div class="admin-item-meta">📍 ${Utils.esc((s.locationText||"").substring(0,60))}</div><div class="admin-actions"><button class="admin-btn admin-btn-approve" onclick="adminApprove('${safeId}')">✅ Approve</button><button class="admin-btn admin-btn-reject" onclick="adminReject('${safeId}')">❌ Reject</button></div></div>`}).join("")}else if(STATE.adminTab==="reported"){let allReports=[];if(fs.getAllReports)allReports=await fs.getAllReports();const grouped={};allReports.forEach(r=>{if(!grouped[r.shopId])grouped[r.shopId]=[];grouped[r.shopId].push(r)});const flagged=[];for(const shopId in grouped){const shop=STATE.allShopsCache.find(s=>String(s.id)===String(shopId));if(!shop)continue;const reporters=new Set(grouped[shopId].map(r=>r.byPhone));if(reporters.size>=GLOBAL_CONFIG.MIN_UNIQUE_REPORTERS){flagged.push({shop,reports:grouped[shopId],unique:reporters.size})}}if(flagged.length===0){cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">✅ No reported</div>';return}cont.innerHTML=flagged.map(({shop,reports,unique})=>{const safeId=Utils.escAttr(String(shop.id));const reasons=reports.slice(0,3).map(r=>`<div style="font-size:10px;opacity:.8;">• ${Utils.esc((r.reason||"").substring(0,40))} — ${Utils.esc((r.byPhone||"?").slice(-4))}</div>`).join("");return`<div class="admin-item"><div class="admin-item-name">${Utils.esc(shop.shopName||shop.userName||"Shop")} ${shop.hidden?'<span style="color:#ef4444;">🚫</span>':''}</div><div class="admin-item-meta" style="color:#fbbf24;font-weight:800;">⚠️ ${unique} reporters</div><div style="margin:6px 0;">${reasons}</div><div class="admin-actions"><button class="admin-btn admin-btn-hide" onclick="adminHide('${safeId}')">🚫 Hide</button><button class="admin-btn admin-btn-clear" onclick="adminClearReports('${safeId}')">✅ Clear</button><button class="admin-btn admin-btn-reject" onclick="adminReject('${safeId}')">🗑️ Del</button></div></div>`}).join("")}else if(STATE.adminTab==="premium"){const fs2=await waitForFS(3000);let userCount=0;try{userCount=fs2&&fs2.getUserCount?await fs2.getUserCount():0}catch(e){}const premiumEnabled=flag("enable_premium");const unlockAt=flag("premium_unlock_at");const progress=Math.min(100,Math.round((userCount/unlockAt)*100));cont.innerHTML=`
         <div style="background:rgba(0,0,0,.2);padding:14px;border-radius:12px;margin-bottom:10px;">
             <div style="font-size:13px;font-weight:800;margin-bottom:8px;">⭐ Premium System</div>
-            <div style="font-size:11px;opacity:.85;margin-bottom:10px;">
-                Users: <strong>${userCount}</strong> / ${unlockAt}
-            </div>
+            <div style="font-size:11px;opacity:.85;margin-bottom:10px;">Users: <strong>${userCount}</strong> / ${unlockAt}</div>
             <div style="background:rgba(255,255,255,.15);height:8px;border-radius:10px;overflow:hidden;margin-bottom:12px;">
                 <div style="height:100%;background:#10b981;width:${progress}%;transition:width .5s;"></div>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;">
                 <div style="font-size:12px;font-weight:700;">Premium ${premiumEnabled?'🟢 ON':'🔴 OFF'}</div>
-                <label class="switch">
-                    <input type="checkbox" ${premiumEnabled?'checked':''} onchange="toggleFlag('enable_premium',this.checked)">
-                    <span class="slider"></span>
-                </label>
+                <label class="switch"><input type="checkbox" ${premiumEnabled?'checked':''} onchange="toggleFlag('enable_premium',this.checked)"><span class="slider"></span></label>
             </div>
-            <div style="font-size:10px;opacity:.7;margin-top:6px;">
-                ${premiumEnabled?'Users ko Premium card dikh raha hai':'Hidden — '+unlockAt+' users hone par auto ON hoga'}
-            </div>
+            <div style="font-size:10px;opacity:.7;margin-top:6px;">${premiumEnabled?'Users ko Premium card dikh raha hai':'Hidden — '+unlockAt+' users hone par auto ON hoga'}</div>
         </div>
         <div style="background:rgba(0,0,0,.2);padding:14px;border-radius:12px;margin-bottom:10px;">
             <div style="font-size:12px;font-weight:800;margin-bottom:10px;">💳 Payment Settings</div>
@@ -1013,9 +1029,7 @@ function openPremiumModal(){
     document.getElementById("premiumModal").classList.remove("hidden");
     document.getElementById("premiumUpiId").innerText=flag("premium_upi_id")||"ashifmd400@upi";
 }
-function closePremiumModal(){
-    document.getElementById("premiumModal").classList.add("hidden");
-}
+function closePremiumModal(){document.getElementById("premiumModal").classList.add("hidden")}
 function setPremiumPlan(plan){
     selectedPremiumPlan=plan;
     const monthlyBtn=document.getElementById("planMonthlyBtn");
@@ -1023,13 +1037,11 @@ function setPremiumPlan(plan){
     const priceEl=document.getElementById("premiumSelectedPrice");
     const durEl=document.getElementById("premiumSelectedDuration");
     if(plan==="monthly"){
-        monthlyBtn.classList.add("active");
-        yearlyBtn.classList.remove("active");
+        monthlyBtn.classList.add("active");yearlyBtn.classList.remove("active");
         priceEl.innerText="₹"+flag("premium_price_monthly");
         durEl.innerHTML=STATE.lang==="hi"?"प्रति महीना":"per month";
     }else{
-        monthlyBtn.classList.remove("active");
-        yearlyBtn.classList.add("active");
+        monthlyBtn.classList.remove("active");yearlyBtn.classList.add("active");
         priceEl.innerText="₹"+flag("premium_price_yearly");
         durEl.innerHTML=STATE.lang==="hi"?"प्रति साल (60% बचत)":"per year (save 60%)";
     }
@@ -1037,27 +1049,16 @@ function setPremiumPlan(plan){
 async function requestPremium(){
     if(!STATE.user)return;
     const price=selectedPremiumPlan==="monthly"?flag("premium_price_monthly"):flag("premium_price_yearly");
-    const admin=(flag("premium_admin_phone")||GLOBAL_CONFIG.ADMIN_PHONE).replace("+91","").replace(/\D/g,"");
-    const msg=encodeURIComponent(
-        "🙏 Premium Request\n"+
-        "Name: "+(STATE.user.name||"")+"\n"+
-        "Phone: "+(STATE.user.phone||"")+"\n"+
-        "Plan: "+selectedPremiumPlan+"\n"+
-        "Amount: ₹"+price+"\n"+
-        "Payment screenshot attached."
-    );
-    window.location.href="https://wa.me/91"+admin+"?text="+msg;
+    const admin=(flag("premium_admin_phone")||GLOBAL_CONFIG.ADMIN_PHONE).replace(/\D/g,"");
+    const msg=encodeURIComponent("🙏 Premium Request\nName: "+(STATE.user.name||"")+"\nPhone: "+(STATE.user.phone||"")+"\nPlan: "+selectedPremiumPlan+"\nAmount: ₹"+price+"\nPayment screenshot attached.");
+    window.location.href="https://wa.me/"+admin+"?text="+msg;
     closePremiumModal();
     showToast(STATE.lang==="hi"?"WhatsApp खुल रहा है...":"Opening WhatsApp...","info");
 }
 function checkPremiumStatus(){
     if(!STATE.user||!STATE.user.isPremium)return false;
     if(!STATE.user.premiumUntil)return false;
-    if(STATE.user.premiumUntil<Date.now()){
-        STATE.user.isPremium=false;
-        AUTH.set(STATE.user);
-        return false;
-    }
+    if(STATE.user.premiumUntil<Date.now()){STATE.user.isPremium=false;AUTH.set(STATE.user);return false}
     return true;
 }
 async function checkUserCountForPremium(){
@@ -1077,20 +1078,25 @@ async function adminActivatePremium(phone,months){
     try{
         const fs=await waitForFS(3000);
         if(!fs)return;
-        const normalized=phone.startsWith("+")?phone:"+"+phone.replace(/\D/g,"");
-        const user=await fs.getUserByPhone(normalized);
+        const digits=phone.replace(/\D/g,"");
+        const normalized="+"+digits;
+        console.log("🔍 Searching for:",normalized);
+        let user=await fs.getUserByPhone(normalized);
         if(!user){
-            showToast("User not found: "+normalized,"error");
+            console.log("🔄 Trying without +:",digits);
+            user=await fs.getUserByPhone(digits);
+        }
+        if(!user){
+            showToast("❌ User not found: "+normalized,"error");
+            console.log("❌ User not found for:",normalized,"or",digits);
             return;
         }
+        console.log("✅ User found:",user);
         const until=Date.now()+(months*30*86400000);
         await fs.updateUser(user.id,{isPremium:true,premiumUntil:until,premiumPlan:months>=12?"yearly":"monthly",premiumActivatedAt:Date.now()});
         showToast("✅ Premium activated for "+normalized,"success");
         await renderAdminContent();
-    }catch(e){
-        console.warn(e);
-        showToast("Failed","error");
-    }
+    }catch(e){console.warn(e);showToast("Failed: "+e.message,"error")}
 }
 async function savePremiumSettings(){
     const upi=document.getElementById("adminUpiInput").value.trim();
@@ -1104,10 +1110,29 @@ async function savePremiumSettings(){
         if(fs&&fs.saveSettings)await fs.saveSettings(STATE.currentFlags);
         showToast("✅ Settings saved","success");
         await renderAdminContent();
-    }catch(e){
-        console.warn(e);
-        showToast("Failed","error");
-    }
+    }catch(e){console.warn(e);showToast("Failed","error")}
+}
+function renderGoldCard(){
+    const wrap=document.getElementById("goldCardWrap");
+    if(!wrap)return;
+    const isPremium=checkPremiumStatus();
+    if(!isPremium){wrap.style.display="none";return}
+    wrap.style.display="block";
+    const userName=STATE.user.name||"User";
+    const userPhone=STATE.user.phone||"";
+    document.getElementById("gcUserName").innerText=userName;
+    document.getElementById("gcUserPhone").innerText=userPhone;
+    const last4=userPhone.replace(/\D/g,"").slice(-4)||"2025";
+    document.getElementById("gcCardNo").innerHTML=`● ● ● ● &nbsp;● ● ● ● &nbsp;● ● ● ● &nbsp;${last4}`;
+    const until=STATE.user.premiumUntil||Date.now();
+    const d=new Date(until);
+    const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+    const expiryStr=months[d.getMonth()]+" "+d.getFullYear();
+    document.getElementById("gcExpiry").innerText=expiryStr;
+    const plan=STATE.user.premiumPlan||"monthly";
+    document.getElementById("gcPlan").innerText=plan.toUpperCase();
+    const daysLeft=Math.max(0,Math.ceil((until-Date.now())/86400000));
+    document.getElementById("gcDaysLeft").innerText=daysLeft;
 }
 /* ===== END PREMIUM SYSTEM ===== */
 
@@ -1129,25 +1154,14 @@ document.addEventListener("click",e=>{
   reportReason=opt.dataset.r;
   document.getElementById("reportSubmitBtn").disabled=false;
 });
-function closeReportModal(){
-  document.getElementById("reportModal").classList.add("hidden");
-  reportTarget=null;reportReason="";
-}
+function closeReportModal(){document.getElementById("reportModal").classList.add("hidden");reportTarget=null;reportReason=""}
 async function submitReport(){
   if(!reportTarget||!reportReason)return;
   const shopId=reportTarget;
   document.getElementById("reportModal").classList.add("hidden");
   try{
     const fs=await waitForFS(3000);
-    if(fs&&fs.addReport){
-      await fs.addReport({
-        shopId,
-        reason:reportReason,
-        reportedAt:Date.now(),
-        byPhone:STATE.user?STATE.user.phone:"guest",
-        byName:STATE.user?STATE.user.name:"Guest"
-      });
-    }
+    if(fs&&fs.addReport){await fs.addReport({shopId,reason:reportReason,reportedAt:Date.now(),byPhone:STATE.user?STATE.user.phone:"guest",byName:STATE.user?STATE.user.name:"Guest"})}
     localStorage.setItem("ac_reported_"+shopId,"1");
     showToast(t("reported"),"success");
   }catch(e){console.warn(e);showToast("Failed","error")}
@@ -1175,9 +1189,9 @@ function closeStory(){clearTimeout(STATE.storyTimer);const v=document.getElement
 function openAiModal(){document.getElementById("aiModal").classList.remove("hidden");window.history.pushState({modal:"ai"},"","#aiModal")}
 function closeAiModal(){document.getElementById("aiModal").classList.add("hidden");if(window.location.hash==="#aiModal")window.history.back()}
 function closeModals(e){if(e.target.id==="aiModal"||e.target.classList.contains("sheet-close")||e.target.id==="addStoryModal"){["aiModal","addStoryModal"].forEach(id=>{const el=document.getElementById(id);if(!el.classList.contains("hidden")){el.classList.add("hidden");if(window.location.hash==="#"+id)window.history.back()}})}}
-function initAiOptions(){const qs=[{k:"why_built",hi:"🎯 यह ऐप क्यों बनाया?",en:"🎯 Why built?",ahi:"इलाके की दुकानें, सेवाएं और रोज़गार एक जगह लाने के लिए।",aen:"To bring local shops together."},{k:"add",hi:"➕ दुकान कैसे जोड़ें?",en:"➕ How to add?",ahi:"'➕ जोड़ें' दबाएँ। डिटेल भरें, पिन लगाएँ, सेव करें। Admin approve करेगा तो live होगा।",aen:"Tap Add. Fill, pin, save. Admin approves."},{k:"rating",hi:"⭐ रेटिंग कैसे दें?",en:"⭐ How to rate?",ahi:"Shop पर टैप करें → 5 सितारे चुनें → कमेंट लिखें → Submit।",aen:"Tap shop → pick stars → comment → submit."},{k:"fav",hi:"❤️ फेवरेट?",en:"❤️ Favourite?",ahi:"Shop card pe 🤍 दबाएँ। होम पर दिखेगा।",aen:"Tap 🤍 on shop card. Shows on home."},{k:"report",hi:"⚠️ रिपोर्ट?",en:"⚠️ Report?",ahi:"Shop pe ⚠️ दबाएँ। Login ज़रूरी। Admin जाँच करेगा।",aen:"Tap ⚠️. Login required. Admin reviews."},{k:"otp",hi:"🔐 OTP कब?",en:"🔐 OTP when?",ahi:"OTP सुविधा तैयार है, लेकिन payment की वजह से अभी बंद है। जल्द शुरू होगा।",aen:"OTP is ready but disabled (requires payment). Coming soon."}];document.getElementById("aiOpts").innerHTML=qs.map(q=>`<button class="ai-btn" onclick="askAI('${q.k}')">${STATE.lang==="hi"?q.hi:q.en}</button>`).join("");document.getElementById("aiOpts").dataset.qs=JSON.stringify(qs)}
+function initAiOptions(){const qs=[{k:"why_built",hi:"🎯 यह ऐप क्यों बनाया?",en:"🎯 Why built?",ahi:"इलाके की दुकानें, सेवाएं और रोज़गार एक जगह लाने के लिए।",aen:"To bring local shops together."},{k:"add",hi:"➕ दुकान कैसे जोड़ें?",en:"➕ How to add?",ahi:"'➕ जोड़ें' दबाएँ। डिटेल भरें, पिन लगाएँ, सेव करें। Admin approve करेगा तो live होगा।",aen:"Tap Add. Fill, pin, save. Admin approves."},{k:"rating",hi:"⭐ रेटिंग कैसे दें?",en:"⭐ How to rate?",ahi:"Shop पर टैप करें → 5 सितारे चुनें → कमेंट लिखें → Submit।",aen:"Tap shop → pick stars → comment → submit."},{k:"fav",hi:"❤️ फेवरेट?",en:"❤️ Favourite?",ahi:"Shop card pe 🤍 दबाएँ। होम पर दिखेगा।",aen:"Tap 🤍 on shop card. Shows on home."},{k:"report",hi:"⚠️ रिपोर्ट?",en:"⚠️ Report?",ahi:"Shop pe ⚠️ दबाएँ। Login ज़रूरी। Admin जाँच करेगा।",aen:"Tap ⚠️. Login required. Admin reviews."},{k:"premium",hi:"⭐ Premium क्या है?",en:"⭐ What is Premium?",ahi:"Premium में unlimited shops, featured listing, verified badge aur gold card milta hai. ₹99/month.",aen:"Premium gives unlimited shops, featured listing, verified badge and gold card. ₹99/month."},{k:"otp",hi:"🔐 OTP कब?",en:"🔐 OTP when?",ahi:"OTP सुविधा तैयार है, लेकिन payment की वजह से अभी बंद है। जल्द शुरू होगा।",aen:"OTP is ready but disabled (requires payment). Coming soon."}];document.getElementById("aiOpts").innerHTML=qs.map(q=>`<button class="ai-btn" onclick="askAI('${q.k}')">${STATE.lang==="hi"?q.hi:q.en}</button>`).join("");document.getElementById("aiOpts").dataset.qs=JSON.stringify(qs)}
 function askAI(key){const qs=JSON.parse(document.getElementById("aiOpts").dataset.qs||"[]");const q=qs.find(x=>x.k===key);if(!q)return;const chat=document.getElementById("aiChat");chat.innerHTML+=`<div class="msg-b m-user">${Utils.esc(STATE.lang==="hi"?q.hi:q.en)}</div>`;chat.scrollTop=chat.scrollHeight;setTimeout(()=>{chat.innerHTML+=`<div class="msg-b m-ai">${Utils.esc(STATE.lang==="hi"?q.ahi:q.aen)}</div>`;chat.scrollTop=chat.scrollHeight},400)}
-function openPrefsModal(){document.getElementById("prefsModal").classList.remove("hidden")}
+function openPrefsModal(){renderGoldCard();document.getElementById("prefsModal").classList.remove("hidden")}
 function closePrefs(){document.getElementById("prefsModal").classList.add("hidden")}
 function shareApp(){if(!flag("enable_share"))return;const url=location.origin+location.pathname;const text=STATE.lang==="hi"?"'अपना क्षेत्र' ऐप पर सभी दुकानें और सेवाएँ देखें: ":"Find local shops on 'My Local Area': ";if(navigator.share){navigator.share({title:STATE.lang==="hi"?"अपना क्षेत्र":"My Local Area",text:text+url}).catch(()=>{window.location.href="whatsapp://send?text="+encodeURIComponent(text+url)})}else{window.location.href="whatsapp://send?text="+encodeURIComponent(text+url)}}
 function switchTab(tabId,updateHash=true){if((tabId==="addShop"||tabId==="profile")&&!STATE.user)tabId="auth";STATE.activeTab=tabId;localStorage.setItem("ac_current_tab",tabId);if(updateHash)window.history.pushState(null,null,"#"+tabId);if(tabId==="profile"){updateProfileUI();if(AUTH.isAdmin(STATE.user))refreshAdminData()}document.querySelectorAll("main > section").forEach(sec=>sec.classList.add("hidden"));const target=document.getElementById(tabId);if(target)target.classList.remove("hidden");document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));const navId=tabId==="onlineTab"?"nav-onlineTab":("nav-"+tabId);const navBtn=document.getElementById(navId);if(navBtn)navBtn.classList.add("active");document.getElementById("backBtn").style.display=(tabId==="home")?"none":"block";if(tabId==="bazaar")renderShops();else if(tabId==="onlineTab")renderOnlineShops();else if(tabId==="home"){renderHomePreviews();renderMyAreaMap()}window.scrollTo(0,0)}
@@ -1244,4 +1258,4 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 </body>
-       </html>
+   </html>
