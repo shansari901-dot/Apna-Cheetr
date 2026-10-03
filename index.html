@@ -245,12 +245,12 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 .report-cancel-btn{background:var(--primary-light);color:var(--text-dark);border:1px solid var(--border)!important}
 .report-submit-btn{background:#ef4444;color:#fff}
 .report-submit-btn:disabled{opacity:.4}
-.premium-gold-card{background:linear-gradient(135deg,#0a1428 0%,#0d1b35 30%,#132845 60%,#0d1b35 100%);border-radius:16px;padding:18px 20px;margin-bottom:16px;position:relative;overflow:hidden;border:1.5px solid rgba(212,175,55,.5);box-shadow:0 0 20px rgba(212,175,55,.15),0 8px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(212,175,55,.2);aspect-ratio:1.586;max-height:230px}
+.premium-gold-card{background:linear-gradient(135deg,#0a1428 0%,#0d1b35 30%,#132845 60%,#0d1b35 100%);border-radius:16px;padding:18px 20px;margin-bottom:16px;position:relative;overflow:hidden;border:1.5px solid rgba(212,175,55,.5);box-shadow:0 0 20px rgba(212,175,55,.15),0 8px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(212,175,55,.2);display:flex;flex-direction:column;min-height:230px}
 .premium-gold-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent 30%,rgba(212,175,55,.25) 50%,transparent 70%);animation:goldShine 4s infinite;pointer-events:none}
 .premium-gold-card::after{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(212,175,55,.15),transparent 70%);animation:goldPulse 3s ease-in-out infinite;pointer-events:none}
 @keyframes goldShine{0%{left:-100%}100%{left:100%}}
 @keyframes goldPulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
-.premium-gold-card .gc-inner{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.premium-gold-card .gc-inner{position:relative;z-index:3;flex:1;display:flex;flex-direction:column;justify-content:space-between}
 .gc-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:14px}
 .premium-gold-card .gc-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#d4af37,#b8860b);color:#0a1428;padding:4px 12px 4px 8px;border-radius:50px;font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;box-shadow:0 2px 8px rgba(212,175,55,.4)}
 .premium-gold-card .gc-badge::before{content:'👑';font-size:11px}
@@ -269,7 +269,7 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 .premium-gold-card .gc-info-block .gc-icon{font-size:12px;margin-right:4px;filter:drop-shadow(0 1px 2px rgba(212,175,55,.5))}
 .premium-gold-card .gc-info-label{font-size:8px;font-weight:900;color:#d4af37;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px;display:flex;align-items:center}
 .premium-gold-card .gc-info-value{font-size:13px;font-weight:900;color:#ffffff;letter-spacing:.5px;text-shadow:0 1px 3px rgba(0,0,0,.5)}
-.premium-gold-card .gc-days-pill{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(10,20,40,.85);border:1px solid rgba(212,175,55,.5);color:#f4e5a1;padding:5px 16px;border-radius:50px;font-size:10px;font-weight:800;letter-spacing:.5px;display:flex;align-items:center;gap:6px;box-shadow:0 0 12px rgba(212,175,55,.3);z-index:4;animation:pillGlow 2s ease-in-out infinite}
+.premium-gold-card .gc-days-pill{position:relative;margin:10px auto 0;left:auto;transform:none;background:rgba(10,20,40,.85);border:1px solid rgba(212,175,55,.5);color:#f4e5a1;padding:5px 16px;border-radius:50px;font-size:10px;font-weight:800;letter-spacing:.5px;display:flex;align-items:center;gap:6px;box-shadow:0 0 12px rgba(212,175,55,.3);z-index:4;animation:pillGlow 2s ease-in-out infinite}
 @keyframes pillGlow{0%,100%{box-shadow:0 0 12px rgba(212,175,55,.3)}50%{box-shadow:0 0 18px rgba(212,175,55,.6)}}
 .premium-gold-card .gc-days-pill .gc-days-num{font-size:14px;font-weight:900;color:#ffffff}
 .premium-gold-card .gc-corner-deco{position:absolute;top:0;right:0;width:80px;height:80px;background:linear-gradient(135deg,transparent 50%,rgba(212,175,55,.15) 50%);pointer-events:none;z-index:1}
@@ -510,7 +510,7 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
                             </div>
                             <div class="gc-divider"></div>
                         </div>
-                        <div class="gc-bottom" style="padding-bottom:28px;">
+                        <div class="gc-bottom">
                             <div class="gc-info-block">
                                 <div class="gc-info-label"><span class="gc-icon">📅</span>Valid Till</div>
                                 <div class="gc-info-value" id="gcExpiry">--/--</div>
@@ -913,13 +913,11 @@ function buildShopCard(shop,isAdmin,isOnline=false){
         :(shop.isOpen
             ?`<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(16,185,129,.12);color:#34d399;padding:2px 7px;border-radius:6px;font-size:10px;font-weight:800;">🟢 ${STATE.lang==="hi"?"खुला":"Open"}</span>`
             :`<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(239,68,68,.12);color:#f87171;padding:2px 7px;border-radius:6px;font-size:10px;font-weight:800;">🔴 ${STATE.lang==="hi"?"बंद":"Closed"}</span>`);
-    const waBtn=shop.phone?`<button onclick="event.stopPropagation();window.open('https://wa.me/${shop.phone.replace(/\D/g,'')}','_blank')" style="position:absolute;bottom:8px;right:8px;background:#25D366;color:#fff;border:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;box-shadow:0 2px 8px rgba(37,211,102,.4);z-index:6;">💬</button>`:"";
     const onclick=`openShopModal('${Utils.escAttr(String(shop.id))}')`;
     return`<div class="shop-card ${shop.isPremium?'premium-card':''}" onclick="${onclick}">
         ${favBtn}
-        ${waBtn}
         <div class="shop-img-box">${Utils.esc(shop.icon||"🏬")}</div>
-        <div class="shop-info" style="padding-right:36px;">
+        <div class="shop-info" style="padding-right:30px;">
             <h3>${Utils.esc(shop.name)}${verifiedMark}${premiumTag}</h3>
             <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
                 <span class="cat-lbl">${Utils.esc(shop.catHi)}</span>
@@ -1097,7 +1095,7 @@ function closeStory(){clearTimeout(STATE.storyTimer);const v=document.getElement
 function openAiModal(){document.getElementById("aiModal").classList.remove("hidden");window.history.pushState({modal:"ai"},"","#aiModal")}
 function closeAiModal(){document.getElementById("aiModal").classList.add("hidden");if(window.location.hash==="#aiModal")window.history.back()}
 function closeModals(e){if(e.target.id==="aiModal"||e.target.classList.contains("sheet-close")||e.target.id==="addStoryModal"){["aiModal","addStoryModal"].forEach(id=>{const el=document.getElementById(id);if(!el.classList.contains("hidden")){el.classList.add("hidden");if(window.location.hash==="#"+id)window.history.back()}})}}
-function initAiOptions(){const qs=[{k:"why_built",hi:"🎯 यह ऐप क्यों बनाया?",en:"🎯 Why built?",ahi:"इलाके की दुकानें, सेवाएं और रोज़गार एक जगह लाने के लिए।",aen:"To bring local shops together."},{k:"add",hi:"➕ दुकान कैसे जोड़ें?",en:"➕ How to add?",ahi:"'➕ जोड़ें' दबाएँ। डिटेल भरें, पिन लगाएँ, सेव करें।",aen:"Tap Add. Fill, pin, save."},{k:"rating",hi:"⭐ रेटिंग कैसे दें?",en:"⭐ How to rate?",ahi:"Shop पर टैप करें → 5 सितारे चुनें → कमेंट → Submit।",aen:"Tap shop → pick stars → comment → submit."},{k:"fav",hi:"❤️ फेवरेट?",en:"❤️ Favourite?",ahi:"Shop card pe 🤍 दबाएँ।",aen:"Tap 🤍 on shop card."},{k:"report",hi:"⚠️ रिपोर्ट?",en:"⚠️ Report?",ahi:"Shop pe ⚠️ दबाएँ। Login ज़रूरी।",aen:"Tap ⚠️. Login required."},{k:"premium",hi:"⭐ Premium क्या है?",en:"⭐ What is Premium?",ahi:"Premium में 50 KM तक दुकानें, unlimited shops, verified badge, gold card milta hai.",aen:"Premium gives 50 KM radius, unlimited shops, verified badge and gold card."}];document.getElementById("aiOpts").innerHTML=qs.map(q=>`<button class="ai-btn" onclick="askAI('${q.k}')">${STATE.lang==="hi"?q.hi:q.en}</button>`).join("");document.getElementById("aiOpts").dataset.qs=JSON.stringify(qs)}
+function initAiOptions(){const qs=[{k:"why_built",hi:"🎯 यह ऐप क्यों बनाया?",en:"🎯 Why built?",ahi:"इलाके की दुकानें, सेवाएं और रोज़गार एक जगह लाने के लिए।",aen:"To bring local shops together."},{k:"add",hi:"➕ दुकान कैसे जोड़ें?",en:"➕ How to add?",ahi:"'➕ जोड़ें' दबाएँ। डिटेल भरें, पिन लगाएँ, सेव करें।",aen:"Tap Add. Fill, pin, save."},{k:"rating",hi:"⭐ रेटिंग कैसे दें?",en:"⭐ How to rate?",ahi:"Shop पर टैप करें → 5 सितारे चुनें → कमेंट → Submit।",aen:"Tap shop → pick stars → comment → submit."},{k:"fav",hi:"❤️ फेवरेट?",en:"❤️ Favourite?",ahi:"Shop card pe 🤍 दबाएँ।",aen:"Tap 🤍 on shop card."},{k:"report",hi:"⚠️ रिपोर्ट?",en:"⚠️ Report?",ahi:"Shop pe ⚠️ दबाएँ। Login ज़रूरी।",aen:"Tap ⚠️. Login required."},{k:"premium",hi:"⭐ Premium क्या है?",en:"⭐ What is Premium?",ahi:"Premium में 50 KM तक दुकानें, unlimited shops, verified badge, gold card milta hai।",aen:"Premium gives 50 KM radius, unlimited shops, verified badge and gold card."}];document.getElementById("aiOpts").innerHTML=qs.map(q=>`<button class="ai-btn" onclick="askAI('${q.k}')">${STATE.lang==="hi"?q.hi:q.en}</button>`).join("");document.getElementById("aiOpts").dataset.qs=JSON.stringify(qs)}
 function askAI(key){const qs=JSON.parse(document.getElementById("aiOpts").dataset.qs||"[]");const q=qs.find(x=>x.k===key);if(!q)return;const chat=document.getElementById("aiChat");chat.innerHTML+=`<div class="msg-b m-user">${Utils.esc(STATE.lang==="hi"?q.hi:q.en)}</div>`;chat.scrollTop=chat.scrollHeight;setTimeout(()=>{chat.innerHTML+=`<div class="msg-b m-ai">${Utils.esc(STATE.lang==="hi"?q.ahi:q.aen)}</div>`;chat.scrollTop=chat.scrollHeight},400)}
 function openPrefsModal(){renderGoldCard();renderReferralCard();document.getElementById("prefsModal").classList.remove("hidden")}
 function closePrefs(){document.getElementById("prefsModal").classList.add("hidden")}
