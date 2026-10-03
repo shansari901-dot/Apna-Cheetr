@@ -12,33 +12,40 @@
 <link rel="apple-touch-icon" href="icon-512.png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-:root{--primary:#0f1729;--primary-light:#1a2332;--header-grad:linear-gradient(135deg,#1e3a8a 0%,#0f1729 70%);--accent:#10b981;--accent-dark:#059669;--bg-color:#0b1120;--card-bg:#151e2f;--text-dark:#f8fafc;--text-muted:#94a3b8;--border:#1e293b;--radius:14px;--danger:#ef4444;--warn:#f59e0b;--hero-c1:#064e3b;--hero-c2:#0a3d2e;--hero-c3:#052e24;--hero-text:#ffffff;--hero-text-sub:rgba(255,255,255,.85);--hero-btn-bg:#ffffff;--hero-btn-text:#047857;--hero-glow:rgba(16,185,129,.25);--hero-border:rgba(74,222,128,.2);--hero-orb:rgba(74,222,128,.4);--hero-icon-opacity:.18}
-body.theme-light{--primary:#fff;--primary-light:#f1f5f9;--header-grad:linear-gradient(135deg,#1e3a8a 0%,#0f1729 100%);--bg-color:#f1f5f9;--card-bg:#fff;--text-dark:#0f172a;--text-muted:#64748b;--border:#e2e8f0;--hero-c1:#d1fae5;--hero-c2:#86efac;--hero-c3:#34d399;--hero-text:#064e3b;--hero-text-sub:rgba(6,78,59,.85);--hero-btn-bg:#ffffff;--hero-btn-text:#059669;--hero-glow:rgba(16,185,129,.2);--hero-border:rgba(16,185,129,.25);--hero-orb:rgba(255,255,255,.5);--hero-icon-opacity:.15}
+:root{--primary:#0f1729;--primary-light:#1a2332;--accent:#10b981;--accent-dark:#059669;--bg-color:#0b1120;--card-bg:#151e2f;--text-dark:#f8fafc;--text-muted:#94a3b8;--border:#1e293b;--radius:14px;--danger:#ef4444;--warn:#f59e0b;--header-grad:linear-gradient(135deg,#0a3d2e 0%,#052e24 100%);--hdr-text:#ffffff;--hdr-sub:rgba(255,255,255,.7);--hdr-icon-bg:rgba(255,255,255,.12);--hdr-icon-border:rgba(255,255,255,.12);--hdr-icon-color:#ffffff;--pill-bg:rgba(255,255,255,.14);--pill-border:rgba(255,255,255,.12);--pill-text:#ffffff;--hdr-search-bg:rgba(255,255,255,.95);--hdr-search-text:#0f172a;--hdr-search-placeholder:#64748b;--hero-c1:#064e3b;--hero-c2:#0a3d2e;--hero-c3:#052e24;--hero-text:#ffffff;--hero-text-sub:rgba(255,255,255,.85);--hero-btn-bg:#ffffff;--hero-btn-text:#047857;--hero-glow:rgba(16,185,129,.25);--hero-border:rgba(74,222,128,.2);--hero-orb:rgba(74,222,128,.4);--hero-icon-opacity:.18}
+body.theme-light{--primary:#fff;--primary-light:#f1f5f9;--bg-color:#f1f5f9;--card-bg:#fff;--text-dark:#0f172a;--text-muted:#64748b;--border:#e2e8f0;--header-grad:linear-gradient(135deg,#ffffff 0%,#ecfdf5 50%,#d1fae5 100%);--hdr-text:#064e3b;--hdr-sub:rgba(6,78,59,.7);--hdr-icon-bg:rgba(6,78,59,.06);--hdr-icon-border:rgba(6,78,59,.1);--hdr-icon-color:#064e3b;--pill-bg:rgba(6,78,59,.06);--pill-border:rgba(6,78,59,.1);--pill-text:#064e3b;--hdr-search-bg:#ffffff;--hdr-search-text:#0f172a;--hdr-search-placeholder:#64748b;--hero-c1:#d1fae5;--hero-c2:#86efac;--hero-c3:#34d399;--hero-text:#064e3b;--hero-text-sub:rgba(6,78,59,.85);--hero-btn-bg:#ffffff;--hero-btn-text:#059669;--hero-glow:rgba(16,185,129,.2);--hero-border:rgba(16,185,129,.25);--hero-orb:rgba(255,255,255,.5);--hero-icon-opacity:.15}
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
 body.lang-hi .en{display:none!important}body.lang-en .hi{display:none!important}
 body{background:var(--bg-color);color:var(--text-dark);min-height:100vh;padding-bottom:90px;overflow-x:hidden;transition:background .3s,color .3s}
 input,textarea,select{color:var(--text-dark)!important}
-.app-header{background:var(--header-grad);padding:16px 16px 20px;position:sticky;top:0;z-index:50;color:#fff}
+.app-header{background:var(--header-grad);padding:16px 16px 20px;position:sticky;top:0;z-index:50;color:var(--hdr-text);transition:background .4s ease,color .4s ease;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+body.theme-light .app-header{box-shadow:0 4px 16px rgba(6,78,59,.06);border-bottom:1px solid rgba(6,78,59,.06)}
 .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .header-left{display:flex;align-items:center;gap:10px}
-.back-arrow{font-size:22px;color:#fff;cursor:pointer;padding:4px 10px;border-radius:50%;background:rgba(255,255,255,.1);display:none;border:none}
+.back-arrow{font-size:22px;color:var(--hdr-text);cursor:pointer;padding:4px 10px;border-radius:50%;background:var(--hdr-icon-bg);display:none;border:1px solid var(--hdr-icon-border);transition:all .3s ease}
 .brand-area{display:flex;align-items:center;gap:10px}
-.brand-icon{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden}
+.brand-icon{width:42px;height:42px;border-radius:13px;background:var(--hdr-icon-bg);border:1px solid var(--hdr-icon-border);display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;transition:all .3s ease;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .brand-icon img{width:100%;height:100%;object-fit:cover}
-.brand-title{font-size:17px;font-weight:800;color:#fff}
-.brand-sub{font-size:10px;font-weight:600;color:rgba(255,255,255,.7)}
+.brand-title{font-size:17px;font-weight:800;color:var(--hdr-text);transition:color .4s ease;letter-spacing:.2px}
+.brand-sub{font-size:10px;font-weight:600;color:var(--hdr-sub);transition:color .4s ease}
 .header-actions{display:flex;gap:8px}
-.hdr-icon{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer}
+.hdr-icon{width:36px;height:36px;border-radius:50%;background:var(--hdr-icon-bg);border:1px solid var(--hdr-icon-border);color:var(--hdr-icon-color);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:all .25s ease}
+.hdr-icon:hover{transform:scale(1.06)}
+.hdr-icon:active{transform:scale(.95)}
 .lang-icon{font-size:11px;font-weight:900;color:#4ade80}
-.loc-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);padding:8px 14px;border-radius:50px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;margin-bottom:14px;border:1px solid rgba(255,255,255,.1)}
+body.theme-light .lang-icon{color:#059669}
+.loc-pill{display:inline-flex;align-items:center;gap:6px;background:var(--pill-bg);padding:8px 14px;border-radius:50px;font-size:12px;font-weight:700;color:var(--pill-text);cursor:pointer;margin-bottom:14px;border:1px solid var(--pill-border);transition:all .3s ease}
+.loc-pill:active{transform:scale(.98)}
 .loc-pill .arr{font-size:9px;opacity:.7}
 .loc-dot{width:7px;height:7px;border-radius:50%;background:#94a3b8;display:inline-block}
 .loc-dot.active{background:#4ade80;box-shadow:0 0 10px #4ade80}
 .loc-dot.pulse{animation:pulseLive 2s infinite}
-.header-search{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.95);border-radius:12px;padding:12px 16px;cursor:pointer}
-.header-search .s-icon{font-size:16px;color:#64748b}
-.header-search input{border:none;outline:none;width:100%;font-size:13px;font-weight:600;background:transparent;color:#0f172a!important}
-.header-search .s-btn{background:var(--accent);color:#fff;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:700}
+.header-search{display:flex;align-items:center;gap:10px;background:var(--hdr-search-bg);border-radius:12px;padding:12px 16px;cursor:pointer;transition:all .3s ease;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+body.theme-light .header-search{border:1px solid rgba(6,78,59,.08);box-shadow:0 2px 12px rgba(6,78,59,.06)}
+.header-search .s-icon{font-size:16px;color:var(--hdr-search-placeholder)}
+.header-search input{border:none;outline:none;width:100%;font-size:13px;font-weight:600;background:transparent;color:var(--hdr-search-text)!important}
+.header-search input::placeholder{color:var(--hdr-search-placeholder)}
+.header-search .s-btn{background:var(--accent);color:#fff;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:700;box-shadow:0 2px 6px rgba(16,185,129,.3)}
 main{max-width:480px;margin:0 auto;padding:16px}
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;margin-top:4px}
 .section-title{font-size:16px;font-weight:800;color:var(--text-dark);display:flex;align-items:center;gap:6px}
@@ -848,7 +855,7 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.2.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.3.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह नंबर पहले से रजिस्टर है!",invalidPhone:"सही नंबर डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Number already registered!",invalidPhone:"Enter valid phone.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -1098,4 +1105,4 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 </body>
-    </html>
+   </html>
