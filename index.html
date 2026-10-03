@@ -12,8 +12,8 @@
 <link rel="apple-touch-icon" href="icon-512.png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-:root{--primary:#0f1729;--primary-light:#1a2332;--header-grad:linear-gradient(135deg,#1e3a8a 0%,#0f1729 70%);--accent:#10b981;--accent-dark:#059669;--bg-color:#0b1120;--card-bg:#151e2f;--text-dark:#f8fafc;--text-muted:#94a3b8;--border:#1e293b;--radius:14px;--danger:#ef4444;--warn:#f59e0b}
-body.theme-light{--primary:#fff;--primary-light:#f1f5f9;--header-grad:linear-gradient(135deg,#1e3a8a 0%,#0f1729 100%);--bg-color:#f1f5f9;--card-bg:#fff;--text-dark:#0f172a;--text-muted:#64748b;--border:#e2e8f0}
+:root{--primary:#0f1729;--primary-light:#1a2332;--header-grad:linear-gradient(135deg,#1e3a8a 0%,#0f1729 70%);--accent:#10b981;--accent-dark:#059669;--bg-color:#0b1120;--card-bg:#151e2f;--text-dark:#f8fafc;--text-muted:#94a3b8;--border:#1e293b;--radius:14px;--danger:#ef4444;--warn:#f59e0b;--hero-c1:#064e3b;--hero-c2:#0a3d2e;--hero-c3:#052e24;--hero-text:#ffffff;--hero-text-sub:rgba(255,255,255,.85);--hero-btn-bg:#ffffff;--hero-btn-text:#047857;--hero-glow:rgba(16,185,129,.25);--hero-border:rgba(74,222,128,.2);--hero-orb:rgba(74,222,128,.4);--hero-icon-opacity:.18}
+body.theme-light{--primary:#fff;--primary-light:#f1f5f9;--header-grad:linear-gradient(135deg,#1e3a8a 0%,#0f1729 100%);--bg-color:#f1f5f9;--card-bg:#fff;--text-dark:#0f172a;--text-muted:#64748b;--border:#e2e8f0;--hero-c1:#d1fae5;--hero-c2:#86efac;--hero-c3:#34d399;--hero-text:#064e3b;--hero-text-sub:rgba(6,78,59,.85);--hero-btn-bg:#ffffff;--hero-btn-text:#059669;--hero-glow:rgba(16,185,129,.2);--hero-border:rgba(16,185,129,.25);--hero-orb:rgba(255,255,255,.5);--hero-icon-opacity:.15}
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
 body.lang-hi .en{display:none!important}body.lang-en .hi{display:none!important}
 body{background:var(--bg-color);color:var(--text-dark);min-height:100vh;padding-bottom:90px;overflow-x:hidden;transition:background .3s,color .3s}
@@ -43,11 +43,14 @@ main{max-width:480px;margin:0 auto;padding:16px}
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;margin-top:4px}
 .section-title{font-size:16px;font-weight:800;color:var(--text-dark);display:flex;align-items:center;gap:6px}
 .section-link{font-size:11px;font-weight:700;color:var(--accent);cursor:pointer;background:none;border:none}
-.hero-banner{background:linear-gradient(135deg,#10b981 0%,#059669 100%);border-radius:16px;padding:14px 18px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(16,185,129,.22)}
-.hero-banner::before{content:'🏘️';position:absolute;right:-8px;bottom:-10px;font-size:80px;opacity:.15}
-.hero-banner h3{font-size:16px;font-weight:900;color:#fff;margin-bottom:4px;line-height:1.25;position:relative}
-.hero-banner p{font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:10px;position:relative}
-.hero-btn{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--accent-dark);padding:7px 14px;border-radius:50px;font-size:11px;font-weight:800;border:none;cursor:pointer;position:relative}
+.hero-banner{background:linear-gradient(135deg,var(--hero-c1) 0%,var(--hero-c2) 50%,var(--hero-c3) 100%);border-radius:18px;padding:18px 20px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:0 10px 28px var(--hero-glow),inset 0 1px 0 rgba(255,255,255,.15);border:1px solid var(--hero-border);transition:background .4s ease,box-shadow .4s ease,border-color .4s ease}
+.hero-banner::before{content:'🏘️';position:absolute;right:-10px;bottom:-15px;font-size:90px;opacity:var(--hero-icon-opacity);transition:opacity .4s ease;filter:drop-shadow(0 4px 12px rgba(0,0,0,.2));pointer-events:none}
+.hero-banner::after{content:'';position:absolute;top:-30%;right:-10%;width:180px;height:180px;background:radial-gradient(circle,var(--hero-orb) 0%,transparent 70%);border-radius:50%;animation:heroOrb 6s ease-in-out infinite;pointer-events:none}
+@keyframes heroOrb{0%,100%{transform:translate(0,0) scale(1);opacity:.7}50%{transform:translate(-20px,20px) scale(1.15);opacity:1}}
+.hero-banner h3{font-size:16px;font-weight:900;color:var(--hero-text);margin-bottom:4px;line-height:1.25;position:relative;z-index:2;text-shadow:0 1px 2px rgba(0,0,0,.1);transition:color .4s ease}
+.hero-banner p{font-size:11px;color:var(--hero-text-sub);font-weight:600;margin-bottom:12px;position:relative;z-index:2;transition:color .4s ease}
+.hero-btn{display:inline-flex;align-items:center;gap:6px;background:var(--hero-btn-bg);color:var(--hero-btn-text);padding:8px 16px;border-radius:50px;font-size:11px;font-weight:800;border:none;cursor:pointer;position:relative;z-index:2;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:transform .2s ease,background .4s ease,color .4s ease}
+.hero-btn:active{transform:scale(.96)}
 .my-area-card{background:var(--card-bg);border-radius:var(--radius);padding:14px;margin-bottom:16px;border:1px solid var(--border)}
 .my-area-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .my-area-title{font-size:14px;font-weight:800;color:var(--text-dark);display:flex;align-items:center;gap:6px}
@@ -235,138 +238,35 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 .report-cancel-btn{background:var(--primary-light);color:var(--text-dark);border:1px solid var(--border)!important}
 .report-submit-btn{background:#ef4444;color:#fff}
 .report-submit-btn:disabled{opacity:.4}
-
-/* ===== PREMIUM GOLD CARD — NAVY + GOLD WITH ANIMATIONS ===== */
-.premium-gold-card{
-    background:linear-gradient(135deg,#0a1428 0%,#0d1b35 30%,#132845 60%,#0d1b35 100%);
-    border-radius:16px;
-    padding:18px 20px;
-    margin-bottom:16px;
-    position:relative;
-    overflow:hidden;
-    border:1.5px solid rgba(212,175,55,.5);
-    box-shadow:0 0 20px rgba(212,175,55,.15),0 8px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(212,175,55,.2);
-    aspect-ratio:1.586;
-    max-height:230px;
-}
-.premium-gold-card::before{
-    content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-    background:linear-gradient(90deg,transparent 30%,rgba(212,175,55,.25) 50%,transparent 70%);
-    animation:goldShine 4s infinite;
-    pointer-events:none;
-}
-.premium-gold-card::after{
-    content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;
-    background:radial-gradient(circle,rgba(212,175,55,.15),transparent 70%);
-    animation:goldPulse 3s ease-in-out infinite;
-    pointer-events:none;
-}
+.premium-gold-card{background:linear-gradient(135deg,#0a1428 0%,#0d1b35 30%,#132845 60%,#0d1b35 100%);border-radius:16px;padding:18px 20px;margin-bottom:16px;position:relative;overflow:hidden;border:1.5px solid rgba(212,175,55,.5);box-shadow:0 0 20px rgba(212,175,55,.15),0 8px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(212,175,55,.2);aspect-ratio:1.586;max-height:230px}
+.premium-gold-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent 30%,rgba(212,175,55,.25) 50%,transparent 70%);animation:goldShine 4s infinite;pointer-events:none}
+.premium-gold-card::after{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(212,175,55,.15),transparent 70%);animation:goldPulse 3s ease-in-out infinite;pointer-events:none}
 @keyframes goldShine{0%{left:-100%}100%{left:100%}}
 @keyframes goldPulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
 .premium-gold-card .gc-inner{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:space-between}
 .gc-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:14px}
-.premium-gold-card .gc-badge{
-    display:inline-flex;align-items:center;gap:5px;
-    background:linear-gradient(135deg,#d4af37,#b8860b);
-    color:#0a1428;
-    padding:4px 12px 4px 8px;
-    border-radius:50px;
-    font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;
-    box-shadow:0 2px 8px rgba(212,175,55,.4);
-}
+.premium-gold-card .gc-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#d4af37,#b8860b);color:#0a1428;padding:4px 12px 4px 8px;border-radius:50px;font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;box-shadow:0 2px 8px rgba(212,175,55,.4)}
 .premium-gold-card .gc-badge::before{content:'👑';font-size:11px}
-.premium-gold-card .gc-chip{
-    width:32px;height:24px;
-    background:linear-gradient(135deg,#f4e5a1,#d4af37,#b8860b);
-    border-radius:5px;position:relative;
-    border:1px solid rgba(255,255,255,.4);
-    box-shadow:0 2px 6px rgba(0,0,0,.5);
-    margin-left:auto;
-    animation:chipFloat 2.5s ease-in-out infinite;
-}
+.premium-gold-card .gc-chip{width:32px;height:24px;background:linear-gradient(135deg,#f4e5a1,#d4af37,#b8860b);border-radius:5px;position:relative;border:1px solid rgba(255,255,255,.4);box-shadow:0 2px 6px rgba(0,0,0,.5);margin-left:auto;animation:chipFloat 2.5s ease-in-out infinite}
 @keyframes chipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
-.premium-gold-card .gc-chip::before{
-    content:'';position:absolute;top:5px;left:5px;right:5px;height:1.5px;
-    background:rgba(90,60,10,.5);
-    box-shadow:0 5px 0 rgba(90,60,10,.5),0 10px 0 rgba(90,60,10,.5);
-}
-.premium-gold-card .gc-chip::after{
-    content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-    background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.5) 50%,transparent 60%);
-    border-radius:5px;
-}
-.premium-gold-card .gc-name{
-    font-size:19px;font-weight:900;color:#ffffff;
-    letter-spacing:.3px;line-height:1.15;
-    margin-bottom:2px;
-    text-shadow:0 2px 8px rgba(212,175,55,.3);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.premium-gold-card .gc-phone{
-    font-size:12px;font-weight:700;color:#c9a961;
-    letter-spacing:.5px;margin-bottom:14px;
-}
-.premium-gold-card .gc-label{
-    font-size:8px;font-weight:900;color:#d4af37;
-    letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;
-}
-.premium-gold-card .gc-cardno{
-    font-size:13px;font-weight:700;color:#f4e5a1;
-    letter-spacing:3px;font-family:'Courier New',monospace;
-    margin-bottom:14px;
-    text-shadow:0 1px 3px rgba(0,0,0,.6);
-    display:flex;justify-content:space-between;align-items:center;
-}
+.premium-gold-card .gc-chip::before{content:'';position:absolute;top:5px;left:5px;right:5px;height:1.5px;background:rgba(90,60,10,.5);box-shadow:0 5px 0 rgba(90,60,10,.5),0 10px 0 rgba(90,60,10,.5)}
+.premium-gold-card .gc-chip::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.5) 50%,transparent 60%);border-radius:5px}
+.premium-gold-card .gc-name{font-size:19px;font-weight:900;color:#ffffff;letter-spacing:.3px;line-height:1.15;margin-bottom:2px;text-shadow:0 2px 8px rgba(212,175,55,.3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.premium-gold-card .gc-phone{font-size:12px;font-weight:700;color:#c9a961;letter-spacing:.5px;margin-bottom:14px}
+.premium-gold-card .gc-label{font-size:8px;font-weight:900;color:#d4af37;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+.premium-gold-card .gc-cardno{font-size:13px;font-weight:700;color:#f4e5a1;letter-spacing:3px;font-family:'Courier New',monospace;margin-bottom:14px;text-shadow:0 1px 3px rgba(0,0,0,.6);display:flex;justify-content:space-between;align-items:center}
 .premium-gold-card .gc-cardno .gc-last4{color:#d4af37;font-weight:900;font-size:15px;letter-spacing:2px}
-.premium-gold-card .gc-divider{
-    height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.6),transparent);
-    margin-bottom:12px;
-}
-.premium-gold-card .gc-bottom{
-    display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
-}
+.premium-gold-card .gc-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.6),transparent);margin-bottom:12px}
+.premium-gold-card .gc-bottom{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .premium-gold-card .gc-info-block{flex:1}
 .premium-gold-card .gc-info-block .gc-icon{font-size:12px;margin-right:4px;filter:drop-shadow(0 1px 2px rgba(212,175,55,.5))}
-.premium-gold-card .gc-info-label{
-    font-size:8px;font-weight:900;color:#d4af37;
-    letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px;display:flex;align-items:center;
-}
-.premium-gold-card .gc-info-value{
-    font-size:13px;font-weight:900;color:#ffffff;
-    letter-spacing:.5px;
-    text-shadow:0 1px 3px rgba(0,0,0,.5);
-}
-.premium-gold-card .gc-days-pill{
-    position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
-    background:rgba(10,20,40,.85);
-    border:1px solid rgba(212,175,55,.5);
-    color:#f4e5a1;
-    padding:5px 16px;border-radius:50px;
-    font-size:10px;font-weight:800;letter-spacing:.5px;
-    display:flex;align-items:center;gap:6px;
-    box-shadow:0 0 12px rgba(212,175,55,.3);
-    z-index:4;
-    animation:pillGlow 2s ease-in-out infinite;
-}
+.premium-gold-card .gc-info-label{font-size:8px;font-weight:900;color:#d4af37;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px;display:flex;align-items:center}
+.premium-gold-card .gc-info-value{font-size:13px;font-weight:900;color:#ffffff;letter-spacing:.5px;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.premium-gold-card .gc-days-pill{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(10,20,40,.85);border:1px solid rgba(212,175,55,.5);color:#f4e5a1;padding:5px 16px;border-radius:50px;font-size:10px;font-weight:800;letter-spacing:.5px;display:flex;align-items:center;gap:6px;box-shadow:0 0 12px rgba(212,175,55,.3);z-index:4;animation:pillGlow 2s ease-in-out infinite}
 @keyframes pillGlow{0%,100%{box-shadow:0 0 12px rgba(212,175,55,.3)}50%{box-shadow:0 0 18px rgba(212,175,55,.6)}}
-.premium-gold-card .gc-days-pill .gc-days-num{
-    font-size:14px;font-weight:900;color:#ffffff;
-}
-.premium-gold-card .gc-corner-deco{
-    position:absolute;top:0;right:0;
-    width:80px;height:80px;
-    background:linear-gradient(135deg,transparent 50%,rgba(212,175,55,.15) 50%);
-    pointer-events:none;
-    z-index:1;
-}
-.premium-gold-card .gc-corner-deco::before{
-    content:'';position:absolute;top:0;right:0;
-    width:0;height:0;
-    border-top:80px solid rgba(212,175,55,.08);
-    border-left:80px solid transparent;
-}
-/* ===== END PREMIUM GOLD CARD ===== */
-
+.premium-gold-card .gc-days-pill .gc-days-num{font-size:14px;font-weight:900;color:#ffffff}
+.premium-gold-card .gc-corner-deco{position:absolute;top:0;right:0;width:80px;height:80px;background:linear-gradient(135deg,transparent 50%,rgba(212,175,55,.15) 50%);pointer-events:none;z-index:1}
+.premium-gold-card .gc-corner-deco::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-top:80px solid rgba(212,175,55,.08);border-left:80px solid transparent}
 @media(max-width:360px){.brand-title{font-size:14px}}
 </style>
 </head>
@@ -948,7 +848,7 @@ input:checked+.slider:before{transform:translateX(22px);background-color:var(--a
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.1.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.2.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह नंबर पहले से रजिस्टर है!",invalidPhone:"सही नंबर डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Number already registered!",invalidPhone:"Enter valid phone.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -967,42 +867,13 @@ function t(key){return(I18N[STATE.lang]&&I18N[STATE.lang][key])||I18N.en[key]||k
 function flag(k){return STATE.currentFlags[k]!==undefined?STATE.currentFlags[k]:DEFAULT_FLAGS[k]}
 function showToast(msg,type="success"){const box=document.getElementById("toastBox");box.innerHTML="";const el=document.createElement("div");el.className="toast "+type;el.innerHTML=(type==="error"?"⚠️ ":type==="info"?"ℹ️ ":"✅ ")+Utils.esc(msg);box.appendChild(el);requestAnimationFrame(()=>el.classList.add("show"));setTimeout(()=>{el.classList.remove("show");setTimeout(()=>el.remove(),300)},2800)}
 function applyThemeAndLang(){document.body.className=`lang-${STATE.lang} theme-${STATE.theme}`;document.documentElement.lang=STATE.lang;document.getElementById("langBtn").innerText=STATE.lang==="hi"?"EN":"HI";document.getElementById("themeBtn").innerText=STATE.theme==="dark"?"☀️":"🌙";const isPrem=checkPremiumStatus();const lockTxt=(flag("enable_premium")&&!isPrem)?" 🔒":"";document.getElementById("locText").innerText=STATE.isLocationTracked?(STATE.lang==="hi"?"आपका क्षेत्र":"Your Area")+" ("+STATE.radius+" KM)"+lockTxt:(STATE.lang==="hi"?"लोकेशन सेट करें ("+STATE.radius+" KM)":"Set Location ("+STATE.radius+" KM)");const lb=document.getElementById("prefLangBtn");if(lb)lb.innerText=STATE.lang==="hi"?"English":"हिन्दी";const tb=document.getElementById("prefThemeBtn");if(tb)tb.innerText=STATE.theme==="dark"?"☀️":"🌙";const ub=document.getElementById("prefUnitBtn");if(ub)ub.innerText=STATE.unit.toUpperCase();const rv=document.getElementById("radiusVal");if(rv)rv.innerText=STATE.radius+(STATE.unit==="mi"?" MI":" KM")+lockTxt}
-function getMaxRadius(){
-    if(!flag("enable_premium"))return flag("premium_radius_km")||50;
-    return checkPremiumStatus()?(flag("premium_radius_km")||50):(flag("free_radius_km")||5);
-}
+function getMaxRadius(){if(!flag("enable_premium"))return flag("premium_radius_km")||50;return checkPremiumStatus()?(flag("premium_radius_km")||50):(flag("free_radius_km")||5)}
 function toggleLang(){STATE.lang=STATE.lang==="hi"?"en":"hi";localStorage.setItem("ac_lang",STATE.lang);applyThemeAndLang();renderShops();renderOnlineShops();renderStories();renderHomePreviews();renderMyAreaMap();if(!document.getElementById("profile").classList.contains("hidden"))updateProfileUI();initAiOptions()}
 function toggleTheme(){STATE.theme=STATE.theme==="dark"?"light":"dark";localStorage.setItem("ac_theme",STATE.theme);applyThemeAndLang()}
 function toggleUnit(){STATE.unit=STATE.unit==="km"?"mi":"km";localStorage.setItem("ac_unit",STATE.unit);applyThemeAndLang();renderShops();renderOnlineShops();renderHomePreviews()}
-function setRadius(val){
-    let v=parseFloat(val);
-    const max=getMaxRadius();
-    if(v>max){
-        v=max;
-        if(flag("enable_premium")&&!checkPremiumStatus()){
-            showToast(STATE.lang==="hi"?`Free users max ${max} KM. Premium me ${flag("premium_radius_km")} KM!`:`Free users max ${max} KM. Premium me ${flag("premium_radius_km")} KM!`,"info");
-        }else{
-            showToast("Max "+max+" KM","info");
-        }
-    }
-    STATE.radius=v;
-    localStorage.setItem("ac_radius",STATE.radius);
-    applyThemeAndLang();renderShops();renderOnlineShops();renderHomePreviews();renderMyAreaMap();
-}
-function updateRadiusSlider(){
-    const slider=document.getElementById("radiusRange");
-    if(!slider)return;
-    const max=getMaxRadius();
-    slider.max=max;
-    if(STATE.radius>max){STATE.radius=max;localStorage.setItem("ac_radius",max)}
-    slider.value=STATE.radius;
-    applyThemeAndLang();
-}
-function updateReferralFieldVisibility(){
-    const w=document.getElementById("referralFieldWrap");
-    if(!w)return;
-    w.style.display=(flag("enable_premium")&&flag("enable_referral"))?"block":"none";
-}
+function setRadius(val){let v=parseFloat(val);const max=getMaxRadius();if(v>max){v=max;if(flag("enable_premium")&&!checkPremiumStatus()){showToast(STATE.lang==="hi"?`Free users max ${max} KM. Premium me ${flag("premium_radius_km")} KM!`:`Free users max ${max} KM. Premium me ${flag("premium_radius_km")} KM!`,"info")}else{showToast("Max "+max+" KM","info")}}STATE.radius=v;localStorage.setItem("ac_radius",STATE.radius);applyThemeAndLang();renderShops();renderOnlineShops();renderHomePreviews();renderMyAreaMap()}
+function updateRadiusSlider(){const slider=document.getElementById("radiusRange");if(!slider)return;const max=getMaxRadius();slider.max=max;if(STATE.radius>max){STATE.radius=max;localStorage.setItem("ac_radius",max)}slider.value=STATE.radius;applyThemeAndLang()}
+function updateReferralFieldVisibility(){const w=document.getElementById("referralFieldWrap");if(!w)return;w.style.display=(flag("enable_premium")&&flag("enable_referral"))?"block":"none"}
 function fillCountrySelects(){const opts=COUNTRIES.map(c=>`<option value="${c.c}">${c.n} ${c.d}</option>`).join("");["authCountry","shopCountry"].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.innerHTML=opts;el.value=GLOBAL_CONFIG.DEFAULT_COUNTRY})}
 function renderCatGrid(){document.getElementById("catGrid").innerHTML=MAIN_CATS.map(c=>`<div class="cat-card-v" onclick="openCategory('${c.key}')"><div class="cat-ico ${c.cls}">${c.icon}</div><div class="cat-lbl"><span class="hi">${c.hi}</span><span class="en">${c.en}</span></div></div>`).join("")}
 function renderFilterChips(){document.getElementById("filterContainer").innerHTML=MAIN_CATS.map(c=>`<div class="filter-chip ${STATE.currentFilter===c.key?'active':''}" data-val="${c.key}" onclick="setFilter('${c.key}')">${c.icon} <span class="hi">${c.hi}</span><span class="en">${c.en}</span></div>`).join("");document.getElementById("onlineFilterContainer").innerHTML=MAIN_CATS.map(c=>`<div class="filter-chip ${STATE.currentOnlineFilter===c.key?'active':''}" data-val="${c.key}" onclick="setOnlineFilter('${c.key}')">${c.icon} <span class="hi">${c.hi}</span><span class="en">${c.en}</span></div>`).join("")}
@@ -1015,25 +886,7 @@ function isFav(id){return STATE.favs.includes(String(id))}
 function toggleFav(id,e){if(e)e.stopPropagation();const sid=String(id);const idx=STATE.favs.indexOf(sid);if(idx>=0){STATE.favs.splice(idx,1);showToast(t("favRemoved"),"info")}else{STATE.favs.push(sid);showToast(t("favAdded"),"success")}localStorage.setItem("ac_favs",JSON.stringify(STATE.favs));renderShops();renderOnlineShops();renderHomePreviews()}
 function renderStories(){const active=getActiveStories();const wrap=document.getElementById("storySectionWrap");if(active.length===0){wrap.style.display="none";return}wrap.style.display="block";const isAdmin=AUTH.isAdmin(STATE.user);document.getElementById("liveStoryContainer").innerHTML=active.map(st=>{const isMy=STATE.user&&(st.name===STATE.user.name||st.userPhone===STATE.user.phone);const canDelete=isAdmin||isMy;const delBtn=canDelete?`<button onclick="event.stopPropagation();deleteAdminStory('${Utils.escAttr(String(st.id))}')" style="position:absolute;top:-5px;right:-5px;background:#ef4444;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;z-index:10;border:2px solid var(--card-bg);cursor:pointer;">🗑️</button>`:"";const isImg=String(st.desc||"").startsWith("data:image");const img=isImg?`<img src="${Utils.escAttr(st.desc)}">`:`<div style="font-size:22px;">✍️</div>`;const badgeWord=(st.badge||"Offer").split(" ")[0];return`<div class="story-item" onclick="openStory('${Utils.escAttr(String(st.id))}')"><div style="position:relative;">${delBtn}<div class="story-ring"><div class="story-img-box">${img}</div></div><div class="story-badge ${isImg?"":"text-only"}">${Utils.esc(badgeWord)}</div></div><div class="story-name">${Utils.esc(st.name)}</div></div>`}).join("")}
 function renderProfileStories(){if(!STATE.user)return;const mine=getActiveStories().filter(st=>st.name===STATE.user.name||st.userPhone===STATE.user.phone);const area=document.getElementById("myActiveStoryArea");if(mine.length===0){area.style.display="none";return}let html=`<div style="font-size:12px;font-weight:800;color:var(--text-dark);margin-bottom:8px;">⏱️ <span class="hi">आपकी लाइव Story</span><span class="en">Your live story</span></div>`;mine.forEach(st=>{const isImg=String(st.desc||"").startsWith("data:image");html+=`<div style="background:var(--card-bg);border:1px solid var(--border);padding:10px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:10px;"><div style="font-size:24px;width:40px;height:40px;border-radius:8px;overflow:hidden;display:flex;justify-content:center;align-items:center;background:var(--primary);">${isImg?`<img src="${Utils.escAttr(st.desc)}" style="width:100%;height:100%;object-fit:cover;">`:"✍️"}</div><div><div style="font-size:12px;font-weight:800;color:var(--text-dark);">${Utils.esc(st.badge)}</div><div style="font-size:10px;color:var(--accent);">${STATE.lang==="hi"?"24 घंटे में हटेगी":"Auto-delete 24h"}</div></div></div><button onclick="deleteAdminStory('${Utils.escAttr(String(st.id))}')" style="background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.3);padding:8px 12px;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;">🗑️</button></div>`});area.innerHTML=html;area.style.display="block"}
-function buildShopCard(shop,isAdmin,isOnline=false){
-    const favActive=isFav(shop.id);
-    const favBtn=flag("enable_favorites")?`<button class="fav-btn ${favActive?'active':''}" onclick="toggleFav('${Utils.escAttr(String(shop.id))}',event)">${favActive?'❤️':'🤍'}</button>`:"";
-    const distTag=shop.calculatedDist!==undefined?`<span class="dist-lbl">📍 ${Utils.formatDist(shop.calculatedDist,STATE.unit)}</span>`:"";
-    const premiumTag=shop.isPremium?`<span class="premium-badge" style="margin-left:4px;">⭐</span>`:"";
-    const verifiedMark=shop.verified?` <span style="color:#60a5fa;font-size:12px;">✔️</span>`:"";
-    const onclick=`openShopModal('${Utils.escAttr(String(shop.id))}')`;
-    return`<div class="shop-card ${shop.isPremium?'premium-card':''}" onclick="${onclick}">
-        ${favBtn}
-        <div class="shop-img-box">${Utils.esc(shop.icon||"🏬")}</div>
-        <div class="shop-info">
-            <h3>${Utils.esc(shop.name)}${verifiedMark}${premiumTag}</h3>
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-                <span class="cat-lbl">${Utils.esc(shop.catHi)}</span>
-                ${distTag}
-            </div>
-        </div>
-    </div>`;
-}
+function buildShopCard(shop,isAdmin,isOnline=false){const favActive=isFav(shop.id);const favBtn=flag("enable_favorites")?`<button class="fav-btn ${favActive?'active':''}" onclick="toggleFav('${Utils.escAttr(String(shop.id))}',event)">${favActive?'❤️':'🤍'}</button>`:"";const distTag=shop.calculatedDist!==undefined?`<span class="dist-lbl">📍 ${Utils.formatDist(shop.calculatedDist,STATE.unit)}</span>`:"";const premiumTag=shop.isPremium?`<span class="premium-badge" style="margin-left:4px;">⭐</span>`:"";const verifiedMark=shop.verified?` <span style="color:#60a5fa;font-size:12px;">✔️</span>`:"";const onclick=`openShopModal('${Utils.escAttr(String(shop.id))}')`;return`<div class="shop-card ${shop.isPremium?'premium-card':''}" onclick="${onclick}">${favBtn}<div class="shop-img-box">${Utils.esc(shop.icon||"🏬")}</div><div class="shop-info"><h3>${Utils.esc(shop.name)}${verifiedMark}${premiumTag}</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;"><span class="cat-lbl">${Utils.esc(shop.catHi)}</span>${distTag}</div></div></div>`}
 function renderShops(){const cont=document.getElementById("shopListContainer");if(!STATE.isLocationTracked){cont.innerHTML=`<div class="empty-state"><div class="icon">📍</div><div class="title">${STATE.lang==="hi"?"लोकेशन सेट करें":"Set Your Location"}</div><div class="desc">${STATE.lang==="hi"?"ऊपर 📍 बटन दबाकर लोकेशन चालू करें।":"Tap 📍 above."}</div></div>`;return}const q=(document.getElementById("bazaarSearch")?.value||"").trim();const sortBy=document.getElementById("sortSelect")?.value||"distance";const isAdmin=AUTH.isAdmin(STATE.user);let list=STATE.shops.filter(s=>{if(s.type!==STATE.currentFilter)return false;if(!s.lat||!s.lng)return false;if(q&&!Utils.fuzzyMatch(s.name+" "+s.catHi+" "+s.locText,q))return false;s.calculatedDist=Utils.haversine(STATE.userLat,STATE.userLng,s.lat,s.lng);return s.calculatedDist<=STATE.radius});if(sortBy==="distance")list.sort((a,b)=>a.calculatedDist-b.calculatedDist);else if(sortBy==="name")list.sort((a,b)=>a.name.localeCompare(b.name));else if(sortBy==="rating")list.sort((a,b)=>(b.rating||0)-(a.rating||0));else if(sortBy==="views")list.sort((a,b)=>(b.views||0)-(a.views||0));else if(sortBy==="newest")list.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));list.sort((a,b)=>(b.isPremium?1:0)-(a.isPremium?1:0));if(list.length===0){cont.innerHTML=`<div class="empty-state"><div class="icon">🏪</div><div class="title">${t("noResults")}</div><div class="desc">${STATE.lang==="hi"?`${STATE.radius} KM के अंदर इस श्रेणी में कोई जानकारी नहीं।`:`No info within ${STATE.radius} KM.`}</div></div>`;return}cont.innerHTML=list.map(s=>buildShopCard(s,isAdmin)).join("")}
 function renderOnlineShops(){const cont=document.getElementById("onlineShopListContainer");if(!STATE.isLocationTracked){cont.innerHTML=`<div class="empty-state"><div class="icon">📍</div><div class="title">${STATE.lang==="hi"?"लोकेशन सेट करें":"Set Your Location"}</div></div>`;return}const isAdmin=AUTH.isAdmin(STATE.user);let list=STATE.shops.filter(s=>{if(!s.lat||!s.lng)return false;if(s.type!==STATE.currentOnlineFilter)return false;if(!s.isOpen)return false;s.calculatedDist=Utils.haversine(STATE.userLat,STATE.userLng,s.lat,s.lng);return s.calculatedDist<=STATE.radius}).sort((a,b)=>a.calculatedDist-b.calculatedDist);if(list.length===0){cont.innerHTML=`<div class="empty-state"><div class="icon">😴</div><div class="title">${STATE.lang==="hi"?"कोई ऑनलाइन नहीं":"Nobody Online"}</div></div>`;return}cont.innerHTML=list.map(s=>buildShopCard(s,isAdmin,true)).join("")}
 function renderHomePreviews(){const isAdmin=AUTH.isAdmin(STATE.user);if(STATE.isLocationTracked&&STATE.shops.length>0){const trending=STATE.shops.filter(s=>s.views>0).sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,5);const tw=document.getElementById("trendingSectionWrap");const tc=document.getElementById("trendingContainer");if(trending.length>=3){tw.style.display="block";tc.innerHTML=trending.map(s=>buildShopCard(s,isAdmin)).join("")}else{tw.style.display="none";tc.innerHTML=""}const nearby=STATE.shops.filter(s=>s.lat&&s.lng).map(s=>{s.calculatedDist=Utils.haversine(STATE.userLat,STATE.userLng,s.lat,s.lng);return s}).filter(s=>s.calculatedDist<=STATE.radius).sort((a,b)=>a.calculatedDist-b.calculatedDist).slice(0,4);const nh=document.getElementById("nearbyHeader"),nc=document.getElementById("nearbyShopsContainer");if(nearby.length){nh.style.display="flex";nc.innerHTML=nearby.map(s=>buildShopCard(s,isAdmin)).join("")}else{nh.style.display="none";nc.innerHTML=""}const online=STATE.shops.filter(s=>{if(!s.lat||!s.lng||!s.isOpen)return false;s.calculatedDist=Utils.haversine(STATE.userLat,STATE.userLng,s.lat,s.lng);return s.calculatedDist<=STATE.radius}).sort((a,b)=>a.calculatedDist-b.calculatedDist).slice(0,3);const oh=document.getElementById("onlinePrevHeader"),oc=document.getElementById("onlinePrevContainer");if(online.length){oh.style.display="flex";oc.innerHTML=online.map(s=>buildShopCard(s,isAdmin,true)).join("")}else{oh.style.display="none";oc.innerHTML=""}}else{["trendingSectionWrap","nearbyHeader","onlinePrevHeader"].forEach(id=>document.getElementById(id).style.display="none");["trendingContainer","nearbyShopsContainer","onlinePrevContainer"].forEach(id=>document.getElementById(id).innerHTML="")}const favs=STATE.shops.filter(s=>isFav(s.id));const fh=document.getElementById("favHeader"),fc=document.getElementById("favContainer");if(flag("enable_favorites")&&favs.length>0){fh.style.display="flex";fc.innerHTML=favs.slice(0,4).map(s=>buildShopCard(s,isAdmin)).join("")}else{fh.style.display="none";fc.innerHTML=""}}
@@ -1044,177 +897,17 @@ async function renderReviews(shopId){const wrap=document.getElementById("reviews
 function bindStars(){const stars=document.querySelectorAll("#mStars .star");STATE.currentReviewRating=0;stars.forEach(s=>{s.onclick=()=>{STATE.currentReviewRating=parseInt(s.dataset.val);stars.forEach(x=>x.classList.toggle("active",parseInt(x.dataset.val)<=STATE.currentReviewRating))}})}
 async function submitReview(){if(!STATE.user)return showToast(t("loginRequired"),"error");if(!STATE.currentReviewRating)return showToast(t("ratingRequired"),"error");const shop=STATE.currentShop;if(!shop)return;const comment=(document.getElementById("mReviewText")?.value||"").trim().substring(0,200);const review={shopId:String(shop.id),userPhone:STATE.user.phone,userName:STATE.user.name,rating:STATE.currentReviewRating,comment,createdAt:Date.now()};try{await DB.addReview(review);STATE.reviews.push(review);const shopLocal=STATE.shops.find(s=>String(s.id)===String(shop.id));const shopCache=STATE.allShopsCache.find(s=>String(s.id)===String(shop.id));const newSum=(shop.ratingSum||0)+STATE.currentReviewRating;const newCount=(shop.ratingCount||0)+1;const newAvg=newSum/newCount;if(shopLocal){shopLocal.ratingSum=newSum;shopLocal.ratingCount=newCount;shopLocal.rating=newAvg}if(shopCache){shopCache.ratingSum=newSum;shopCache.ratingCount=newCount;shopCache.rating=newAvg}const fs=await waitForFS(2000);if(fs){await fs.updateShop(shop.id,{ratingSum:newSum,ratingCount:newCount,rating:newAvg})}showToast(t("reviewAdded"));STATE.currentReviewRating=0;await renderReviews(shop.id);renderShops()}catch(e){console.warn(e);showToast(t("failed"),"error")}}
 function closeShopModal(e){if(e.target.id==="shopModal"||e.target.classList.contains("sheet-close")){document.getElementById("shopModal").classList.add("hidden")}}
-function detectUserLocation(silent=false){
-  if(!navigator.geolocation){if(!silent)showToast("Geolocation not supported","error");return}
-  const dot=document.getElementById("locDot");
-  const locTxt=document.getElementById("locText");
-  dot.classList.add("active","pulse");
-  locTxt.innerText=STATE.lang==="hi"?"📍 लोकेशन खोज रहे...":"📍 Locating...";
-  if(!silent)showToast(STATE.lang==="hi"?"GPS लोकेशन ले रहे...":"Getting GPS...","info");
-  if(locationWatchId!==null){try{navigator.geolocation.clearWatch(locationWatchId)}catch(e){}locationWatchId=null}
-  let firstFix=true;
-  locationWatchId=navigator.geolocation.watchPosition(
-    pos=>{
-      STATE.userLat=pos.coords.latitude;
-      STATE.userLng=pos.coords.longitude;
-      STATE.accuracy=pos.coords.accuracy;
-      STATE.isLocationTracked=true;
-      dot.classList.add("active","pulse");
-      applyThemeAndLang();
-      if(!silent&&firstFix)showToast(t("locationSet"));
-      firstFix=false;
-      renderShops();renderOnlineShops();renderHomePreviews();renderMyAreaMap();
-    },
-    err=>{
-      console.warn("Geo error:",err);
-      let msg=t("gpsOff");
-      if(err.code===1)msg=STATE.lang==="hi"?"लोकेशन permission दें":"Please allow location";
-      else if(err.code===2)msg=STATE.lang==="hi"?"GPS signal नहीं":"No GPS signal";
-      else if(err.code===3)msg=STATE.lang==="hi"?"समय समाप्त — फिर कोशिश करें":"Timeout — retry";
-      if(!silent)showToast(msg,"error");
-      if(!STATE.isLocationTracked){dot.classList.remove("active","pulse")}
-    },
-    {enableHighAccuracy:true,timeout:20000,maximumAge:5000}
-  );
-}
-function toggleAreaMap(){
-  const card=document.getElementById("myAreaCard");
-  const icon=document.getElementById("areaToggleIcon");
-  if(!card)return;
-  const collapsed=card.classList.toggle("collapsed");
-  if(icon)icon.innerText=collapsed?"▼":"▲";
-  if(!collapsed){
-    renderMyAreaMap();
-    setTimeout(()=>{if(areaMap){try{areaMap.invalidateSize()}catch(e){}}},250);
-  }
-}
-function renderMyAreaMap(){
-  const card=document.getElementById("myAreaCard");
-  if(!card)return;
-  if(!STATE.isLocationTracked){card.style.display="none";return}
-  card.style.display="block";
-  const titleEl=card.querySelector(".my-area-title");
-  if(titleEl){
-    const lockTxt=(flag("enable_premium")&&!checkPremiumStatus())?" 🔒":"";
-    titleEl.innerHTML=`📍 <span class="hi">आपका क्षेत्र</span><span class="en">Your Area</span> (${STATE.radius} KM)${lockTxt}`;
-  }
-  if(card.classList.contains("collapsed"))return;
-  setTimeout(()=>{
-    const mapEl=document.getElementById("myAreaMap");
-    if(!mapEl)return;
-    if(typeof L==="undefined")return;
-    if(!areaMap){
-      areaMap=L.map("myAreaMap",{zoomControl:false,attributionControl:false}).setView([STATE.userLat,STATE.userLng],13);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19}).addTo(areaMap);
-      areaCircle=L.circle([STATE.userLat,STATE.userLng],{radius:STATE.radius*1000,color:"#10b981",fillColor:"#10b981",fillOpacity:0.15,weight:2}).addTo(areaMap);
-      areaMarker=L.circleMarker([STATE.userLat,STATE.userLng],{radius:8,color:"#ffffff",fillColor:"#10b981",fillOpacity:1,weight:3}).addTo(areaMap);
-    }else{
-      try{areaMap.invalidateSize()}catch(e){}
-      areaMap.setView([STATE.userLat,STATE.userLng],areaMap.getZoom()||13);
-      areaCircle.setLatLng([STATE.userLat,STATE.userLng]);
-      areaCircle.setRadius(STATE.radius*1000);
-      areaMarker.setLatLng([STATE.userLat,STATE.userLng]);
-    }
-    const st=document.getElementById("areaStatus");
-    if(st){
-      const acc=STATE.accuracy?Math.round(STATE.accuracy):"—";
-      st.classList.add("ok");
-      st.innerHTML=STATE.lang==="hi"
-        ?`✅ लोकेशन ट्रैक हो रही है • ±${acc}m • रेडियस ${STATE.radius} KM`
-        :`✅ Tracking live • ±${acc}m • Radius ${STATE.radius} KM`;
-    }
-  },150);
-}
-function recenterArea(){
-  if(areaMap&&STATE.isLocationTracked){
-    areaMap.setView([STATE.userLat,STATE.userLng],14);
-    showToast(STATE.lang==="hi"?"री-सेंटर हो गया":"Recentered","success");
-  }else if(!STATE.isLocationTracked){
-    detectUserLocation(false);
-  }
-}
+function detectUserLocation(silent=false){if(!navigator.geolocation){if(!silent)showToast("Geolocation not supported","error");return}const dot=document.getElementById("locDot");const locTxt=document.getElementById("locText");dot.classList.add("active","pulse");locTxt.innerText=STATE.lang==="hi"?"📍 लोकेशन खोज रहे...":"📍 Locating...";if(!silent)showToast(STATE.lang==="hi"?"GPS लोकेशन ले रहे...":"Getting GPS...","info");if(locationWatchId!==null){try{navigator.geolocation.clearWatch(locationWatchId)}catch(e){}locationWatchId=null}let firstFix=true;locationWatchId=navigator.geolocation.watchPosition(pos=>{STATE.userLat=pos.coords.latitude;STATE.userLng=pos.coords.longitude;STATE.accuracy=pos.coords.accuracy;STATE.isLocationTracked=true;dot.classList.add("active","pulse");applyThemeAndLang();if(!silent&&firstFix)showToast(t("locationSet"));firstFix=false;renderShops();renderOnlineShops();renderHomePreviews();renderMyAreaMap()},err=>{console.warn("Geo error:",err);let msg=t("gpsOff");if(err.code===1)msg=STATE.lang==="hi"?"लोकेशन permission दें":"Please allow location";else if(err.code===2)msg=STATE.lang==="hi"?"GPS signal नहीं":"No GPS signal";else if(err.code===3)msg=STATE.lang==="hi"?"समय समाप्त — फिर कोशिश करें":"Timeout — retry";if(!silent)showToast(msg,"error");if(!STATE.isLocationTracked){dot.classList.remove("active","pulse")}},{enableHighAccuracy:true,timeout:20000,maximumAge:5000})}
+function toggleAreaMap(){const card=document.getElementById("myAreaCard");const icon=document.getElementById("areaToggleIcon");if(!card)return;const collapsed=card.classList.toggle("collapsed");if(icon)icon.innerText=collapsed?"▼":"▲";if(!collapsed){renderMyAreaMap();setTimeout(()=>{if(areaMap){try{areaMap.invalidateSize()}catch(e){}}},250)}}
+function renderMyAreaMap(){const card=document.getElementById("myAreaCard");if(!card)return;if(!STATE.isLocationTracked){card.style.display="none";return}card.style.display="block";const titleEl=card.querySelector(".my-area-title");if(titleEl){const lockTxt=(flag("enable_premium")&&!checkPremiumStatus())?" 🔒":"";titleEl.innerHTML=`📍 <span class="hi">आपका क्षेत्र</span><span class="en">Your Area</span> (${STATE.radius} KM)${lockTxt}`}if(card.classList.contains("collapsed"))return;setTimeout(()=>{const mapEl=document.getElementById("myAreaMap");if(!mapEl)return;if(typeof L==="undefined")return;if(!areaMap){areaMap=L.map("myAreaMap",{zoomControl:false,attributionControl:false}).setView([STATE.userLat,STATE.userLng],13);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19}).addTo(areaMap);areaCircle=L.circle([STATE.userLat,STATE.userLng],{radius:STATE.radius*1000,color:"#10b981",fillColor:"#10b981",fillOpacity:0.15,weight:2}).addTo(areaMap);areaMarker=L.circleMarker([STATE.userLat,STATE.userLng],{radius:8,color:"#ffffff",fillColor:"#10b981",fillOpacity:1,weight:3}).addTo(areaMap)}else{try{areaMap.invalidateSize()}catch(e){}areaMap.setView([STATE.userLat,STATE.userLng],areaMap.getZoom()||13);areaCircle.setLatLng([STATE.userLat,STATE.userLng]);areaCircle.setRadius(STATE.radius*1000);areaMarker.setLatLng([STATE.userLat,STATE.userLng])}const st=document.getElementById("areaStatus");if(st){const acc=STATE.accuracy?Math.round(STATE.accuracy):"—";st.classList.add("ok");st.innerHTML=STATE.lang==="hi"?`✅ लोकेशन ट्रैक हो रही है • ±${acc}m • रेडियस ${STATE.radius} KM`:`✅ Tracking live • ±${acc}m • Radius ${STATE.radius} KM`}},150)}
+function recenterArea(){if(areaMap&&STATE.isLocationTracked){areaMap.setView([STATE.userLat,STATE.userLng],14);showToast(STATE.lang==="hi"?"री-सेंटर हो गया":"Recentered","success")}else if(!STATE.isLocationTracked){detectUserLocation(false)}}
 function openRealMapPicker(){document.getElementById("realMapModal").classList.remove("hidden");setTimeout(()=>{if(!STATE.map){STATE.map=L.map("map").setView([STATE.userLat,STATE.userLng],14);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:20,attribution:"© OSM"}).addTo(STATE.map);STATE.marker=L.marker([STATE.userLat,STATE.userLng],{draggable:true}).addTo(STATE.map);STATE.marker.on("dragend",()=>{const p=STATE.marker.getLatLng();STATE.pickedLat=p.lat;STATE.pickedLng=p.lng});STATE.map.on("click",e=>{STATE.marker.setLatLng(e.latlng);STATE.pickedLat=e.latlng.lat;STATE.pickedLng=e.latlng.lng})}else{STATE.map.invalidateSize();STATE.map.setView([STATE.userLat,STATE.userLng],14);STATE.marker.setLatLng([STATE.userLat,STATE.userLng])}STATE.pickedLat=STATE.userLat;STATE.pickedLng=STATE.userLng},200)}
 function closeRealMap(){document.getElementById("realMapModal").classList.add("hidden")}
 async function searchOnMap(){const q=document.getElementById("mapSearchInput").value.trim();if(!q)return showToast(STATE.lang==="hi"?"जगह का नाम लिखें":"Enter place","error");showToast(STATE.lang==="hi"?"खोज रहा है...":"Searching...","info");try{const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=1`);const d=await r.json();if(d&&d.length){const nLat=parseFloat(d[0].lat),nLng=parseFloat(d[0].lon);STATE.map.setView([nLat,nLng],16);STATE.marker.setLatLng([nLat,nLng]);STATE.pickedLat=nLat;STATE.pickedLng=nLng;showToast(STATE.lang==="hi"?"जगह मिल गई!":"Found!")}else showToast(STATE.lang==="hi"?"जगह नहीं मिली।":"Not found.","error")}catch{showToast("Search failed","error")}}
 async function confirmMapLocation(){const latStr=STATE.pickedLat.toFixed(4);const lngStr=STATE.pickedLng.toFixed(4);closeRealMap();showToast(STATE.lang==="hi"?"लोकेशन सेव...":"Saving...","info");try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${STATE.pickedLat}&lon=${STATE.pickedLng}`);const d=await r.json();let addr="";if(d&&d.address){const a=d.address;const area=a.road||a.suburb||a.neighbourhood||a.village||a.residential||"";const city=a.city||a.town||a.county||a.state_district||"";const pin=a.postcode||"";if(area)addr+=area;if(city)addr+=(addr?", ":"")+city;if(pin)addr+=" - "+pin;if(!addr&&d.display_name)addr=d.display_name.split(",").slice(0,2).join(",")}document.getElementById("addLoc").value=addr||(latStr+"° N, "+lngStr+"° E")}catch{document.getElementById("addLoc").value=latStr+"° N, "+lngStr+"° E"}STATE.locationPicked=true;const b=document.getElementById("mapPickBtn");b.classList.add("picked");b.innerHTML=`✅ <span class="hi">लोकेशन सेट (बदलने के लिए टैप)</span><span class="en">Set (tap to change)</span>`;showToast(t("locationSet"))}
-async function doAuth(){
-    const country=document.getElementById("authCountry").value;
-    const raw=document.getElementById("authPhone").value.trim();
-    const name=document.getElementById("authName").value.trim();
-    const consent=document.getElementById("authConsent").checked;
-    const refCode=(document.getElementById("authRefCode")?.value||"").trim().toUpperCase();
-    if(!Utils.isValidPhone(country,raw))return showToast(t("invalidPhone"),"error");
-    if(!name||name.length<2)return showToast(t("nameRequired"),"error");
-    if(!consent)return showToast(t("consent"),"error");
-    const fullPhone=Utils.normalizePhone(country,raw);
-    const btn=document.getElementById("authBtn");
-    btn.disabled=true;
-    try{
-        const fs=await waitForFS(3000);
-        if(fs&&fs.isUserBanned){const banned=await fs.isUserBanned(fullPhone);if(banned){showToast(STATE.lang==="hi"?"यह नंबर बैन है!":"Banned!","error");btn.disabled=false;return}}
-        let fsConflict=null;
-        if(fs&&fs.getUserByPhone){try{const existing=await fs.getUserByPhone(fullPhone);if(existing&&existing.name&&existing.name.toLowerCase()!==name.toLowerCase()){fsConflict=existing}}catch(e){}}
-        const reg=AUTH.getRegistry(fullPhone);
-        if(reg&&reg.name&&reg.name.toLowerCase()!==name.toLowerCase()){showToast(t("numberExists"),"error");btn.disabled=false;return}
-        if(fsConflict){showToast(t("numberExists"),"error");btn.disabled=false;return}
-        const finalName=(reg&&reg.name)?reg.name:(fsConflict?fsConflict.name:name);
-        if(fs&&fs.createUser&&!fsConflict){try{await fs.createUser(fullPhone,finalName,country,refCode||null)}catch(e){}}
-        if(refCode&&flag("enable_referral")&&fs&&fs.processReferral){
-            try{await fs.processReferral(refCode,fullPhone,finalName)}catch(e){console.warn("Referral:",e)}
-        }
-        let freshUser=null;
-        if(fs&&fs.getUserByPhone){try{freshUser=await fs.getUserByPhone(fullPhone)}catch(e){}}
-        const userObj=freshUser?{
-            phone:freshUser.phone||fullPhone,
-            name:freshUser.name||finalName,
-            country:freshUser.country||country,
-            isPremium:freshUser.isPremium===true,
-            premiumUntil:freshUser.premiumUntil||null,
-            premiumPlan:freshUser.premiumPlan||null,
-            totalShops:freshUser.totalShops||0,
-            referralCode:freshUser.referralCode||"",
-            referredBy:freshUser.referredBy||null,
-            referralCount:freshUser.referralCount||0
-        }:{
-            phone:fullPhone,name:finalName,country,
-            isPremium:false,premiumUntil:null,totalShops:0,
-            referralCode:"",referredBy:refCode||null,referralCount:0
-        };
-        STATE.user=AUTH.set(userObj);
-        AUTH.setRegistry(fullPhone,{name:finalName,phone:fullPhone,country,ts:Date.now()});
-        showToast(AUTH.isAdmin(STATE.user)?"👑 Welcome Admin!":t("loginSuccess"));
-        document.getElementById("authPhone").value="";
-        document.getElementById("authName").value="";
-        if(document.getElementById("authRefCode"))document.getElementById("authRefCode").value="";
-        document.getElementById("authConsent").checked=false;
-        const sc=document.getElementById("shopCountry");
-        if(sc)sc.value=country;
-        switchTab("profile");
-    }catch(e){console.warn(e);showToast(t("failed"),"error")}
-    btn.disabled=false;
-}
+async function doAuth(){const country=document.getElementById("authCountry").value;const raw=document.getElementById("authPhone").value.trim();const name=document.getElementById("authName").value.trim();const consent=document.getElementById("authConsent").checked;const refCode=(document.getElementById("authRefCode")?.value||"").trim().toUpperCase();if(!Utils.isValidPhone(country,raw))return showToast(t("invalidPhone"),"error");if(!name||name.length<2)return showToast(t("nameRequired"),"error");if(!consent)return showToast(t("consent"),"error");const fullPhone=Utils.normalizePhone(country,raw);const btn=document.getElementById("authBtn");btn.disabled=true;try{const fs=await waitForFS(3000);if(fs&&fs.isUserBanned){const banned=await fs.isUserBanned(fullPhone);if(banned){showToast(STATE.lang==="hi"?"यह नंबर बैन है!":"Banned!","error");btn.disabled=false;return}}let fsConflict=null;if(fs&&fs.getUserByPhone){try{const existing=await fs.getUserByPhone(fullPhone);if(existing&&existing.name&&existing.name.toLowerCase()!==name.toLowerCase()){fsConflict=existing}}catch(e){}}const reg=AUTH.getRegistry(fullPhone);if(reg&&reg.name&&reg.name.toLowerCase()!==name.toLowerCase()){showToast(t("numberExists"),"error");btn.disabled=false;return}if(fsConflict){showToast(t("numberExists"),"error");btn.disabled=false;return}const finalName=(reg&&reg.name)?reg.name:(fsConflict?fsConflict.name:name);if(fs&&fs.createUser&&!fsConflict){try{await fs.createUser(fullPhone,finalName,country,refCode||null)}catch(e){}}if(refCode&&flag("enable_referral")&&fs&&fs.processReferral){try{await fs.processReferral(refCode,fullPhone,finalName)}catch(e){console.warn("Referral:",e)}}let freshUser=null;if(fs&&fs.getUserByPhone){try{freshUser=await fs.getUserByPhone(fullPhone)}catch(e){}}const userObj=freshUser?{phone:freshUser.phone||fullPhone,name:freshUser.name||finalName,country:freshUser.country||country,isPremium:freshUser.isPremium===true,premiumUntil:freshUser.premiumUntil||null,premiumPlan:freshUser.premiumPlan||null,totalShops:freshUser.totalShops||0,referralCode:freshUser.referralCode||"",referredBy:freshUser.referredBy||null,referralCount:freshUser.referralCount||0}:{phone:fullPhone,name:finalName,country,isPremium:false,premiumUntil:null,totalShops:0,referralCode:"",referredBy:refCode||null,referralCount:0};STATE.user=AUTH.set(userObj);AUTH.setRegistry(fullPhone,{name:finalName,phone:fullPhone,country,ts:Date.now()});showToast(AUTH.isAdmin(STATE.user)?"👑 Welcome Admin!":t("loginSuccess"));document.getElementById("authPhone").value="";document.getElementById("authName").value="";if(document.getElementById("authRefCode"))document.getElementById("authRefCode").value="";document.getElementById("authConsent").checked=false;const sc=document.getElementById("shopCountry");if(sc)sc.value=country;switchTab("profile")}catch(e){console.warn(e);showToast(t("failed"),"error")}btn.disabled=false}
 function logout(){AUTH.clear();STATE.user=null;showToast(t("logoutDone"),"info");switchTab("home")}
-function updateProfileUI(){
-  if(!STATE.user)return;
-  if(STATE.user.isPremium===undefined)STATE.user.isPremium=false;
-  if(STATE.user.premiumUntil===undefined)STATE.user.premiumUntil=null;
-  if(STATE.user.totalShops===undefined)STATE.user.totalShops=0;
-  if(STATE.user.referralCode===undefined)STATE.user.referralCode="";
-  if(STATE.user.referralCount===undefined)STATE.user.referralCount=0;
-  document.getElementById("profileName").innerText=STATE.user.name||"User";
-  document.getElementById("profilePhone").innerText=STATE.user.phone||"";
-  const isAdmin=AUTH.isAdmin(STATE.user);
-  const myShops=STATE.shops.filter(s=>s.phone===STATE.user.phone||s.name===STATE.user.name);
-  document.getElementById("adminPanel").style.display=isAdmin?"block":"none";
-  if(isAdmin){document.getElementById("adminTotalShops").innerText=STATE.allShopsCache.length;document.getElementById("adminTotalStories").innerText=STATE.stories.length;const pendingCount=STATE.allShopsCache.filter(s=>s.pending===true).length;document.getElementById("adminPendingCount").innerText=pendingCount;renderAdminContent()}
-  const premiumEnabled=flag("enable_premium");
-  const premiumCard=document.getElementById("premiumCard");
-  if(premiumCard){
-    const shouldShow=premiumEnabled&&!checkPremiumStatus();
-    premiumCard.style.display=shouldShow?"block":"none";
-    if(shouldShow)document.getElementById("premiumMonthlyPrice").innerText=flag("premium_price_monthly");
-  }
-  if(myShops.length>0||isAdmin){document.getElementById("shopStatusWrap").style.display="block";document.getElementById("addStoryWrap").style.display=flag("enable_story_posting")?"block":"none";document.getElementById("customerMsgWrap").style.display="none";if(myShops.length>0){document.getElementById("dashShopName").innerText=myShops[0].name;document.getElementById("dashShopStats").innerText=`👁️ ${myShops[0].views||0} ${STATE.lang==="hi"?"व्यू":"views"} • ⭐ ${(myShops[0].rating||0).toFixed(1)} (${myShops[0].ratingCount||0})`;const isOpen=myShops[0].isOpen;document.getElementById("liveSwitch").checked=isOpen;const te=document.getElementById("switchText");te.innerHTML=isOpen?"ON":"OFF";te.style.color=isOpen?"var(--accent)":"#f87171"}}else{document.getElementById("shopStatusWrap").style.display="none";document.getElementById("addStoryWrap").style.display="none";document.getElementById("customerMsgWrap").style.display="block"}renderProfileStories();setTimeout(renderGoldCard,100);setTimeout(renderReferralCard,100);setTimeout(updateRadiusSlider,50)}
+function updateProfileUI(){if(!STATE.user)return;if(STATE.user.isPremium===undefined)STATE.user.isPremium=false;if(STATE.user.premiumUntil===undefined)STATE.user.premiumUntil=null;if(STATE.user.totalShops===undefined)STATE.user.totalShops=0;if(STATE.user.referralCode===undefined)STATE.user.referralCode="";if(STATE.user.referralCount===undefined)STATE.user.referralCount=0;document.getElementById("profileName").innerText=STATE.user.name||"User";document.getElementById("profilePhone").innerText=STATE.user.phone||"";const isAdmin=AUTH.isAdmin(STATE.user);const myShops=STATE.shops.filter(s=>s.phone===STATE.user.phone||s.name===STATE.user.name);document.getElementById("adminPanel").style.display=isAdmin?"block":"none";if(isAdmin){document.getElementById("adminTotalShops").innerText=STATE.allShopsCache.length;document.getElementById("adminTotalStories").innerText=STATE.stories.length;const pendingCount=STATE.allShopsCache.filter(s=>s.pending===true).length;document.getElementById("adminPendingCount").innerText=pendingCount;renderAdminContent()}const premiumEnabled=flag("enable_premium");const premiumCard=document.getElementById("premiumCard");if(premiumCard){const shouldShow=premiumEnabled&&!checkPremiumStatus();premiumCard.style.display=shouldShow?"block":"none";if(shouldShow)document.getElementById("premiumMonthlyPrice").innerText=flag("premium_price_monthly")}if(myShops.length>0||isAdmin){document.getElementById("shopStatusWrap").style.display="block";document.getElementById("addStoryWrap").style.display=flag("enable_story_posting")?"block":"none";document.getElementById("customerMsgWrap").style.display="none";if(myShops.length>0){document.getElementById("dashShopName").innerText=myShops[0].name;document.getElementById("dashShopStats").innerText=`👁️ ${myShops[0].views||0} ${STATE.lang==="hi"?"व्यू":"views"} • ⭐ ${(myShops[0].rating||0).toFixed(1)} (${myShops[0].ratingCount||0})`;const isOpen=myShops[0].isOpen;document.getElementById("liveSwitch").checked=isOpen;const te=document.getElementById("switchText");te.innerHTML=isOpen?"ON":"OFF";te.style.color=isOpen?"var(--accent)":"#f87171"}}else{document.getElementById("shopStatusWrap").style.display="none";document.getElementById("addStoryWrap").style.display="none";document.getElementById("customerMsgWrap").style.display="block"}renderProfileStories();setTimeout(renderGoldCard,100);setTimeout(renderReferralCard,100);setTimeout(updateRadiusSlider,50)}
 function setAdminTab(tab){STATE.adminTab=tab;document.querySelectorAll(".admin-tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===tab));renderAdminContent()}
 async function renderAdminContent(){const cont=document.getElementById("adminContent");if(!cont)return;cont.innerHTML='<div style="text-align:center;padding:20px;">Loading...</div>';if(!AUTH.isAdmin(STATE.user))return;try{const fs=await waitForFS(3000);if(!fs)return cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">Firebase not ready</div>';if(STATE.adminTab==="pending"){const pending=STATE.allShopsCache.filter(s=>s.pending===true);if(pending.length===0){cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">✅ No pending</div>';return}cont.innerHTML=pending.map(s=>{const safeId=Utils.escAttr(String(s.id));return`<div class="admin-item"><div class="admin-item-name">${Utils.esc(s.shopName||s.userName||"Shop")}</div><div class="admin-item-meta">${Utils.esc(s.mainType||"")} • 📞 ${Utils.esc(s.contactPhone||s.userPhone||"")}</div><div class="admin-item-meta">📍 ${Utils.esc((s.locationText||"").substring(0,60))}</div><div class="admin-actions"><button class="admin-btn admin-btn-approve" onclick="adminApprove('${safeId}')">✅ Approve</button><button class="admin-btn admin-btn-reject" onclick="adminReject('${safeId}')">❌ Reject</button></div></div>`}).join("")}else if(STATE.adminTab==="reported"){let allReports=[];if(fs.getAllReports)allReports=await fs.getAllReports();const grouped={};allReports.forEach(r=>{if(!grouped[r.shopId])grouped[r.shopId]=[];grouped[r.shopId].push(r)});const flagged=[];for(const shopId in grouped){const shop=STATE.allShopsCache.find(s=>String(s.id)===String(shopId));if(!shop)continue;const reporters=new Set(grouped[shopId].map(r=>r.byPhone));if(reporters.size>=GLOBAL_CONFIG.MIN_UNIQUE_REPORTERS){flagged.push({shop,reports:grouped[shopId],unique:reporters.size})}}if(flagged.length===0){cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">✅ No reported</div>';return}cont.innerHTML=flagged.map(({shop,reports,unique})=>{const safeId=Utils.escAttr(String(shop.id));const reasons=reports.slice(0,3).map(r=>`<div style="font-size:10px;opacity:.8;">• ${Utils.esc((r.reason||"").substring(0,40))} — ${Utils.esc((r.byPhone||"?").slice(-4))}</div>`).join("");return`<div class="admin-item"><div class="admin-item-name">${Utils.esc(shop.shopName||shop.userName||"Shop")} ${shop.hidden?'<span style="color:#ef4444;">🚫</span>':''}</div><div class="admin-item-meta" style="color:#fbbf24;font-weight:800;">⚠️ ${unique} reporters</div><div style="margin:6px 0;">${reasons}</div><div class="admin-actions"><button class="admin-btn admin-btn-hide" onclick="adminHide('${safeId}')">🚫 Hide</button><button class="admin-btn admin-btn-clear" onclick="adminClearReports('${safeId}')">✅ Clear</button><button class="admin-btn admin-btn-reject" onclick="adminReject('${safeId}')">🗑️ Del</button></div></div>`}).join("")}else if(STATE.adminTab==="premium"){const fs2=await waitForFS(3000);let userCount=0;try{userCount=fs2&&fs2.getUserCount?await fs2.getUserCount():0}catch(e){}const premiumEnabled=flag("enable_premium");const referralEnabled=flag("enable_referral");const unlockAt=flag("premium_unlock_at");const progress=Math.min(100,Math.round((userCount/unlockAt)*100));cont.innerHTML=`
         <div style="background:rgba(0,0,0,.2);padding:14px;border-radius:12px;margin-bottom:10px;">
@@ -1280,16 +973,8 @@ async function renderAdminContent(){const cont=document.getElementById("adminCon
             <div id="premiumUsersList">Loading...</div>
         </div>
     `;setTimeout(renderPremiumUsersList,100)}else if(STATE.adminTab==="shops"){if(STATE.allShopsCache.length===0){cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">No shops</div>';return}cont.innerHTML=STATE.allShopsCache.map(s=>{const safeId=Utils.escAttr(String(s.id));const tags=[];if(s.pending)tags.push("⏳");if(s.hidden)tags.push("🚫");if(s.verified)tags.push("✅");const tagStr=tags.length?' <span style="color:#fbbf24;">'+tags.join(" ")+'</span>':'';return`<div class="admin-item"><div class="admin-item-name">${Utils.esc(s.shopName||s.userName||"Shop")}${tagStr}</div><div class="admin-item-meta">${Utils.esc(s.mainType||"")} • 👁️ ${s.views||0} • ⭐ ${(s.rating||0).toFixed(1)}</div><div class="admin-actions"><button class="admin-btn admin-btn-approve" onclick="adminVerify('${safeId}',${!s.verified})">${s.verified?'✖ Unverify':'✅ Verify'}</button><button class="admin-btn admin-btn-hide" onclick="adminToggleHide('${safeId}',${!s.hidden})">${s.hidden?'👁️ Show':'🚫 Hide'}</button><button class="admin-btn admin-btn-ban" onclick="adminBanOwner('${safeId}','${Utils.escAttr(s.userPhone||s.contactPhone||"")}')">🚫 Ban</button><button class="admin-btn admin-btn-reject" onclick="adminReject('${safeId}')">🗑️</button></div></div>`}).join("")}else if(STATE.adminTab==="stories"){const allStories=await fs.getAllStories();if(allStories.length===0){cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">No stories</div>';return}cont.innerHTML=allStories.slice(0,50).map(st=>{const safeId=Utils.escAttr(String(st.id));return`<div class="admin-item"><div class="admin-item-name">${Utils.esc(st.userName||"Shop")}</div><div class="admin-item-meta">${Utils.esc((st.badgeTitle||"Offer").substring(0,40))}</div><div class="admin-actions"><button class="admin-btn admin-btn-reject" onclick="adminRejectStory('${safeId}')">🗑️ Delete</button></div></div>`}).join("")}else if(STATE.adminTab==="banned"){const banned=fs.getBannedUsers?await fs.getBannedUsers():[];if(banned.length===0){cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">No banned users</div>';return}cont.innerHTML=banned.map(u=>{const safeId=Utils.escAttr(String(u.id));return`<div class="admin-item"><div class="admin-item-name">${Utils.esc(u.phone||"?")}</div><div class="admin-item-meta">${Utils.esc(u.name||"")}</div><div class="admin-actions"><button class="admin-btn admin-btn-approve" onclick="adminUnban('${safeId}')">✅ Unban</button></div></div>`}).join("")}else if(STATE.adminTab==="settings"){const flags=STATE.currentFlags;const rows=[{k:"enable_shop_posting",hi:"शॉप पोस्टिंग",en:"Shop Posting"},{k:"enable_story_posting",hi:"स्टोरी पोस्टिंग",en:"Story Posting"},{k:"enable_report",hi:"रिपोर्ट सिस्टम",en:"Report System"},{k:"enable_ratings",hi:"रेटिंग",en:"Ratings"},{k:"enable_favorites",hi:"फेवरेट",en:"Favourites"},{k:"enable_view_counter",hi:"व्यू काउंटर",en:"View Counter"},{k:"enable_business_hours",hi:"बिज़नेस टाइमिंग",en:"Business Hours"},{k:"enable_recent_search",hi:"रीसेंट सर्च",en:"Recent Search"},{k:"enable_share",hi:"शेयर",en:"Share"},{k:"require_login_shop",hi:"शॉप के लिए लॉगिन ज़रूरी",en:"Login for Shop"},{k:"require_login_report",hi:"रिपोर्ट के लिए लॉगिन ज़रूरी",en:"Login for Report"},{k:"enable_otp",hi:"OTP (आने वाला)",en:"OTP (future)"}];const flagsHtml=rows.map(r=>`<div class="flag-row"><div class="flag-label">${STATE.lang==="hi"?r.hi:r.en}</div><label class="switch"><input type="checkbox" ${flags[r.k]?"checked":""} onchange="toggleFlag('${r.k}',this.checked)"><span class="slider"></span></label></div>`).join("");cont.innerHTML=`<div style="background:rgba(0,0,0,.2);padding:12px;border-radius:10px;margin-bottom:10px;"><div style="font-size:11px;font-weight:800;margin-bottom:8px;">🔧 ${STATE.lang==="hi"?"फीचर कंट्रोल":"Feature Control"}</div>${flagsHtml}<div class="flag-row" style="margin-top:8px;"><div class="flag-label">${STATE.lang==="hi"?"रोज़ाना शॉप लिमिट":"Daily Shop Limit"}</div><input type="number" min="1" max="50" value="${flags.max_shops_per_day||3}" onchange="setFlagValue('max_shops_per_day',this.value)" style="width:60px;padding:4px;background:var(--card-bg);border:1px solid var(--border);border-radius:6px;color:var(--text-dark);text-align:center;"></div><div class="flag-row"><div class="flag-label">${STATE.lang==="hi"?"रोज़ाना स्टोरी लिमिट":"Daily Story Limit"}</div><input type="number" min="1" max="50" value="${flags.max_stories_per_day||5}" onchange="setFlagValue('max_stories_per_day',this.value)" style="width:60px;padding:4px;background:var(--card-bg);border:1px solid var(--border);border-radius:6px;color:var(--text-dark);text-align:center;"></div></div>`}}catch(e){console.warn(e);cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">Error</div>'}}
-async function toggleFlag(key,val){STATE.currentFlags[key]=val;try{const fs=await waitForFS(2000);if(fs&&fs.saveSettings)await fs.saveSettings(STATE.currentFlags);showToast((STATE.lang==="hi"?"सेव हो गया":"Saved"),"success")}catch(e){showToast("Failed","error")}
-    if(key==="enable_premium"||key==="enable_referral"){
-        applyThemeAndLang();updateRadiusSlider();updateReferralFieldVisibility();
-        if(STATE.user)updateProfileUI();
-        renderShops();renderOnlineShops();renderHomePreviews();
-    }
-}
-async function setFlagValue(key,val){STATE.currentFlags[key]=parseInt(val)||3;try{const fs=await waitForFS(2000);if(fs&&fs.saveSettings)await fs.saveSettings(STATE.currentFlags);showToast("Saved")}catch(e){}
-    if(key==="free_radius_km"||key==="premium_radius_km"){updateRadiusSlider();applyThemeAndLang();renderShops();renderOnlineShops();renderHomePreviews();renderMyAreaMap()}
-}
+async function toggleFlag(key,val){STATE.currentFlags[key]=val;try{const fs=await waitForFS(2000);if(fs&&fs.saveSettings)await fs.saveSettings(STATE.currentFlags);showToast((STATE.lang==="hi"?"सेव हो गया":"Saved"),"success")}catch(e){showToast("Failed","error")}if(key==="enable_premium"||key==="enable_referral"){applyThemeAndLang();updateRadiusSlider();updateReferralFieldVisibility();if(STATE.user)updateProfileUI();renderShops();renderOnlineShops();renderHomePreviews()}}
+async function setFlagValue(key,val){STATE.currentFlags[key]=parseInt(val)||3;try{const fs=await waitForFS(2000);if(fs&&fs.saveSettings)await fs.saveSettings(STATE.currentFlags);showToast("Saved")}catch(e){}if(key==="free_radius_km"||key==="premium_radius_km"){updateRadiusSlider();applyThemeAndLang();renderShops();renderOnlineShops();renderHomePreviews();renderMyAreaMap()}}
 async function refreshAdminData(){const fs=await waitForFS(3000);if(!fs)return;STATE.allShopsCache=await fs.getAllShops();STATE.reviews=await DB.getAllReviews();renderAdminContent()}
 async function adminApprove(id){try{const fs=await waitForFS(3000);await fs.updateShop(id,{pending:false,verified:true,approvedAt:Date.now()});showToast("✅ Approved!");await fetchRealData()}catch(e){showToast("Failed","error")}}
 async function adminReject(id){if(!confirm("Delete?"))return;try{const fs=await waitForFS(3000);await fs.deleteShop(id);showToast("❌ Rejected!");await fetchRealData()}catch(e){showToast("Failed","error")}}
@@ -1300,257 +985,28 @@ async function adminToggleHide(id,val){try{const fs=await waitForFS(3000);await 
 async function adminBanOwner(shopId,phone){if(!phone||phone.length<6)return showToast("No phone","error");if(!confirm("Ban "+phone+"?"))return;try{const fs=await waitForFS(3000);if(fs.banUser)await fs.banUser(phone,"Banned by admin");await fs.updateShop(shopId,{hidden:true});showToast("🚫 Banned!");await fetchRealData()}catch(e){showToast("Failed","error")}}
 async function adminUnban(id){try{const fs=await waitForFS(3000);if(fs.unbanUser)await fs.unbanUser(id);showToast("✅ Unbanned!");await renderAdminContent()}catch(e){showToast("Failed","error")}}
 async function adminRejectStory(id){if(!confirm("Delete story?"))return;try{const fs=await waitForFS(3000);await fs.deleteStory(id);showToast("🗑️ Deleted!");await fetchRealData()}catch(e){showToast("Failed","error")}}
-
-/* ===== PREMIUM SYSTEM ===== */
-async function refreshCurrentUser(){
-    if(!STATE.user||!STATE.user.phone)return;
-    try{
-        const fs=await waitForFS(3000);
-        if(!fs||!fs.getUserByPhone)return;
-        const fresh=await fs.getUserByPhone(STATE.user.phone);
-        if(!fresh)return;
-        const updated={
-            ...STATE.user,
-            name:fresh.name||STATE.user.name,
-            isPremium:fresh.isPremium===true,
-            premiumUntil:fresh.premiumUntil||null,
-            premiumPlan:fresh.premiumPlan||null,
-            totalShops:fresh.totalShops||0,
-            referralCode:fresh.referralCode||"",
-            referredBy:fresh.referredBy||null,
-            referralCount:fresh.referralCount||0
-        };
-        STATE.user=AUTH.set(updated);
-        console.log("🔄 User refreshed:",updated.isPremium?"PREMIUM":"FREE");
-    }catch(e){console.warn("User refresh failed:",e)}
-}
-function openPremiumModal(){
-    if(!STATE.user){showToast(t("loginRequired"),"error");switchTab("auth");return}
-    if(!flag("enable_premium")){showToast(STATE.lang==="hi"?"Premium जल्द आ रहा है!":"Premium coming soon!","info");return}
-    document.getElementById("premiumMonthlyPrice").innerText=flag("premium_price_monthly");
-    setPremiumPlan("monthly");
-    document.getElementById("premiumModal").classList.remove("hidden");
-    document.getElementById("premiumUpiId").innerText=flag("premium_upi_id")||"ashifmd400@upi";
-}
+async function refreshCurrentUser(){if(!STATE.user||!STATE.user.phone)return;try{const fs=await waitForFS(3000);if(!fs||!fs.getUserByPhone)return;const fresh=await fs.getUserByPhone(STATE.user.phone);if(!fresh)return;const updated={...STATE.user,name:fresh.name||STATE.user.name,isPremium:fresh.isPremium===true,premiumUntil:fresh.premiumUntil||null,premiumPlan:fresh.premiumPlan||null,totalShops:fresh.totalShops||0,referralCode:fresh.referralCode||"",referredBy:fresh.referredBy||null,referralCount:fresh.referralCount||0};STATE.user=AUTH.set(updated);console.log("🔄 User refreshed:",updated.isPremium?"PREMIUM":"FREE")}catch(e){console.warn("User refresh failed:",e)}}
+function openPremiumModal(){if(!STATE.user){showToast(t("loginRequired"),"error");switchTab("auth");return}if(!flag("enable_premium")){showToast(STATE.lang==="hi"?"Premium जल्द आ रहा है!":"Premium coming soon!","info");return}document.getElementById("premiumMonthlyPrice").innerText=flag("premium_price_monthly");setPremiumPlan("monthly");document.getElementById("premiumModal").classList.remove("hidden");document.getElementById("premiumUpiId").innerText=flag("premium_upi_id")||"ashifmd400@upi"}
 function closePremiumModal(){document.getElementById("premiumModal").classList.add("hidden")}
-function setPremiumPlan(plan){
-    selectedPremiumPlan=plan;
-    const monthlyBtn=document.getElementById("planMonthlyBtn");
-    const yearlyBtn=document.getElementById("planYearlyBtn");
-    const priceEl=document.getElementById("premiumSelectedPrice");
-    const durEl=document.getElementById("premiumSelectedDuration");
-    if(plan==="monthly"){
-        monthlyBtn.classList.add("active");yearlyBtn.classList.remove("active");
-        priceEl.innerText="₹"+flag("premium_price_monthly");
-        durEl.innerHTML=STATE.lang==="hi"?"प्रति महीना":"per month";
-    }else{
-        monthlyBtn.classList.remove("active");yearlyBtn.classList.add("active");
-        priceEl.innerText="₹"+flag("premium_price_yearly");
-        durEl.innerHTML=STATE.lang==="hi"?"प्रति साल (60% बचत)":"per year (save 60%)";
-    }
-}
-async function requestPremium(){
-    if(!STATE.user)return;
-    const price=selectedPremiumPlan==="monthly"?flag("premium_price_monthly"):flag("premium_price_yearly");
-    const admin=(flag("premium_admin_phone")||GLOBAL_CONFIG.ADMIN_PHONE).replace(/\D/g,"");
-    const msg=encodeURIComponent("🙏 Premium Request\nName: "+(STATE.user.name||"")+"\nPhone: "+(STATE.user.phone||"")+"\nPlan: "+selectedPremiumPlan+"\nAmount: ₹"+price+"\nPayment screenshot attached.");
-    window.location.href="https://wa.me/"+admin+"?text="+msg;
-    closePremiumModal();
-    showToast(STATE.lang==="hi"?"WhatsApp खुल रहा है...":"Opening WhatsApp...","info");
-}
-function checkPremiumStatus(){
-    if(!STATE.user||!STATE.user.isPremium)return false;
-    if(!STATE.user.premiumUntil)return false;
-    if(STATE.user.premiumUntil<Date.now()){STATE.user.isPremium=false;AUTH.set(STATE.user);return false}
-    return true;
-}
-async function checkUserCountForPremium(){
-    try{
-        const fs=await waitForFS(3000);
-        if(!fs||!fs.getUserCount)return;
-        const count=await fs.getUserCount();
-        if(count>=flag("premium_unlock_at")&&!flag("enable_premium")){
-            STATE.currentFlags.enable_premium=true;
-            if(fs.saveSettings)await fs.saveSettings(STATE.currentFlags);
-            console.log("✅ Premium auto-enabled! Users:",count);
-        }
-    }catch(e){console.warn("User count check:",e)}
-}
-async function adminActivatePremium(phone,months){
-    if(!phone||phone.length<10){showToast("Phone number डालें","error");return}
-    try{
-        const fs=await waitForFS(3000);
-        if(!fs)return;
-        const digits=phone.replace(/\D/g,"");
-        const normalized="+"+digits;
-        let user=await fs.getUserByPhone(normalized);
-        if(!user){user=await fs.getUserByPhone(digits)}
-        if(!user){showToast("❌ User not found: "+normalized,"error");return}
-        const until=Date.now()+(months*30*86400000);
-        await fs.updateUser(user.id,{isPremium:true,premiumUntil:until,premiumPlan:months>=12?"yearly":"monthly",premiumActivatedAt:Date.now()});
-        showToast("✅ Premium activated for "+normalized,"success");
-        await renderAdminContent();
-    }catch(e){console.warn(e);showToast("Failed: "+e.message,"error")}
-}
-async function savePremiumSettings(){
-    const upi=document.getElementById("adminUpiInput").value.trim();
-    const phone=document.getElementById("adminPhoneInput").value.trim();
-    if(!upi||upi.length<3){showToast("UPI ID सही डालें","error");return}
-    if(!phone||phone.length<10){showToast("Phone number सही डालें","error");return}
-    STATE.currentFlags.premium_upi_id=upi;
-    STATE.currentFlags.premium_admin_phone=phone;
-    try{
-        const fs=await waitForFS(2000);
-        if(fs&&fs.saveSettings)await fs.saveSettings(STATE.currentFlags);
-        showToast("✅ Settings saved","success");
-        await renderAdminContent();
-    }catch(e){console.warn(e);showToast("Failed","error")}
-}
-async function renderPremiumUsersList(){
-    const el=document.getElementById("premiumUsersList");
-    if(!el)return;
-    try{
-        const fs=await waitForFS(3000);
-        if(!fs||!fs.getAllUsers){el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">⚠️ getAllUsers missing</div>';return}
-        const users=await fs.getAllUsers();
-        const premium=users.filter(u=>u.isPremium===true&&u.premiumUntil>Date.now());
-        if(premium.length===0){el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">Koi premium user nahi</div>';return}
-        el.innerHTML=premium.map(u=>{
-            const daysLeft=Math.ceil((u.premiumUntil-Date.now())/86400000);
-            const plan=(u.premiumPlan||"monthly").toUpperCase();
-            const refs=u.referralCount||0;
-            return `<div style="background:rgba(0,0,0,.2);padding:10px;border-radius:8px;margin-bottom:6px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:12px;font-weight:800;">${Utils.esc(u.name||"User")}</div>
-                        <div style="font-size:10px;opacity:.75;">${Utils.esc(u.phone||"")}</div>
-                        <div style="font-size:9px;opacity:.6;">Refs: ${refs}</div>
-                    </div>
-                    <div style="text-align:right;">
-                        <div style="font-size:10px;font-weight:800;color:#fbbf24;">⭐ ${plan}</div>
-                        <div style="font-size:10px;opacity:.75;">${daysLeft} days left</div>
-                    </div>
-                </div>
-            </div>`;
-        }).join("");
-    }catch(e){console.warn(e);el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">Error</div>'}
-}
-function renderGoldCard(){
-    const wrap=document.getElementById("goldCardWrap");
-    if(!wrap)return;
-    const isPremium=checkPremiumStatus();
-    if(!isPremium){wrap.style.display="none";return}
-    wrap.style.display="block";
-    const userName=STATE.user.name||"User";
-    const userPhone=STATE.user.phone||"";
-    document.getElementById("gcUserName").innerText=userName;
-    document.getElementById("gcUserPhone").innerText=userPhone;
-    const last4=userPhone.replace(/\D/g,"").slice(-4)||"0000";
-    document.getElementById("gcLast4").innerText=last4;
-    const until=STATE.user.premiumUntil||Date.now();
-    const d=new Date(until);
-    const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-    const expiryStr=months[d.getMonth()]+" "+d.getFullYear();
-    document.getElementById("gcExpiry").innerText=expiryStr;
-    const plan=STATE.user.premiumPlan||"monthly";
-    document.getElementById("gcPlan").innerText=plan.toUpperCase();
-    const daysLeft=Math.max(0,Math.ceil((until-Date.now())/86400000));
-    document.getElementById("gcDaysLeft").innerText=daysLeft;
-}
-function renderReferralCard(){
-    const wrap=document.getElementById("referralCardWrap");
-    if(!wrap)return;
-    if(!flag("enable_premium")||!flag("enable_referral")){wrap.style.display="none";return}
-    if(!STATE.user){wrap.style.display="none";return}
-    wrap.style.display="block";
-    const el=document.getElementById("myReferralCode");
-    if(el)el.innerText=STATE.user.referralCode||"------";
-    const cnt=document.getElementById("myReferralCount");
-    if(cnt)cnt.innerText=STATE.user.referralCount||0;
-}
-function copyReferralCode(){
-    const code=STATE.user?.referralCode||"";
-    if(!code){showToast("Code nahi hai","error");return}
-    navigator.clipboard.writeText(code).then(()=>showToast("Code copied!","success")).catch(()=>{
-        const ta=document.createElement("textarea");ta.value=code;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);showToast("Code copied!","success");
-    });
-}
-function shareReferral(){
-    const code=STATE.user?.referralCode||"";
-    const url=location.origin+location.pathname;
-    const text="🎁 Apna Chhetr app join karo!\n\nMera referral code: "+code+"\n\n1 friend = 1 month Free Premium!\n\n";
-    if(navigator.share){navigator.share({title:"Apna Chhetr",text:text,url:url}).catch(()=>{})}else{copyReferralCode()}
-}
-function shareReferralWhatsApp(){
-    const code=STATE.user?.referralCode||"";
-    const url=location.origin+location.pathname;
-    const text=encodeURIComponent("🎁 *Apna Chhetr* app join karo!\n\n🔑 Mera referral code: *"+code+"*\n\n✨ 1 friend refer karne pe 1 mahina Free Premium!\n\n👉 "+url);
-    window.location.href="https://wa.me/?text="+text;
-}
-async function requestNotificationPermission(){
-    if(!("Notification" in window))return false;
-    if(Notification.permission==="granted")return true;
-    if(Notification.permission==="denied")return false;
-    try{const perm=await Notification.requestPermission();return perm==="granted"}catch(e){return false}
-}
-function showLocalNotification(title,body){
-    if(!("Notification" in window)||Notification.permission!=="granted")return;
-    try{new Notification(title,{body:body,icon:"icon-512.png",badge:"icon-512.png",tag:"premium-expiry",requireInteraction:true})}catch(e){console.warn("Notification failed:",e)}
-}
-async function checkPremiumExpiry(){
-    if(!flag("enable_premium"))return;
-    if(!STATE.user||!STATE.user.isPremium)return;
-    if(!STATE.user.premiumUntil)return;
-    const daysLeft=Math.ceil((STATE.user.premiumUntil-Date.now())/86400000);
-    if(daysLeft<=0){STATE.user.isPremium=false;AUTH.set(STATE.user);return}
-    const lastNotified=parseInt(localStorage.getItem("ac_premium_notified")||"0");
-    const today=Math.floor(Date.now()/86400000);
-    if(lastNotified===today)return;
-    let shouldNotify=false,title="",body="";
-    if(daysLeft<=1){title="⚠️ Premium Expiring Today!";body="Aapki Premium membership aaj khatam ho rahi hai. Renew karein!";shouldNotify=true}
-    else if(daysLeft<=3){title="⏰ Premium "+daysLeft+" Days Left";body="Sirf "+daysLeft+" din bache hain. Renew karein.";shouldNotify=true}
-    else if(daysLeft<=7){title="⭐ Premium "+daysLeft+" Days Left";body="Premium "+daysLeft+" din me khatam hogi. Renew karein!";shouldNotify=true}
-    if(shouldNotify){
-        const granted=await requestNotificationPermission();
-        if(granted){showLocalNotification(title,body)}else{showToast(title+" — "+body,"info")}
-        localStorage.setItem("ac_premium_notified",String(today));
-    }
-}
-/* ===== END PREMIUM SYSTEM ===== */
-
-/* ===== REPORT SYSTEM ===== */
-function reportShop(shopId){
-  if(flag("require_login_report")&&!STATE.user){showToast(t("reportLogin"),"error");switchTab("auth");return}
-  const reportedKey="ac_reported_"+shopId;
-  if(localStorage.getItem(reportedKey)){showToast(t("reportOnce"),"info");return}
-  reportTarget=shopId;reportReason="";
-  document.querySelectorAll(".report-reason-opt").forEach(el=>el.classList.remove("selected"));
-  document.getElementById("reportSubmitBtn").disabled=true;
-  document.getElementById("reportModal").classList.remove("hidden");
-}
-document.addEventListener("click",e=>{
-  const opt=e.target.closest(".report-reason-opt");
-  if(!opt)return;
-  document.querySelectorAll(".report-reason-opt").forEach(el=>el.classList.remove("selected"));
-  opt.classList.add("selected");
-  reportReason=opt.dataset.r;
-  document.getElementById("reportSubmitBtn").disabled=false;
-});
+function setPremiumPlan(plan){selectedPremiumPlan=plan;const monthlyBtn=document.getElementById("planMonthlyBtn");const yearlyBtn=document.getElementById("planYearlyBtn");const priceEl=document.getElementById("premiumSelectedPrice");const durEl=document.getElementById("premiumSelectedDuration");if(plan==="monthly"){monthlyBtn.classList.add("active");yearlyBtn.classList.remove("active");priceEl.innerText="₹"+flag("premium_price_monthly");durEl.innerHTML=STATE.lang==="hi"?"प्रति महीना":"per month"}else{monthlyBtn.classList.remove("active");yearlyBtn.classList.add("active");priceEl.innerText="₹"+flag("premium_price_yearly");durEl.innerHTML=STATE.lang==="hi"?"प्रति साल (60% बचत)":"per year (save 60%)"}}
+async function requestPremium(){if(!STATE.user)return;const price=selectedPremiumPlan==="monthly"?flag("premium_price_monthly"):flag("premium_price_yearly");const admin=(flag("premium_admin_phone")||GLOBAL_CONFIG.ADMIN_PHONE).replace(/\D/g,"");const msg=encodeURIComponent("🙏 Premium Request\nName: "+(STATE.user.name||"")+"\nPhone: "+(STATE.user.phone||"")+"\nPlan: "+selectedPremiumPlan+"\nAmount: ₹"+price+"\nPayment screenshot attached.");window.location.href="https://wa.me/"+admin+"?text="+msg;closePremiumModal();showToast(STATE.lang==="hi"?"WhatsApp खुल रहा है...":"Opening WhatsApp...","info")}
+function checkPremiumStatus(){if(!STATE.user||!STATE.user.isPremium)return false;if(!STATE.user.premiumUntil)return false;if(STATE.user.premiumUntil<Date.now()){STATE.user.isPremium=false;AUTH.set(STATE.user);return false}return true}
+async function checkUserCountForPremium(){try{const fs=await waitForFS(3000);if(!fs||!fs.getUserCount)return;const count=await fs.getUserCount();if(count>=flag("premium_unlock_at")&&!flag("enable_premium")){STATE.currentFlags.enable_premium=true;if(fs.saveSettings)await fs.saveSettings(STATE.currentFlags);console.log("✅ Premium auto-enabled! Users:",count)}}catch(e){console.warn("User count check:",e)}}
+async function adminActivatePremium(phone,months){if(!phone||phone.length<10){showToast("Phone number डालें","error");return}try{const fs=await waitForFS(3000);if(!fs)return;const digits=phone.replace(/\D/g,"");const normalized="+"+digits;let user=await fs.getUserByPhone(normalized);if(!user){user=await fs.getUserByPhone(digits)}if(!user){showToast("❌ User not found: "+normalized,"error");return}const until=Date.now()+(months*30*86400000);await fs.updateUser(user.id,{isPremium:true,premiumUntil:until,premiumPlan:months>=12?"yearly":"monthly",premiumActivatedAt:Date.now()});showToast("✅ Premium activated for "+normalized,"success");await renderAdminContent()}catch(e){console.warn(e);showToast("Failed: "+e.message,"error")}}
+async function savePremiumSettings(){const upi=document.getElementById("adminUpiInput").value.trim();const phone=document.getElementById("adminPhoneInput").value.trim();if(!upi||upi.length<3){showToast("UPI ID सही डालें","error");return}if(!phone||phone.length<10){showToast("Phone number सही डालें","error");return}STATE.currentFlags.premium_upi_id=upi;STATE.currentFlags.premium_admin_phone=phone;try{const fs=await waitForFS(2000);if(fs&&fs.saveSettings)await fs.saveSettings(STATE.currentFlags);showToast("✅ Settings saved","success");await renderAdminContent()}catch(e){console.warn(e);showToast("Failed","error")}}
+async function renderPremiumUsersList(){const el=document.getElementById("premiumUsersList");if(!el)return;try{const fs=await waitForFS(3000);if(!fs||!fs.getAllUsers){el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">⚠️ getAllUsers missing</div>';return}const users=await fs.getAllUsers();const premium=users.filter(u=>u.isPremium===true&&u.premiumUntil>Date.now());if(premium.length===0){el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">Koi premium user nahi</div>';return}el.innerHTML=premium.map(u=>{const daysLeft=Math.ceil((u.premiumUntil-Date.now())/86400000);const plan=(u.premiumPlan||"monthly").toUpperCase();const refs=u.referralCount||0;return`<div style="background:rgba(0,0,0,.2);padding:10px;border-radius:8px;margin-bottom:6px;"><div style="display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:12px;font-weight:800;">${Utils.esc(u.name||"User")}</div><div style="font-size:10px;opacity:.75;">${Utils.esc(u.phone||"")}</div><div style="font-size:9px;opacity:.6;">Refs: ${refs}</div></div><div style="text-align:right;"><div style="font-size:10px;font-weight:800;color:#fbbf24;">⭐ ${plan}</div><div style="font-size:10px;opacity:.75;">${daysLeft} days left</div></div></div></div>`}).join("")}catch(e){console.warn(e);el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">Error</div>'}}
+function renderGoldCard(){const wrap=document.getElementById("goldCardWrap");if(!wrap)return;const isPremium=checkPremiumStatus();if(!isPremium){wrap.style.display="none";return}wrap.style.display="block";const userName=STATE.user.name||"User";const userPhone=STATE.user.phone||"";document.getElementById("gcUserName").innerText=userName;document.getElementById("gcUserPhone").innerText=userPhone;const last4=userPhone.replace(/\D/g,"").slice(-4)||"0000";document.getElementById("gcLast4").innerText=last4;const until=STATE.user.premiumUntil||Date.now();const d=new Date(until);const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];const expiryStr=months[d.getMonth()]+" "+d.getFullYear();document.getElementById("gcExpiry").innerText=expiryStr;const plan=STATE.user.premiumPlan||"monthly";document.getElementById("gcPlan").innerText=plan.toUpperCase();const daysLeft=Math.max(0,Math.ceil((until-Date.now())/86400000));document.getElementById("gcDaysLeft").innerText=daysLeft}
+function renderReferralCard(){const wrap=document.getElementById("referralCardWrap");if(!wrap)return;if(!flag("enable_premium")||!flag("enable_referral")){wrap.style.display="none";return}if(!STATE.user){wrap.style.display="none";return}wrap.style.display="block";const el=document.getElementById("myReferralCode");if(el)el.innerText=STATE.user.referralCode||"------";const cnt=document.getElementById("myReferralCount");if(cnt)cnt.innerText=STATE.user.referralCount||0}
+function copyReferralCode(){const code=STATE.user?.referralCode||"";if(!code){showToast("Code nahi hai","error");return}navigator.clipboard.writeText(code).then(()=>showToast("Code copied!","success")).catch(()=>{const ta=document.createElement("textarea");ta.value=code;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);showToast("Code copied!","success")})}
+function shareReferral(){const code=STATE.user?.referralCode||"";const url=location.origin+location.pathname;const text="🎁 Apna Chhetr app join karo!\n\nMera referral code: "+code+"\n\n1 friend = 1 month Free Premium!\n\n";if(navigator.share){navigator.share({title:"Apna Chhetr",text:text,url:url}).catch(()=>{})}else{copyReferralCode()}}
+function shareReferralWhatsApp(){const code=STATE.user?.referralCode||"";const url=location.origin+location.pathname;const text=encodeURIComponent("🎁 *Apna Chhetr* app join karo!\n\n🔑 Mera referral code: *"+code+"*\n\n✨ 1 friend refer karne pe 1 mahina Free Premium!\n\n👉 "+url);window.location.href="https://wa.me/?text="+text}
+async function requestNotificationPermission(){if(!("Notification" in window))return false;if(Notification.permission==="granted")return true;if(Notification.permission==="denied")return false;try{const perm=await Notification.requestPermission();return perm==="granted"}catch(e){return false}}
+function showLocalNotification(title,body){if(!("Notification" in window)||Notification.permission!=="granted")return;try{new Notification(title,{body:body,icon:"icon-512.png",badge:"icon-512.png",tag:"premium-expiry",requireInteraction:true})}catch(e){console.warn("Notification failed:",e)}}
+async function checkPremiumExpiry(){if(!flag("enable_premium"))return;if(!STATE.user||!STATE.user.isPremium)return;if(!STATE.user.premiumUntil)return;const daysLeft=Math.ceil((STATE.user.premiumUntil-Date.now())/86400000);if(daysLeft<=0){STATE.user.isPremium=false;AUTH.set(STATE.user);return}const lastNotified=parseInt(localStorage.getItem("ac_premium_notified")||"0");const today=Math.floor(Date.now()/86400000);if(lastNotified===today)return;let shouldNotify=false,title="",body="";if(daysLeft<=1){title="⚠️ Premium Expiring Today!";body="Aapki Premium membership aaj khatam ho rahi hai. Renew karein!";shouldNotify=true}else if(daysLeft<=3){title="⏰ Premium "+daysLeft+" Days Left";body="Sirf "+daysLeft+" din bache hain. Renew karein.";shouldNotify=true}else if(daysLeft<=7){title="⭐ Premium "+daysLeft+" Days Left";body="Premium "+daysLeft+" din me khatam hogi. Renew karein!";shouldNotify=true}if(shouldNotify){const granted=await requestNotificationPermission();if(granted){showLocalNotification(title,body)}else{showToast(title+" — "+body,"info")}localStorage.setItem("ac_premium_notified",String(today))}}
+function reportShop(shopId){if(flag("require_login_report")&&!STATE.user){showToast(t("reportLogin"),"error");switchTab("auth");return}const reportedKey="ac_reported_"+shopId;if(localStorage.getItem(reportedKey)){showToast(t("reportOnce"),"info");return}reportTarget=shopId;reportReason="";document.querySelectorAll(".report-reason-opt").forEach(el=>el.classList.remove("selected"));document.getElementById("reportSubmitBtn").disabled=true;document.getElementById("reportModal").classList.remove("hidden")}
+document.addEventListener("click",e=>{const opt=e.target.closest(".report-reason-opt");if(!opt)return;document.querySelectorAll(".report-reason-opt").forEach(el=>el.classList.remove("selected"));opt.classList.add("selected");reportReason=opt.dataset.r;document.getElementById("reportSubmitBtn").disabled=false});
 function closeReportModal(){document.getElementById("reportModal").classList.add("hidden");reportTarget=null;reportReason=""}
-async function submitReport(){
-  if(!reportTarget||!reportReason)return;
-  const shopId=reportTarget;
-  document.getElementById("reportModal").classList.add("hidden");
-  try{
-    const fs=await waitForFS(3000);
-    if(fs&&fs.addReport){await fs.addReport({shopId,reason:reportReason,reportedAt:Date.now(),byPhone:STATE.user?STATE.user.phone:"guest",byName:STATE.user?STATE.user.name:"Guest"})}
-    localStorage.setItem("ac_reported_"+shopId,"1");
-    showToast(t("reported"),"success");
-  }catch(e){console.warn(e);showToast("Failed","error")}
-  reportTarget=null;reportReason="";
-}
-/* ===== END REPORT SYSTEM ===== */
-
+async function submitReport(){if(!reportTarget||!reportReason)return;const shopId=reportTarget;document.getElementById("reportModal").classList.add("hidden");try{const fs=await waitForFS(3000);if(fs&&fs.addReport){await fs.addReport({shopId,reason:reportReason,reportedAt:Date.now(),byPhone:STATE.user?STATE.user.phone:"guest",byName:STATE.user?STATE.user.name:"Guest"})}localStorage.setItem("ac_reported_"+shopId,"1");showToast(t("reported"),"success")}catch(e){console.warn(e);showToast("Failed","error")}reportTarget=null;reportReason=""}
 function initAddShopSelects(){document.getElementById("addMainCat").innerHTML=`<option value="" disabled selected>-- ${STATE.lang==="hi"?"चुनें":"Select"} --</option>`+MAIN_CATS.map(c=>`<option value="${c.key}">${c.icon} ${STATE.lang==="hi"?c.hi:c.en}</option>`).join("")}
 function updateSubCats(){const main=document.getElementById("addMainCat").value;const subWrap=document.getElementById("subCatField");const jobWrap=document.getElementById("jobTypeField");const subSel=document.getElementById("addSubCat");const nameLabel=document.getElementById("nameLabel");subWrap.classList.remove("hidden");if(main==="रोज़गार"){jobWrap.classList.remove("hidden");nameLabel.innerHTML=`<span class="hi">नाम *</span><span class="en">Name *</span>`}else{jobWrap.classList.add("hidden");nameLabel.innerHTML=`<span class="hi">नाम (दुकान / सर्विस) *</span><span class="en">Name *</span>`}const list=SUBCATS[main]||["अन्य"];subSel.innerHTML=`<option value="" disabled selected>-- ${STATE.lang==="hi"?"चुनें":"Select"} --</option>`+list.map(s=>`<option value="${Utils.esc(s)}">${Utils.esc(s)}</option>`).join("")}
 function setJobType(type){document.getElementById("rbHiring").classList.toggle("active",type==="hiring");document.getElementById("rbSeeking").classList.toggle("active",type==="seeking");document.querySelector(`input[name="jobType"][value="${type}"]`).checked=true}
@@ -1618,45 +1074,11 @@ window.FS={
   async deleteShop(id){await deleteDoc(doc(db,"shops",id));return true},
   async deleteStory(id){await deleteDoc(doc(db,"stories",id));return true},
   async getUserByPhone(phone){const q=query(USERS,where("phone","==",phone),limit(1));const snap=await getDocs(q);if(snap.empty)return null;const d=snap.docs[0];return{id:d.id,...d.data()}},
-  async createUser(phone,name,country,referralCode){
-    const existing=await this.getUserByPhone(phone);
-    if(existing)return existing;
-    const myCode=(name||"USER").replace(/[^A-Za-z]/g,"").toUpperCase().slice(0,4)+phone.replace(/\D/g,"").slice(-4);
-    const ref={phone,name,country,createdAt:Date.now(),isPremium:false,premiumUntil:null,referralCode:myCode,referredBy:referralCode||null,referralCount:0};
-    const r=await addDoc(USERS,ref);
-    return{id:r.id,...ref};
-  },
+  async createUser(phone,name,country,referralCode){const existing=await this.getUserByPhone(phone);if(existing)return existing;const myCode=(name||"USER").replace(/[^A-Za-z]/g,"").toUpperCase().slice(0,4)+phone.replace(/\D/g,"").slice(-4);const ref={phone,name,country,createdAt:Date.now(),isPremium:false,premiumUntil:null,referralCode:myCode,referredBy:referralCode||null,referralCount:0};const r=await addDoc(USERS,ref);return{id:r.id,...ref}},
   async getUserCount(){const snap=await getDocs(USERS);return snap.size},
   async updateUser(id,patch){await updateDoc(doc(db,"users",id),patch);return true},
   async getAllUsers(){const snap=await getDocs(USERS);return snap.docs.map(d=>({id:d.id,...d.data()}))},
-  async processReferral(code,newUserPhone,newUserName){
-    if(!code)return null;
-    const q=query(USERS,where("referralCode","==",code),limit(1));
-    const snap=await getDocs(q);
-    if(snap.empty)return null;
-    const refDoc=snap.docs[0];
-    const refData=refDoc.data();
-    if(refData.phone===newUserPhone)return null;
-    const newUser=await this.getUserByPhone(newUserPhone);
-    if(newUser&&newUser.referredBy)return null;
-    const newCount=(refData.referralCount||0)+1;
-    const yearlyThreshold=10;
-    let premiumMonths=1;
-    if(newCount>=yearlyThreshold)premiumMonths=12;
-    const currentUntil=(refData.premiumUntil&&refData.premiumUntil>Date.now())?refData.premiumUntil:Date.now();
-    const newUntil=currentUntil+(premiumMonths*30*86400000);
-    await updateDoc(doc(db,"users",refDoc.id),{
-      referralCount:newCount,
-      isPremium:true,
-      premiumUntil:newUntil,
-      premiumPlan:newCount>=yearlyThreshold?"yearly":"monthly",
-      lastReferralAt:Date.now()
-    });
-    if(newUser&&newUser.id){
-      await updateDoc(doc(db,"users",newUser.id),{referredBy:code});
-    }
-    return{referrerId:refDoc.id,newCount,premiumMonths};
-  },
+  async processReferral(code,newUserPhone,newUserName){if(!code)return null;const q=query(USERS,where("referralCode","==",code),limit(1));const snap=await getDocs(q);if(snap.empty)return null;const refDoc=snap.docs[0];const refData=refDoc.data();if(refData.phone===newUserPhone)return null;const newUser=await this.getUserByPhone(newUserPhone);if(newUser&&newUser.referredBy)return null;const newCount=(refData.referralCount||0)+1;const yearlyThreshold=10;let premiumMonths=1;if(newCount>=yearlyThreshold)premiumMonths=12;const currentUntil=(refData.premiumUntil&&refData.premiumUntil>Date.now())?refData.premiumUntil:Date.now();const newUntil=currentUntil+(premiumMonths*30*86400000);await updateDoc(doc(db,"users",refDoc.id),{referralCount:newCount,isPremium:true,premiumUntil:newUntil,premiumPlan:newCount>=yearlyThreshold?"yearly":"monthly",lastReferralAt:Date.now()});if(newUser&&newUser.id){await updateDoc(doc(db,"users",newUser.id),{referredBy:code})}return{referrerId:refDoc.id,newCount,premiumMonths}},
   async addReport(obj){const ref=await addDoc(REPORTS,obj);return{id:ref.id,...obj}},
   async getAllReports(){const snap=await getDocs(REPORTS);return snap.docs.map(d=>({id:d.id,...d.data()}))},
   async banUser(phone,reason){const snap=await getDocs(BANNED);const existing=snap.docs.find(d=>d.data().phone===phone);if(existing)return;await addDoc(BANNED,{phone,reason:reason||"Banned",bannedAt:Date.now()})},
@@ -1676,4 +1098,4 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 </body>
-   </html>
+    </html>
