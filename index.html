@@ -200,29 +200,75 @@ body.theme-dark .bg-amber{background:rgba(217,119,6,.14);color:#FCD34D}
 .report-cancel-btn{background:var(--primary-light);color:var(--text-dark);border:1px solid var(--border)!important}
 .report-submit-btn{background:var(--danger);color:#fff}
 .report-submit-btn:disabled{opacity:.4}
-.premium-gold-card{background:linear-gradient(135deg,#0F1729 0%,#0B2239 50%,#0A3D2E 100%);border-radius:14px;padding:14px 16px;margin-bottom:14px;position:relative;overflow:hidden;border:1px solid rgba(217,169,32,.35);box-shadow:0 6px 18px rgba(15,23,41,.26);display:flex;flex-direction:column;min-height:140px}
-.premium-gold-card::before{content:'';position:absolute;top:-50%;right:-40%;width:150px;height:150px;background:radial-gradient(circle,rgba(217,169,32,.18),transparent 70%);border-radius:50%;pointer-events:none}
+
+/* ============================================================
+   PREMIUM CARD — 3 PLAN COLORS + CIRCULAR BADGE
+   ============================================================ */
+.premium-gold-card{background:linear-gradient(135deg,#0F1729 0%,#0B2239 50%,#0A3D2E 100%);border-radius:16px;padding:16px 18px;margin-bottom:14px;position:relative;overflow:hidden;border:1.5px solid rgba(217,169,32,.45);box-shadow:0 8px 24px rgba(15,23,41,.35);display:flex;flex-direction:column;min-height:180px}
+.premium-gold-card::before{content:'';position:absolute;top:-50%;right:-40%;width:200px;height:200px;background:radial-gradient(circle,rgba(217,169,32,.20),transparent 70%);border-radius:50%;pointer-events:none}
+.premium-gold-card::after{content:'';position:absolute;bottom:-40%;left:-30%;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%);border-radius:50%;pointer-events:none}
+.premium-gold-card.plan-monthly{background:linear-gradient(135deg,#0F2557 0%,#1E3A8A 50%,#1D4ED8 100%);border-color:rgba(96,165,250,.55)}
+.premium-gold-card.plan-monthly::before{background:radial-gradient(circle,rgba(147,197,253,.25),transparent 70%)}
+.premium-gold-card.plan-quarterly{background:linear-gradient(135deg,#052E24 0%,#064E3B 50%,#047857 100%);border-color:rgba(74,222,128,.55)}
+.premium-gold-card.plan-quarterly::before{background:radial-gradient(circle,rgba(74,222,128,.25),transparent 70%)}
+.premium-gold-card.plan-yearly{background:linear-gradient(135deg,#0A0A0A 0%,#1A1A1A 50%,#0F0F0F 100%);border-color:rgba(217,169,32,.7)}
+.premium-gold-card.plan-yearly::before{background:radial-gradient(circle,rgba(217,169,32,.30),transparent 70%)}
 .premium-gold-card .gc-inner{position:relative;z-index:3;display:flex;flex-direction:column;gap:10px;flex:1;justify-content:space-between}
 .gc-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .premium-gold-card .gc-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#D9A920,#B8860B);color:#0F1729;padding:3px 10px 3px 7px;border-radius:50px;font-size:8.5px;font-weight:900;letter-spacing:.7px;text-transform:uppercase}
 .premium-gold-card .gc-badge::before{content:'👑';font-size:9px}
+.premium-gold-card.plan-monthly .gc-badge{background:linear-gradient(135deg,#93C5FD,#3B82F6);color:#0F1729}
+.premium-gold-card.plan-quarterly .gc-badge{background:linear-gradient(135deg,#86EFAC,#22C55E);color:#052E24}
 .premium-gold-card .gc-chip{width:26px;height:18px;background:linear-gradient(135deg,#F4E5A1,#D9A920,#B8860B);border-radius:4px;position:relative;border:1px solid rgba(255,255,255,.35);margin-left:auto}
 .premium-gold-card .gc-chip::before{content:'';position:absolute;top:4px;left:4px;right:4px;height:1.2px;background:rgba(90,60,10,.55);box-shadow:0 5px 0 rgba(90,60,10,.55),0 10px 0 rgba(90,60,10,.55)}
-.premium-gold-card .gc-name{font-size:15px;font-weight:800;color:#fff;letter-spacing:.2px;line-height:1.2;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.premium-gold-card.plan-monthly .gc-chip{background:linear-gradient(135deg,#DBEAFE,#93C5FD,#3B82F6)}
+.premium-gold-card.plan-monthly .gc-chip::before{background:rgba(15,37,87,.6);box-shadow:0 5px 0 rgba(15,37,87,.6),0 10px 0 rgba(15,37,87,.6)}
+.premium-gold-card.plan-quarterly .gc-chip{background:linear-gradient(135deg,#DCFCE7,#86EFAC,#22C55E)}
+.premium-gold-card.plan-quarterly .gc-chip::before{background:rgba(5,46,36,.6);box-shadow:0 5px 0 rgba(5,46,36,.6),0 10px 0 rgba(5,46,36,.6)}
+.premium-gold-card .gc-applogo{display:flex;align-items:center;gap:5px;margin-top:2px;margin-bottom:4px}
+.premium-gold-card .gc-applogo .gc-logo-ico{font-size:16px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.premium-gold-card .gc-applogo .gc-logo-txt{font-size:10px;font-weight:800;color:#F4E5A1;letter-spacing:.5px;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.premium-gold-card.plan-monthly .gc-applogo .gc-logo-txt{color:#DBEAFE}
+.premium-gold-card.plan-quarterly .gc-applogo .gc-logo-txt{color:#DCFCE7}
+.premium-gold-card .gc-name{font-size:15px;font-weight:800;color:#fff;letter-spacing:.2px;line-height:1.2;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:62%}
 .premium-gold-card .gc-phone{font-size:10.5px;font-weight:600;color:#C9A961;letter-spacing:.4px;margin-bottom:8px}
+.premium-gold-card.plan-monthly .gc-phone{color:#BFDBFE}
+.premium-gold-card.plan-quarterly .gc-phone{color:#BBF7D0}
 .premium-gold-card .gc-label{font-size:7.5px;font-weight:800;color:#D9A920;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:1px}
-.premium-gold-card .gc-cardno{font-size:11px;font-weight:600;color:#F4E5A1;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.premium-gold-card.plan-monthly .gc-label{color:#93C5FD}
+.premium-gold-card.plan-quarterly .gc-label{color:#86EFAC}
+.premium-gold-card .gc-cardno{font-size:11px;font-weight:600;color:#F4E5A1;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;max-width:62%}
 .premium-gold-card .gc-cardno .gc-last4{color:#D9A920;font-weight:800;font-size:12px;letter-spacing:1.3px}
-.premium-gold-card .gc-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(217,169,32,.45),transparent);margin-bottom:8px}
-.premium-gold-card .gc-bottom{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.premium-gold-card.plan-monthly .gc-cardno{color:#DBEAFE}
+.premium-gold-card.plan-monthly .gc-cardno .gc-last4{color:#93C5FD}
+.premium-gold-card.plan-quarterly .gc-cardno{color:#DCFCE7}
+.premium-gold-card.plan-quarterly .gc-cardno .gc-last4{color:#86EFAC}
+.premium-gold-card .gc-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(217,169,32,.45),transparent);margin-bottom:8px;max-width:62%}
+.premium-gold-card.plan-monthly .gc-divider{background:linear-gradient(90deg,transparent,rgba(96,165,250,.55),transparent)}
+.premium-gold-card.plan-quarterly .gc-divider{background:linear-gradient(90deg,transparent,rgba(74,222,128,.55),transparent)}
+.premium-gold-card .gc-bottom{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;max-width:62%}
 .premium-gold-card .gc-info-block{flex:1}
 .premium-gold-card .gc-info-block .gc-icon{font-size:10px;margin-right:3px}
 .premium-gold-card .gc-info-label{font-size:7.5px;font-weight:800;color:#D9A920;letter-spacing:.9px;text-transform:uppercase;margin-bottom:2px;display:flex;align-items:center}
+.premium-gold-card.plan-monthly .gc-info-label{color:#93C5FD}
+.premium-gold-card.plan-quarterly .gc-info-label{color:#86EFAC}
 .premium-gold-card .gc-info-value{font-size:11.5px;font-weight:800;color:#fff;letter-spacing:.3px;text-shadow:0 1px 3px rgba(0,0,0,.4)}
-.premium-gold-card .gc-days-pill{position:relative;margin:4px auto 0;background:rgba(15,23,41,.6);border:1px solid rgba(217,169,32,.4);color:#F4E5A1;padding:4px 12px;border-radius:50px;font-size:10px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:5px;align-self:center}
-.premium-gold-card .gc-days-pill .gc-days-num{font-size:12px;font-weight:800;color:#fff}
 .premium-gold-card .gc-corner-deco{position:absolute;top:0;right:0;width:60px;height:60px;pointer-events:none;z-index:1;opacity:.6}
 .premium-gold-card .gc-corner-deco::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-top:60px solid rgba(217,169,32,.08);border-left:60px solid transparent}
+
+/* Circular plan badge */
+.premium-gold-card .gc-plan-badge{position:absolute;top:50%;right:16px;transform:translateY(-50%);width:86px;height:86px;border-radius:50%;background:radial-gradient(circle,#F4E5A1 0%,#D9A920 60%,#B8860B 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,.35);box-shadow:0 6px 20px rgba(217,169,32,.5),inset 0 0 12px rgba(255,255,255,.3);z-index:4}
+.premium-gold-card .gc-plan-badge::before{content:'👑';position:absolute;top:-12px;font-size:16px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.premium-gold-card .gc-plan-badge .gc-plan-num{font-size:26px;font-weight:900;color:#fff;line-height:1;text-shadow:0 2px 4px rgba(0,0,0,.4)}
+.premium-gold-card .gc-plan-badge .gc-plan-unit{font-size:9px;font-weight:900;color:#fff;letter-spacing:.6px;margin-top:2px;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.premium-gold-card.plan-monthly .gc-plan-badge{background:radial-gradient(circle,#DBEAFE 0%,#60A5FA 60%,#2563EB 100%);box-shadow:0 6px 20px rgba(96,165,250,.5),inset 0 0 12px rgba(255,255,255,.3)}
+.premium-gold-card.plan-quarterly .gc-plan-badge{background:radial-gradient(circle,#DCFCE7 0%,#4ADE80 60%,#16A34A 100%);box-shadow:0 6px 20px rgba(74,222,128,.5),inset 0 0 12px rgba(255,255,255,.3)}
+.premium-gold-card.plan-yearly .gc-plan-badge{background:radial-gradient(circle,#F4E5A1 0%,#D9A920 60%,#B8860B 100%);box-shadow:0 6px 20px rgba(217,169,32,.6),inset 0 0 12px rgba(255,255,255,.3)}
+
+/* Legacy pills (kept for compatibility) */
+.premium-gold-card .gc-days-pill{position:relative;margin:4px auto 0;background:rgba(15,23,41,.6);border:1px solid rgba(217,169,32,.4);color:#F4E5A1;padding:4px 12px;border-radius:50px;font-size:10px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:5px;align-self:center}
+.premium-gold-card .gc-days-pill .gc-days-num{font-size:12px;font-weight:800;color:#fff}
+
 .toast-container{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:99999999;display:flex;flex-direction:column;gap:10px;pointer-events:none;width:90%;max-width:400px}
 .toast{background:#0F1729;color:#fff;padding:13px 18px;border-radius:12px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;transform:translateY(-16px);opacity:0;transition:all .25s ease;box-shadow:var(--shadow-lg)}
 .toast.show{transform:translateY(0);opacity:1}.toast.error{background:#7F1D1D;border-left:4px solid var(--danger)}.toast.success{background:#064E3B;border-left:4px solid var(--accent)}.toast.info{background:#1E3A8A;border-left:4px solid var(--info)}
@@ -243,7 +289,7 @@ input:checked+.slider{background:var(--accent)}input:checked+.slider:before{tran
 .ai-btn{background:var(--surface-soft);border:1px solid var(--border);color:var(--text-dark);padding:12px 14px;border-radius:10px;text-align:left;font-size:12.5px;font-weight:600;cursor:pointer;transition:background .15s ease}
 .ai-btn:active{background:var(--accent-soft);border-color:var(--accent)}
 .type-toggle{display:flex;gap:6px;margin-bottom:16px;background:var(--primary-light);padding:4px;border-radius:12px}
-.type-toggle button{flex:1;padding:10px;border:none;background:transparent;border-radius:9px;font-size:12px;font-weight:700;color:var(--text-muted);cursor:pointer}
+.type-toggle button{flex:1;padding:10px;border:none;background:transparent;border-radius:9px;font-size:11.5px;font-weight:700;color:var(--text-muted);cursor:pointer}
 .type-toggle button.active{background:var(--accent);color:#fff}
 .admin-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none}
 .admin-tabs::-webkit-scrollbar{display:none}
@@ -284,9 +330,10 @@ input:checked+.slider{background:var(--accent)}input:checked+.slider:before{tran
 .story-text-only .sub-text{font-size:13px;color:rgba(255,255,255,.75);margin-top:14px;font-weight:500}
 .story-offer-badge{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(24,168,120,.95);color:#fff;font-size:13px;font-weight:800;padding:10px 22px;border-radius:50px;text-align:center;white-space:nowrap;max-width:90%}
 body.theme-switching *{transition:none!important;animation-duration:0s!important}
-@media(max-width:360px){.brand-title{font-size:14.5px}main{padding:14px 12px 28px}.cat-card-v{padding:14px 6px 10px}.cat-card-v .cat-ico{width:42px;height:42px;font-size:19px}}
+@media(max-width:360px){.brand-title{font-size:14.5px}main{padding:14px 12px 28px}.cat-card-v{padding:14px 6px 10px}.cat-card-v .cat-ico{width:42px;height:42px;font-size:19px}.premium-gold-card .gc-plan-badge{width:72px;height:72px;right:12px}.premium-gold-card .gc-plan-badge .gc-plan-num{font-size:22px}}
 </style>
-   </head> <body class="lang-hi theme-light">
+   </head>
+   <body class="lang-hi theme-light">
 <div class="toast-container" id="toastBox" role="status"></div>
 <header class="app-header">
    <div class="header-top">
@@ -519,19 +566,27 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
             <p style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:4px;" id="profilePhone"></p>
             <p style="font-size:10px;color:var(--accent-dark);font-weight:800;margin-bottom:24px;">✅ <span class="hi">वेरिफाइड यूज़र</span><span class="en">Verified User</span></p>
             <div id="goldCardWrap" style="display:none;margin-bottom:14px;">
-                <div class="premium-gold-card" id="goldCard">
+                <div class="premium-gold-card plan-monthly" id="goldCard">
                     <div class="gc-corner-deco"></div>
+                    <div class="gc-plan-badge" id="gcPlanBadge">
+                        <div class="gc-plan-num" id="gcPlanNum">1</div>
+                        <div class="gc-plan-unit" id="gcPlanUnit">MONTH</div>
+                    </div>
                     <div class="gc-inner">
                         <div>
                             <div class="gc-badge-row">
                                 <div class="gc-badge">PREMIUM MEMBER</div>
                                 <div class="gc-chip"></div>
                             </div>
+                            <div class="gc-applogo">
+                                <span class="gc-logo-ico">🏘️</span>
+                                <span class="gc-logo-txt"><span class="hi">अपना क्षेत्र</span><span class="en">MY LOCAL AREA</span></span>
+                            </div>
                             <div class="gc-name" id="gcUserName">User Name</div>
                             <div class="gc-phone" id="gcUserPhone">+91 XXXXXXXXXX</div>
                             <div class="gc-label">Card Number</div>
                             <div class="gc-cardno" id="gcCardNo">
-                                <span>● ● ● ● &nbsp; ● ● ● ● &nbsp; ● ● ● ●</span>
+                                <span>●●●● ●●●● ●●●●</span>
                                 <span class="gc-last4" id="gcLast4">0000</span>
                             </div>
                             <div class="gc-divider"></div>
@@ -546,11 +601,6 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
                                 <div class="gc-info-value" id="gcPlan">MONTHLY</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="gc-days-pill">
-                        <span>⏱️</span>
-                        <span class="gc-days-num" id="gcDaysLeft">0</span>
-                        <span>days remaining</span>
                     </div>
                 </div>
             </div>
@@ -887,9 +937,10 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
     </div>
     <div class="ai-opts" id="aiOpts"></div>
   </div>
-                           </div> <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+               </div>
+               <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.6.5",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.6.6",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह नंबर पहले से रजिस्टर है!",invalidPhone:"सही नंबर डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Number already registered!",invalidPhone:"Enter valid phone.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -1044,10 +1095,10 @@ function setPremiumPlan(plan){selectedPremiumPlan=plan;const mBtn=document.getEl
 async function requestPremium(){if(!STATE.user)return;let price="";if(selectedPremiumPlan==="monthly")price=flag("premium_price_monthly");else if(selectedPremiumPlan==="quarterly")price=flag("premium_price_quarterly")||199;else price=flag("premium_price_yearly");const admin=(flag("premium_admin_phone")||GLOBAL_CONFIG.ADMIN_PHONE).replace(/\D/g,"");const msg=encodeURIComponent("🙏 Premium Request\nName: "+(STATE.user.name||"")+"\nPhone: "+(STATE.user.phone||"")+"\nPlan: "+selectedPremiumPlan+"\nAmount: ₹"+price+"\nPayment screenshot attached.");window.location.href="https://wa.me/"+admin+"?text="+msg;closePremiumModal();showToast(STATE.lang==="hi"?"WhatsApp खुल रहा है...":"Opening WhatsApp...","info")}
 function checkPremiumStatus(){if(!STATE.user||!STATE.user.isPremium)return false;if(!STATE.user.premiumUntil)return false;if(STATE.user.premiumUntil<Date.now()){STATE.user.isPremium=false;AUTH.set(STATE.user);return false}return true}
 async function checkUserCountForPremium(){try{const fs=await waitForFS(3000);if(!fs||!fs.getUserCount)return;const count=await fs.getUserCount();if(count>=flag("premium_unlock_at")&&!flag("enable_premium")){STATE.currentFlags.enable_premium=true;if(fs.saveSettings)await fs.saveSettings(STATE.currentFlags);console.log("✅ Premium auto-enabled! Users:",count)}}catch(e){console.warn("User count check:",e)}}
-async function adminActivatePremium(phone,months){if(!phone||phone.length<10){showToast("Phone number डालें","error");return}try{const fs=await waitForFS(3000);if(!fs)return;const digits=phone.replace(/\D/g,"");const normalized="+"+digits;let user=await fs.getUserByPhone(normalized);if(!user){user=await fs.getUserByPhone(digits)}if(!user){showToast("❌ User not found: "+normalized,"error");return}const until=Date.now()+(months*30*86400000);await fs.updateUser(user.id,{isPremium:true,premiumUntil:until,premiumPlan:months>=12?"yearly":(months>=3?"quarterly":"monthly"),premiumActivatedAt:Date.now()});showToast("✅ Premium activated for "+normalized+" ("+months+"M)","success");await renderAdminContent()}catch(e){console.warn(e);showToast("Failed: "+e.message,"error")}}
+async function adminActivatePremium(phone,months){if(!phone||phone.length<10){showToast("Phone number डालें","error");return}try{const fs=await waitForFS(3000);if(!fs)return;const digits=phone.replace(/\D/g,"");const normalized="+"+digits;let user=await fs.getUserByPhone(normalized);if(!user){user=await fs.getUserByPhone(digits)}if(!user){showToast("❌ User not found: "+normalized,"error");return}const until=Date.now()+(months*30*86400000);const plan=months>=12?"yearly":(months>=3?"quarterly":"monthly");await fs.updateUser(user.id,{isPremium:true,premiumUntil:until,premiumPlan:plan,premiumActivatedAt:Date.now()});showToast("✅ "+months+"M Premium activated for "+normalized,"success");await renderAdminContent()}catch(e){console.warn(e);showToast("Failed: "+e.message,"error")}}
 async function savePremiumSettings(){const upi=document.getElementById("adminUpiInput").value.trim();const phone=document.getElementById("adminPhoneInput").value.trim();if(!upi||upi.length<3){showToast("UPI ID सही डालें","error");return}if(!phone||phone.length<10){showToast("Phone number सही डालें","error");return}STATE.currentFlags.premium_upi_id=upi;STATE.currentFlags.premium_admin_phone=phone;try{const fs=await waitForFS(2000);if(fs&&fs.saveSettings)await fs.saveSettings(STATE.currentFlags);showToast("✅ Settings saved","success");await renderAdminContent()}catch(e){console.warn(e);showToast("Failed","error")}}
 async function renderPremiumUsersList(){const el=document.getElementById("premiumUsersList");if(!el)return;try{const fs=await waitForFS(3000);if(!fs||!fs.getAllUsers){el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">⚠️ getAllUsers missing</div>';return}const users=await fs.getAllUsers();const premium=users.filter(u=>u.isPremium===true&&u.premiumUntil>Date.now());if(premium.length===0){el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">Koi premium user nahi</div>';return}el.innerHTML=premium.map(u=>{const daysLeft=Math.ceil((u.premiumUntil-Date.now())/86400000);const plan=(u.premiumPlan||"monthly").toUpperCase();const refs=u.referralCount||0;return`<div style="background:rgba(0,0,0,.2);padding:10px;border-radius:8px;margin-bottom:6px;"><div style="display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:12px;font-weight:800;">${Utils.esc(u.name||"User")}</div><div style="font-size:10px;opacity:.75;">${Utils.esc(u.phone||"")}</div><div style="font-size:9px;opacity:.6;">Refs: ${refs}</div></div><div style="text-align:right;"><div style="font-size:10px;font-weight:800;color:#fbbf24;">⭐ ${plan}</div><div style="font-size:10px;opacity:.75;">${daysLeft} days left</div></div></div></div>`}).join("")}catch(e){console.warn(e);el.innerHTML='<div style="font-size:11px;opacity:.7;text-align:center;padding:10px;">Error</div>'}}
-function renderGoldCard(){const wrap=document.getElementById("goldCardWrap");if(!wrap)return;const isPremium=checkPremiumStatus();if(!isPremium){wrap.style.display="none";return}wrap.style.display="block";const userName=STATE.user.name||"User";const userPhone=STATE.user.phone||"";document.getElementById("gcUserName").innerText=userName;document.getElementById("gcUserPhone").innerText=userPhone;const last4=userPhone.replace(/\D/g,"").slice(-4)||"0000";document.getElementById("gcLast4").innerText=last4;const until=STATE.user.premiumUntil||Date.now();const d=new Date(until);const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];const expiryStr=months[d.getMonth()]+" "+d.getFullYear();document.getElementById("gcExpiry").innerText=expiryStr;const plan=STATE.user.premiumPlan||"monthly";document.getElementById("gcPlan").innerText=plan.toUpperCase();const daysLeft=Math.max(0,Math.ceil((until-Date.now())/86400000));document.getElementById("gcDaysLeft").innerText=daysLeft}
+function renderGoldCard(){const wrap=document.getElementById("goldCardWrap");if(!wrap)return;const isPremium=checkPremiumStatus();if(!isPremium){wrap.style.display="none";return}wrap.style.display="block";const cardEl=document.getElementById("goldCard");const plan=STATE.user.premiumPlan||"monthly";if(cardEl){cardEl.classList.remove("plan-monthly","plan-quarterly","plan-yearly");cardEl.classList.add("plan-"+plan)}const badgeNum=document.getElementById("gcPlanNum");const badgeUnit=document.getElementById("gcPlanUnit");if(plan==="monthly"){if(badgeNum)badgeNum.innerText="1";if(badgeUnit)badgeUnit.innerText="MONTH"}else if(plan==="quarterly"){if(badgeNum)badgeNum.innerText="3";if(badgeUnit)badgeUnit.innerText="MONTHS"}else{if(badgeNum)badgeNum.innerText="12";if(badgeUnit)badgeUnit.innerText="MONTHS"}const userName=STATE.user.name||"User";const userPhone=STATE.user.phone||"";document.getElementById("gcUserName").innerText=userName;document.getElementById("gcUserPhone").innerText=userPhone;const last4=userPhone.replace(/\D/g,"").slice(-4)||"0000";document.getElementById("gcLast4").innerText=last4;const until=STATE.user.premiumUntil||Date.now();const d=new Date(until);const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];const expiryStr=months[d.getMonth()]+" "+d.getFullYear();document.getElementById("gcExpiry").innerText=expiryStr;document.getElementById("gcPlan").innerText=plan.toUpperCase()}
 function renderReferralCard(){const wrap=document.getElementById("referralCardWrap");if(!wrap)return;if(!flag("enable_premium")||!flag("enable_referral")){wrap.style.display="none";return}if(!STATE.user){wrap.style.display="none";return}wrap.style.display="block";const el=document.getElementById("myReferralCode");if(el)el.innerText=STATE.user.referralCode||"------";const cnt=document.getElementById("myReferralCount");if(cnt)cnt.innerText=STATE.user.referralCount||0}
 function copyReferralCode(){const code=STATE.user?.referralCode||"";if(!code){showToast("Code nahi hai","error");return}navigator.clipboard.writeText(code).then(()=>showToast("Code copied!","success")).catch(()=>{const ta=document.createElement("textarea");ta.value=code;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);showToast("Code copied!","success")})}
 function shareReferral(){const code=STATE.user?.referralCode||"";const url=location.origin+location.pathname;const text="🎁 Apna Chhetr app join karo!\n\nMera referral code: "+code+"\n\n1 friend = 1 month Free Premium!\n\n";if(navigator.share){navigator.share({title:"Apna Chhetr",text:text,url:url}).catch(()=>{})}else{copyReferralCode()}}
