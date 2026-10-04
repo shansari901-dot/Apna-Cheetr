@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
 /* ============================================================
-   APNA CHHETR — POLISHED UI  (v2.0)
+   APNA CHHETR — POLISHED UI (v2.2)
    ============================================================ */
 :root{
   --accent:#18A878;--accent-dark:#087A59;--accent-soft:#EAF8F2;--accent-glow:rgba(24,168,120,.22);
@@ -28,13 +28,13 @@
   --hero-bg:linear-gradient(135deg,#0F1729 0%,#0B2239 55%,#0A3D2E 100%);--hero-text:#ffffff;--hero-text-sub:rgba(255,255,255,.72);--hero-btn-bg:#ffffff;--hero-btn-text:#087A59;--hero-glow:rgba(15,23,41,.16);
 }
 body.theme-dark{
-  --bg-color:#0B1120;--card-bg:#151E2F;--primary:#151E2F;--primary-light:#1E293B;--surface-soft:#1A2332;
-  --text-dark:#F8FAFC;--text-muted:#94A3B8;--text-soft:#64748B;--border:#1E293B;--border-strong:#334155;
-  --danger-soft:rgba(239,68,68,.12);--warn-soft:rgba(245,158,11,.12);--info-soft:rgba(59,130,246,.12);
-  --shadow-xs:0 1px 2px rgba(0,0,0,.25);--shadow-sm:0 2px 8px rgba(0,0,0,.35);--shadow-md:0 4px 14px rgba(0,0,0,.4);--shadow-lg:0 8px 24px rgba(0,0,0,.45);
-  --header-bg:#0F1729;--hdr-text:#F8FAFC;--hdr-sub:#94A3B8;--hdr-icon-bg:rgba(255,255,255,.06);--hdr-icon-color:#F8FAFC;
-  --pill-bg:#151E2F;--pill-border:#1E293B;--pill-text:#F8FAFC;--hdr-search-bg:#1A2332;--hdr-search-text:#F8FAFC;--hdr-search-placeholder:#64748B;
-  --accent-soft:rgba(24,168,120,.14);
+  --bg-color:#0B1120;--card-bg:#1A2332;--primary:#1A2332;--primary-light:#243044;--surface-soft:#1F2A3D;
+  --text-dark:#F8FAFC;--text-muted:#A8B4C4;--text-soft:#7A879B;--border:#2A3447;--border-strong:#475569;
+  --danger-soft:rgba(239,68,68,.14);--warn-soft:rgba(245,158,11,.14);--info-soft:rgba(59,130,246,.14);
+  --shadow-xs:0 1px 2px rgba(0,0,0,.3);--shadow-sm:0 2px 8px rgba(0,0,0,.4);--shadow-md:0 4px 14px rgba(0,0,0,.45);--shadow-lg:0 8px 24px rgba(0,0,0,.5);
+  --header-bg:#0F1729;--hdr-text:#F8FAFC;--hdr-sub:#A8B4C4;--hdr-icon-bg:rgba(255,255,255,.07);--hdr-icon-color:#F8FAFC;
+  --pill-bg:#1A2332;--pill-border:#2A3447;--pill-text:#F8FAFC;--hdr-search-bg:#1F2A3D;--hdr-search-text:#F8FAFC;--hdr-search-placeholder:#7A879B;
+  --accent-soft:rgba(24,168,120,.16);
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans Devanagari',sans-serif;-webkit-tap-highlight-color:transparent}
 body.lang-hi .en{display:none!important}
@@ -47,14 +47,14 @@ button{font-family:inherit}
 .app-header{background:var(--header-bg);padding:14px 16px;position:sticky;top:0;z-index:50;color:var(--hdr-text);border-bottom:1px solid var(--border)}
 .header-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .header-left{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
-.back-arrow{font-size:18px;color:var(--hdr-text);cursor:pointer;width:36px;height:36px;border-radius:50%;background:var(--hdr-icon-bg);border:1px solid var(--hdr-icon-border);display:none;align-items:center;justify-content:center;padding:0;flex-shrink:0}
+.back-arrow{font-size:18px;color:var(--hdr-text);cursor:pointer;width:34px;height:34px;border-radius:50%;background:transparent;border:none;display:none;align-items:center;justify-content:center;padding:0;flex-shrink:0}
 .brand-area{display:flex;align-items:center;gap:10px;min-width:0}
-.brand-icon{width:40px;height:40px;border-radius:12px;background:var(--accent-soft);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.brand-icon{width:38px;height:38px;border-radius:11px;background:var(--accent-soft);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
 .brand-title{font-size:16px;font-weight:800;color:var(--hdr-text);letter-spacing:-.2px;line-height:1.15}
 .brand-sub{font-size:10.5px;font-weight:500;color:var(--hdr-sub);margin-top:1px}
-.header-actions{display:flex;gap:6px;flex-shrink:0}
-.hdr-icon{width:36px;height:36px;border-radius:50%;background:var(--hdr-icon-bg);border:1px solid var(--hdr-icon-border);color:var(--hdr-icon-color);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:transform .15s ease,background .15s ease}
-.hdr-icon:active{transform:scale(.92);background:var(--accent-soft);color:var(--accent-dark)}
+.header-actions{display:flex;gap:4px;flex-shrink:0}
+.hdr-icon{width:32px;height:32px;border-radius:50%;background:transparent;border:none;color:var(--hdr-icon-color);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:background .15s ease,transform .15s ease}
+.hdr-icon:active{transform:scale(.9);background:var(--hdr-icon-bg)}
 .lang-icon{font-size:11px;font-weight:800;color:var(--accent-dark)}
 .loc-pill{display:inline-flex;align-items:center;gap:8px;background:var(--pill-bg);padding:8px 14px;border-radius:50px;font-size:12px;font-weight:600;color:var(--pill-text);cursor:pointer;border:1px solid var(--pill-border);margin-top:12px;transition:transform .15s ease}
 .loc-pill:active{transform:scale(.98)}
@@ -115,24 +115,24 @@ main{max-width:480px;margin:0 auto;padding:16px 16px 32px}
 .cat-card-v:active{transform:scale(.97)}
 .cat-card-v .cat-ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px}
 .cat-card-v .cat-lbl{font-size:11.5px;font-weight:700;color:var(--text-dark);line-height:1.25}
-.bg-green{background:rgba(24,168,120,.12);color:#087A59}
-.bg-purple{background:rgba(139,92,246,.12);color:#6D28D9}
-.bg-red{background:rgba(239,68,68,.12);color:#B91C1C}
-.bg-orange{background:rgba(245,158,11,.12);color:#B45309}
-.bg-blue{background:rgba(59,130,246,.12);color:#1D4ED8}
-.bg-pink{background:rgba(236,72,153,.12);color:#BE185D}
-.bg-cyan{background:rgba(14,165,233,.12);color:#0369A1}
-.bg-indigo{background:rgba(79,70,229,.12);color:#4338CA}
-.bg-amber{background:rgba(217,119,6,.12);color:#92400E}
-body.theme-dark .bg-green{background:rgba(24,168,120,.18);color:#34D399}
-body.theme-dark .bg-purple{background:rgba(139,92,246,.18);color:#C4B5FD}
-body.theme-dark .bg-red{background:rgba(239,68,68,.18);color:#FCA5A5}
-body.theme-dark .bg-orange{background:rgba(245,158,11,.18);color:#FCD34D}
-body.theme-dark .bg-blue{background:rgba(59,130,246,.18);color:#93C5FD}
-body.theme-dark .bg-pink{background:rgba(236,72,153,.18);color:#F9A8D4}
-body.theme-dark .bg-cyan{background:rgba(14,165,233,.18);color:#7DD3FC}
-body.theme-dark .bg-indigo{background:rgba(79,70,229,.18);color:#A5B4FC}
-body.theme-dark .bg-amber{background:rgba(217,119,6,.18);color:#FCD34D}
+.bg-green{background:rgba(24,168,120,.09);color:#087A59}
+.bg-purple{background:rgba(139,92,246,.09);color:#6D28D9}
+.bg-red{background:rgba(239,68,68,.09);color:#B91C1C}
+.bg-orange{background:rgba(245,158,11,.09);color:#B45309}
+.bg-blue{background:rgba(59,130,246,.09);color:#1D4ED8}
+.bg-pink{background:rgba(236,72,153,.09);color:#BE185D}
+.bg-cyan{background:rgba(14,165,233,.09);color:#0369A1}
+.bg-indigo{background:rgba(79,70,229,.09);color:#4338CA}
+.bg-amber{background:rgba(217,119,6,.09);color:#92400E}
+body.theme-dark .bg-green{background:rgba(24,168,120,.14);color:#4ADE80}
+body.theme-dark .bg-purple{background:rgba(139,92,246,.14);color:#C4B5FD}
+body.theme-dark .bg-red{background:rgba(239,68,68,.14);color:#FCA5A5}
+body.theme-dark .bg-orange{background:rgba(245,158,11,.14);color:#FCD34D}
+body.theme-dark .bg-blue{background:rgba(59,130,246,.14);color:#93C5FD}
+body.theme-dark .bg-pink{background:rgba(236,72,153,.14);color:#F9A8D4}
+body.theme-dark .bg-cyan{background:rgba(14,165,233,.14);color:#7DD3FC}
+body.theme-dark .bg-indigo{background:rgba(79,70,229,.14);color:#A5B4FC}
+body.theme-dark .bg-amber{background:rgba(217,119,6,.14);color:#FCD34D}
 
 .shop-card{background:var(--card-bg);border-radius:var(--radius);padding:14px;display:flex;gap:12px;margin-bottom:10px;border:1px solid var(--border);cursor:pointer;align-items:center;position:relative;box-shadow:var(--shadow-xs);transition:transform .15s ease,box-shadow .15s ease}
 .shop-card:active{transform:scale(.995);box-shadow:var(--shadow-sm)}
@@ -170,12 +170,11 @@ body.theme-dark .bg-amber{background:rgba(217,119,6,.18);color:#FCD34D}
 .sort-bar{display:flex;gap:8px;margin-bottom:12px;align-items:center;font-size:12px;font-weight:600;color:var(--text-muted)}
 .sort-bar select{background:var(--card-bg);border:1px solid var(--border);color:var(--text-dark);padding:7px 12px;border-radius:10px;font-size:12px;font-weight:600;outline:none}
 
-.empty-state{text-align:center;padding:44px 24px}
-.empty-state .icon{font-size:52px;margin-bottom:14px;opacity:.85}
+.empty-state{text-align:center;padding:40px 24px}
+.empty-state .icon{font-size:48px;margin-bottom:12px;opacity:.9}
 .empty-state .title{font-size:16px;font-weight:800;color:var(--text-dark);margin-bottom:8px}
 .empty-state .desc{font-size:13px;font-weight:500;color:var(--text-muted);line-height:1.55;max-width:280px;margin:0 auto}
 .empty-state .cta{margin-top:20px;padding:11px 24px;background:var(--accent);color:#fff;border:none;border-radius:50px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 4px 12px var(--accent-glow)}
-.empty-state .cta.ghost{background:var(--card-bg);color:var(--text-dark);border:1px solid var(--border);box-shadow:none;margin-left:6px}
 
 @keyframes skeletonShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 .skel{background:linear-gradient(90deg,var(--primary-light) 25%,var(--surface-soft) 50%,var(--primary-light) 75%);background-size:200% 100%;animation:skeletonShimmer 1.4s ease-in-out infinite;border-radius:8px}
@@ -212,6 +211,11 @@ body.theme-dark .bg-amber{background:rgba(217,119,6,.18);color:#FCD34D}
 .map-pick-btn{width:100%;background:var(--info-soft);color:var(--info);border:1px dashed rgba(59,130,246,.5);margin-bottom:10px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:700;border-radius:12px;cursor:pointer}
 .map-pick-btn.picked{background:var(--accent-soft);color:var(--accent-dark);border-color:var(--accent);border-style:solid}
 
+.form-section{margin-bottom:22px}
+.form-section-head{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.form-section-num{width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.form-section-title{font-size:13px;font-weight:800;color:var(--text-dark);letter-spacing:-.1px}
+
 .bottom-nav{position:fixed!important;bottom:0!important;left:0;right:0;background:var(--card-bg);display:flex;justify-content:space-around;padding:8px 0 10px;padding-bottom:calc(8px + env(safe-area-inset-bottom));z-index:999999!important;border-top:1px solid var(--border);box-shadow:0 -2px 12px rgba(15,23,41,.04)}
 .bottom-nav button{flex:1;background:none;border:none;font-size:10.5px;font-weight:600;color:var(--text-soft);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;padding:4px 0}
 .bottom-nav button .ico{font-size:20px;filter:grayscale(1);opacity:.55;transition:filter .15s,opacity .15s}
@@ -244,29 +248,29 @@ body.theme-dark .bg-amber{background:rgba(217,119,6,.18);color:#FCD34D}
 .report-submit-btn{background:var(--danger);color:#fff}
 .report-submit-btn:disabled{opacity:.4}
 
-.premium-gold-card{background:linear-gradient(135deg,#0F1729 0%,#0B2239 50%,#0A3D2E 100%);border-radius:16px;padding:16px 18px;margin-bottom:16px;position:relative;overflow:hidden;border:1px solid rgba(217,169,32,.35);box-shadow:0 8px 22px rgba(15,23,41,.28);display:flex;flex-direction:column;min-height:170px}
-.premium-gold-card::before{content:'';position:absolute;top:-50%;right:-40%;width:180px;height:180px;background:radial-gradient(circle,rgba(217,169,32,.18),transparent 70%);border-radius:50%;pointer-events:none}
-.premium-gold-card .gc-inner{position:relative;z-index:3;display:flex;flex-direction:column;gap:12px;flex:1;justify-content:space-between}
-.gc-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.premium-gold-card .gc-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#D9A920,#B8860B);color:#0F1729;padding:4px 11px 4px 8px;border-radius:50px;font-size:9px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
-.premium-gold-card .gc-badge::before{content:'👑';font-size:10px}
-.premium-gold-card .gc-chip{width:28px;height:20px;background:linear-gradient(135deg,#F4E5A1,#D9A920,#B8860B);border-radius:4px;position:relative;border:1px solid rgba(255,255,255,.35);margin-left:auto}
+.premium-gold-card{background:linear-gradient(135deg,#0F1729 0%,#0B2239 50%,#0A3D2E 100%);border-radius:14px;padding:14px 16px;margin-bottom:14px;position:relative;overflow:hidden;border:1px solid rgba(217,169,32,.35);box-shadow:0 6px 18px rgba(15,23,41,.26);display:flex;flex-direction:column;min-height:140px}
+.premium-gold-card::before{content:'';position:absolute;top:-50%;right:-40%;width:150px;height:150px;background:radial-gradient(circle,rgba(217,169,32,.18),transparent 70%);border-radius:50%;pointer-events:none}
+.premium-gold-card .gc-inner{position:relative;z-index:3;display:flex;flex-direction:column;gap:10px;flex:1;justify-content:space-between}
+.gc-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.premium-gold-card .gc-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#D9A920,#B8860B);color:#0F1729;padding:3px 10px 3px 7px;border-radius:50px;font-size:8.5px;font-weight:900;letter-spacing:.7px;text-transform:uppercase}
+.premium-gold-card .gc-badge::before{content:'👑';font-size:9px}
+.premium-gold-card .gc-chip{width:26px;height:18px;background:linear-gradient(135deg,#F4E5A1,#D9A920,#B8860B);border-radius:4px;position:relative;border:1px solid rgba(255,255,255,.35);margin-left:auto}
 .premium-gold-card .gc-chip::before{content:'';position:absolute;top:4px;left:4px;right:4px;height:1.2px;background:rgba(90,60,10,.55);box-shadow:0 5px 0 rgba(90,60,10,.55),0 10px 0 rgba(90,60,10,.55)}
-.premium-gold-card .gc-name{font-size:17px;font-weight:800;color:#fff;letter-spacing:.2px;line-height:1.2;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.premium-gold-card .gc-phone{font-size:11.5px;font-weight:600;color:#C9A961;letter-spacing:.4px;margin-bottom:10px}
-.premium-gold-card .gc-label{font-size:8px;font-weight:800;color:#D9A920;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px}
-.premium-gold-card .gc-cardno{font-size:12.5px;font-weight:600;color:#F4E5A1;letter-spacing:2.5px;font-family:'Courier New',monospace;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.premium-gold-card .gc-cardno .gc-last4{color:#D9A920;font-weight:800;font-size:14px;letter-spacing:1.5px}
-.premium-gold-card .gc-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(217,169,32,.45),transparent);margin-bottom:10px}
-.premium-gold-card .gc-bottom{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.premium-gold-card .gc-name{font-size:15px;font-weight:800;color:#fff;letter-spacing:.2px;line-height:1.2;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.premium-gold-card .gc-phone{font-size:10.5px;font-weight:600;color:#C9A961;letter-spacing:.4px;margin-bottom:8px}
+.premium-gold-card .gc-label{font-size:7.5px;font-weight:800;color:#D9A920;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:1px}
+.premium-gold-card .gc-cardno{font-size:11px;font-weight:600;color:#F4E5A1;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.premium-gold-card .gc-cardno .gc-last4{color:#D9A920;font-weight:800;font-size:12px;letter-spacing:1.3px}
+.premium-gold-card .gc-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(217,169,32,.45),transparent);margin-bottom:8px}
+.premium-gold-card .gc-bottom{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .premium-gold-card .gc-info-block{flex:1}
-.premium-gold-card .gc-info-block .gc-icon{font-size:11px;margin-right:4px}
-.premium-gold-card .gc-info-label{font-size:8px;font-weight:800;color:#D9A920;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;display:flex;align-items:center}
-.premium-gold-card .gc-info-value{font-size:12.5px;font-weight:800;color:#fff;letter-spacing:.4px;text-shadow:0 1px 3px rgba(0,0,0,.4)}
-.premium-gold-card .gc-days-pill{position:relative;margin:6px auto 0;background:rgba(15,23,41,.6);border:1px solid rgba(217,169,32,.4);color:#F4E5A1;padding:6px 14px;border-radius:50px;font-size:10.5px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:6px;align-self:center}
-.premium-gold-card .gc-days-pill .gc-days-num{font-size:13px;font-weight:800;color:#fff}
-.premium-gold-card .gc-corner-deco{position:absolute;top:0;right:0;width:70px;height:70px;pointer-events:none;z-index:1;opacity:.6}
-.premium-gold-card .gc-corner-deco::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-top:70px solid rgba(217,169,32,.08);border-left:70px solid transparent}
+.premium-gold-card .gc-info-block .gc-icon{font-size:10px;margin-right:3px}
+.premium-gold-card .gc-info-label{font-size:7.5px;font-weight:800;color:#D9A920;letter-spacing:.9px;text-transform:uppercase;margin-bottom:2px;display:flex;align-items:center}
+.premium-gold-card .gc-info-value{font-size:11.5px;font-weight:800;color:#fff;letter-spacing:.3px;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.premium-gold-card .gc-days-pill{position:relative;margin:4px auto 0;background:rgba(15,23,41,.6);border:1px solid rgba(217,169,32,.4);color:#F4E5A1;padding:4px 12px;border-radius:50px;font-size:10px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:5px;align-self:center}
+.premium-gold-card .gc-days-pill .gc-days-num{font-size:12px;font-weight:800;color:#fff}
+.premium-gold-card .gc-corner-deco{position:absolute;top:0;right:0;width:60px;height:60px;pointer-events:none;z-index:1;opacity:.6}
+.premium-gold-card .gc-corner-deco::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-top:60px solid rgba(217,169,32,.08);border-left:60px solid transparent}
 
 .toast-container{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:99999999;display:flex;flex-direction:column;gap:10px;pointer-events:none;width:90%;max-width:400px}
 .toast{background:#0F1729;color:#fff;padding:13px 18px;border-radius:12px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;transform:translateY(-16px);opacity:0;transition:all .25s ease;box-shadow:var(--shadow-lg)}
@@ -381,7 +385,7 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
        <span id="locText" style="font-size:12px;">लोकेशन सेट करें (10 KM)</span>
        <span class="arr">▼</span>
    </div>
-   <div class="header-search" onclick="switchTab('bazaar')">
+   <div class="header-search" id="headerSearchBar" onclick="switchTab('bazaar')">
        <span class="s-icon">🔍</span>
        <input type="text" placeholder="सेवा, दुकान, व्यक्ति खोजें..." readonly>
        <span class="s-btn">🔍</span>
@@ -509,57 +513,86 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
     </section>
     <section id="addShop" class="hidden">
         <div class="card">
-            <h2 style="font-size:20px;">➕ <span class="hi">नई जानकारी जोड़ें</span><span class="en">Add New Info</span></h2>
-            <div id="addShopNotice" style="background:var(--warn-soft);border:1px solid rgba(245,158,11,.3);padding:10px 12px;border-radius:10px;margin-bottom:16px;font-size:11px;color:#92400E;font-weight:600;line-height:1.5;">
+            <h2 style="font-size:20px;margin-bottom:14px;">➕ <span class="hi">नई जानकारी जोड़ें</span><span class="en">Add New Info</span></h2>
+            <div id="addShopNotice" style="background:var(--warn-soft);border:1px solid rgba(245,158,11,.3);padding:10px 12px;border-radius:10px;margin-bottom:20px;font-size:11px;color:#92400E;font-weight:600;line-height:1.5;">
                 ⚠️ <span class="hi">नया शॉप admin approval के बाद live होगा। एक दिन में max 3।</span>
                 <span class="en">Needs admin approval. Max 3/day.</span>
             </div>
-            <div class="field">
-                <label><span class="hi">मेन केटेगरी *</span><span class="en">Main Category *</span></label>
-                <div class="input-wrap"><span>📑</span><select id="addMainCat" onchange="updateSubCats()"></select></div>
-            </div>
-            <div class="field hidden" id="jobTypeField">
-                <label><span class="hi">आप क्या चाहते हैं? *</span><span class="en">What do you need? *</span></label>
-                <div class="radio-group">
-                    <label class="radio-box active" id="rbHiring" onclick="setJobType('hiring')">
-                        <input type="radio" name="jobType" value="hiring" checked hidden> 👷 <span class="hi">वर्कर चाहिए</span><span class="en">Hiring</span>
-                    </label>
-                    <label class="radio-box" id="rbSeeking" onclick="setJobType('seeking')">
-                        <input type="radio" name="jobType" value="seeking" hidden> 💼 <span class="hi">काम चाहिए</span><span class="en">Seeking</span>
-                    </label>
+
+            <div class="form-section">
+                <div class="form-section-head">
+                    <div class="form-section-num">1</div>
+                    <div class="form-section-title"><span class="hi">मूल जानकारी</span><span class="en">Basic Info</span></div>
+                </div>
+                <div class="field">
+                    <label><span class="hi">मेन केटेगरी *</span><span class="en">Main Category *</span></label>
+                    <div class="input-wrap"><span>📑</span><select id="addMainCat" onchange="updateSubCats()"></select></div>
+                </div>
+                <div class="field hidden" id="jobTypeField">
+                    <label><span class="hi">आप क्या चाहते हैं? *</span><span class="en">What do you need? *</span></label>
+                    <div class="radio-group">
+                        <label class="radio-box active" id="rbHiring" onclick="setJobType('hiring')">
+                            <input type="radio" name="jobType" value="hiring" checked hidden> 👷 <span class="hi">वर्कर चाहिए</span><span class="en">Hiring</span>
+                        </label>
+                        <label class="radio-box" id="rbSeeking" onclick="setJobType('seeking')">
+                            <input type="radio" name="jobType" value="seeking" hidden> 💼 <span class="hi">काम चाहिए</span><span class="en">Seeking</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="field hidden" id="subCatField">
+                    <label><span class="hi">काम का प्रकार *</span><span class="en">Sub Category *</span></label>
+                    <div class="input-wrap"><span>📋</span><select id="addSubCat"></select></div>
+                </div>
+                <div class="field">
+                    <label id="nameLabel"><span class="hi">नाम (दुकान / सर्विस) *</span><span class="en">Name *</span></label>
+                    <div class="input-wrap"><span>👤</span><input type="text" placeholder="नाम लिखें..." id="addName" maxlength="60"></div>
                 </div>
             </div>
-            <div class="field hidden" id="subCatField">
-                <label><span class="hi">काम का प्रकार *</span><span class="en">Sub Category *</span></label>
-                <div class="input-wrap"><span>📋</span><select id="addSubCat"></select></div>
-            </div>
-            <div class="field">
-                <label id="nameLabel"><span class="hi">नाम *</span><span class="en">Name *</span></label>
-                <div class="input-wrap"><span>👤</span><input type="text" placeholder="नाम लिखें..." id="addName" maxlength="60"></div>
-            </div>
-            <div class="field" id="hoursField">
-                <label><span class="hi">बिज़नेस टाइमिंग (optional)</span><span class="en">Business Hours (optional)</span></label>
-                <div style="display:flex;gap:8px;">
-                    <div class="input-wrap" style="flex:1;"><span>🕒</span><input type="time" id="addOpenTime" value="09:00"></div>
-                    <div class="input-wrap" style="flex:1;"><span>🕒</span><input type="time" id="addCloseTime" value="21:00"></div>
+
+            <div class="form-section">
+                <div class="form-section-head">
+                    <div class="form-section-num">2</div>
+                    <div class="form-section-title"><span class="hi">टाइमिंग (ऑप्शनल)</span><span class="en">Timing (Optional)</span></div>
+                </div>
+                <div class="field" id="hoursField" style="margin-bottom:0;">
+                    <label><span class="hi">बिज़नेस टाइमिंग</span><span class="en">Business Hours</span></label>
+                    <div style="display:flex;gap:8px;">
+                        <div class="input-wrap" style="flex:1;"><span>🕒</span><input type="time" id="addOpenTime" value="09:00"></div>
+                        <div class="input-wrap" style="flex:1;"><span>🕒</span><input type="time" id="addCloseTime" value="21:00"></div>
+                    </div>
                 </div>
             </div>
-            <div class="field">
-                <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location *</span></label>
-                <button class="btn map-pick-btn" id="mapPickBtn" onclick="openRealMapPicker()">📍 <span class="hi">मैप पर पिन लगाएँ (ज़रूरी है)</span><span class="en">Drop pin (required)</span></button>
-                <div class="loc-preview">
-                    <span>🏠</span>
-                    <textarea rows="2" id="addLoc" placeholder="मैप से पता यहाँ आएगा..." maxlength="200"></textarea>
+
+            <div class="form-section">
+                <div class="form-section-head">
+                    <div class="form-section-num">3</div>
+                    <div class="form-section-title"><span class="hi">लोकेशन</span><span class="en">Location</span></div>
+                </div>
+                <div class="field" style="margin-bottom:0;">
+                    <label><span class="hi">सटीक लोकेशन (Map) *</span><span class="en">Exact Location *</span></label>
+                    <button class="btn map-pick-btn" id="mapPickBtn" onclick="openRealMapPicker()">📍 <span class="hi">मैप पर पिन लगाएँ (ज़रूरी है)</span><span class="en">Drop pin (required)</span></button>
+                    <div class="loc-preview">
+                        <span>🏠</span>
+                        <textarea rows="2" id="addLoc" placeholder="मैप से पता यहाँ आएगा..." maxlength="200"></textarea>
+                    </div>
                 </div>
             </div>
-            <div class="field">
-                <label><span class="hi">संपर्क नंबर</span><span class="en">Contact Number</span></label>
-                <div class="phone-wrap">
-                    <div class="cc-box"><select id="shopCountry"></select></div>
-                    <div class="num-box"><input type="tel" id="addPhone" placeholder="Phone" inputmode="numeric"></div>
+
+            <div class="form-section">
+                <div class="form-section-head">
+                    <div class="form-section-num">4</div>
+                    <div class="form-section-title"><span class="hi">संपर्क जानकारी</span><span class="en">Contact</span></div>
+                </div>
+                <div class="field" style="margin-bottom:0;">
+                    <label><span class="hi">संपर्क नंबर</span><span class="en">Contact Number</span></label>
+                    <div class="phone-wrap">
+                        <div class="cc-box"><select id="shopCountry"></select></div>
+                        <div class="num-box"><input type="tel" id="addPhone" placeholder="Phone" inputmode="numeric"></div>
+                    </div>
                 </div>
             </div>
-            <button class="btn" onclick="submitShop()" id="submitShopBtn">✅ <span class="hi">रजिस्टर करें</span><span class="en">Register</span></button>
+
+            <button class="btn" onclick="submitShop()" id="submitShopBtn" style="margin-top:6px;">✅ <span class="hi">रजिस्टर करें</span><span class="en">Register</span></button>
         </div>
     </section>
     <section id="profile" class="hidden">
@@ -568,7 +601,7 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
             <h2 style="font-size:20px;margin-bottom:4px;" id="profileName">My Profile</h2>
             <p style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:4px;" id="profilePhone"></p>
             <p style="font-size:10px;color:var(--accent-dark);font-weight:800;margin-bottom:24px;">✅ <span class="hi">वेरिफाइड यूज़र</span><span class="en">Verified User</span></p>
-            <div id="goldCardWrap" style="display:none;margin-bottom:16px;">
+            <div id="goldCardWrap" style="display:none;margin-bottom:14px;">
                 <div class="premium-gold-card" id="goldCard">
                     <div class="gc-corner-deco"></div>
                     <div class="gc-inner">
@@ -939,7 +972,7 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.6.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_PHONE:"+917318259001",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.6.2",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह नंबर पहले से रजिस्टर है!",invalidPhone:"सही नंबर डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Number already registered!",invalidPhone:"Enter valid phone.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -1025,7 +1058,7 @@ function renderShops(){
         const comingSoonKeywords=["csc","आधार","aadhaar","पासपोर्ट","passport","पैन","pan card","राशन","ration","बैंक मित्र","bank mitra"];
         const qLower=(q||"").toLowerCase();
         const isComingSoon=qLower&&comingSoonKeywords.some(kw=>qLower.includes(kw.toLowerCase()));
-        if(isComingSoon){cont.innerHTML=`<div class="empty-state"><div class="icon" style="font-size:60px;">🚀</div><div class="title" style="font-size:18px;color:#B45309;">${STATE.lang==="hi"?"जल्द आ रहा है!":"Coming Soon!"}</div><div class="desc">${STATE.lang==="hi"?`<strong style="color:var(--accent-dark);">"${Utils.esc(q)}"</strong> सेवा अभी आपके ${STATE.radius} KM क्षेत्र में उपलब्ध नहीं है।<br>🙏 हम जल्द ही इसे जोड़ने की कोशिश कर रहे हैं।`:`<strong style="color:var(--accent-dark);">"${Utils.esc(q)}"</strong> service is not yet available in your ${STATE.radius} KM area.<br>🙏 We are working to add it soon.`}</div><button class="cta" onclick="showToast('${STATE.lang==="hi"?"धन्यवाद! हम जल्द जोड़ेंगे।":"Thanks! We will add soon."}','success')">🔔 ${STATE.lang==="hi"?"मुझे बताएं":"Notify Me"}</button></div>`}
+        if(isComingSoon){cont.innerHTML=`<div class="empty-state"><div class="icon" style="font-size:56px;">🚀</div><div class="title" style="font-size:17px;color:#B45309;">${STATE.lang==="hi"?"जल्द आ रहा है!":"Coming Soon!"}</div><div class="desc">${STATE.lang==="hi"?`<strong style="color:var(--accent-dark);">"${Utils.esc(q)}"</strong> सेवा अभी आपके ${STATE.radius} KM क्षेत्र में उपलब्ध नहीं है।<br>🙏 हम जल्द ही इसे जोड़ने की कोशिश कर रहे हैं।`:`<strong style="color:var(--accent-dark);">"${Utils.esc(q)}"</strong> service is not yet available in your ${STATE.radius} KM area.<br>🙏 We are working to add it soon.`}</div><button class="cta" onclick="showToast('${STATE.lang==="hi"?"धन्यवाद! हम जल्द जोड़ेंगे।":"Thanks! We will add soon."}','success')">🔔 ${STATE.lang==="hi"?"मुझे बताएं":"Notify Me"}</button></div>`}
         else{
             const nextR=Math.min(50,STATE.radius+5);
             cont.innerHTML=`<div class="empty-state"><div class="icon">🔍</div><div class="title">${t("noResults")}</div><div class="desc">${STATE.lang==="hi"?`आपके ${STATE.radius} KM क्षेत्र में इस श्रेणी में कुछ नहीं मिला। खोज बदलें या रेडियस बढ़ाएँ।`:`Nothing found in your ${STATE.radius} KM area. Change search or increase radius.`}</div><div style="margin-top:20px;"><button class="cta" onclick="setRadius(${nextR})">📏 ${STATE.lang==="hi"?`दूरी बढ़ाएँ (${nextR} KM)`:`Increase (${nextR} KM)`}</button></div></div>`;
@@ -1034,7 +1067,7 @@ function renderShops(){
     }
     cont.innerHTML=list.map(s=>buildShopCard(s,isAdmin)).join("");
 }
-function renderOnlineShops(){const cont=document.getElementById("onlineShopListContainer");if(!STATE.isLocationTracked){cont.innerHTML=`<div class="empty-state"><div class="icon">📍</div><div class="title">${STATE.lang==="hi"?"लोकेशन सेट करें":"Set Your Location"}</div><button class="cta" onclick="detectUserLocation(false)">📍 ${STATE.lang==="hi"?"लोकेशन सेट करें":"Set Location"}</button></div>`;return}const isAdmin=AUTH.isAdmin(STATE.user);let list=STATE.shops.filter(s=>{if(!s.lat||!s.lng)return false;if(s.type!==STATE.currentOnlineFilter)return false;if(!s.isOpen)return false;s.calculatedDist=Utils.haversine(STATE.userLat,STATE.userLng,s.lat,s.lng);return s.calculatedDist<=STATE.radius}).sort((a,b)=>a.calculatedDist-b.calculatedDist);if(list.length===0){cont.innerHTML=`<div class="empty-state"><div class="icon">😴</div><div class="title">${STATE.lang==="hi"?"अभी कोई ऑनलाइन नहीं":"Nobody Online"}</div><div class="desc">${STATE.lang==="hi"?"इस समय आपके क्षेत्र में कोई दुकान खुली नहीं है।":"No shops open in your area right now."}</div></div>`;return}cont.innerHTML=list.map(s=>buildShopCard(s,isAdmin,true)).join("")}
+function renderOnlineShops(){const cont=document.getElementById("onlineShopListContainer");if(!STATE.isLocationTracked){cont.innerHTML=`<div class="empty-state"><div class="icon">📍</div><div class="title">${STATE.lang==="hi"?"लोकेशन सेट करें":"Set Your Location"}</div><div class="desc">${STATE.lang==="hi"?"ऊपर 📍 बटन दबाकर लोकेशन चालू करें।":"Tap 📍 above."}</div><button class="cta" onclick="detectUserLocation(false)">📍 ${STATE.lang==="hi"?"लोकेशन सेट करें":"Set Location"}</button></div>`;return}const isAdmin=AUTH.isAdmin(STATE.user);let list=STATE.shops.filter(s=>{if(!s.lat||!s.lng)return false;if(s.type!==STATE.currentOnlineFilter)return false;if(!s.isOpen)return false;s.calculatedDist=Utils.haversine(STATE.userLat,STATE.userLng,s.lat,s.lng);return s.calculatedDist<=STATE.radius}).sort((a,b)=>a.calculatedDist-b.calculatedDist);if(list.length===0){cont.innerHTML=`<div class="empty-state"><div class="icon">😴</div><div class="title">${STATE.lang==="hi"?"अभी कोई ऑनलाइन नहीं":"Nobody Online"}</div><div class="desc">${STATE.lang==="hi"?"इस समय आपके क्षेत्र में कोई दुकान खुली नहीं है। थोड़ी देर बाद देखें।":"No shops open in your area right now. Check back later."}</div></div>`;return}cont.innerHTML=list.map(s=>buildShopCard(s,isAdmin,true)).join("")}
 function renderLiveCounter(){
     const el=document.getElementById("liveCounter");
     if(!el)return;
@@ -1188,7 +1221,7 @@ function askAI(key){const qs=JSON.parse(document.getElementById("aiOpts").datase
 function openPrefsModal(){renderGoldCard();renderReferralCard();document.getElementById("prefsModal").classList.remove("hidden")}
 function closePrefs(){document.getElementById("prefsModal").classList.add("hidden")}
 function shareApp(){if(!flag("enable_share"))return;const url=location.origin+location.pathname;const text=STATE.lang==="hi"?"'अपना क्षेत्र' ऐप पर सभी दुकानें और सेवाएँ देखें: ":"Find local shops on 'My Local Area': ";if(navigator.share){navigator.share({title:STATE.lang==="hi"?"अपना क्षेत्र":"My Local Area",text:text+url}).catch(()=>{window.location.href="whatsapp://send?text="+encodeURIComponent(text+url)})}else{window.location.href="whatsapp://send?text="+encodeURIComponent(text+url)}}
-async function switchTab(tabId,updateHash=true){if((tabId==="addShop"||tabId==="profile")&&!STATE.user)tabId="auth";STATE.activeTab=tabId;localStorage.setItem("ac_current_tab",tabId);if(updateHash)window.history.pushState(null,null,"#"+tabId);if(tabId==="profile"){await refreshCurrentUser();updateProfileUI();if(AUTH.isAdmin(STATE.user))refreshAdminData();await checkPremiumExpiry()}if(tabId==="auth"){updateReferralFieldVisibility()}document.querySelectorAll("main > section").forEach(sec=>sec.classList.add("hidden"));const target=document.getElementById(tabId);if(target)target.classList.remove("hidden");document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));const navId=tabId==="onlineTab"?"nav-onlineTab":("nav-"+tabId);const navBtn=document.getElementById(navId);if(navBtn)navBtn.classList.add("active");document.getElementById("backBtn").style.display=(tabId==="home")?"none":"block";if(tabId==="bazaar")renderShops();else if(tabId==="onlineTab")renderOnlineShops();else if(tabId==="home"){renderHomePreviews();renderMyAreaMap();renderLiveCounter()}window.scrollTo(0,0)}
+async function switchTab(tabId,updateHash=true){if((tabId==="addShop"||tabId==="profile")&&!STATE.user)tabId="auth";STATE.activeTab=tabId;localStorage.setItem("ac_current_tab",tabId);if(updateHash)window.history.pushState(null,null,"#"+tabId);if(tabId==="profile"){await refreshCurrentUser();updateProfileUI();if(AUTH.isAdmin(STATE.user))refreshAdminData();await checkPremiumExpiry()}if(tabId==="auth"){updateReferralFieldVisibility()}document.querySelectorAll("main > section").forEach(sec=>sec.classList.add("hidden"));const target=document.getElementById(tabId);if(target)target.classList.remove("hidden");document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));const navId=tabId==="onlineTab"?"nav-onlineTab":("nav-"+tabId);const navBtn=document.getElementById(navId);if(navBtn)navBtn.classList.add("active");document.getElementById("backBtn").style.display=(tabId==="home")?"none":"block";const _hs=document.getElementById("headerSearchBar");if(_hs)_hs.style.display=(tabId==="home")?"flex":"none";if(tabId==="bazaar")renderShops();else if(tabId==="onlineTab")renderOnlineShops();else if(tabId==="home"){renderHomePreviews();renderMyAreaMap();renderLiveCounter()}window.scrollTo(0,0)}
 function goHome(){switchTab("home")}
 function onSearchInput(val){debouncedRenderShops();if(val.trim().length>2)saveRecentSearch(val.trim())}
 function showRecentSearches(){if(!flag("enable_recent_search"))return;const box=document.getElementById("recentBox");if(STATE.recentSearch.length===0){box.style.display="none";return}box.innerHTML=STATE.recentSearch.slice(0,5).map(s=>`<div class="recent-item" onclick="applyRecentSearch('${Utils.escAttr(s)}')"><span>🕒 ${Utils.esc(s)}</span><span onclick="event.stopPropagation();clearRecentSearch('${Utils.escAttr(s)}')" style="opacity:.5;">✖</span></div>`).join("")+`<div class="recent-item" onclick="clearAllRecent()" style="color:var(--danger);font-weight:800;">${STATE.lang==="hi"?"सभी हटाएँ":"Clear all"}</div>`;box.style.display="block"}
