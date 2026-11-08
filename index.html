@@ -201,10 +201,6 @@ body.theme-dark .bg-amber{background:rgba(217,119,6,.14);color:#FCD34D}
 .report-cancel-btn{background:var(--primary-light);color:var(--text-dark);border:1px solid var(--border)!important}
 .report-submit-btn{background:var(--danger);color:#fff}
 .report-submit-btn:disabled{opacity:.4}
-
-/* ============================================================
-   PREMIUM CARD — 3 PLAN COLORS + CIRCULAR BADGE
-   ============================================================ */
 .premium-gold-card{background:linear-gradient(135deg,#0F1729 0%,#0B2239 50%,#0A3D2E 100%);border-radius:16px;padding:16px 18px;margin-bottom:14px;position:relative;overflow:hidden;border:1.5px solid rgba(217,169,32,.45);box-shadow:0 8px 24px rgba(15,23,41,.35);display:flex;flex-direction:column;min-height:180px}
 .premium-gold-card::before{content:'';position:absolute;top:-50%;right:-40%;width:200px;height:200px;background:radial-gradient(circle,rgba(217,169,32,.20),transparent 70%);border-radius:50%;pointer-events:none}
 .premium-gold-card::after{content:'';position:absolute;bottom:-40%;left:-30%;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%);border-radius:50%;pointer-events:none}
@@ -256,8 +252,6 @@ body.theme-dark .bg-amber{background:rgba(217,119,6,.14);color:#FCD34D}
 .premium-gold-card .gc-info-value{font-size:11.5px;font-weight:800;color:#fff;letter-spacing:.3px;text-shadow:0 1px 3px rgba(0,0,0,.4)}
 .premium-gold-card .gc-corner-deco{position:absolute;top:0;right:0;width:60px;height:60px;pointer-events:none;z-index:1;opacity:.6}
 .premium-gold-card .gc-corner-deco::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-top:60px solid rgba(217,169,32,.08);border-left:60px solid transparent}
-
-/* Circular plan badge */
 .premium-gold-card .gc-plan-badge{position:absolute;top:50%;right:16px;transform:translateY(-50%);width:86px;height:86px;border-radius:50%;background:radial-gradient(circle,#F4E5A1 0%,#D9A920 60%,#B8860B 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,.35);box-shadow:0 6px 20px rgba(217,169,32,.5),inset 0 0 12px rgba(255,255,255,.3);z-index:4}
 .premium-gold-card .gc-plan-badge::before{content:'👑';position:absolute;top:-12px;font-size:16px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
 .premium-gold-card .gc-plan-badge .gc-plan-num{font-size:26px;font-weight:900;color:#fff;line-height:1;text-shadow:0 2px 4px rgba(0,0,0,.4)}
@@ -265,11 +259,8 @@ body.theme-dark .bg-amber{background:rgba(217,119,6,.14);color:#FCD34D}
 .premium-gold-card.plan-monthly .gc-plan-badge{background:radial-gradient(circle,#DBEAFE 0%,#60A5FA 60%,#2563EB 100%);box-shadow:0 6px 20px rgba(96,165,250,.5),inset 0 0 12px rgba(255,255,255,.3)}
 .premium-gold-card.plan-quarterly .gc-plan-badge{background:radial-gradient(circle,#DCFCE7 0%,#4ADE80 60%,#16A34A 100%);box-shadow:0 6px 20px rgba(74,222,128,.5),inset 0 0 12px rgba(255,255,255,.3)}
 .premium-gold-card.plan-yearly .gc-plan-badge{background:radial-gradient(circle,#F4E5A1 0%,#D9A920 60%,#B8860B 100%);box-shadow:0 6px 20px rgba(217,169,32,.6),inset 0 0 12px rgba(255,255,255,.3)}
-
-/* Legacy pills (kept for compatibility) */
 .premium-gold-card .gc-days-pill{position:relative;margin:4px auto 0;background:rgba(15,23,41,.6);border:1px solid rgba(217,169,32,.4);color:#F4E5A1;padding:4px 12px;border-radius:50px;font-size:10px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:5px;align-self:center}
 .premium-gold-card .gc-days-pill .gc-days-num{font-size:12px;font-weight:800;color:#fff}
-
 .toast-container{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:99999999;display:flex;flex-direction:column;gap:10px;pointer-events:none;width:90%;max-width:400px}
 .toast{background:#0F1729;color:#fff;padding:13px 18px;border-radius:12px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;transform:translateY(-16px);opacity:0;transition:all .25s ease;box-shadow:var(--shadow-lg)}
 .toast.show{transform:translateY(0);opacity:1}.toast.error{background:#7F1D1D;border-left:4px solid var(--danger)}.toast.success{background:#064E3B;border-left:4px solid var(--accent)}.toast.info{background:#1E3A8A;border-left:4px solid var(--info)}
@@ -332,35 +323,9 @@ input:checked+.slider{background:var(--accent)}input:checked+.slider:before{tran
 .story-offer-badge{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(24,168,120,.95);color:#fff;font-size:13px;font-weight:800;padding:10px 22px;border-radius:50px;text-align:center;white-space:nowrap;max-width:90%}
 body.theme-switching *{transition:none!important;animation-duration:0s!important}
 @media(max-width:360px){.brand-title{font-size:14.5px}main{padding:14px 12px 28px}.cat-card-v{padding:14px 6px 10px}.cat-card-v .cat-ico{width:42px;height:42px;font-size:19px}.premium-gold-card .gc-plan-badge{width:72px;height:72px;right:12px}.premium-gold-card .gc-plan-badge .gc-plan-num{font-size:22px}}
-
-
-/* Premium visual polish — keeps the original home layout and all existing behavior */
-:root{
- --accent:#13B889; --accent-dark:#087A59; --accent-soft:#E4F8F0;
- --hero-bg:linear-gradient(125deg,#14213D 0%,#163C55 58%,#087A59 100%);
- --radius:16px; --radius-lg:21px; --radius-xl:24px;
-}
-.app-header{background:linear-gradient(180deg,var(--header-bg) 0%,var(--bg-color) 100%)}
-.brand-icon{background:linear-gradient(145deg,#DDFCEF,#C6F6E5);border:1px solid #A7EBD0;box-shadow:0 5px 14px rgba(8,122,89,.12)}
-.loc-pill{box-shadow:0 3px 10px rgba(15,23,41,.035)}
-.header-search{box-shadow:0 4px 14px rgba(15,23,41,.035)}
-.hero-banner{background:radial-gradient(circle at 92% 8%,rgba(62,220,174,.22),transparent 34%),linear-gradient(125deg,#14213D 0%,#163C55 58%,#087A59 100%);border:1px solid rgba(255,255,255,.12);border-radius:22px;box-shadow:0 12px 26px rgba(20,33,61,.17)}
-.hero-banner h3{font-size:17px;letter-spacing:-.25px}
-.hero-btn{background:linear-gradient(135deg,#E5FFF4,#FFFFFF);box-shadow:0 5px 14px rgba(0,0,0,.14)}
-.my-area-card,.shop-card,.card,.search-box{box-shadow:0 4px 14px rgba(15,23,41,.035)}
-#liveCounter{background:linear-gradient(115deg,#E4F8F0,#F0FBF8);border-color:rgba(19,184,137,.25)}
-.cat-card-v{border-radius:18px;border-color:rgba(148,163,184,.24);box-shadow:0 5px 15px rgba(15,23,41,.045);transition:transform .16s ease,box-shadow .16s ease}
-.cat-card-v:active{transform:scale(.97);box-shadow:0 2px 7px rgba(15,23,41,.06)}
-.cat-card-v .cat-ico{width:50px;height:50px;border-radius:17px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
-.section-title{letter-spacing:-.2px}
-.shop-card{border-radius:16px}
-.bottom-nav{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(255,255,255,.96);box-shadow:0 -5px 18px rgba(15,23,41,.055)}
-body.theme-dark .bottom-nav{background:rgba(26,35,50,.96)}
-body.theme-dark #liveCounter{background:linear-gradient(115deg,rgba(19,184,137,.15),rgba(19,184,137,.05))}
-@media(max-width:360px){.hero-banner{padding:17px}.cat-card-v .cat-ico{width:44px;height:44px}}
 </style>
-</head>
-<body class="lang-hi theme-light">
+   </head>
+   <body class="lang-hi theme-light">
 <div class="toast-container" id="toastBox" role="status"></div>
 <header class="app-header">
    <div class="header-top">
@@ -451,6 +416,7 @@ body.theme-dark #liveCounter{background:linear-gradient(115deg,rgba(19,184,137,.
         </div>
         <div id="onlinePrevContainer"></div>
     </section>
+    
     <section id="bazaar" class="hidden">
         <div class="search-box">
             <span>🔍</span>
@@ -464,6 +430,7 @@ body.theme-dark #liveCounter{background:linear-gradient(115deg,rgba(19,184,137,.
         <div class="filter-scroll" id="filterContainer"></div>
         <div id="shopListContainer"></div>
     </section>
+    
     <section id="onlineTab" class="hidden">
         <div style="margin-bottom:16px;">
             <h2 style="font-size:17px;font-weight:800;color:var(--text-dark);margin-bottom:4px;display:flex;align-items:center;gap:8px;">
@@ -476,7 +443,7 @@ body.theme-dark #liveCounter{background:linear-gradient(115deg,rgba(19,184,137,.
     </section>
     
     <!-- ==========================================
-         AUTH (LOGIN / REGISTER) - UPDATED
+         AUTH (EMAIL LOGIN / REGISTER)
          ========================================== -->
     <section id="auth" class="hidden">
         <div class="card" style="text-align:center;padding-top:30px;">
@@ -485,8 +452,8 @@ body.theme-dark #liveCounter{background:linear-gradient(115deg,rgba(19,184,137,.
             </div>
             <h2 style="font-size:22px;margin-bottom:8px;"><span class="hi">लॉगिन / रजिस्टर</span><span class="en">Login / Register</span></h2>
             <p style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:24px;">
-                <span class="hi">दुकान या सर्विस जोड़ने के लिए लॉगिन करें।</span>
-                <span class="en">Login to add shops.</span>
+                <span class="hi">ईमेल और पासवर्ड से लॉगिन करें।</span>
+                <span class="en">Login with your email and password.</span>
             </p>
             
             <div class="field">
@@ -599,11 +566,12 @@ body.theme-dark #liveCounter{background:linear-gradient(115deg,rgba(19,184,137,.
             <button class="btn" onclick="submitShop()" id="submitShopBtn" style="margin-top:6px;">✅ <span class="hi">रजिस्टर करें</span><span class="en">Register</span></button>
         </div>
     </section>
+
     <section id="profile" class="hidden">
         <div class="card" style="text-align:center;">
             <div style="width:74px;height:74px;background:var(--accent-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 12px;border:3px solid var(--accent);">👤</div>
             <h2 style="font-size:20px;margin-bottom:4px;" id="profileName">My Profile</h2>
-            <p style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:4px;" id="profileEmail"></p>
+            <p style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:4px;" id="profilePhone"></p>
             <p style="font-size:10px;color:var(--accent-dark);font-weight:800;margin-bottom:24px;">✅ <span class="hi">वेरिफाइड यूज़र</span><span class="en">Verified User</span></p>
             
             <div id="goldCardWrap" style="display:none;margin-bottom:14px;">
@@ -982,9 +950,10 @@ body.theme-dark #liveCounter{background:linear-gradient(115deg,rgba(19,184,137,.
     </div>
     <div class="ai-opts" id="aiOpts"></div>
   </div>
+   </div>
    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_EMAIL:"ashifmd400@gmail.com",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.7.0",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_EMAIL:"ashifmd400@gmail.com",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.7.1",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"}};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह ईमेल पहले से रजिस्टर है!",invalidPhone:"सही जानकारी डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Email already registered!",invalidPhone:"Enter valid info.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -1071,11 +1040,11 @@ async function doAuth(){
         let isNewUser = false;
 
         try {
-            // Pehle login try karo
+            // Try login
             userCredential = await auth.signInWithEmailAndPassword(auth.getAuth(), email, password);
         } catch (error) {
             if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
-                // Agar user nahi hai, toh naya account banao
+                // Create user if not found
                 userCredential = await auth.createUserWithEmailAndPassword(auth.getAuth(), email, password);
                 isNewUser = true;
                 await auth.updateProfile(userCredential.user, { displayName: name });
@@ -1085,12 +1054,15 @@ async function doAuth(){
             }
         }
 
-        // Check karo email verify hui ya nahi
-        if (!userCredential.user.emailVerified && !isNewUser) {
-            await auth.sendEmailVerification(userCredential.user);
-            showToast("Email verify nahi hui hai. Link dobara bhej diya gaya hai!", "info");
+        // STRICT VERIFICATION CHECK: Agar verify nahi hai toh bahar nikaal do
+        if (!userCredential.user.emailVerified) {
+            if (!isNewUser) {
+                await auth.sendEmailVerification(userCredential.user);
+            }
+            showToast("Verification link aapke email par bhej diya gaya hai. Kripya Inbox aur Spam folder check karein.", "info");
             btn.disabled = false;
             btn.innerText = "Login / Register";
+            await auth.getAuth().signOut(); // Force Logout
             return;
         }
 
@@ -1101,7 +1073,7 @@ async function doAuth(){
             uid: userCredential.user.uid,
             email: userCredential.user.email,
             name: finalName,
-            phone: "N/A", // Backward compatibility
+            phone: "N/A",
             country: "IN",
             isPremium: false,
             premiumUntil: null,
@@ -1117,7 +1089,7 @@ async function doAuth(){
             await window.FS.createUserByEmail(userObj.uid, userObj.email, finalName);
         }
 
-        // Referral logic (Agar future me on karna ho)
+        // Referral logic
         if(refCode && flag("enable_referral") && window.FS && window.FS.processReferral){
             try{ await window.FS.processReferral(refCode, userObj.uid, finalName); }catch(e){}
         }
@@ -1125,7 +1097,7 @@ async function doAuth(){
         STATE.user = AUTH.set(userObj);
         
         if (isNewUser) {
-            showToast("Account ban gaya! Inbox check karein (Spam folder bhi dekhein).", "success");
+            showToast("Account ban gaya! Welcome.", "success");
         } else {
             showToast(AUTH.isAdmin(STATE.user)?"👑 Welcome Admin!":t("loginSuccess"), "success");
         }
@@ -1154,7 +1126,7 @@ async function forgotPassword(){
 }
 
 function logout(){AUTH.clear();STATE.user=null;showToast(t("logoutDone"),"info");switchTab("home")}
-function updateProfileUI(){if(!STATE.user)return;if(STATE.user.isPremium===undefined)STATE.user.isPremium=false;if(STATE.user.premiumUntil===undefined)STATE.user.premiumUntil=null;if(STATE.user.totalShops===undefined)STATE.user.totalShops=0;if(STATE.user.referralCode===undefined)STATE.user.referralCode="";if(STATE.user.referralCount===undefined)STATE.user.referralCount=0;document.getElementById("profileName").innerText=STATE.user.name||"User";document.getElementById("profileEmail").innerText=STATE.user.email||STATE.user.phone||"";const isAdmin=AUTH.isAdmin(STATE.user);const myShops=STATE.shops.filter(s=>s.userEmail===STATE.user.email||s.name===STATE.user.name);document.getElementById("adminPanel").style.display=isAdmin?"block":"none";if(isAdmin){document.getElementById("adminTotalShops").innerText=STATE.allShopsCache.length;document.getElementById("adminTotalStories").innerText=STATE.stories.length;const pendingCount=STATE.allShopsCache.filter(s=>s.pending===true).length;document.getElementById("adminPendingCount").innerText=pendingCount;renderAdminContent()}const premiumEnabled=flag("enable_premium");const premiumCard=document.getElementById("premiumCard");if(premiumCard){const shouldShow=premiumEnabled&&!checkPremiumStatus();premiumCard.style.display=shouldShow?"block":"none";if(shouldShow)document.getElementById("premiumMonthlyPrice").innerText=flag("premium_price_monthly")}if(myShops.length>0||isAdmin){document.getElementById("shopStatusWrap").style.display="block";document.getElementById("addStoryWrap").style.display=flag("enable_story_posting")?"block":"none";document.getElementById("customerMsgWrap").style.display="none";if(myShops.length>0){document.getElementById("dashShopName").innerText=myShops[0].name;document.getElementById("dashShopStats").innerText=`👁️ ${myShops[0].views||0} ${STATE.lang==="hi"?"व्यू":"views"} • ⭐ ${(myShops[0].rating||0).toFixed(1)} (${myShops[0].ratingCount||0})`;const isOpen=myShops[0].isOpen;document.getElementById("liveSwitch").checked=isOpen;const te=document.getElementById("switchText");te.innerHTML=isOpen?"ON":"OFF";te.style.color=isOpen?"var(--accent-dark)":"var(--danger)"}}else{document.getElementById("shopStatusWrap").style.display="none";document.getElementById("addStoryWrap").style.display="none";document.getElementById("customerMsgWrap").style.display="block"}renderProfileStories();setTimeout(renderGoldCard,100);setTimeout(renderReferralCard,100);setTimeout(updateRadiusSlider,50)}
+function updateProfileUI(){if(!STATE.user)return;if(STATE.user.isPremium===undefined)STATE.user.isPremium=false;if(STATE.user.premiumUntil===undefined)STATE.user.premiumUntil=null;if(STATE.user.totalShops===undefined)STATE.user.totalShops=0;if(STATE.user.referralCode===undefined)STATE.user.referralCode="";if(STATE.user.referralCount===undefined)STATE.user.referralCount=0;document.getElementById("profileName").innerText=STATE.user.name||"User";document.getElementById("profilePhone").innerText=STATE.user.email||STATE.user.phone||"";const isAdmin=AUTH.isAdmin(STATE.user);const myShops=STATE.shops.filter(s=>s.userEmail===STATE.user.email||s.name===STATE.user.name);document.getElementById("adminPanel").style.display=isAdmin?"block":"none";if(isAdmin){document.getElementById("adminTotalShops").innerText=STATE.allShopsCache.length;document.getElementById("adminTotalStories").innerText=STATE.stories.length;const pendingCount=STATE.allShopsCache.filter(s=>s.pending===true).length;document.getElementById("adminPendingCount").innerText=pendingCount;renderAdminContent()}const premiumEnabled=flag("enable_premium");const premiumCard=document.getElementById("premiumCard");if(premiumCard){const shouldShow=premiumEnabled&&!checkPremiumStatus();premiumCard.style.display=shouldShow?"block":"none";if(shouldShow)document.getElementById("premiumMonthlyPrice").innerText=flag("premium_price_monthly")}if(myShops.length>0||isAdmin){document.getElementById("shopStatusWrap").style.display="block";document.getElementById("addStoryWrap").style.display=flag("enable_story_posting")?"block":"none";document.getElementById("customerMsgWrap").style.display="none";if(myShops.length>0){document.getElementById("dashShopName").innerText=myShops[0].name;document.getElementById("dashShopStats").innerText=`👁️ ${myShops[0].views||0} ${STATE.lang==="hi"?"व्यू":"views"} • ⭐ ${(myShops[0].rating||0).toFixed(1)} (${myShops[0].ratingCount||0})`;const isOpen=myShops[0].isOpen;document.getElementById("liveSwitch").checked=isOpen;const te=document.getElementById("switchText");te.innerHTML=isOpen?"ON":"OFF";te.style.color=isOpen?"var(--accent-dark)":"var(--danger)"}}else{document.getElementById("shopStatusWrap").style.display="none";document.getElementById("addStoryWrap").style.display="none";document.getElementById("customerMsgWrap").style.display="block"}renderProfileStories();setTimeout(renderGoldCard,100);setTimeout(renderReferralCard,100);setTimeout(updateRadiusSlider,50)}
 function setAdminTab(tab){STATE.adminTab=tab;document.querySelectorAll(".admin-tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===tab));renderAdminContent()}
 async function renderAdminContent(){const cont=document.getElementById("adminContent");if(!cont)return;cont.innerHTML='<div style="text-align:center;padding:20px;">Loading...</div>';if(!AUTH.isAdmin(STATE.user))return;try{const fs=await waitForFS(3000);if(!fs)return cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">Firebase not ready</div>';if(STATE.adminTab==="pending"){const pending=STATE.allShopsCache.filter(s=>s.pending===true);if(pending.length===0){cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">✅ No pending</div>';return}cont.innerHTML=pending.map(s=>{const safeId=Utils.escAttr(String(s.id));return`<div class="admin-item"><div class="admin-item-name">${Utils.esc(s.shopName||s.userName||"Shop")}</div><div class="admin-item-meta">${Utils.esc(s.mainType||"")} • 📞 ${Utils.esc(s.contactPhone||s.userPhone||"")}</div><div class="admin-item-meta">📍 ${Utils.esc((s.locationText||"").substring(0,60))}</div><div class="admin-actions"><button class="admin-btn admin-btn-approve" onclick="adminApprove('${safeId}')">✅ Approve</button><button class="admin-btn admin-btn-reject" onclick="adminReject('${safeId}')">❌ Reject</button></div></div>`}).join("")}else if(STATE.adminTab==="reported"){let allReports=[];if(fs.getAllReports)allReports=await fs.getAllReports();const grouped={};allReports.forEach(r=>{if(!grouped[r.shopId])grouped[r.shopId]=[];grouped[r.shopId].push(r)});const flagged=[];for(const shopId in grouped){const shop=STATE.allShopsCache.find(s=>String(s.id)===String(shopId));if(!shop)continue;const reporters=new Set(grouped[shopId].map(r=>r.byPhone));if(reporters.size>=GLOBAL_CONFIG.MIN_UNIQUE_REPORTERS){flagged.push({shop,reports:grouped[shopId],unique:reporters.size})}}if(flagged.length===0){cont.innerHTML='<div style="opacity:.7;text-align:center;padding:20px;">✅ No reported</div>';return}cont.innerHTML=flagged.map(({shop,reports,unique})=>{const safeId=Utils.escAttr(String(shop.id));const reasons=reports.slice(0,3).map(r=>`<div style="font-size:10px;opacity:.8;">• ${Utils.esc((r.reason||"").substring(0,40))} — ${Utils.esc((r.byPhone||"?").slice(-4))}</div>`).join("");return`<div class="admin-item"><div class="admin-item-name">${Utils.esc(shop.shopName||shop.userName||"Shop")} ${shop.hidden?'<span style="color:#ef4444;">🚫</span>':''}</div><div class="admin-item-meta" style="color:#fbbf24;font-weight:800;">⚠️ ${unique} reporters</div><div style="margin:6px 0;">${reasons}</div><div class="admin-actions"><button class="admin-btn admin-btn-hide" onclick="adminHide('${safeId}')">🚫 Hide</button><button class="admin-btn admin-btn-clear" onclick="adminClearReports('${safeId}')">✅ Clear</button><button class="admin-btn admin-btn-reject" onclick="adminReject('${safeId}')">🗑️ Del</button></div></div>`}).join("")}else if(STATE.adminTab==="premium"){const fs2=await waitForFS(3000);let userCount=0;try{userCount=fs2&&fs2.getUserCount?await fs2.getUserCount():0}catch(e){}const premiumEnabled=flag("enable_premium");const referralEnabled=flag("enable_referral");const unlockAt=flag("premium_unlock_at");const progress=Math.min(100,Math.round((userCount/unlockAt)*100));cont.innerHTML=`
         <div style="background:rgba(0,0,0,.2);padding:14px;border-radius:12px;margin-bottom:10px;">
@@ -1354,4 +1326,3 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
-                                                                                                   </div>
