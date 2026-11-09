@@ -874,21 +874,41 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
     </div>
 </div>
 
+<!-- UPDATED AI MODAL -->
 <div id="aiModal" class="modal-overlay hidden" style="align-items:center;" onclick="closeModals(event)">
-  <div class="ai-box">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
-       <h2 style="color:var(--text-dark);font-size:17px;margin:0;">🤖 AI Help</h2>
-       <button style="font-size:24px;cursor:pointer;color:var(--danger);line-height:1;background:none;border:none;" onclick="closeAiModal()">✖</button>
+  <div class="ai-box" style="padding:16px;max-height:85vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+       <h2 style="color:var(--text-dark);font-size:16px;margin:0;display:flex;align-items:center;gap:6px;">🤖 <span class="hi">AI Help Assistant</span><span class="en">AI Help Assistant</span></h2>
+       <button style="font-size:22px;cursor:pointer;color:var(--danger);line-height:1;background:none;border:none;" onclick="closeAiModal()">✖</button>
     </div>
-    <div class="chat-area" id="aiChat">
-       <div class="msg-b m-ai"><span class="hi">नमस्ते! नीचे किसी भी सवाल पर क्लिक करें। 👇</span><span class="en">Hi! Tap any question below. 👇</span></div>
+    
+    <!-- Chat Window -->
+    <div class="chat-area" id="aiChat" style="min-height:180px;max-height:300px;margin-bottom:12px;">
+       <div class="msg-b m-ai">नमस्ते! 🙏<br>मैं आपका AI हेल्पर हूँ। नीचे दिए गए सवालों में से चुनें, या सीधे अपना सवाल टाइप करें।</div>
     </div>
-    <div class="ai-opts" id="aiOpts"></div>
+    
+    <!-- User Input -->
+    <div style="display:flex;gap:6px;margin-bottom:12px;">
+        <input type="text" id="aiInput" placeholder="अपना सवाल लिखें..." style="flex:1;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:12.5px;background:var(--surface-soft);outline:none;" onkeypress="if(event.key==='Enter') sendAiMessage()">
+        <button onclick="sendAiMessage()" style="background:var(--accent);color:#fff;border:none;border-radius:10px;padding:0 14px;font-weight:800;cursor:pointer;">➤</button>
+    </div>
+
+    <!-- Quick Options -->
+    <div class="ai-opts" id="aiOpts" style="max-height:150px;overflow-y:auto;"></div>
+    
+    <!-- WhatsApp Contact Button (Always visible) -->
+    <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:12px;text-align:center;">
+        <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">अगर और जानकारी चाहिए तो सीधे Admin से बात करें:</div>
+        <button onclick="contactAdminWhatsApp()" style="width:100%;background:#25D366;color:#fff;border:none;padding:12px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 10px rgba(37,211,102,.3);">
+            <span style="font-size:16px;">💬</span> <span class="hi">WhatsApp पर Admin से बात करें</span><span class="en">Chat with Admin on WhatsApp</span>
+        </button>
+    </div>
   </div>
 </div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_EMAIL:"ashifmd400@gmail.com",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.8.2",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"},FEATURED_CAT_KEY:"सेवाएं"};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_EMAIL:"ashifmd400@gmail.com",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.8.3",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"},FEATURED_CAT_KEY:"सेवाएं"};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह ईमेल पहले से रजिस्टर है!",invalidPhone:"सही जानकारी डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें",screenshotRequired:"पहले screenshot upload करें!",screenshotUploaded:"Screenshot ready"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Email already registered!",invalidPhone:"Enter valid info.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating",screenshotRequired:"Upload screenshot first!",screenshotUploaded:"Screenshot ready"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -1086,8 +1106,67 @@ function closeStory(){clearTimeout(STATE.storyTimer);const v=document.getElement
 function openAiModal(){document.getElementById("aiModal").classList.remove("hidden");window.history.pushState({modal:"ai"},"","#aiModal")}
 function closeAiModal(){document.getElementById("aiModal").classList.add("hidden");if(window.location.hash==="#aiModal")window.history.back()}
 function closeModals(e){if(e.target.id==="aiModal"||e.target.classList.contains("sheet-close")||e.target.id==="addStoryModal"){["aiModal","addStoryModal"].forEach(id=>{const el=document.getElementById(id);if(!el.classList.contains("hidden")){el.classList.add("hidden");if(window.location.hash==="#"+id)window.history.back()}})}}
-function initAiOptions(){const qs=[{k:"why_built",hi:"🎯 यह ऐप क्यों बनाया?",en:"🎯 Why built?",ahi:"इलाके की दुकानें, सेवाएं और रोज़गार एक जगह लाने के लिए।",aen:"To bring local shops together."},{k:"add",hi:"➕ दुकान कैसे जोड़ें?",en:"➕ How to add?",ahi:"'➕ जोड़ें' दबाएँ। डिटेल भरें, पिन लगाएँ, सेव करें।",aen:"Tap Add. Fill, pin, save."},{k:"rating",hi:"⭐ रेटिंग कैसे दें?",en:"⭐ How to rate?",ahi:"Shop पर टैप करें → 5 सितारे चुनें → कमेंट → Submit।",aen:"Tap shop → pick stars → comment → submit."},{k:"fav",hi:"❤️ फेवरेट?",en:"❤️ Favourite?",ahi:"Shop card pe 🤍 दबाएँ।",aen:"Tap 🤍 on shop card."},{k:"report",hi:"⚠️ रिपोर्ट?",en:"⚠️ Report?",ahi:"Shop pe ⚠️ दबाएँ। Login ज़रूरी।",aen:"Tap ⚠️. Login required."},{k:"premium",hi:"⭐ Premium क्या है?",en:"⭐ What is Premium?",ahi:"Premium में customer leads, Top 3 position, verified badge, unlimited stories और gold card मिलता है।",aen:"Premium gives customer leads, Top 3 position, verified badge, unlimited stories and gold card."}];document.getElementById("aiOpts").innerHTML=qs.map(q=>`<button class="ai-btn" onclick="askAI('${q.k}')">${STATE.lang==="hi"?q.hi:q.en}</button>`).join("");document.getElementById("aiOpts").dataset.qs=JSON.stringify(qs)}
-function askAI(key){const qs=JSON.parse(document.getElementById("aiOpts").dataset.qs||"[]");const q=qs.find(x=>x.k===key);if(!q)return;const chat=document.getElementById("aiChat");chat.innerHTML+=`<div class="msg-b m-user">${Utils.esc(STATE.lang==="hi"?q.hi:q.en)}</div>`;chat.scrollTop=chat.scrollHeight;setTimeout(()=>{chat.innerHTML+=`<div class="msg-b m-ai">${Utils.esc(STATE.lang==="hi"?q.ahi:q.aen)}</div>`;chat.scrollTop=chat.scrollHeight},400)}
+
+// UPDATED AI LOGIC
+function initAiOptions(){
+    const qs=[
+        {k:"add",hi:"➕ दुकान कैसे जोड़ें?",en:"➕ How to add?"},
+        {k:"rating",hi:"⭐ रेटिंग कैसे दें?",en:"⭐ How to rate?"},
+        {k:"premium",hi:"⭐ Premium क्या है?",en:"⭐ What is Premium?"},
+        {k:"ref",hi:"🎁 Referral से Free Premium?",en:"🎁 Free Premium via Referral?"},
+        {k:"problem",hi:"⚠️ कुछ काम नहीं कर रहा",en:"⚠️ Something not working"}
+    ];
+    document.getElementById("aiOpts").innerHTML=qs.map(q=>`<button class="ai-btn" onclick="askAI('${q.k}')" style="padding:10px 12px;font-size:12px;">${STATE.lang==="hi"?q.hi:q.en}</button>`).join("");
+}
+
+function askAI(key){
+    const chat=document.getElementById("aiChat");
+    const qMap={
+        "add": { q: "दुकान कैसे जोड़ें?", a: "नीचे '➕ जोड़ें' (Add) बटन दबाएँ। वहाँ अपनी दुकान/सर्विस की जानकारी भरें, मैप पर पिन लगाएँ और रजिस्टर करें। Admin approve करने के बाद आपकी दुकान live हो जाएगी।" },
+        "rating": { q: "रेटिंग कैसे दें?", a: "किसी भी दुकान पर टैप करें। उसके प्रोफाइल में नीचे की ओर 'रेटिंग और रिव्यू' सेक्शन मिलेगा। वहाँ 5 सितारे (⭐) चुनें, अपना कमेंट लिखें और सबमिट कर दें।" },
+        "premium": { q: "Premium क्या है?", a: "Premium लेने पर आपको Customer Leads (WhatsApp alert), Top 3 position (सर्च में ऊपर), Verified Badge (नीला टिक) और Gold Card मिलता है। इससे आपको 4x ज़्यादा कस्टमर मिल सकते हैं।" },
+        "ref": { q: "Referral से Free Premium?", a: "हाँ! अगर आप 2 दोस्तों को ऐप पर लाते हैं (उनके रजिस्ट्रेशन में आपका रेफरल कोड डालकर), तो आपको 1 महीने का Free Premium मिलेगा। आपको बस स्क्रीनशॉट भेजना होगा।" },
+        "problem": { q: "कुछ काम नहीं कर रहा", a: "अगर ऐप में कोई दिक्कत आ रही है, तो कृपया नीचे दिए गए हरे बटन से सीधे Admin (मालिक) को WhatsApp मैसेज करें। वो आपकी पूरी मदद करेंगे।" }
+    };
+
+    const data = qMap[key];
+    if(!data) return;
+
+    // User message
+    chat.innerHTML += `<div class="msg-b m-user">${data.q}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+
+    // AI Typing effect
+    setTimeout(()=>{
+        chat.innerHTML += `<div class="msg-b m-ai">${data.a}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+    }, 400);
+}
+
+function sendAiMessage(){
+    const input = document.getElementById("aiInput");
+    const text = input.value.trim();
+    if(!text) return;
+    
+    const chat = document.getElementById("aiChat");
+    // User msg
+    chat.innerHTML += `<div class="msg-b m-user">${Utils.esc(text)}</div>`;
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+
+    // AI reply (Fixed fallback)
+    setTimeout(()=>{
+        chat.innerHTML += `<div class="msg-b m-ai">माफ़ करें, मैं एक Basic AI हूँ और मेरे पास इस सवाल का जवाब नहीं है। 😔<br><br>कृपया नीचे दिए गए <strong>WhatsApp</strong> बटन से Admin से बात करें, वो आपकी पूरी मदद करेंगे।</div>`;
+        chat.scrollTop = chat.scrollHeight;
+    }, 600);
+}
+
+function contactAdminWhatsApp(){
+    const admin = (flag("premium_admin_phone") || "+917318259001").replace(/\D/g, "");
+    const msg = encodeURIComponent("🙏 नमस्ते Admin,\nमुझे 'अपना क्षेत्र' ऐप में मदद चाहिए।\n\nमेरा नाम: " + (STATE.user ? STATE.user.name : "Guest"));
+    window.open("https://wa.me/" + admin + "?text=" + msg, "_blank");
+}
+
 function openPrefsModal(){renderGoldCard();renderReferralCard();document.getElementById("prefsModal").classList.remove("hidden")}
 function closePrefs(){document.getElementById("prefsModal").classList.add("hidden")}
 function shareApp(){if(!flag("enable_share"))return;const url=location.origin+location.pathname;const text=STATE.lang==="hi"?"'अपना क्षेत्र' ऐप पर सभी दुकानें और सेवाएँ देखें: ":"Find local shops on 'My Local Area': ";if(navigator.share){navigator.share({title:STATE.lang==="hi"?"अपना क्षेत्र":"My Local Area",text:text+url}).catch(()=>{window.location.href="whatsapp://send?text="+encodeURIComponent(text+url)})}else{window.location.href="whatsapp://send?text="+encodeURIComponent(text+url)}}
