@@ -800,8 +800,8 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
                 <div style="position:absolute;top:-20px;right:-20px;font-size:70px;opacity:.15;">🎁</div>
                 <div style="font-size:15px;font-weight:800;margin-bottom:6px;">🎁 <span class="hi">Refer & Earn Premium</span><span class="en">Refer & Earn Premium</span></div>
                 <div style="font-size:11px;opacity:.95;line-height:1.5;margin-bottom:12px;">
-                    <span class="hi"><span id="refCountNeeded">2</span> दोस्त refer करें = 1 महीना Free Premium</span>
-                    <span class="en">Refer <span id="refCountNeededEn">2</span> friends = 1 month Free Premium</span>
+                    <span class="hi"><span id="refCountNeeded">2</span> दुकानदार दोस्त refer करें = 1 महीना Free Premium</span>
+                    <span class="en">Refer <span id="refCountNeededEn">2</span> shopkeeper friends = 1 month Free Premium</span>
                 </div>
                 <div style="background:rgba(0,0,0,.25);border-radius:10px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
                     <div>
@@ -908,7 +908,7 @@ body.theme-switching *{transition:none!important;animation-duration:0s!important
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_EMAIL:"ashifmd400@gmail.com",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.8.3",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"},FEATURED_CAT_KEY:"सेवाएं"};
+const GLOBAL_CONFIG={API_URL:"https://apna-chetr-dpi.ashifmd400.workers.dev",ADMIN_EMAIL:"ashifmd400@gmail.com",DEFAULT_COUNTRY:"IN",DEFAULT_RADIUS_KM:10,FREE_RADIUS_KM:5,PREMIUM_RADIUS_KM:50,STORY_TTL_MS:86400000,SESSION_TTL_MS:2592000000,MAX_PHOTO_MB:3,PHOTO_MAX_DIM:800,PHOTO_QUALITY:0.7,RATE_LIMIT_MS:3000,DAILY_SHOP_LIMIT:3,DAILY_STORY_LIMIT:5,MIN_UNIQUE_REPORTERS:3,TRENDING_DAYS:7,NEW_SHOP_DAYS:7,MAX_REVIEWS_SHOW:20,APP_VERSION:"9.8.4",BRAND:{hi:"अपना क्षेत्र",en:"My Local Area"},FEATURED_CAT_KEY:"सेवाएं"};
 const COUNTRIES=[{c:"IN",d:"+91",n:"🇮🇳 India",len:10},{c:"US",d:"+1",n:"🇺🇸 USA",len:10},{c:"GB",d:"+44",n:"🇬🇧 UK",len:10},{c:"AE",d:"+971",n:"🇦🇪 UAE",len:9},{c:"SA",d:"+966",n:"🇸🇦 Saudi",len:9},{c:"PK",d:"+92",n:"🇵🇰 Pakistan",len:10},{c:"BD",d:"+880",n:"🇧🇩 Bangladesh",len:10},{c:"NP",d:"+977",n:"🇳🇵 Nepal",len:10},{c:"LK",d:"+94",n:"🇱🇰 Sri Lanka",len:9},{c:"CN",d:"+86",n:"🇨🇳 China",len:11},{c:"JP",d:"+81",n:"🇯🇵 Japan",len:10},{c:"KR",d:"+82",n:"🇰🇷 S.Korea",len:10},{c:"SG",d:"+65",n:"🇸🇬 Singapore",len:8},{c:"MY",d:"+60",n:"🇲🇾 Malaysia",len:9},{c:"ID",d:"+62",n:"🇮🇩 Indonesia",len:10},{c:"PH",d:"+63",n:"🇵🇭 Philippines",len:10},{c:"TH",d:"+66",n:"🇹🇭 Thailand",len:9},{c:"VN",d:"+84",n:"🇻🇳 Vietnam",len:9},{c:"AU",d:"+61",n:"🇦🇺 Australia",len:9},{c:"NZ",d:"+64",n:"🇳🇿 New Zealand",len:9},{c:"CA",d:"+1",n:"🇨🇦 Canada",len:10},{c:"DE",d:"+49",n:"🇩🇪 Germany",len:11},{c:"FR",d:"+33",n:"🇫🇷 France",len:9},{c:"IT",d:"+39",n:"🇮🇹 Italy",len:10},{c:"ES",d:"+34",n:"🇪🇸 Spain",len:9},{c:"NL",d:"+31",n:"🇳🇱 Netherlands",len:9},{c:"RU",d:"+7",n:"🇷🇺 Russia",len:10},{c:"BR",d:"+55",n:"🇧🇷 Brazil",len:11},{c:"MX",d:"+52",n:"🇲🇽 Mexico",len:10},{c:"ZA",d:"+27",n:"🇿🇦 South Africa",len:9},{c:"NG",d:"+234",n:"🇳🇬 Nigeria",len:10},{c:"EG",d:"+20",n:"🇪🇬 Egypt",len:10},{c:"KE",d:"+254",n:"🇰🇪 Kenya",len:9},{c:"TR",d:"+90",n:"🇹🇷 Turkey",len:10},{c:"IR",d:"+98",n:"🇮🇷 Iran",len:10},{c:"IQ",d:"+964",n:"🇮🇶 Iraq",len:10},{c:"QA",d:"+974",n:"🇶🇦 Qatar",len:8},{c:"KW",d:"+965",n:"🇰🇼 Kuwait",len:8},{c:"OM",d:"+968",n:"🇴🇲 Oman",len:8},{c:"BH",d:"+973",n:"🇧🇭 Bahrain",len:8}];
 const I18N={hi:{noResults:"कुछ नहीं मिला",open:"चालू है",closed:"बंद है",loginSuccess:"लॉगिन सफल!",logoutDone:"लॉगआउट हो गया।",numberExists:"यह ईमेल पहले से रजिस्टर है!",invalidPhone:"सही जानकारी डालें।",fillAll:"सभी ज़रूरी जानकारी भरें!",dropPin:"मैप पर पिन लगाएँ!",consent:"Privacy Policy से सहमति दें।",saved:"सेव हो गया!",deleted:"डिलीट हो गया!",failed:"कुछ गड़बड़ हो गई।",locationSet:"लोकेशन सेट!",gpsOff:"GPS चालू करें।",uploading:"अपलोड हो रहा है...",published:"लाइव हो गई!",tooFast:"थोड़ा इंतज़ार करें...",nameRequired:"नाम लिखें",pendingApproval:"जमा! Admin approve करेगा।",dailyLimit:"आज की लिमिट खत्म।",reported:"रिपोर्ट हो गई!",reportLogin:"रिपोर्ट के लिए लॉगिन करें",reportOnce:"पहले ही रिपोर्ट कर दी",loginRequired:"लॉगिन करें",featureOff:"यह सुविधा अभी बंद है",reviewAdded:"रिव्यू जुड़ गया!",alreadyReviewed:"आप पहले ही रिव्यू दे चुके हैं",favAdded:"फेवरेट में जोड़ा",favRemoved:"फेवरेट से हटाया",ratingRequired:"रेटिंग चुनें",screenshotRequired:"पहले screenshot upload करें!",screenshotUploaded:"Screenshot ready"},en:{noResults:"Nothing found",open:"Open",closed:"Closed",loginSuccess:"Logged in!",logoutDone:"Logged out.",numberExists:"Email already registered!",invalidPhone:"Enter valid info.",fillAll:"Fill all fields!",dropPin:"Drop pin on map!",consent:"Accept Privacy Policy.",saved:"Saved!",deleted:"Deleted!",failed:"Something went wrong.",locationSet:"Location set!",gpsOff:"Enable GPS.",uploading:"Uploading...",published:"Live!",tooFast:"Please wait...",nameRequired:"Enter name",pendingApproval:"Submitted! Awaiting admin.",dailyLimit:"Daily limit reached.",reported:"Reported!",reportLogin:"Login to report",reportOnce:"Already reported",loginRequired:"Please login",featureOff:"Feature disabled",reviewAdded:"Review added!",alreadyReviewed:"Already reviewed",favAdded:"Added to favourites",favRemoved:"Removed from favourites",ratingRequired:"Choose rating",screenshotRequired:"Upload screenshot first!",screenshotUploaded:"Screenshot ready"}};
 const MAIN_CATS=[{key:"बाज़ार",icon:"🛒",cls:"bg-green",hi:"लोकल बाज़ार",en:"Market"},{key:"सेवाएं",icon:"🛠️",cls:"bg-purple",hi:"सेवाएँ",en:"Services"},{key:"स्वास्थ्य",icon:"🏥",cls:"bg-red",hi:"स्वास्थ्य",en:"Health"},{key:"रोज़गार",icon:"💼",cls:"bg-orange",hi:"रोज़गार",en:"Jobs"},{key:"शिक्षा",icon:"🎓",cls:"bg-blue",hi:"शिक्षा",en:"Education"},{key:"खाना",icon:"🍴",cls:"bg-pink",hi:"खाना",en:"Food"},{key:"वाहन",icon:"🚗",cls:"bg-cyan",hi:"वाहन",en:"Transport"},{key:"प्रॉपर्टी",icon:"🏠",cls:"bg-indigo",hi:"प्रॉपर्टी",en:"Property"},{key:"अन्य",icon:"🎉",cls:"bg-amber",hi:"और सेवाएँ",en:"More"}];
@@ -1121,11 +1121,15 @@ function initAiOptions(){
 
 function askAI(key){
     const chat=document.getElementById("aiChat");
+    
+    // Admin se threshold uthayenge, default 2
+    const refThreshold = flag("referral_claim_threshold") || 2;
+
     const qMap={
         "add": { q: "दुकान कैसे जोड़ें?", a: "नीचे '➕ जोड़ें' (Add) बटन दबाएँ। वहाँ अपनी दुकान/सर्विस की जानकारी भरें, मैप पर पिन लगाएँ और रजिस्टर करें। Admin approve करने के बाद आपकी दुकान live हो जाएगी।" },
         "rating": { q: "रेटिंग कैसे दें?", a: "किसी भी दुकान पर टैप करें। उसके प्रोफाइल में नीचे की ओर 'रेटिंग और रिव्यू' सेक्शन मिलेगा। वहाँ 5 सितारे (⭐) चुनें, अपना कमेंट लिखें और सबमिट कर दें।" },
         "premium": { q: "Premium क्या है?", a: "Premium लेने पर आपको Customer Leads (WhatsApp alert), Top 3 position (सर्च में ऊपर), Verified Badge (नीला टिक) और Gold Card मिलता है। इससे आपको 4x ज़्यादा कस्टमर मिल सकते हैं।" },
-        "ref": { q: "Referral से Free Premium?", a: "हाँ! अगर आप 2 दोस्तों को ऐप पर लाते हैं (उनके रजिस्ट्रेशन में आपका रेफरल कोड डालकर), तो आपको 1 महीने का Free Premium मिलेगा। आपको बस स्क्रीनशॉट भेजना होगा।" },
+        "ref": { q: "Referral से Free Premium?", a: `हाँ! अगर आप ${refThreshold} दुकानदार दोस्तों को ऐप पर लाते हैं (उनके रजिस्ट्रेशन में आपका रेफरल कोड डालकर) और उनकी दुकानें online active हो जाती हैं, तो आपको 1 महीने का Free Premium मिलेगा। आपको बस स्क्रीनशॉट भेजना होगा।` },
         "problem": { q: "कुछ काम नहीं कर रहा", a: "अगर ऐप में कोई दिक्कत आ रही है, तो कृपया नीचे दिए गए हरे बटन से सीधे Admin (मालिक) को WhatsApp मैसेज करें। वो आपकी पूरी मदद करेंगे।" }
     };
 
@@ -1237,4 +1241,4 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 </body>
-               </html>
+   </html>
